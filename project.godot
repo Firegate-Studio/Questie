@@ -1,0 +1,54 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Resource",
+"class": "QuestData",
+"language": "GDScript",
+"path": "res://addons/questie/editor/database/quest_data.gd"
+}, {
+"base": "Resource",
+"class": "QuestDatabase",
+"language": "GDScript",
+"path": "res://addons/questie/editor/database/quest_db.gd"
+}, {
+"base": "EditorPlugin",
+"class": "QuestieModule",
+"language": "GDScript",
+"path": "res://addons/questie/questie_module.gd"
+}, {
+"base": "Object",
+"class": "UUID",
+"language": "GDScript",
+"path": "res://addons/questie/editor/uuid/uuid.gd"
+} ]
+_global_script_class_icons={
+"QuestData": "",
+"QuestDatabase": "",
+"QuestieModule": "",
+"UUID": ""
+}
+
+[application]
+
+config/name="Quest System For Godot"
+config/icon="res://icon.png"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/questie/plugin.cfg" )
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
