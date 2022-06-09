@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_label.gd" type="Script" id=1]
+
+[node name="Quest Label" type="Control"]
+margin_right = 280.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 270, 20 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="quest" type="Button" parent="HBoxContainer"]
+margin_right = 254.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+text = "Quest-XXXX-XX-XX-XX-XXXXXX"
+
+[node name="delete" type="Button" parent="HBoxContainer"]
+margin_left = 258.0
+margin_right = 280.0
+margin_bottom = 20.0
+text = "D"

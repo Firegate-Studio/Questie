@@ -2,6 +2,7 @@
 # So far, this class represent an asset with persistent data such as the object class.
 # Do not try to create a resource asset using "NewResource" command, instead use questie editor unless you know what are you doing.
 
+tool
 extends Resource
 class_name QuestData
 

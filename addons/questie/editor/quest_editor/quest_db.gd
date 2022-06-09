@@ -15,12 +15,25 @@ export(Array, Resource) var data
 
 # Add a new quest to the database with default values
 func push_new_quest()->QuestData: 
-    var result : QuestData = QuestData.new()
-    data.push_back(result)
-    return result
+	var result : QuestData = QuestData.new()
+	result.uuid = UUID.generate()
+	data.push_back(result)
+	print("[questie]: called")
+	return result
 
-# **TODO**: this function is not ported yet.
-func erase_quest(var quest : String)->void: pass
+# Remove a quest from the quest database
+func erase_quest(var uuid : String)->void: 
+	for item in data:
+		if item.uuid == uuid: 
+			data.erase(item)
+			print("[questie]: removed quest with uuid(" + uuid+")")
+			return
+	print("[questie]: can't find a quest with the following uuid("+uuid+")")
 
-    
-        
+# @brief removes all stored data
+func purge():
+	data.clear()
+	
+
+	
+		

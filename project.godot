@@ -9,15 +9,80 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "DTS",
+"language": "GDScript",
+"path": "res://addons/dialogic/Localization/translation_service.gd"
+}, {
+"base": "Node",
+"class": "Dialogic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicClass.gd"
+}, {
+"base": "Reference",
+"class": "DialogicAnimaPropertiesHelper",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaPropertiesHelper.gd"
+}, {
+"base": "Node",
+"class": "DialogicAnimaResources",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/Anima/DialogicAnimaResources.gd"
+}, {
+"base": "Control",
+"class": "DialogicBackgroundMusic",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/BackgroundMusic.gd"
+}, {
+"base": "Node",
+"class": "DialogicCustomEvents",
+"language": "GDScript",
+"path": "res://addons/dialogic/Nodes/DialogicCustomEvents.gd"
+}, {
+"base": "Node",
+"class": "DialogicDefinitionsUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicDefinitionsUtil.gd"
+}, {
+"base": "Node",
+"class": "DialogicParser",
+"language": "GDScript",
+"path": "res://addons/dialogic/Parser/DialogicParser.gd"
+}, {
+"base": "Reference",
+"class": "DialogicResources",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicResources.gd"
+}, {
+"base": "Reference",
+"class": "DialogicUtil",
+"language": "GDScript",
+"path": "res://addons/dialogic/Other/DialogicUtil.gd"
+}, {
+"base": "PanelContainer",
+"class": "HistoryRow",
+"language": "GDScript",
+"path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
+}, {
 "base": "Resource",
 "class": "QuestData",
 "language": "GDScript",
-"path": "res://addons/questie/editor/database/quest_data.gd"
+"path": "res://addons/questie/editor/quest_editor/quest_data.gd"
 }, {
 "base": "Resource",
 "class": "QuestDatabase",
 "language": "GDScript",
-"path": "res://addons/questie/editor/database/quest_db.gd"
+"path": "res://addons/questie/editor/quest_editor/quest_db.gd"
+}, {
+"base": "Node",
+"class": "QuestDirector",
+"language": "GDScript",
+"path": "res://addons/questie/runtime/quest_director.gd"
+}, {
+"base": "Control",
+"class": "QuestLabel",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/quest_label.gd"
 }, {
 "base": "EditorPlugin",
 "class": "QuestieModule",
@@ -27,11 +92,24 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "UUID",
 "language": "GDScript",
-"path": "res://addons/questie/editor/uuid/uuid.gd"
+"path": "res://addons/questie/editor/common/uuid/uuid.gd"
 } ]
 _global_script_class_icons={
+"DTS": "",
+"Dialogic": "",
+"DialogicAnimaPropertiesHelper": "",
+"DialogicAnimaResources": "",
+"DialogicBackgroundMusic": "",
+"DialogicCustomEvents": "",
+"DialogicDefinitionsUtil": "",
+"DialogicParser": "",
+"DialogicResources": "",
+"DialogicUtil": "",
+"HistoryRow": "",
 "QuestData": "",
 "QuestDatabase": "",
+"QuestDirector": "",
+"QuestLabel": "",
 "QuestieModule": "",
 "UUID": ""
 }
@@ -40,10 +118,6 @@ _global_script_class_icons={
 
 config/name="Quest System For Godot"
 config/icon="res://icon.png"
-
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/questie/plugin.cfg" )
 
 [physics]
 
