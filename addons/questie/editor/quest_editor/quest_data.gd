@@ -8,7 +8,12 @@ class_name QuestData
 
 # Track the quest status.
 # The possible values are: ONGOING, FAILED, COMPLETED 
-enum QuestComplention{ONGOING, FAILED, COMPLETED}
+enum QuestComplention{
+    IDLE,               # Nothing happening 
+    ONGOING,            # Activated and running
+    FAILED,             # Can't be completed anymore
+    COMPLETED           # Completed with success
+}
 
 # the unique identifier for a quest item. Each time a new quest data is generated a new uuid will be generated too.
 export(String) var uuid
@@ -18,7 +23,7 @@ export(String) var title = "fill quest title here"
 
 # The status of the quest
 # for more details see 'QuestComplention'
-export(QuestComplention) var status
+export(QuestComplention) var status = QuestComplention.IDLE
 
 # quest description for journal
 export(String) var description = "fill quest description here"

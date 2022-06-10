@@ -1,7 +1,7 @@
 # The interface responsable for building a quest from scratch or modifying it
 
 tool
-extends ColorRect
+extends Control
 
 # Represent a list which contains all quests created
 #
@@ -10,7 +10,7 @@ extends ColorRect
 #
 # When you change the name of your quest, the button name
 # changes too  
-var quest_list
+var quest_tree
 
 # Represent the area where you can add some [elements] to the quest
 #
@@ -29,24 +29,24 @@ var elements
 # An interface which can call operations (i.e. add a quest)
 var toolbar 
 
-var database
+var database = preload("res://questie/quest-db.tres")
 
-# Called when the [NewQuestButton] is pressed from toolbar
-func on_new_quest_button_pressed():
+# Handle a request to create a new quest
+func new_quest_request():
+	
+	# Check if database has been loaded
+	if not database:
+		print("[questie]: quest database not found!")
+		return
+
+	# Generate new quest
 	database.push_new_quest()
-	var uuid : String = database.data[database.data.size()-1].uuid
-	var quest_label = quest_list.add_quest_button(uuid)
-	quest_label.delete_btn.connect("button_down", self, "erase_quest_from_database", [uuid])
-	
-func erase_quest_from_database(var uuid : String): 
-	print("[questie]: todo - remove quest label from database")
+	quest_tree.add_quest_item(database.data[database.data.size() - 1].uuid)
 
-func _enter_tree(): 
-	database = load("res://questie/quest-db.tres")
+func _enter_tree():
+	quest_tree = get_node("VBoxContainer/HBoxContainer2/quest tree/Tree")
 	toolbar = $"VBoxContainer/Toolbar"
-	quest_list = $"VBoxContainer/HBoxContainer2/VBoxContainer/quest list/ScrollContainer/VBoxContainer"
-	
-	toolbar.get_node("new quest").connect("button_down", self, "on_new_quest_button_pressed")
 
-func _exit_tree(): 
-	toolbar.get_node("new quest").disconnect("button_down", self, "on_new_quest_button_pressed")
+func _ready():
+	toolbar.new_quest_btn.connect("button_down", self, "new_quest_request")
+

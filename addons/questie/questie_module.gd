@@ -9,13 +9,19 @@ class_name QuestieModule
 
 # The database that contains all quest of the game
 var quest_database 
-var quest_editor = preload("res://addons/questie/editor/quest_editor/quest_editor.tscn").instance()
+
+var quest_editor = preload("res://addons/questie/editor/main.tscn")
+var quest_editor_instance
 
 func get_plugin_name(): return "Questie"
 
 func get_plugin_icon(): return get_editor_interface().get_base_control().get_icon("Spatial", "EditorIcons")
 
 func has_main_screen(): return true
+
+func make_visible(visible):
+	if quest_editor_instance:
+		quest_editor_instance.visible = visible
 
 func _enter_tree(): 
 	print("[questie]: startup questie...")
@@ -37,9 +43,14 @@ func _enter_tree():
 		ResourceSaver.save("res://questie/quest-db.tres", quest_database)
 		print("[questie]: quest database created at path res://questie/quest-db.tres")
 
-	get_editor_interface().get_editor_viewport().add_child(quest_editor)
+	# loading questie interface
+	quest_editor_instance = quest_editor.instance()
+	get_editor_interface().get_editor_viewport().add_child(quest_editor_instance)
+	make_visible(false)
+
+	print("[questie]: questie initialized successfully")
 
 func _exit_tree(): 
-	if quest_editor:
-		quest_editor.queue_free()
+	if quest_editor_instance:
+		quest_editor_instance.queue_free()
 

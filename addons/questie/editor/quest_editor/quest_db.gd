@@ -18,7 +18,7 @@ func push_new_quest()->QuestData:
 	var result : QuestData = QuestData.new()
 	result.uuid = UUID.generate()
 	data.push_back(result)
-	print("[questie]: called")
+	print("[questie]: new quest created")
 	return result
 
 # Remove a quest from the quest database

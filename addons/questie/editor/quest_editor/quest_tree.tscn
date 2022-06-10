@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_tree.gd" type="Script" id=1]
+
+[node name="quest tree" type="ScrollContainer"]
+anchor_bottom = 1.0
+margin_bottom = -588.0
+
+[node name="Tree" type="Tree" parent="."]
+margin_right = 275.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 275, 600 )
+size_flags_vertical = 3
+columns = 2
+allow_reselect = true
+allow_rmb_select = true
+hide_folding = true
+hide_root = true
+script = ExtResource( 1 )
