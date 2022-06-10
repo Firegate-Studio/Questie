@@ -33,6 +33,13 @@ func erase_quest(var uuid : String)->void:
 # @brief removes all stored data
 func purge():
 	data.clear()
+
+# @brief				Get the quest data throw [uuid]
+# @param [uuid]			the [uuid] owned from the quest you want get
+func get_data(var uuid : String)->QuestData:
+	for item in data:
+		if item.uuid == uuid: return item
+	return null
 	
 
 	

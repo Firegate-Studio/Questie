@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/toolbar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_editor.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_tree.tscn" type="PackedScene" id=3]
-[ext_resource path="res://addons/questie/editor/icons/kill.png" type="Texture" id=4]
-[ext_resource path="res://addons/questie/editor/icons/talk.png" type="Texture" id=5]
-[ext_resource path="res://addons/questie/editor/icons/coin.png" type="Texture" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace area.tscn" type="PackedScene" id=4]
 
 [node name="Quest Editor" type="Control"]
 anchor_right = 1.0
@@ -23,10 +21,10 @@ size_flags_vertical = 3
 [node name="Toolbar" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
 margin_right = 1024.0
-margin_bottom = 22.0
+margin_bottom = 72.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 26.0
+margin_top = 76.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 3
@@ -35,117 +33,22 @@ size_flags_vertical = 3
 [node name="quest tree" parent="VBoxContainer/HBoxContainer2" instance=ExtResource( 3 )]
 anchor_bottom = 0.0
 margin_right = 275.0
-margin_bottom = 574.0
+margin_bottom = 524.0
 rect_min_size = Vector2( 275, 0 )
 size_flags_vertical = 3
 
-[node name="workspace area" type="CenterContainer" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 279.0
-margin_right = 720.0
-margin_bottom = 574.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/workspace area"]
-margin_left = 122.0
-margin_top = 280.0
-margin_right = 319.0
-margin_bottom = 294.0
-text = "Create a  quest to start to work"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="workspace area" parent="VBoxContainer/HBoxContainer2" instance=ExtResource( 4 )]
 visible = false
-margin_left = 824.0
-margin_right = 1024.0
-margin_bottom = 574.0
-rect_min_size = Vector2( 200, 0 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer2"]
-margin_left = 724.0
+[node name="empty" type="CenterContainer" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 279.0
 margin_right = 1024.0
-margin_bottom = 574.0
-rect_min_size = Vector2( 300, 0 )
-
-[node name="ItemList" type="GridContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer"]
-margin_right = 304.0
-margin_bottom = 562.0
+margin_bottom = 524.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 2
 
-[node name="Button" type="Button" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList"]
-margin_right = 150.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 150, 60 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
-margin_right = -5.0
-margin_bottom = -5.0
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button/HBoxContainer"]
-margin_right = 48.0
-margin_bottom = 50.0
-texture = ExtResource( 6 )
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button/HBoxContainer"]
-margin_left = 52.0
-margin_top = 18.0
-margin_right = 120.0
-margin_bottom = 32.0
-text = "get money"
-
-[node name="Button2" type="Button" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList"]
-margin_left = 154.0
-margin_right = 304.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 150, 60 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button2"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
-margin_right = -5.0
-margin_bottom = -5.0
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button2/HBoxContainer"]
-margin_right = 48.0
-margin_bottom = 50.0
-texture = ExtResource( 4 )
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button2/HBoxContainer"]
-margin_left = 52.0
-margin_top = 18.0
-margin_right = 72.0
-margin_bottom = 32.0
-text = "Kill"
-
-[node name="Button3" type="Button" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList"]
-margin_top = 64.0
-margin_right = 150.0
-margin_bottom = 124.0
-rect_min_size = Vector2( 150, 60 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button3"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 5.0
-margin_right = -5.0
-margin_bottom = -5.0
-
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button3/HBoxContainer"]
-margin_right = 48.0
-margin_bottom = 50.0
-texture = ExtResource( 5 )
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/ScrollContainer/ItemList/Button3/HBoxContainer"]
-margin_left = 52.0
-margin_top = 18.0
-margin_right = 77.0
-margin_bottom = 32.0
-text = "Talk"
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/empty"]
+margin_left = 276.0
+margin_top = 255.0
+margin_right = 469.0
+margin_bottom = 269.0
+text = "Create a quest to start to work"
