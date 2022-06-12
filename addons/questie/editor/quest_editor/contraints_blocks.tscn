@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/contraints/has_quest_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/contraints/has_item_block.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/block_section.tscn" type="PackedScene" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/contraints/has_gold_block.tscn" type="PackedScene" id=4]
+
+[node name="contraints blocks" instance=ExtResource( 3 )]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="title" parent="." index="0"]
+margin_right = 1004.0
+
+[node name="container" parent="." index="1"]
+margin_right = 1004.0
+margin_bottom = 82.0
+
+[node name="has gold block" parent="container" index="0" instance=ExtResource( 4 )]
+margin_right = 120.0
+margin_bottom = 30.0
+
+[node name="has item block" parent="container" index="1" instance=ExtResource( 2 )]
+margin_left = 124.0
+margin_right = 244.0
+margin_bottom = 30.0
+
+[node name="has quest block" parent="container" index="2" instance=ExtResource( 1 )]
+margin_top = 34.0
+margin_right = 120.0
+margin_bottom = 64.0
