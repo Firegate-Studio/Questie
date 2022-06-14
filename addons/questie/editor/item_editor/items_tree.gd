@@ -167,6 +167,32 @@ func remove_subitem(var item : TreeItem, var category : int, var idb : ItemDatab
 	# Log
 	print("[questie]: tree item removed")
 
+# @brief				load data store inside the item database
+# @param db				the item database
+func load_data(var db):
+	if db.weapons.size() > 0:
+		for item in db.weapons:
+			create_subitem(db.weapons, "res://addons/questie/editor/icons/item.png", weapons)
+
+	if db.armors.size() > 0:
+		for item in db.armors:
+			create_subitem(db.armors, "res://addons/questie/editor/icons/armor.png", armors)
+
+	if db.consumables.size() > 0:
+		for item in db.consumables:
+			create_subitem(db.consumables, "res://addons/questie/editor/icons/potion.png", consumables)
+
+	if db.materials.size() > 0:
+		for item in db.materials:
+			create_subitem(db.materials, "res://addons/questie/editor/icons/material.png", materials)
+
+	if db.specials.size() > 0:
+		for item in db.specials:
+			create_subitem(db.specials, "res://addons/questie/editor/icons/coin.png", specials)
+
+	# Log
+	print("[questie]: saved data loaded...")
+
 func _enter_tree(): 
 
 	# Construct root
@@ -179,7 +205,8 @@ func _enter_tree():
 	materials = create_root("Materials", "res://addons/questie/editor/icons/folder.png")
 	specials = create_root("Specials", "res://addons/questie/editor/icons/folder.png")
 
-	# TODO: items loding
-	print("[questie]: items loading not yet ported")
+	# Load saved data
+	load_data(load("res://questie/item-db.tres"))
+
 
 func _exit_tree(): pass
