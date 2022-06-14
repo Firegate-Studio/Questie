@@ -11,8 +11,10 @@ enum DamageType{
     PHYSIC,         # Base damage for each white-weapon such as swords, mace, ..., etc.
     FIRE,           # magic damage based on fire
     WATER,          # magic damage based on water
-    EARTH,          # magic damage based on nature (i.e. poison, nature, ..., etc.)
+    NATURE,         # magic damage based on nature (i.e. poison, nature, ..., etc.)
     AIR,            # magic damage based on air
+    LIGHT,          
+    DARKNESS,
     SPIRIT          # magic damage based on spirit (i.e. conjuring, necromancy)
 }
 

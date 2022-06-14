@@ -16,12 +16,17 @@ export(String) var description
 # See [QuestDatabase.ItemCategory] for possible values
 export(int) var category
 
+# The path of the icon loaded
+export(String) var icon_path = ""
+
 # The item icon for inventory
 export(Texture) var icon
 
+export(bool) var can_be_sold = true
+
 # The purchase price from vendor
-export(float) var vendor = 50
+export(float) var purchase_price = 50
 
 # The sell price
-export(float) var sell = 10
+export(float) var sell_price = 10
 

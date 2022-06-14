@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/items_tree.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/toolbar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://addons/questie/editor/item_editor/item_editor.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/item_editor/weapon_editor.tscn" type="PackedScene" id=4]
 
 [node name="Items Editor" type="Control"]
 anchor_right = 1.0
@@ -26,7 +27,30 @@ size_flags_vertical = 3
 [node name="ItemTree" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 1 )]
 margin_bottom = 496.0
 
-[node name="Control" type="Control" parent="VBoxContainer/HSplitContainer"]
+[node name="Weapon Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 262.0
 margin_right = 1024.0
 margin_bottom = 496.0
+
+[node name="Empty" type="Control" parent="VBoxContainer/HSplitContainer"]
+margin_left = 262.0
+margin_right = 1024.0
+margin_bottom = 496.0
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/Empty"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/Empty/MarginContainer"]
+margin_top = 231.0
+margin_right = 742.0
+margin_bottom = 245.0
+text = "Select an item from the tree on the left side to start to work"
+align = 1

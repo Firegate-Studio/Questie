@@ -129,3 +129,4 @@ func erase_item(var uuid, var category : int):
                 specials.erase(item)
                 print("[questie]: special removed from database")
                 return
+

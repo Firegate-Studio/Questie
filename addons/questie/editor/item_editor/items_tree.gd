@@ -61,9 +61,9 @@ func create_subitem(var storage : Array, var icon : String, var parent : TreeIte
 
 	# create tree item
 	var item = create_item(parent)
-	item.set_text(0, "weapon_"+var2str(storage.size()))
+	item.set_text(0, "item_"+var2str(storage.size()))
 	item.set_selectable(0, true)
-	item.set_editable(0, true)
+	item.set_editable(0, false)
 	item.set_expand_right(0, true)
 
 	# create icon
@@ -172,23 +172,38 @@ func remove_subitem(var item : TreeItem, var category : int, var idb : ItemDatab
 func load_data(var db):
 	if db.weapons.size() > 0:
 		for item in db.weapons:
-			create_subitem(db.weapons, "res://addons/questie/editor/icons/item.png", weapons)
+			var sub = create_subitem(db.weapons, "res://addons/questie/editor/icons/item.png", weapons)
+			
+			# Update name
+			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.armors.size() > 0:
 		for item in db.armors:
-			create_subitem(db.armors, "res://addons/questie/editor/icons/armor.png", armors)
+			var sub = create_subitem(db.armors, "res://addons/questie/editor/icons/armor.png", armors)
+
+			# Update name
+			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.consumables.size() > 0:
 		for item in db.consumables:
-			create_subitem(db.consumables, "res://addons/questie/editor/icons/potion.png", consumables)
+			var sub = create_subitem(db.consumables, "res://addons/questie/editor/icons/potion.png", consumables)
+
+			# Update name
+			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.materials.size() > 0:
 		for item in db.materials:
-			create_subitem(db.materials, "res://addons/questie/editor/icons/material.png", materials)
+			var sub = create_subitem(db.materials, "res://addons/questie/editor/icons/material.png", materials)
+			
+			# Update name
+			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.specials.size() > 0:
 		for item in db.specials:
-			create_subitem(db.specials, "res://addons/questie/editor/icons/coin.png", specials)
+			var sub = create_subitem(db.specials, "res://addons/questie/editor/icons/coin.png", specials)
+			
+			# Update name
+			if not item.title == "": sub.set_text(0, item.title)
 
 	# Log
 	print("[questie]: saved data loaded...")

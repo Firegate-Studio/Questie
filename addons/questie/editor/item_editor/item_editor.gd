@@ -9,6 +9,12 @@ var items_tree
 # A toolbar for all action allowed in item editor (i.e., Create Weapon, Armor, Consumables, ..., etc.)
 var toolbar
 
+# An empty area that displays a message as placehodler for any workspace
+var empty_area
+
+# The interface containing the weapon data
+var weapon_editor
+
 # @brief					creates a weapon item inside the item tree
 func create_weapon():
 	
@@ -103,7 +109,277 @@ func delete_item():
 		database.erase_item(uuid, database.ItemCategory.SPECIAL)
 		items_tree.remove_subitem(selected, database.ItemCategory.SPECIAL, database)
 
-func _enter_tree():
+	unselect_tree_item()
+
+# @brief					Display the correct workspace by item selection
+func tree_item_selected():
+
+	# Get selected item IID
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Check if the selected item is a weapon
+	if items_tree.weapon_uuid_map.has(selected):
+
+		# Get weapon UUID
+		var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+		# Preapare data to bake
+		var data = null
+
+		# Get data
+		for item in database.weapons:
+
+			# Ignore invalid UUIDs
+			if not item.uuid == uuid: continue
+
+			data = item
+			break
+
+		# Load weapon data
+		weapon_editor.title.text = data.title
+		weapon_editor.description.text = data.description
+		weapon_editor.icon.text = data.icon_path
+		weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(data.damage_type)
+		weapon_editor.min_damage.value = data.min_damage
+		weapon_editor.max_damage.value = data.max_damage
+		weapon_editor.can_be_sold.pressed = data.can_be_sold
+		weapon_editor.purchase_price.value = data.purchase_price
+		weapon_editor.sell_price.value = data.sell_price
+		print("[questie]: weapon item with [uuid]: " + uuid + " loaded")
+
+		# Swap interfaces
+		empty_area.hide()
+		weapon_editor.show()
+
+# @brief				Deselect the current selected item and swap interfaces
+func unselect_tree_item():
+
+	# Swap interfaces
+	weapon_editor.hide()
+	empty_area.show()
+
+# @brief				update the name for both weapon data and tree item
+# @param title			the changed name as String
+func weapon_name_changed(var title):
+	
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Prepare weapon data
+	var data : String = ""
+
+	# Retrive weapon data from database
+	for item in database.weapons:
+
+		# Ignore different UUIDs
+		if not item.uuid == uuid : continue
+
+		# Change title
+		item.title = title
+
+		# Update tree item name
+		items_tree.get_selected().set_text(0, title)
+		return
+
+	# Log error
+	print("[questie]: can't update title for weapon with [UUID]: "+uuid)
+
+# @brief				update the weapon description
+func weapon_description_changed():
+
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.weapons:
+
+		# Ignore different UUIDs
+		if not item.uuid == uuid: continue
+		
+		# Update description
+		item.description = weapon_editor.description.text
+
+		return
+
+	# Log error
+	print("[questie]: can't update weapon description for weapon with [UUID]:" + uuid)
+
+# @brief				update weapon damage type
+func weapon_damage_changed(var id):
+
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage type
+		item.damage_type = id
+		weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(id)
+
+		return
+
+	# Log error
+	print("[questie]: can't update weapon damage type")
+
+# @brief				update the min damage dealt from a weapon
+# @param value			the new value
+func weapon_min_damage_changed(var value):
+
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.min_damage = value
+		
+		# Log changes
+		print("[questie]: weapon min damage changed to " + var2str(value))
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the weapon min value")
+
+# @brief				update the max damage dealt from a weapon
+# @param value			the new value
+func weapon_max_damage_changed(var value):
+
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.max_damage = value
+
+		# Log changes
+		print("[questie]: weapon max damage changed to " + var2str(value))
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the weapon max value")
+
+# @brief				update sellability setting
+# @param enabled		if true the item can be sold to a vendor
+func weapon_sellable_changed(var enabled : bool):
+
+	# Get weapo UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrive weapon data
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.can_be_sold = enabled
+
+		return
+
+	# Log error
+	print("[questie]: can't update sellable option for weapon data with [uuid]: "+uuid)
+
+# @brief				update purchase price for weapon item
+# @param value			the new value
+func weapon_purchase_price_changed(var value):
+
+	# Get weapo UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrive weapon data
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.purchase_price = value
+
+		# Log changes
+		print("[questie]: weapon purchase price changed to " + var2str(value))
+
+		return
+
+	# Log error
+	print("[questie]: can't update purchase price for weapon data with [uuid]: "+uuid)
+
+# @brief 				update sell price for weapon item
+# @param value			the new value
+func weapon_sell_price_changed(var value):
+
+	# Get weapo UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrive weapon data
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.sell_price = value
+
+		# Log changes
+		print("[questie]: weapon sell price changed to " + var2str(value))
+
+		return
+
+	# Log error
+	print("[questie]: can't update sellable option for weapon data with [uuid]: "+uuid)
+
+
+func weapon_icon_changed(var path):
+
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Skip if invalid path
+		if not ".png" in path: return
+
+		# Prepare icon
+		var icon = load(path)
+
+		# Check if icon is invalid
+		if not icon: 
+			
+			# Log error
+			print("[questie]: unable to load icon at path: " + path)
+			return
+
+		# Load icon in weapon data
+		item.icon = icon
+		item.icon_path = path
+
+		# Log new icon
+		print("[questie]: stored icon with path " + path)
+
+		return
+
+	# Log error
+	print("[questie]: can't find valid weapon data to store icon with [uuid]: " + uuid)
+
+func _ready():
 
 	# Load database
 	database = load("res://questie/item-db.tres")
@@ -111,6 +387,8 @@ func _enter_tree():
 	# Get references from interface
 	toolbar = get_node("VBoxContainer/Toolbar")
 	items_tree = get_node("VBoxContainer/HSplitContainer/ItemTree/ScrollContainer/Tree")
+	empty_area = $VBoxContainer/HSplitContainer/Empty
+	weapon_editor = $"VBoxContainer/HSplitContainer/Weapon Editor"
 
 	# Subscribe toolbar events
 	toolbar.connect("new_weapon_item_request", self, "create_weapon")
@@ -120,13 +398,19 @@ func _enter_tree():
 	toolbar.connect("new_special_item_request", self, "create_special")
 	toolbar.connect("delete_item_request", self, "delete_item")
 
-func _exit_tree():
+	# Subscribe item tree events
+	items_tree.connect("item_selected", self, "tree_item_selected")
+	items_tree.connect("nothing_selected", self, "unselect_tree_item")
 
-	# Unsubscribe toolbar events
-	toolbar.disconnect("new_weapon_item_request", self, "create_weapon")
-	toolbar.disconnect("new_armor_item_request", self, "create_armor")
-	toolbar.disconnect("new_consumable_item_request", self, "create_consumable")
-	toolbar.disconnect("new_material_item_request", self, "create_material")
-	toolbar.disconnect("new_special_item_request", self, "create_special")
-	toolbar.disconnect("delete_item_request", self, "delete_item")
+	# Subscribe weapon editor events
+	weapon_editor.title.connect("text_changed", self, "weapon_name_changed")
+	weapon_editor.description.connect("text_changed", self, "weapon_description_changed")
+	weapon_editor.damage_type.get_popup().connect("id_pressed", self, "weapon_damage_changed")
+	weapon_editor.min_damage.connect("value_changed", self, "weapon_min_damage_changed")
+	weapon_editor.max_damage.connect("value_changed", self, "weapon_max_damage_changed")
+	weapon_editor.can_be_sold.connect("toggled", self, "weapon_sellable_changed")
+	weapon_editor.purchase_price.connect("value_changed", self, "weapon_purchase_price_changed")
+	weapon_editor.sell_price.connect("value_changed", self, "weapon_sell_price_changed")
+	weapon_editor.icon.connect("text_changed", self, "weapon_icon_changed")
+
 
