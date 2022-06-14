@@ -15,6 +15,9 @@ var empty_area
 # The interface containing the weapon data
 var weapon_editor
 
+# The interface containing the armor data
+var armor_editor
+
 # @brief					creates a weapon item inside the item tree
 func create_weapon():
 	
@@ -111,8 +114,11 @@ func delete_item():
 
 	unselect_tree_item()
 
-# @brief					Display the correct workspace by item selection
+# @brief					Display the correct workspace by item selection and loads data from database
 func tree_item_selected():
+
+	# Close all workspaces
+	unselect_tree_item()
 
 	# Get selected item IID
 	var selected = items_tree.get_selected().get_instance_id()
@@ -151,12 +157,52 @@ func tree_item_selected():
 		empty_area.hide()
 		weapon_editor.show()
 
+	# Check if the selected item is an armor
+	if items_tree.armor_uuid_map.has(selected):
+
+		# Get armor UUID
+		var uuid = items_tree.armor_uuid_map[selected]
+
+		# Prepare data to bake from database
+		var data = null
+
+		# Get data from database
+		for item in database.armors:
+
+			# Ignore invalid UUIDs
+			if not item.uuid == uuid: continue
+
+			# Bake data
+			data = item
+			
+			break
+
+		# Load data to display in armor workspace
+		armor_editor.title.text = data.title
+		armor_editor.description.text = data.description
+		armor_editor.icon_path.text = data.icon_path
+		if not data.icon_path == "": armor_editor.icon_preview.set_texture(load(data.icon_path))
+		else: armor_editor.icon_preview.set_texture(null)
+		armor_editor.armor.value = data.armor
+		armor_editor.armor_type.text = armor_editor.armor_type.get_popup().get_item_text(data.type)
+		armor_editor.can_be_sold.pressed = data.can_be_sold
+		armor_editor.purchase_price.value = data.purchase_price
+		armor_editor.sell_price.value = data.sell_price
+		print("[questie]: armor data with [UUID]: " + uuid + " loaded")
+
+		# Swap interfaces to show workspace
+		empty_area.hide()
+		armor_editor.show()
+
 # @brief				Deselect the current selected item and swap interfaces
 func unselect_tree_item():
 
 	# Swap interfaces
 	weapon_editor.hide()
+	armor_editor.hide()
 	empty_area.show()
+
+################################################################################################################
 
 # @brief				update the name for both weapon data and tree item
 # @param title			the changed name as String
@@ -342,7 +388,7 @@ func weapon_sell_price_changed(var value):
 	# Log error
 	print("[questie]: can't update sellable option for weapon data with [uuid]: "+uuid)
 
-
+# @brief				update the weapon icon and path
 func weapon_icon_changed(var path):
 
 	# Get weapon UUID
@@ -379,6 +425,237 @@ func weapon_icon_changed(var path):
 	# Log error
 	print("[questie]: can't find valid weapon data to store icon with [uuid]: " + uuid)
 
+######################################################################################################################################################################################################
+
+# @brief					update the armor name for both database data and tree item
+# @param title				the new name
+func armor_name_changed(var title):
+
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update armor name
+		item.title = title
+
+		# Update armor tree item
+		items_tree.get_selected().set_text(0, title)
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor name with [uuid]: " + uuid)
+
+# @brief					update armor description in database
+func armor_description_changed():
+
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update armor description
+		item.description = armor_editor.description.text
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor description with [uuid]: " + uuid)
+
+# @brief 					update the icon path and workspace preview
+# @param path				the updated path
+func armor_icon_changed(var path):
+
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Check if path is valid
+		if not ".png" in path: return
+		
+		# prepare texture to preview
+		var icon = load(path)
+		if not icon:
+			
+			# Log invalid icon
+			print("[questie]: can't load texture at path: " + path)
+
+			return
+
+		# Update path and preview
+		item.icon_path = path
+		item.icon = icon
+		armor_editor.icon_preview.set_texture(icon)
+
+		# Log
+		print("[questie]: armor icon loaded from path: " + path)
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor icon with [uuid]: " + uuid)		
+		
+# @brief					update the armor value
+# @param value				the new armor value
+func armor_value_changed(var value):
+
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+	
+	# Retrive armor from database
+	for item in database.armors:
+	
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+	
+		# Update armor value
+		item.armor = value
+	
+		# Log
+		print("[questie]: armor value set to " + var2str(value) + " for armor with [UUID]: " + uuid)
+
+		return
+	
+	# Log error
+	print("[questie]: can't update armor value with [uuid]: " + uuid)
+
+# @brief					update the armor type
+# @param id					the new armor type. See [ArmorType] for possible values
+func armor_type_changed(var id):
+	
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update armor type for database and workspace
+		item.type = id
+		armor_editor.armor_type.text = armor_editor.armor_type.get_popup().get_item_text(id)
+
+		# Log
+		print("[questie]: armor type updated with the value " + var2str(id))
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor description with [uuid]: " + uuid)
+
+# @brief 					update the capacity to sell an item to a vendor
+# @param enabled			the new sellability
+func armor_sellable_changed(var enabled):
+	
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update armor proficiency to sell item to a vendor
+		item.can_be_sold = enabled
+		
+		# Log
+		print("[questie]: set armor sellability to " + var2str(enabled) + " for armor with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor description with [uuid]: " + uuid)
+
+# @brief					update the armor purchase price 
+# @param value				the new purchase price
+func armor_purchase_price_changed(var value):
+	
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update armor purchase price
+		item.purchase_price = value
+
+		# Log
+		print("[questie]: armor purchase price set to " + var2str(value) + " for armor with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor purchase price with [uuid]: " + uuid)
+
+# @brief					update armor sell price
+# @param value				the new sell price
+func armor_sell_price_changed(var value):
+
+	# Get selected item
+	var selected = items_tree.get_selected().get_instance_id()
+
+	# Get armor UUID
+	var uuid = items_tree.armor_uuid_map[selected]
+
+	# Retrive armor from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update armor purchase price
+		item.sell_price = value
+
+		# Log
+		print("[questie]: armor sell price set to " + var2str(value) + " for armor with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update armor purchase price with [uuid]: " + uuid)
+
+####################################################################################################################################################################################################
+
 func _ready():
 
 	# Load database
@@ -389,6 +666,7 @@ func _ready():
 	items_tree = get_node("VBoxContainer/HSplitContainer/ItemTree/ScrollContainer/Tree")
 	empty_area = $VBoxContainer/HSplitContainer/Empty
 	weapon_editor = $"VBoxContainer/HSplitContainer/Weapon Editor"
+	armor_editor = $"VBoxContainer/HSplitContainer/Armor Editor"
 
 	# Subscribe toolbar events
 	toolbar.connect("new_weapon_item_request", self, "create_weapon")
@@ -412,5 +690,15 @@ func _ready():
 	weapon_editor.purchase_price.connect("value_changed", self, "weapon_purchase_price_changed")
 	weapon_editor.sell_price.connect("value_changed", self, "weapon_sell_price_changed")
 	weapon_editor.icon.connect("text_changed", self, "weapon_icon_changed")
+
+	# Subscribe armor editor events
+	armor_editor.title.connect("text_changed", self, "armor_name_changed")
+	armor_editor.description.connect("text_changed", self, "armor_description_changed")
+	armor_editor.icon_path.connect("text_changed", self, "armor_icon_changed")
+	armor_editor.armor.connect("value_changed", self, "armor_value_changed")
+	armor_editor.armor_type.get_popup().connect("id_pressed", self, "armor_type_changed")
+	armor_editor.can_be_sold.connect("toggled", self, "armor_sellable_changed")
+	armor_editor.purchase_price.connect("value_changed", self, "armor_purchase_price_changed")
+	armor_editor.sell_price.connect("value_changed", self, "armor_sell_price_changed")
 
 

@@ -45,7 +45,7 @@ func push_item(var category : int):
             weapons.push_back(result)
             return result
         ItemCategory.ARMOR:
-            result = load("res://addons/questie/editor/item_editor/item_data.gd").new()
+            result = load("res://addons/questie/editor/item_editor/armor_data.gd").new()
             result.uuid = UUID.generate()
             armors.push_back(result)
             return result
