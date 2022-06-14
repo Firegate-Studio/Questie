@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=1]
 [ext_resource path="res://addons/questie/editor/icons/material.png" type="Texture" id=2]
@@ -6,11 +6,13 @@
 [ext_resource path="res://addons/questie/editor/icons/potion.png" type="Texture" id=4]
 [ext_resource path="res://addons/questie/editor/icons/trash.png" type="Texture" id=5]
 [ext_resource path="res://addons/questie/editor/icons/coin.png" type="Texture" id=6]
+[ext_resource path="res://addons/questie/editor/item_editor/toolabar.gd" type="Script" id=7]
 
 [node name="Toolbar" type="Control"]
 margin_right = 1024.0
 margin_bottom = 100.0
 rect_min_size = Vector2( 0, 100 )
+script = ExtResource( 7 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0

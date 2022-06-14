@@ -10,6 +10,9 @@ class_name QuestieModule
 # The database that contains all quest of the game
 var quest_database 
 
+# The database that contains all items of the game
+var item_database
+
 var quest_editor = preload("res://addons/questie/editor/main.tscn")
 var quest_editor_instance
 
@@ -42,6 +45,14 @@ func _enter_tree():
 		quest_database.purge()
 		ResourceSaver.save("res://questie/quest-db.tres", quest_database)
 		print("[questie]: quest database created at path res://questie/quest-db.tres")
+
+	if not file.file_exists("res://questie/item-db.tres"):
+		print("[questie]: creating item database...")
+		item_database = ItemDatabase.new()
+		item_database.uuid = UUID.generate()
+		ResourceSaver.save("res://questie/item-db.tres", item_database)
+		print("[questie]: item database created at path res://quesite/item-db.tres")
+
 
 	# loading questie interface
 	quest_editor_instance = quest_editor.instance()
