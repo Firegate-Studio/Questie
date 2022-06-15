@@ -1488,7 +1488,7 @@ func special_consumable_value_changed(var value):
 	# Check if data is valid
 	if not data:
 
-		#Log error
+		# Log error
 		print("[questie]: can't update data for special item with [uuid]: " + uuid)
 
 		return
@@ -1599,7 +1599,7 @@ func _ready():
 	special_editor.armor_type.get_popup().connect("id_pressed", self, "special_armor_type_changed")
 	special_editor.armor_value.connect("value_changed", self, "special_armor_value_changed")
 	special_editor.as_consumable.connect("toggled", self, "special_consumable_changed")
-	special_editor.consumable_value.connect("value_changed", self, "special_consumable_changed")
+	special_editor.consumable_value.connect("value_changed", self, "special_consumable_value_changed")
 	special_editor.is_unique.connect("toggled", self, "special_unique_changed")
 
 
