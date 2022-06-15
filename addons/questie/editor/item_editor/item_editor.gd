@@ -18,8 +18,11 @@ var weapon_editor
 # The interface containing the armor data
 var armor_editor
 
-# The interface contianing the consumable data
+# The interface contaniing the consumable data
 var consumable_editor
+
+# the interface containing the material data
+var material_editor
 
 # @brief					creates a weapon item inside the item tree
 func create_weapon():
@@ -237,6 +240,53 @@ func tree_item_selected():
 		empty_area.hide()
 		consumable_editor.show()
 			
+	# Check if selected item is a material
+	if items_tree.material_uuid_map.has(selected):
+
+		# Get material UUID
+		var uuid = items_tree.material_uuid_map[selected]
+
+		# Prepare data to bake
+		var data = null
+
+		# Retrieve material data from database
+		for item in database.materials:
+
+			# Ignore invalid UUIDs
+			if not item.uuid == uuid: continue
+
+			# Get data
+			data = item
+
+			break
+
+		# Check if data is not valid
+		if not data:
+
+			# Log error
+			print("[questie]: invalid data for material item with [uuid]: " + uuid)
+
+			return
+
+		# Load material data
+		material_editor.title.text = data.title
+		material_editor.description.text = data.description
+		material_editor.icon_path.text = data.icon_path
+		
+		if not data.icon: material_editor.icon_preview.set_texture(null)
+		else: material_editor.icon_preview.set_texture(data.icon)
+
+		material_editor.can_be_sold.pressed = data.can_be_sold
+		material_editor.purchase_price.value = data.purchase_price
+		material_editor.sell_price.value = data.sell_price
+
+		# Log
+		print("[questie]: loaded data for material item with [uuid]: " + uuid)
+
+		# Swap workspaces
+		empty_area.hide()
+		material_editor.show()
+	
 
 # @brief				Deselect the current selected item and swap interfaces
 func unselect_tree_item():
@@ -245,6 +295,7 @@ func unselect_tree_item():
 	weapon_editor.hide()
 	armor_editor.hide()
 	consumable_editor.hide()
+	material_editor.hide()
 	empty_area.show()
 
 ################################################################################################################
@@ -856,8 +907,8 @@ func consumable_sell_price_changed(var price):
 	# Log error
 	print("[questie]: can't update consumable sell price for consumable item with [UUID]: " + uuid)
 
-# @brief			update consumable value
-# @param value		the new consumable value
+# @brief				update consumable value
+# @param value			the new consumable value
 func consumable_value_changed(var value):
 	
 	# Get consumable UUID
@@ -882,6 +933,168 @@ func consumable_value_changed(var value):
 
 #################################################################################################################
 
+# @brief				update material name
+# @param title 			the new material name
+func material_name_changed(var title):
+
+	# Get material UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.title = title
+		items_tree.get_selected().set_text(0, title)
+
+		# Log
+		print("[questie]: updated name for material item with [uuid]: " + uuid)
+
+		return
+	
+	# Log error
+	print("[questie]: unable to set a new name for material item with [uuid]: " + uuid)
+
+# @brief				update material description
+func material_description_changed():
+	
+	# Get material UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.description = material_editor.description.text
+
+		# Log
+		print("[questie]: updated description for material item with [uuid]: " + uuid)
+
+		return
+	
+	# Log error
+	print("[questie]: unable to set a new description for material item with [uuid]: " + uuid)
+
+# @brief				update material icon
+# @param path			the new icon path
+func material_icon_changed(var path):
+
+	# Get material UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Check if path is valid
+		if not ".png" in path: continue
+
+		# Prepare icon for editor preview
+		var icon = load(path)
+
+		# Check if icon is valid
+		if not icon:
+
+			# Log error
+			print("[questie]: can't load icon at path " + path + " for the material item with [uuid]: " + uuid)
+
+			return
+
+		# Update data
+		item.icon = icon
+		item.icon_path = path
+		material_editor.icon_preview.set_texture(icon)
+
+		# Log 
+		print("[questie]: updated icon from path " + path + " for material item with [uuid]: " + uuid)
+
+		return
+	
+	# Log error - disbaled for smart logging
+	#print("[questie]: unable to set a new icon from path" + path + " for material item with [uuid]: " + uuid)
+
+# @brief				update material sellability capacity
+# @param enabled		the new sellability capacity
+func material_sellability_changed(var enabled):
+
+	# Get material UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.can_be_sold = enabled
+
+		# Log
+		print("[questie]: set sellability to " + var2str(enabled) + " for material item with [uuid]: " + uuid)
+
+		return
+	
+	# Log error
+	print("[questie]: unable to set a sellability for material item with [uuid]: " + uuid)
+
+# @brief				update material purchase price
+# @param price			the new purchase price
+func material_purchase_price_changed(var price):
+
+	# Get material UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.purchase_price = price
+
+		# Log
+		print("[questie]: set purcahse price to "+ var2str(price) + " for material item with [uuid]: " + uuid)
+
+		return
+	
+	# Log error
+	print("[questie]: unable to set a new purchase price for material item with [uuid]: " + uuid)
+
+# @brief				update material sell price
+# @param price			the new sell price
+func material_sell_price_changed(var price):
+
+	# Get material UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.sell_price = price
+
+		# Log
+		print("[questie]: set sell price to " + var2str(price) + " for material item with [uuid]: " + uuid)
+
+		return
+	
+	# Log error
+	print("[questie]: unable to set a new sell price for material item with [uuid]: " + uuid)
+
+#################################################################################################################
+
 func _ready():
 
 	# Load database
@@ -894,6 +1107,7 @@ func _ready():
 	weapon_editor = $"VBoxContainer/HSplitContainer/Weapon Editor"
 	armor_editor = $"VBoxContainer/HSplitContainer/Armor Editor"
 	consumable_editor = $"VBoxContainer/HSplitContainer/Consumable Editor"
+	material_editor = $"VBoxContainer/HSplitContainer/Material Editor"
 
 	# Subscribe toolbar events
 	toolbar.connect("new_weapon_item_request", self, "create_weapon")
@@ -936,5 +1150,13 @@ func _ready():
 	consumable_editor.purchase_price.connect("value_changed", self, "consumable_purchase_price_changed")
 	consumable_editor.sell_price.connect("value_changed", self, "consumable_sell_price_changed")
 	consumable_editor.value.connect("value_changed", self, "consumable_value_changed")
+
+	# Subscribe material editor events
+	material_editor.title.connect("text_changed", self, "material_name_changed")
+	material_editor.description.connect("text_changed", self, "material_description_changed")
+	material_editor.icon_path.connect("text_changed", self, "material_icon_changed")
+	material_editor.can_be_sold.connect("toggled", self, "material_sellability_changed")
+	material_editor.purchase_price.connect("value_changed", self, "material_purchase_price_changed")
+	material_editor.sell_price.connect("value_changed", self, "material_sell_price_changed")
 
 
