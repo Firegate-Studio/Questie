@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/items_tree.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/toolbar.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/questie/editor/item_editor/armor_editor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/questie/editor/item_editor/consumable_editor.tscn" type="PackedScene" id=6]
 [ext_resource path="res://addons/questie/editor/item_editor/material_editor.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/questie/editor/item_editor/special_editor.tscn" type="PackedScene" id=8]
 
 [node name="Items Editor" type="Control"]
 anchor_right = 1.0
@@ -55,6 +56,14 @@ margin_right = 1024.0
 margin_bottom = 496.0
 
 [node name="Material Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 7 )]
+visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 262.0
+margin_right = 1024.0
+margin_bottom = 496.0
+
+[node name="Special Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 8 )]
 visible = false
 anchor_right = 0.0
 anchor_bottom = 0.0

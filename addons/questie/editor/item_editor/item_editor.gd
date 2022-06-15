@@ -24,6 +24,9 @@ var consumable_editor
 # the interface containing the material data
 var material_editor
 
+# the interface containing the special item data
+var special_editor
+
 # @brief					creates a weapon item inside the item tree
 func create_weapon():
 	
@@ -287,6 +290,60 @@ func tree_item_selected():
 		empty_area.hide()
 		material_editor.show()
 	
+	# Check if selected item is special
+	if items_tree.special_uuid_map.has(selected):
+
+		# Get special item UUID
+		var uuid = items_tree.special_uuid_map[selected]
+
+		# Prepare data to bake
+		var data = null
+
+		# Retrieve special item data
+		for item in database.specials:
+
+			# Ignore invalid UUIDs
+			if not item.uuid == uuid: continue
+
+			# Get data
+			data = item
+
+			break
+		
+		# Load data from database
+		special_editor.title.text = data.title
+		special_editor.description.text = data.description
+		
+		special_editor.icon_path.text = data.icon_path
+		if not data.icon: 
+			special_editor.icon_preview.set_texture(null)
+		else:
+			special_editor.icon_preview.set_texture(data.icon)
+
+		special_editor.can_be_sold.pressed = data.can_be_sold
+		special_editor.purchase_price.value = data.purchase_price
+		special_editor.sell_price.value = data.sell_price
+
+		special_editor.as_weapon.pressed = data.as_weapon
+		special_editor.damage_type.text = special_editor.damage_type.get_popup().get_item_text(data.armor_type)
+		special_editor.min_damage.value = data.min_damage
+		special_editor.max_damage.value = data.max_damage
+
+		special_editor.as_armor.pressed = data.as_armor
+		special_editor.armor_type.text = special_editor.armor_type.get_popup().get_item_text(data.armor_type)
+		special_editor.armor_value.value = data.armor_value
+
+		special_editor.as_consumable.pressed = data.as_consumable
+		special_editor.consumable_value.value = data.consumable_value
+
+		special_editor.is_unique.pressed = data.is_unique
+
+		# Log
+		print("[questie]: special editor loaded for item with [uuid]: " + uuid)
+
+		# Swap workspaces
+		empty_area.hide()
+		special_editor.show()
 
 # @brief				Deselect the current selected item and swap interfaces
 func unselect_tree_item():
@@ -296,6 +353,7 @@ func unselect_tree_item():
 	armor_editor.hide()
 	consumable_editor.hide()
 	material_editor.hide()
+	special_editor.hide()
 	empty_area.show()
 
 ################################################################################################################
@@ -1095,6 +1153,372 @@ func material_sell_price_changed(var price):
 
 #################################################################################################################
 
+# @brief				update the special name
+# @param title			the new special item name
+func special_name_changed(var title):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.title = title
+	items_tree.get_selected().set_text(0, title)
+	print("[questie]: updated item name for special item with [uuid]: " + uuid)
+
+# @brief				update description for special item
+func special_description_changed():
+	
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.description = special_editor.description.text
+	print("[questie]: updated item description for special item with [uuid]: " + uuid)
+
+# @brief 				update special icon
+# @param path			the new icon path
+func special_icon_changed(var path):
+	
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Check path validation
+	if not ".png" in path: return
+
+	# Prepare icon
+	var icon = load(path)
+	if not icon:
+
+		# Log error
+		print("[questie]: can't load data at path " + path + " for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.icon_path = path
+	data.icon = icon
+	special_editor.icon_preview.set_texture(icon)
+	print("[questie]: set icon to " + path + " for special item with [uuid]: " + uuid)
+
+# @brief 				update special item sellabity
+# @param enabled		the new sellabilty
+func special_sellability_changed(var enabled):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.can_be_sold = enabled
+	print("[questie]: set sellabity to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+# @brief				update purchase price for special item
+# @param price			the new price
+func special_purchase_price_changed(var price):
+	
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.purchase_price = price
+	print("[questie]: set purchase price to " + var2str(price) + " for special item with [uuid]: " + uuid)
+
+# @brief				update sell price for special item
+# @param price			the new price
+func special_sell_price_changed(var price):
+	
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.sell_price = price
+	print("[questie]: set sell price to " + var2str(price) + " for special item with [uuid]: " + uuid)
+
+# @brief				update weapon casting for special item
+# @param enabled		if true this item will be used just like a weapon
+func special_weapon_changed(var enabled):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.as_weapon = enabled
+	print("[questie]: set as_weapon to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+# @brief				update damage type for special item
+# @param id				the new damage type identifier
+func special_damage_type_changed(var id):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.damage_type = id
+	print("[questie]: set damage type to " + var2str(special_editor.damage_type.get_popup().get_item_text(id)) + " for special item with [uuid]: " + uuid)
+
+# @brief				update minimum damage for special item
+# @param dmg			the new damage
+func special_min_damage_changed(var dmg):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.min_damage = dmg
+	print("[questie]: set min_damage to " + var2str(dmg) + " for special item with [uuid]: " + uuid)
+
+# @brief				update max damage for special item
+# @param dmg			the new damage
+func special_max_damage_changed(var dmg):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.max_damage = dmg
+	print("[questie]: set max_damage to " + var2str(dmg) + " for special item with [uuid]: " + uuid)
+
+# @brief				update armor cast for special item
+# @param enabled		if true this item will be used just like an armor item
+func special_armor_changed(var enabled):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.as_armor = enabled
+	print("[questie]: set as_armor to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+	
+# @brief				update armor type for special item
+# @param id				the new armor type identifier
+func special_armor_type_changed(var id):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.armor_type = id
+	print("[questie]: set armor_type to " + var2str(special_editor.armor_type.get_popup().get_item_text(id)) + " for special item with [uuid]: " + uuid)
+
+# @brief				update armor value for special item
+# @param armor			the new armor value
+func special_armor_value_changed(var armor):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.armor_value = armor
+	print("[questie]: set armor to " + var2str(armor) + " for special item with [uuid]: " + uuid)
+
+# @brief				update consumable casting for special item
+# @param enabled		if true this item will be used just like a consumable item		
+func special_consumable_changed(var enabled):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.as_consumable = enabled
+	print("[questie]: set as_consumable to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+# @brief				update consumable value for special item
+# @param value			the new consumable item
+func special_consumable_value_changed(var value):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.consumable_value = value
+	print("[questie]: set consumable_value to " + var2str(value) + " for special item with [uuid]: " + uuid)
+
+# @brief				update unique tag for special item
+# @param enabled		if true this item will be unique
+func special_unique_changed(var enabled):
+
+	# Get special item UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.find_data(uuid, database.ItemCategory.SPECIAL)
+
+	# Check if data is valid
+	if not data:
+
+		#Log error
+		print("[questie]: can't update data for special item with [uuid]: " + uuid)
+
+		return
+
+	# Update data
+	data.is_unique = enabled
+	print("[questie]: set is_unique to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
 func _ready():
 
 	# Load database
@@ -1108,6 +1532,7 @@ func _ready():
 	armor_editor = $"VBoxContainer/HSplitContainer/Armor Editor"
 	consumable_editor = $"VBoxContainer/HSplitContainer/Consumable Editor"
 	material_editor = $"VBoxContainer/HSplitContainer/Material Editor"
+	special_editor = $"VBoxContainer/HSplitContainer/Special Editor"
 
 	# Subscribe toolbar events
 	toolbar.connect("new_weapon_item_request", self, "create_weapon")
@@ -1158,5 +1583,23 @@ func _ready():
 	material_editor.can_be_sold.connect("toggled", self, "material_sellability_changed")
 	material_editor.purchase_price.connect("value_changed", self, "material_purchase_price_changed")
 	material_editor.sell_price.connect("value_changed", self, "material_sell_price_changed")
+
+	# Subscribe special editor events
+	special_editor.title.connect("text_changed", self, "special_name_changed")
+	special_editor.description.connect("text_changed", self, "special_description_changed")
+	special_editor.icon_path.connect("text_changed", self, "special_icon_changed")
+	special_editor.can_be_sold.connect("toggled", self, "special_sellability_changed")
+	special_editor.purchase_price.connect("value_changed", self, "special_purchase_price_changed")
+	special_editor.sell_price.connect("value_changed", self, "special_sell_price_changed")
+	special_editor.as_weapon.connect("toggled", self, "special_weapon_changed")
+	special_editor.damage_type.get_popup().connect("id_pressed", self, "special_damage_type_changed")
+	special_editor.min_damage.connect("value_changed", self, "special_min_damage_changed")
+	special_editor.max_damage.connect("value_changed", self, "special_max_damage_changed")
+	special_editor.as_armor.connect("toggled", self, "special_armor_changed")
+	special_editor.armor_type.get_popup().connect("id_pressed", self, "special_armor_type_changed")
+	special_editor.armor_value.connect("value_changed", self, "special_armor_value_changed")
+	special_editor.as_consumable.connect("toggled", self, "special_consumable_changed")
+	special_editor.consumable_value.connect("value_changed", self, "special_consumable_changed")
+	special_editor.is_unique.connect("toggled", self, "special_unique_changed")
 
 

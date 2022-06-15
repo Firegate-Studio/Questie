@@ -60,12 +60,12 @@ func push_item(var category : int):
             materials.push_back(result)
             return result
         ItemCategory.SPECIAL:
-            result = load("res://addons/questie/editor/item_editor/item_data.gd").new()
+            result = load("res://addons/questie/editor/item_editor/special_data.gd").new()
             result.uuid = UUID.generate()
             specials.push_back(result)
             return result
 
-# @brif                             Remove an item from DB
+# @brief                            Remove an item from DB
 # @param uuid                       the uuid corrispondint to the item to remove
 # @param category                   the category owning the item to remove. See [ItemCategory] for possibile values
 func erase_item(var uuid, var category : int):
@@ -130,3 +130,38 @@ func erase_item(var uuid, var category : int):
                 print("[questie]: special removed from database")
                 return
 
+# @brief                            Find and get data from database
+# @param uuid                       the item identifier
+# @param category                   the category to search. See [ItemDatabase.ItemCategory] for possible values
+func find_data(var uuid : String, var category):
+
+    match category:
+        ItemCategory.WEAPON:
+            for item in weapons:
+                if not item.uuid == uuid: continue
+
+                return item
+
+        ItemCategory.ARMOR:
+            for item in armors:
+                if not item.uuid == uuid: continue
+
+                return item
+
+        ItemCategory.CONSUMABLE:
+            for item in consumables:
+                if not item.uuid == uuid: continue
+
+                return item
+
+        ItemCategory.MATERIAL:
+            for item in materials:
+                if not item.uuid == uuid: continue
+
+                return item
+
+        ItemCategory.SPECIAL:
+            for item in specials:
+                if not item.uuid == uuid: continue
+
+                return item
