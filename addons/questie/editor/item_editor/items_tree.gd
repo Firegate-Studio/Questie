@@ -57,6 +57,7 @@ func create_root(var title, var icon):
 # @param storage        the item type container in item database
 # @param icon           the path to icon to load as item icon (displayed on the left side of the item)
 # @return               the new tree item
+# [NB: if you are trying to load items from database use load_subitem_from_db insted]
 func create_subitem(var storage : Array, var icon : String, var parent : TreeItem = null)->TreeItem:
 
 	# create tree item
@@ -133,6 +134,84 @@ func create_subitem(var storage : Array, var icon : String, var parent : TreeIte
 
 	return item
 
+# @brief                create a new item from database data
+# @param storage        the item type container in item database
+# @param icon           the path to icon to load as item icon (displayed on the left side of the item)
+# @return               the new tree item
+func load_subitem_from_db(var storage : Array, var icon : String, var parent : TreeItem = null)->TreeItem: 
+	
+	# create tree item
+	var item = create_item(parent)
+	item.set_text(0, "item_"+var2str(storage.size()))
+	item.set_selectable(0, true)
+	item.set_editable(0, false)
+	item.set_expand_right(0, true)
+
+	# create icon
+	item.set_custom_as_button(0, true)
+	item.set_icon(0, load(icon))
+	item.set_icon_max_width(0, 32)
+
+	# Get folder size
+	var folder_size = 0
+	var child = parent.get_children()
+	while child != null:
+
+		# Update folder size
+		folder_size += 1
+
+		child = child.get_next()
+
+
+	# Check if folder is not empty
+	if folder_size == 0: return null
+
+	# If weapon item
+	if parent == weapons:
+
+		# Register UUID
+		weapon_uuid_map[item.get_instance_id()] = storage[folder_size - 1].uuid
+
+		print("[questie]: weapon item registred with [UUID]: " + storage[folder_size - 1].uuid)
+
+	# If armor item
+	if parent == armors:
+
+		# Register UUID
+		armor_uuid_map[item.get_instance_id()] = storage[folder_size - 1].uuid
+
+		# Log
+		print("[questie]: armor item registred with [UUID]: " + storage[folder_size - 1].uuid)
+
+	# If consumable item
+	if parent == consumables:
+		
+		# Register UUID
+		consumable_uuid_map[item.get_instance_id()] = storage[folder_size - 1].uuid
+
+		# Log
+		print("[questie]: consumable item registred with [UUID]: " + storage[folder_size - 1].uuid)
+
+	# If material item
+	if parent == materials:
+
+		# Register UUID
+		material_uuid_map[item.get_instance_id()] = storage[folder_size - 1].uuid
+
+		# Log
+		print("[questie]: material item registred with [UUID]: " + storage[folder_size - 1].uuid)
+
+	# If special item
+	if parent == specials:
+
+		# Register UUID
+		special_uuid_map[item.get_instance_id()] = storage[folder_size - 1].uuid
+
+		# Log
+		print("[questie]: special item registred with [UUID]: " + storage[folder_size - 1].uuid)
+
+	return item
+
 # @brief				remove a tree item from viewport
 # @param item			the item to remove. Must be a [TreeItem]
 # @param category		the category represents the folder containing the item. See [QuestDatabase.ItemCategory] for possible values
@@ -172,35 +251,35 @@ func remove_subitem(var item : TreeItem, var category : int, var idb : ItemDatab
 func load_data(var db):
 	if db.weapons.size() > 0:
 		for item in db.weapons:
-			var sub = create_subitem(db.weapons, "res://addons/questie/editor/icons/item.png", weapons)
+			var sub = load_subitem_from_db(db.weapons, "res://addons/questie/editor/icons/item.png", weapons)
 			
 			# Update name
 			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.armors.size() > 0:
 		for item in db.armors:
-			var sub = create_subitem(db.armors, "res://addons/questie/editor/icons/armor.png", armors)
+			var sub = load_subitem_from_db(db.armors, "res://addons/questie/editor/icons/armor.png", armors)
 
 			# Update name
 			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.consumables.size() > 0:
 		for item in db.consumables:
-			var sub = create_subitem(db.consumables, "res://addons/questie/editor/icons/potion.png", consumables)
+			var sub = load_subitem_from_db(db.consumables, "res://addons/questie/editor/icons/potion.png", consumables)
 
 			# Update name
 			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.materials.size() > 0:
 		for item in db.materials:
-			var sub = create_subitem(db.materials, "res://addons/questie/editor/icons/material.png", materials)
+			var sub = load_subitem_from_db(db.materials, "res://addons/questie/editor/icons/material.png", materials)
 			
 			# Update name
 			if not item.title == "": sub.set_text(0, item.title)
 
 	if db.specials.size() > 0:
 		for item in db.specials:
-			var sub = create_subitem(db.specials, "res://addons/questie/editor/icons/coin.png", specials)
+			var sub = load_subitem_from_db(db.specials, "res://addons/questie/editor/icons/coin.png", specials)
 			
 			# Update name
 			if not item.title == "": sub.set_text(0, item.title)

@@ -18,6 +18,9 @@ var weapon_editor
 # The interface containing the armor data
 var armor_editor
 
+# The interface contianing the consumable data
+var consumable_editor
+
 # @brief					creates a weapon item inside the item tree
 func create_weapon():
 	
@@ -132,26 +135,26 @@ func tree_item_selected():
 		# Preapare data to bake
 		var data = null
 
+
 		# Get data
 		for item in database.weapons:
 
 			# Ignore invalid UUIDs
 			if not item.uuid == uuid: continue
 
-			data = item
+			# Load weapon data
+			weapon_editor.title.text = item.title
+			weapon_editor.description.text = item.description
+			weapon_editor.icon.text = item.icon_path
+			weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(item.damage_type)
+			weapon_editor.min_damage.value = item.min_damage
+			weapon_editor.max_damage.value = item.max_damage
+			weapon_editor.can_be_sold.pressed = item.can_be_sold
+			weapon_editor.purchase_price.value = item.purchase_price
+			weapon_editor.sell_price.value = item.sell_price
+			print("[questie]: weapon item with [uuid]: " + uuid + " loaded")
+			
 			break
-
-		# Load weapon data
-		weapon_editor.title.text = data.title
-		weapon_editor.description.text = data.description
-		weapon_editor.icon.text = data.icon_path
-		weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(data.damage_type)
-		weapon_editor.min_damage.value = data.min_damage
-		weapon_editor.max_damage.value = data.max_damage
-		weapon_editor.can_be_sold.pressed = data.can_be_sold
-		weapon_editor.purchase_price.value = data.purchase_price
-		weapon_editor.sell_price.value = data.sell_price
-		print("[questie]: weapon item with [uuid]: " + uuid + " loaded")
 
 		# Swap interfaces
 		empty_area.hide()
@@ -194,12 +197,54 @@ func tree_item_selected():
 		empty_area.hide()
 		armor_editor.show()
 
+		return
+	
+	# Check if the selected item is a consumable
+	if items_tree.consumable_uuid_map.has(selected):
+
+		# Get consumable UUID
+		var uuid = items_tree.consumable_uuid_map[selected]
+
+		# Prepare data to bake from database
+		var data = null
+
+		# Get consumable data
+		for item in database.consumables:
+
+			# Ignore invalid UUIDs
+			if not item.uuid == uuid: continue
+
+			# Get data
+			data = item
+
+			break
+
+		# Load data from database
+		consumable_editor.title.text = data.title
+		consumable_editor.description.text = data.description
+		consumable_editor.icon_path = data.icon_path
+
+		if not data.icon_path == "": consumable_editor.icon_preview.set_texture(data.icon)
+		else: consumable_editor.icon_preview.set_texture(null)
+
+		consumable_editor.can_be_sold.pressed = data.can_be_sold
+		consumable_editor.purchase_price.value = data.purchase_price
+		consumable_editor.sell_price.value = data.sell_price
+
+		consumable_editor.value = data.value
+
+		# Swap interfaces
+		empty_area.hide()
+		consumable_editor.show()
+			
+
 # @brief				Deselect the current selected item and swap interfaces
 func unselect_tree_item():
 
 	# Swap interfaces
 	weapon_editor.hide()
 	armor_editor.hide()
+	consumable_editor.hide()
 	empty_area.show()
 
 ################################################################################################################
@@ -656,6 +701,187 @@ func armor_sell_price_changed(var value):
 
 ####################################################################################################################################################################################################
 
+# @brief					update consumable name
+# @param title				the new name
+func consumable_name_changed(var title):
+
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data and tree item
+		item.title = title
+		items_tree.get_selected().set_text(0, title)
+
+		# Log
+		print("[questie]: consumable name updated for consumable item with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update consumable title for consumable with [UUID]: " + uuid)
+
+# @brief				update consumable description
+func consumable_description_changed():
+
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.description = consumable_editor.description.text
+
+		# Log
+		print("[questie]: consumable description updated for consumable item with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update consumable description for consumable with [UUID]: " + uuid)
+
+# @brief				update consumable icon
+# @param path			the new path to icon
+func consumable_icon_changed(var path):
+	
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Check if path is valid
+		if not ".png" in path: continue
+
+		# Check if icon is valid
+		var icon = load(path)
+		if not icon:
+
+			# Log icon error
+			print("[questie]: can't load icon from path " + path + " for consumable item with [UUID]: " + uuid)
+			
+			return
+
+		# Update path and editor preview
+		item.icon_path = path
+		item.icon = icon
+		consumable_editor.icon_preview.set_texture(icon)
+
+		# Log
+		print("[questie]: consumable icon set to " + path + " for consumable item with [UUID]: " + uuid)
+
+		return
+		
+# @brief				update consumable sellability capacity
+# @param enabled		the sellability value
+func consumable_sellability_changed(var enabled):
+	
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.can_be_sold = enabled
+
+		# Log
+		print("[questie]: consumable sellability set to " + var2str(enabled) + " for consumable item with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update consumable sellability for consumable with [UUID]: " + uuid)
+
+# @brief				update consumable purchase price
+# @param price			the new purhase price
+func consumable_purchase_price_changed(var price):
+	
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.purchase_price = price
+
+		# Log
+		print("[questie]: consumable purchase price set to " + var2str(price) + " for consumable item with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update consumable purchase price for consumable item with [UUID]: " + uuid)
+
+# @brief				update consumable sell price
+# @param price			the new sell price
+func consumable_sell_price_changed(var price):
+	
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.sell_price = price
+
+		# Log
+		print("[questie]: consumable sell price set to " + var2str(price) + " for consumable item with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update consumable sell price for consumable item with [UUID]: " + uuid)
+
+# @brief			update consumable value
+# @param value		the new consumable value
+func consumable_value_changed(var value):
+	
+	# Get consumable UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve data
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update data
+		item.value = value
+
+		# Log
+		print("[questie]: consumable value set to " + var2str(value) + " for consumable item with [UUID]: " + uuid)
+
+		return
+
+	# Log error
+	print("[questie]: can't update consumable value for consumable item with [UUID]: " + uuid)
+
+#################################################################################################################
+
 func _ready():
 
 	# Load database
@@ -667,6 +893,7 @@ func _ready():
 	empty_area = $VBoxContainer/HSplitContainer/Empty
 	weapon_editor = $"VBoxContainer/HSplitContainer/Weapon Editor"
 	armor_editor = $"VBoxContainer/HSplitContainer/Armor Editor"
+	consumable_editor = $"VBoxContainer/HSplitContainer/Consumable Editor"
 
 	# Subscribe toolbar events
 	toolbar.connect("new_weapon_item_request", self, "create_weapon")
@@ -700,5 +927,14 @@ func _ready():
 	armor_editor.can_be_sold.connect("toggled", self, "armor_sellable_changed")
 	armor_editor.purchase_price.connect("value_changed", self, "armor_purchase_price_changed")
 	armor_editor.sell_price.connect("value_changed", self, "armor_sell_price_changed")
+
+	# Subscribe consumable editor events
+	consumable_editor.title.connect("text_changed", self, "consumable_name_changed")
+	consumable_editor.description.connect("text_changed", self, "consumable_description_changed")
+	consumable_editor.icon_path.connect("text_changed", self, "consumable_icon_changed")
+	consumable_editor.can_be_sold.connect("toggled", self, "consumable_sellability_changed")
+	consumable_editor.purchase_price.connect("value_changed", self, "consumable_purchase_price_changed")
+	consumable_editor.sell_price.connect("value_changed", self, "consumable_sell_price_changed")
+	consumable_editor.value.connect("value_changed", self, "consumable_value_changed")
 
 

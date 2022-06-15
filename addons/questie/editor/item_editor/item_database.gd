@@ -50,7 +50,7 @@ func push_item(var category : int):
             armors.push_back(result)
             return result
         ItemCategory.CONSUMABLE:
-            result = load("res://addons/questie/editor/item_editor/item_data.gd").new()
+            result = load("res://addons/questie/editor/item_editor/consumable_data.gd").new()
             result.uuid = UUID.generate()
             consumables.push_back(result)
             return result
