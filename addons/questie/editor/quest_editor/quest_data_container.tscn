@@ -69,10 +69,35 @@ margin_right = 409.0
 margin_bottom = 110.0
 size_flags_vertical = 3
 
-[node name="constraints section" type="Control" parent="."]
+[node name="Constraint Section Header" type="Control" parent="."]
 margin_top = 163.0
 margin_right = 429.0
-margin_bottom = 283.0
+margin_bottom = 193.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Constraint Section Header"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Label" type="Label" parent="Constraint Section Header/HBoxContainer"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Constraints"
+
+[node name="HSeparator" type="HSeparator" parent="Constraint Section Header/HBoxContainer"]
+margin_left = 76.0
+margin_right = 409.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="constraints section" type="Control" parent="."]
+margin_top = 197.0
+margin_right = 429.0
+margin_bottom = 655.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -84,25 +109,15 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="constraints section/margin"]
+[node name="container" type="VBoxContainer" parent="constraints section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="constraints section/margin/VBoxContainer"]
-margin_right = 409.0
-margin_bottom = 14.0
-text = "Constraints"
-
-[node name="Panel" type="Panel" parent="constraints section/margin/VBoxContainer"]
-margin_top = 18.0
-margin_right = 409.0
-margin_bottom = 110.0
-size_flags_vertical = 3
-
 [node name="triggers section" type="Control" parent="."]
-margin_top = 287.0
+visible = false
+margin_top = 411.0
 margin_right = 429.0
-margin_bottom = 407.0
+margin_bottom = 655.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -126,13 +141,14 @@ text = "Triggers"
 [node name="Panel" type="Panel" parent="triggers section/margin/VBoxContainer"]
 margin_top = 18.0
 margin_right = 409.0
-margin_bottom = 110.0
+margin_bottom = 234.0
 size_flags_vertical = 3
 
 [node name="tasks section" type="Control" parent="."]
+visible = false
 margin_top = 411.0
 margin_right = 429.0
-margin_bottom = 531.0
+margin_bottom = 655.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -156,11 +172,12 @@ text = "Tasks"
 [node name="Panel" type="Panel" parent="tasks section/margin/VBoxContainer"]
 margin_top = 18.0
 margin_right = 409.0
-margin_bottom = 110.0
+margin_bottom = 234.0
 size_flags_vertical = 3
 
 [node name="rewards section" type="Control" parent="."]
-margin_top = 535.0
+visible = false
+margin_top = 493.0
 margin_right = 429.0
 margin_bottom = 655.0
 rect_min_size = Vector2( 0, 120 )
@@ -186,5 +203,5 @@ text = "Rewards"
 [node name="Panel" type="Panel" parent="rewards section/margin/VBoxContainer"]
 margin_top = 18.0
 margin_right = 409.0
-margin_bottom = 110.0
+margin_bottom = 152.0
 size_flags_vertical = 3

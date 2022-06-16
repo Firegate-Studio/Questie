@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "Constraint_HasQuest",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/has_quest_constraint.gd"
+}, {
 "base": "Reference",
 "class": "DTS",
 "language": "GDScript",
@@ -95,6 +100,7 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/common/uuid/uuid.gd"
 } ]
 _global_script_class_icons={
+"Constraint_HasQuest": "",
 "DTS": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",

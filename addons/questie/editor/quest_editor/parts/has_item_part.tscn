@@ -1,0 +1,44 @@
+[gd_scene format=2]
+
+[node name="Has Item Part" type="Panel"]
+margin_top = 10.0
+margin_right = 409.0
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 35 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 19.0
+text = "Has Item: "
+
+[node name="Quest" type="MenuButton" parent="HBoxContainer"]
+margin_left = 71.0
+margin_right = 113.0
+margin_bottom = 25.0
+focus_mode = 2
+text = "item"
+flat = false
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+margin_left = 117.0
+margin_top = 5.0
+margin_right = 176.0
+margin_bottom = 19.0
+text = "Quantity:"
+
+[node name="Quantity" type="SpinBox" parent="HBoxContainer"]
+margin_left = 180.0
+margin_right = 254.0
+margin_bottom = 25.0
+min_value = 1.0
+value = 1.0
+allow_greater = true

@@ -42,5 +42,4 @@ func get_data(var uuid : String)->QuestData:
 	return null
 	
 
-	
 		
