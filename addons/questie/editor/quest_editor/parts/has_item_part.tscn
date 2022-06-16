@@ -1,10 +1,14 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/parts/has_item_part.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/icons/trash.png" type="Texture" id=2]
 
 [node name="Has Item Part" type="Panel"]
 margin_top = 10.0
 margin_right = 409.0
 margin_bottom = 45.0
-rect_min_size = Vector2( 0, 35 )
+rect_min_size = Vector2( 0, 40 )
+script = ExtResource( 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -15,30 +19,54 @@ margin_right = -5.0
 margin_bottom = -5.0
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-margin_top = 5.0
-margin_right = 67.0
-margin_bottom = 19.0
-text = "Has Item: "
+margin_top = 9.0
+margin_right = 28.0
+margin_bottom = 23.0
+text = "Has "
 
-[node name="Quest" type="MenuButton" parent="HBoxContainer"]
-margin_left = 71.0
-margin_right = 113.0
-margin_bottom = 25.0
+[node name="Item" type="MenuButton" parent="HBoxContainer"]
+margin_left = 32.0
+margin_right = 74.0
+margin_bottom = 32.0
 focus_mode = 2
 text = "item"
 flat = false
 
 [node name="Label2" type="Label" parent="HBoxContainer"]
-margin_left = 117.0
-margin_top = 5.0
-margin_right = 176.0
-margin_bottom = 19.0
-text = "Quantity:"
+margin_left = 78.0
+margin_top = 9.0
+margin_right = 108.0
+margin_bottom = 23.0
+text = "from"
+
+[node name="Category" type="MenuButton" parent="HBoxContainer"]
+margin_left = 112.0
+margin_right = 179.0
+margin_bottom = 32.0
+text = "Category"
+flat = false
+items = [ "Weapon", null, 0, false, false, 0, 0, null, "", false, "Armor", null, 0, false, false, 1, 0, null, "", false, "Consumable", null, 0, false, false, 2, 0, null, "", false, "Material", null, 0, false, false, 3, 0, null, "", false, "Special", null, 0, false, false, 4, 0, null, "", false ]
+
+[node name="Label3" type="Label" parent="HBoxContainer"]
+margin_left = 183.0
+margin_top = 9.0
+margin_right = 195.0
+margin_bottom = 23.0
+text = "of"
 
 [node name="Quantity" type="SpinBox" parent="HBoxContainer"]
-margin_left = 180.0
-margin_right = 254.0
-margin_bottom = 25.0
+margin_left = 199.0
+margin_right = 363.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
 allow_greater = true
+
+[node name="Delete" type="Button" parent="HBoxContainer"]
+margin_left = 367.0
+margin_right = 399.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+icon = ExtResource( 2 )
+expand_icon = true

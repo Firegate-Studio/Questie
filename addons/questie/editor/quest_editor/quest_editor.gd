@@ -119,6 +119,65 @@ func load_workspace():
 				# Log 
 				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)
 
+			if element is Constraint_HasItem:
+
+				# Construct part
+				var part = load("res://addons/questie/editor/quest_editor/parts/has_item_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in constraints_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+					constraints_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				constraints_list.add_child(part)
+				
+
+				# Delete from here
+				# Load item database
+				var item_db = load("res://questie/item-db.tres")
+
+				# Check item database validation
+				if not item_db:
+
+					# Log error
+					print("[questie]: items database not found. Please reinstall Questie")
+
+					return
+
+				# Get item data
+				var item_data = item_db.find_data(element.item, element.category)
+				if not item_data:
+					
+					# Log
+					print("[questie]: item data not found")
+					
+					return
+					
+				print(data.title)
+				
+				# Update interface block
+				part.item.text = item_data.title
+				part.category.text = part.category.get_popup().get_item_text(element.category - 1)
+				part.quantity.value = element.quantity
+				part.refresh(element.category)
+
+				part.connect("item_changed", self, "has_item_changed")
+				part.connect("category_changed", self, "has_item_category_changed")
+				part.connect("quantity_changed", self, "has_item_quantity_changed")
+				part.connect("delete_part", self, "delete_part")
+
+				# Log 
+				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)
 
 	# Swap workspace visibility
 	empty_workspace.hide()
@@ -269,7 +328,6 @@ func has_quest_changed(var id, var instance_id):
 
 		# Log error
 		print("[questie]: can't retrieve constraint data from quest with [uuid]: " + data.uuid)
-		print(instance_id)
 
 		return
 
@@ -317,6 +375,150 @@ func delete_constraint_part(var part):
 	constraints_list.remove_child(part)
 	part.queue_free()
 
+func has_item_constraint():
+
+	# Prepare part to add 
+	var part = load("res://addons/questie/editor/quest_editor/parts/has_item_part.tscn").instance()
+
+	# Get quest UUID
+	var uuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+
+	# Get data
+	var data = database.get_data(uuid)
+
+	# Load quest part
+	var constraint = data.push_constraint(data.ConstraintType.HAS_ITEM, data.uuid)
+	constraints_list.add_child(part)
+
+	# Register constraint uuid
+	constraints_uuid_map[part.get_instance_id()] = constraint.uuid
+
+	# Subscribe events
+	part.connect("item_changed", self, "has_item_changed")
+	part.connect("category_changed", self, "has_item_category_changed")
+	part.connect("quantity_changed", self, "has_item_quantity_changed")
+	part.connect("delete_part", self, "delete_constraint_part")
+
+func has_item_category_changed(var part, var category):
+
+	# Get quest UUID for the current quest
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+
+	# Get quest data
+	var data = database.get_data(quuid)
+
+	# Check quest data
+	if not data:
+
+		# Log error
+		print("[questie]: invalid quest data!")
+
+		return
+
+	# get constraint UUID
+	var cuuid = constraints_uuid_map[part.get_instance_id()]
+
+	# Get constraint of the displayed quest
+	var constraint = data.get_constraint(cuuid)
+
+	# Check if constraint is valid
+	if not constraint:
+
+		# Log error
+		print("[questie]: can't retrieve constraint data from quest with [uuid]: " + data.uuid)
+
+		return
+
+	# Update questo to the quest we want track over time
+	constraint.category = category
+	# Log
+	print("[questie]: set item_category to " + var2str(category) + " for constraint with [uuid]: " + constraint.uuid)
+
+func has_item_changed(var part, var id, var category):
+
+	# Get quest UUID for the current quest
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+
+	# Get quest data
+	var data = database.get_data(quuid)
+
+	# Check quest data
+	if not data:
+
+		# Log error
+		print("[questie]: invalid quest data!")
+
+		return
+
+	# get constraint UUID
+	var cuuid = constraints_uuid_map[part.get_instance_id()]
+
+	# Get constraint of the displayed quest
+	var constraint = data.get_constraint(cuuid)
+
+	# Check if constraint is valid
+	if not constraint:
+
+		# Log error
+		print("[questie]: can't retrieve constraint data from quest with [uuid]: " + data.uuid)
+
+		return
+
+	# Get item database
+	var item_db = load("res://questie/item-db.tres")
+	
+	# Check item database validation
+	if not item_db:
+		
+		# Log error
+		print("[questie]: can't load item database")
+		
+		return
+
+	# Update constraint item UUID
+	constraint.item = item_db.find_data_by_slot(id, category).uuid
+
+	# Log
+	print("[questie]: set item to " + var2str(constraint.item) + " for constraint with [uuid]: " + constraint.uuid)
+
+# @brief					Update the item quantity
+# @param quantity			The new quantity
+func has_item_quantity_changed(var part, var quantity): 
+
+	# Get quest UUID for the current quest
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+
+	# Get quest data
+	var data = database.get_data(quuid)
+
+	# Check quest data
+	if not data:
+
+		# Log error
+		print("[questie]: invalid quest data!")
+
+		return
+
+	# get constraint UUID
+	var cuuid = constraints_uuid_map[part.get_instance_id()]
+
+	# Get constraint of the displayed quest
+	var constraint = data.get_constraint(cuuid)
+
+	# Check if constraint is valid
+	if not constraint:
+
+		# Log error
+		print("[questie]: can't retrieve constraint data from quest with [uuid]: " + data.uuid)
+
+		return
+
+	# Update constraint quantity
+	constraint.quantity = quantity
+
+	# Log
+	print("[questie]: set has_item_quantity to " + var2str(constraint.quantity) + " for constraint with [uuid]: " + constraint.uuid)
+
 ###############################################################################################################
 
 func _enter_tree():
@@ -339,5 +541,6 @@ func _ready():
 	
 	# Subscribe quest blocks events
 	blocks.connect("has_quest_request", self, "has_quest_constraint")
+	blocks.connect("has_item_request", self,  "has_item_constraint")
 
 
