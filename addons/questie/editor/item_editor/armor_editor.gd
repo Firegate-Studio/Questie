@@ -29,6 +29,9 @@ func _ready():
 	# Get type popup
 	var popup = armor_type.get_popup()
 
+	# Avoid popup item duplication
+	popup.clear()
+
 	# Create armor type items
 	popup.add_item("Physic")
 	popup.add_item("Magic")

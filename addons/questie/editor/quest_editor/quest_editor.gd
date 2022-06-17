@@ -174,7 +174,7 @@ func load_workspace():
 				part.connect("item_changed", self, "has_item_changed")
 				part.connect("category_changed", self, "has_item_category_changed")
 				part.connect("quantity_changed", self, "has_item_quantity_changed")
-				part.connect("delete_part", self, "delete_part")
+				part.connect("delete_part", self, "delete_constraint_part")
 
 				# Log 
 				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)

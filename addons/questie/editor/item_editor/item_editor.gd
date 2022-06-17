@@ -1341,6 +1341,7 @@ func special_damage_type_changed(var id):
 
 	# Update data
 	data.damage_type = id
+	special_editor.damage_type.text = special_editor.damage_type.get_popup().get_item_text(id)
 	print("[questie]: set damage type to " + var2str(special_editor.damage_type.get_popup().get_item_text(id)) + " for special item with [uuid]: " + uuid)
 
 # @brief				update minimum damage for special item
@@ -1429,6 +1430,7 @@ func special_armor_type_changed(var id):
 
 	# Update data
 	data.armor_type = id
+	special_editor.armor_type.text = special_editor.armor_type.get_popup().get_item_text(id)
 	print("[questie]: set armor_type to " + var2str(special_editor.armor_type.get_popup().get_item_text(id)) + " for special item with [uuid]: " + uuid)
 
 # @brief				update armor value for special item
