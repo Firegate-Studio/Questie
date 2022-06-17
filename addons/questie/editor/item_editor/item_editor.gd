@@ -34,12 +34,18 @@ func create_weapon():
 	database.push_item(database.ItemCategory.WEAPON)
 	var result = items_tree.create_subitem(database.weapons, "res://addons/questie/editor/icons/item.png", items_tree.weapons)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief					creates an armor item inside the item tree
 func create_armor():
 	
 	# Creates data and tree item
 	database.push_item(database.ItemCategory.ARMOR)
 	var result = items_tree.create_subitem(database.armors, "res://addons/questie/editor/icons/armor.png", items_tree.armors)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 	
 # @brief					creates a consumable item inside the item tree
 func create_consumable():
@@ -48,6 +54,9 @@ func create_consumable():
 	database.push_item(database.ItemCategory.CONSUMABLE)
 	var result = items_tree.create_subitem(database.consumables, "res://addons/questie/editor/icons/potion.png", items_tree.consumables)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief					creates a material item inside the item tree
 func create_material(): 
 
@@ -55,12 +64,18 @@ func create_material():
 	database.push_item(database.ItemCategory.MATERIAL)
 	var result = items_tree.create_subitem(database.materials, "res://addons/questie/editor/icons/material.png", items_tree.materials)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief 					creates a special item inside the item tree
 func create_special(): 
 	
 	# Creates data and tree item
 	database.push_item(database.ItemCategory.SPECIAL)
 	var result = items_tree.create_subitem(database.specials, "res://addons/questie/editor/icons/coin.png", items_tree.specials)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 # @brief					removes an item from tree and the pointing data of the items database
 func delete_item():
@@ -84,6 +99,9 @@ func delete_item():
 		# Clean cached data
 		database.erase_item(uuid, database.ItemCategory.WEAPON)
 		items_tree.remove_subitem(selected, database.ItemCategory.WEAPON, database)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 		
 	if items_tree.armor_uuid_map.has(selected.get_instance_id()):
 
@@ -94,6 +112,9 @@ func delete_item():
 		database.erase_item(uuid, database.ItemCategory.ARMOR)
 		items_tree.remove_subitem(selected, database.ItemCategory.ARMOR, database)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 	if items_tree.consumable_uuid_map.has(selected.get_instance_id()):
 
 		# Get UUID from map
@@ -102,6 +123,9 @@ func delete_item():
 		# Clean cached data
 		database.erase_item(uuid, database.ItemCategory.CONSUMABLE)
 		items_tree.remove_subitem(selected, database.ItemCategory.CONSUMABLE, database)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 	if items_tree.material_uuid_map.has(selected.get_instance_id()):
 
@@ -112,6 +136,9 @@ func delete_item():
 		database.erase_item(uuid, database.ItemCategory.MATERIAL)
 		items_tree.remove_subitem(selected, database.ItemCategory.MATERIAL, database)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 	if items_tree.special_uuid_map.has(selected.get_instance_id()):
 
 		# Get UUID from map
@@ -120,6 +147,9 @@ func delete_item():
 		# Clean cached data
 		database.erase_item(uuid, database.ItemCategory.SPECIAL)
 		items_tree.remove_subitem(selected, database.ItemCategory.SPECIAL, database)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 	unselect_tree_item()
 
@@ -379,6 +409,10 @@ func weapon_name_changed(var title):
 
 		# Update tree item name
 		items_tree.get_selected().set_text(0, title)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -398,6 +432,9 @@ func weapon_description_changed():
 		
 		# Update description
 		item.description = weapon_editor.description.text
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -419,6 +456,9 @@ func weapon_damage_changed(var id):
 		# Update damage type
 		item.damage_type = id
 		weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(id)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -444,10 +484,14 @@ func weapon_min_damage_changed(var value):
 		# Log changes
 		print("[questie]: weapon min damage changed to " + var2str(value))
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 	
 	# Log error
 	print("[questie]: can't update the weapon min value")
+
 
 # @brief				update the max damage dealt from a weapon
 # @param value			the new value
@@ -467,6 +511,9 @@ func weapon_max_damage_changed(var value):
 
 		# Log changes
 		print("[questie]: weapon max damage changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 	
@@ -488,6 +535,9 @@ func weapon_sellable_changed(var enabled : bool):
 
 		# Update data
 		item.can_be_sold = enabled
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -513,6 +563,9 @@ func weapon_purchase_price_changed(var value):
 		# Log changes
 		print("[questie]: weapon purchase price changed to " + var2str(value))
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -536,6 +589,9 @@ func weapon_sell_price_changed(var value):
 
 		# Log changes
 		print("[questie]: weapon sell price changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -574,6 +630,9 @@ func weapon_icon_changed(var path):
 		# Log new icon
 		print("[questie]: stored icon with path " + path)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -603,6 +662,9 @@ func armor_name_changed(var title):
 		# Update armor tree item
 		items_tree.get_selected().set_text(0, title)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -625,6 +687,9 @@ func armor_description_changed():
 
 		# Update armor description
 		item.description = armor_editor.description.text
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -664,6 +729,9 @@ func armor_icon_changed(var path):
 		item.icon = icon
 		armor_editor.icon_preview.set_texture(icon)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		# Log
 		print("[questie]: armor icon loaded from path: " + path)
 
@@ -694,6 +762,9 @@ func armor_value_changed(var value):
 		# Log
 		print("[questie]: armor value set to " + var2str(value) + " for armor with [UUID]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 	
 	# Log error
@@ -722,6 +793,9 @@ func armor_type_changed(var id):
 		# Log
 		print("[questie]: armor type updated with the value " + var2str(id))
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -748,6 +822,9 @@ func armor_sellable_changed(var enabled):
 		
 		# Log
 		print("[questie]: set armor sellability to " + var2str(enabled) + " for armor with [UUID]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -776,6 +853,9 @@ func armor_purchase_price_changed(var value):
 		# Log
 		print("[questie]: armor purchase price set to " + var2str(value) + " for armor with [UUID]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -802,6 +882,9 @@ func armor_sell_price_changed(var value):
 
 		# Log
 		print("[questie]: armor sell price set to " + var2str(value) + " for armor with [UUID]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -830,6 +913,9 @@ func consumable_name_changed(var title):
 		# Log
 		print("[questie]: consumable name updated for consumable item with [UUID]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -852,6 +938,9 @@ func consumable_description_changed():
 
 		# Log
 		print("[questie]: consumable description updated for consumable item with [UUID]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -888,6 +977,9 @@ func consumable_icon_changed(var path):
 		item.icon = icon
 		consumable_editor.icon_preview.set_texture(icon)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		# Log
 		print("[questie]: consumable icon set to " + path + " for consumable item with [UUID]: " + uuid)
 
@@ -911,6 +1003,9 @@ func consumable_sellability_changed(var enabled):
 
 		# Log
 		print("[questie]: consumable sellability set to " + var2str(enabled) + " for consumable item with [UUID]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -936,6 +1031,9 @@ func consumable_purchase_price_changed(var price):
 		# Log
 		print("[questie]: consumable purchase price set to " + var2str(price) + " for consumable item with [UUID]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -960,6 +1058,9 @@ func consumable_sell_price_changed(var price):
 		# Log
 		print("[questie]: consumable sell price set to " + var2str(price) + " for consumable item with [UUID]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 
 	# Log error
@@ -983,6 +1084,9 @@ func consumable_value_changed(var value):
 
 		# Log
 		print("[questie]: consumable value set to " + var2str(value) + " for consumable item with [UUID]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 
@@ -1011,6 +1115,9 @@ func material_name_changed(var title):
 		# Log
 		print("[questie]: updated name for material item with [uuid]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 	
 	# Log error
@@ -1033,6 +1140,9 @@ func material_description_changed():
 
 		# Log
 		print("[questie]: updated description for material item with [uuid]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 	
@@ -1074,6 +1184,9 @@ func material_icon_changed(var path):
 		# Log 
 		print("[questie]: updated icon from path " + path + " for material item with [uuid]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 	
 	# Log error - disbaled for smart logging
@@ -1097,6 +1210,9 @@ func material_sellability_changed(var enabled):
 
 		# Log
 		print("[questie]: set sellability to " + var2str(enabled) + " for material item with [uuid]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 	
@@ -1122,6 +1238,9 @@ func material_purchase_price_changed(var price):
 		# Log
 		print("[questie]: set purcahse price to "+ var2str(price) + " for material item with [uuid]: " + uuid)
 
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
 		return
 	
 	# Log error
@@ -1145,6 +1264,9 @@ func material_sell_price_changed(var price):
 
 		# Log
 		print("[questie]: set sell price to " + var2str(price) + " for material item with [uuid]: " + uuid)
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
 
 		return
 	
@@ -1176,6 +1298,9 @@ func special_name_changed(var title):
 	items_tree.get_selected().set_text(0, title)
 	print("[questie]: updated item name for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update description for special item
 func special_description_changed():
 	
@@ -1196,6 +1321,9 @@ func special_description_changed():
 	# Update data
 	data.description = special_editor.description.text
 	print("[questie]: updated item description for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 # @brief 				update special icon
 # @param path			the new icon path
@@ -1233,6 +1361,9 @@ func special_icon_changed(var path):
 	special_editor.icon_preview.set_texture(icon)
 	print("[questie]: set icon to " + path + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief 				update special item sellabity
 # @param enabled		the new sellabilty
 func special_sellability_changed(var enabled):
@@ -1254,6 +1385,9 @@ func special_sellability_changed(var enabled):
 	# Update data
 	data.can_be_sold = enabled
 	print("[questie]: set sellabity to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 # @brief				update purchase price for special item
 # @param price			the new price
@@ -1277,6 +1411,9 @@ func special_purchase_price_changed(var price):
 	data.purchase_price = price
 	print("[questie]: set purchase price to " + var2str(price) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update sell price for special item
 # @param price			the new price
 func special_sell_price_changed(var price):
@@ -1299,6 +1436,9 @@ func special_sell_price_changed(var price):
 	data.sell_price = price
 	print("[questie]: set sell price to " + var2str(price) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update weapon casting for special item
 # @param enabled		if true this item will be used just like a weapon
 func special_weapon_changed(var enabled):
@@ -1320,6 +1460,9 @@ func special_weapon_changed(var enabled):
 	# Update data
 	data.as_weapon = enabled
 	print("[questie]: set as_weapon to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 # @brief				update damage type for special item
 # @param id				the new damage type identifier
@@ -1344,6 +1487,9 @@ func special_damage_type_changed(var id):
 	special_editor.damage_type.text = special_editor.damage_type.get_popup().get_item_text(id)
 	print("[questie]: set damage type to " + var2str(special_editor.damage_type.get_popup().get_item_text(id)) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update minimum damage for special item
 # @param dmg			the new damage
 func special_min_damage_changed(var dmg):
@@ -1365,6 +1511,9 @@ func special_min_damage_changed(var dmg):
 	# Update data
 	data.min_damage = dmg
 	print("[questie]: set min_damage to " + var2str(dmg) + " for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 # @brief				update max damage for special item
 # @param dmg			the new damage
@@ -1388,6 +1537,9 @@ func special_max_damage_changed(var dmg):
 	data.max_damage = dmg
 	print("[questie]: set max_damage to " + var2str(dmg) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update armor cast for special item
 # @param enabled		if true this item will be used just like an armor item
 func special_armor_changed(var enabled):
@@ -1409,6 +1561,9 @@ func special_armor_changed(var enabled):
 	# Update data
 	data.as_armor = enabled
 	print("[questie]: set as_armor to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 	
 # @brief				update armor type for special item
 # @param id				the new armor type identifier
@@ -1433,6 +1588,9 @@ func special_armor_type_changed(var id):
 	special_editor.armor_type.text = special_editor.armor_type.get_popup().get_item_text(id)
 	print("[questie]: set armor_type to " + var2str(special_editor.armor_type.get_popup().get_item_text(id)) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update armor value for special item
 # @param armor			the new armor value
 func special_armor_value_changed(var armor):
@@ -1454,6 +1612,9 @@ func special_armor_value_changed(var armor):
 	# Update data
 	data.armor_value = armor
 	print("[questie]: set armor to " + var2str(armor) + " for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 # @brief				update consumable casting for special item
 # @param enabled		if true this item will be used just like a consumable item		
@@ -1477,6 +1638,9 @@ func special_consumable_changed(var enabled):
 	data.as_consumable = enabled
 	print("[questie]: set as_consumable to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update consumable value for special item
 # @param value			the new consumable item
 func special_consumable_value_changed(var value):
@@ -1499,6 +1663,9 @@ func special_consumable_value_changed(var value):
 	data.consumable_value = value
 	print("[questie]: set consumable_value to " + var2str(value) + " for special item with [uuid]: " + uuid)
 
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
+
 # @brief				update unique tag for special item
 # @param enabled		if true this item will be unique
 func special_unique_changed(var enabled):
@@ -1520,6 +1687,9 @@ func special_unique_changed(var enabled):
 	# Update data
 	data.is_unique = enabled
 	print("[questie]: set is_unique to " + var2str(enabled) + " for special item with [uuid]: " + uuid)
+
+	# Save Database
+	ResourceSaver.save("res://questie/item-db.tres", database)
 
 func _ready():
 

@@ -61,6 +61,9 @@ func new_quest_request():
 		uuid = database.data[database.data.size() - 1].uuid
 	quest_tree.add_quest_item(uuid)
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 # @brief		show workspace and loads quest data
 func load_workspace():
 	var item = quest_tree.get_selected()
@@ -243,6 +246,9 @@ func delete_quest():
 	database.erase_quest(quest_tree.uuid_map[item.get_instance_id()])
 	quest_tree.remove_quest_item(item)
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 	# Swap workspace visibility
 	workspace.hide()
 	empty_workspace.show()
@@ -263,6 +269,9 @@ func update_quest_title(var title : String):
 	quest_data.title = title
 	quest_tree.get_selected().set_text(0, title)
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 # @brief				update the quest description
 func update_quest_description():
 
@@ -276,6 +285,9 @@ func update_quest_description():
 		return
 
 	quest_data.description = quest_data_container.description.text
+
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 # @brief					Find an old keu in dictionary
 # @param new				the new key in dictionary
@@ -345,6 +357,9 @@ func has_quest_constraint():
 	part.connect("quest_select", self, "has_quest_changed")
 	part.connect("delete", self, "delete_constraint_part")
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 # @brief				Update the has quest constraint
 # @param id				the id selected from the popup menu
 # @param instance_id	the instance_id of the modified part				
@@ -384,6 +399,9 @@ func has_quest_changed(var id, var instance_id):
 	# Log
 	print("[questie]: set quest to " + constraint.quest + " for constraint with [uuid]: " + constraint.uuid)
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 # @brief				Delete a constraint part
 # @param part			The part to destroy
 func delete_constraint_part(var part):
@@ -422,6 +440,9 @@ func delete_constraint_part(var part):
 	constraints_list.remove_child(part)
 	part.queue_free()
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 func has_item_constraint():
 
 	# Prepare part to add 
@@ -445,6 +466,9 @@ func has_item_constraint():
 	part.connect("category_changed", self, "has_item_category_changed")
 	part.connect("quantity_changed", self, "has_item_quantity_changed")
 	part.connect("delete_part", self, "delete_constraint_part")
+
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 func has_item_category_changed(var part, var category):
 
@@ -480,6 +504,9 @@ func has_item_category_changed(var part, var category):
 	constraint.category = category
 	# Log
 	print("[questie]: set item_category to " + var2str(category) + " for constraint with [uuid]: " + constraint.uuid)
+
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 func has_item_changed(var part, var id, var category):
 
@@ -528,6 +555,9 @@ func has_item_changed(var part, var id, var category):
 	# Log
 	print("[questie]: set item to " + var2str(constraint.item) + " for constraint with [uuid]: " + constraint.uuid)
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 # @brief					Update the item quantity
 # @param quantity			The new quantity
 func has_item_quantity_changed(var part, var quantity): 
@@ -565,6 +595,9 @@ func has_item_quantity_changed(var part, var quantity):
 
 	# Log
 	print("[questie]: set has_item_quantity to " + var2str(constraint.quantity) + " for constraint with [uuid]: " + constraint.uuid)
+
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 # @brief					Generates a quest state contraint inside the quest
 func quest_state_constraint(): 
@@ -605,6 +638,9 @@ func quest_state_constraint():
 	part.connect("delete", self, "delete_constraint_part")
 	part.connect("quest_changed", self, "quest_state_quest_changed")
 	part.connect("state_changed", self, "quest_state_state_changed")
+
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 func quest_state_quest_changed(var part, var quest_id):
 
@@ -650,6 +686,9 @@ func quest_state_quest_changed(var part, var quest_id):
 	# Log success
 	print("[questie]: Set quest_state to point quest " + constraint_data.uuid + " from constraint " + cuuid)
 
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 func quest_state_state_changed(var part, var state_id): 
 
 	# Get current quest data
@@ -680,6 +719,9 @@ func quest_state_state_changed(var part, var state_id):
 
 	# Log success
 	print("[questie]: set quest_state.state to " + var2str(constraint_data.state) + " for constraint " + constraint_data.uuid + " in quest " + quuid)
+
+	# Save database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 
 
