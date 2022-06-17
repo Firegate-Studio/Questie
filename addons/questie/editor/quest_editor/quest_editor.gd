@@ -179,6 +179,53 @@ func load_workspace():
 				# Log 
 				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)
 
+			if element is Constraint_QuestState:
+
+				# Construct part
+				var part = load("res://addons/questie/editor/quest_editor/parts/quest_state_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in constraints_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+					constraints_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				constraints_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+
+				# Update constraint block
+				part.quest.text = database.get_data(element.quest).title
+				part.state.text = part.state.get_popup().get_item_text(element.state)
+				part.refresh()
+
+				# Subscribe events
+				part.connect("delete", self, "delete_constraint_part")
+				part.connect("quest_changed", self, "quest_state_quest_changed")
+				part.connect("state_changed", self, "quest_state_state_changed")
+
+				# Log 
+				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)
+			
 	# Swap workspace visibility
 	empty_workspace.hide()
 	workspace.show()
@@ -519,6 +566,124 @@ func has_item_quantity_changed(var part, var quantity):
 	# Log
 	print("[questie]: set has_item_quantity to " + var2str(constraint.quantity) + " for constraint with [uuid]: " + constraint.uuid)
 
+# @brief					Generates a quest state contraint inside the quest
+func quest_state_constraint(): 
+
+	# Load constraint part to add to quest
+	var part = load("res://addons/questie/editor/quest_editor/parts/quest_state_part.tscn").instance()
+
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+
+		return
+
+	# Generates constraint data
+	var constraint_data = quest_data.push_constraint(quest_data.ConstraintType.QUEST_STATE, quuid)
+
+	# Check constraint validation
+	if not constraint_data:
+
+		# Log error
+		print("[questie]: quest constraint generation failed for quest with [uuid]: " + quuid)
+
+		return
+
+	constraints_uuid_map[part.get_instance_id()] = constraint_data.uuid												# Register constraint UUID to constraint map
+	print("[questie]: added constraint with [uuid]: " + constraint_data.uuid + " to quest with [uuid]: " + quuid)	# Log constraint generation success
+
+	# Add constraint to vierport
+	constraints_list.add_child(part)
+
+	# Subscribe constrain events
+	part.connect("delete", self, "delete_constraint_part")
+	part.connect("quest_changed", self, "quest_state_quest_changed")
+	part.connect("state_changed", self, "quest_state_state_changed")
+
+func quest_state_quest_changed(var part, var quest_id):
+
+	# Get current quest data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log error
+		print("[questie]: can't retrieve quest data for quest with [uuid]: " + quuid)
+
+		return
+
+	# Get constraint data
+	var cuuid = constraints_uuid_map[part.get_instance_id()]
+	var constraint_data = quest_data.get_constraint(cuuid)
+
+	# Check constraint data validation
+	if not constraint_data:
+
+		# Log error
+		print("[questie]: can't retrieve constraint data for constraint item with [uuid]: " + cuuid + " for quest item with [uuid]: " + quuid)
+
+		return
+
+	# Get pointing quest data
+	var pquuid = database.data[quest_id].uuid 
+	var pqdata = database.get_data(pquuid)
+
+	# Check pointing quest data validation
+	if not pqdata:
+
+		# Log error
+		print("[questie]: can't retrieve data from quest " + pquuid + " from constraint " + cuuid)
+
+		return
+
+	# Update data
+	constraint_data.quest = pquuid
+	
+	# Log success
+	print("[questie]: Set quest_state to point quest " + constraint_data.uuid + " from constraint " + cuuid)
+
+func quest_state_state_changed(var part, var state_id): 
+
+	# Get current quest data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log Error
+		print("[questie]: can't retrieve quest data for quest: " + quuid)
+
+		return
+
+	# Get constraint data
+	var cuuid = constraints_uuid_map[part.get_instance_id()]
+	var constraint_data = quest_data.get_constraint(cuuid)
+
+	if not constraint_data:
+
+		# Log error
+		print("[questie]: can't retrive constraint " + cuuid + " from quest " + quuid)
+
+		return
+
+	# Update data
+	constraint_data.state = state_id
+
+	# Log success
+	print("[questie]: set quest_state.state to " + var2str(constraint_data.state) + " for constraint " + constraint_data.uuid + " in quest " + quuid)
+
+
+
+
 ###############################################################################################################
 
 func _enter_tree():
@@ -542,5 +707,6 @@ func _ready():
 	# Subscribe quest blocks events
 	blocks.connect("has_quest_request", self, "has_quest_constraint")
 	blocks.connect("has_item_request", self,  "has_item_constraint")
+	blocks.connect("quest_state_request", self, "quest_state_constraint")
 
 

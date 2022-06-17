@@ -64,7 +64,7 @@ func push_constraint(var type : int, var owner : String):
 		ConstraintType.HAS_ITEM:			
 			result = load("res://addons/questie/editor/quest_editor/has_item_constraint.gd").new()
 		ConstraintType.QUEST_STATE: 		
-			result = null
+			result = load("res://addons/questie/editor/quest_editor/quest_state_constraint.gd").new()
 	
 	# Generate constraint UUID
 	result.uuid = UUID.generate()

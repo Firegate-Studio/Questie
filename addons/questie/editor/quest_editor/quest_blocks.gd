@@ -26,6 +26,7 @@ func constraint_has_quest_pressed():
 
 func constraint_quest_state_pressed(): 
 	print("[questie]: quest state constraint requested")
+	emit_signal("quest_state_request")
 
 func trigger_area_bounds_pressed(): 
 	print("[questie]: area bounds trigger requested")
