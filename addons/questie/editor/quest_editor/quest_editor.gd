@@ -111,10 +111,14 @@ func load_workspace():
 
 
 				constraints_list.add_child(part)
+				
+				var pqdata = database.get_data(element.quest)
+				if pqdata:
 
-				part.quest.text = database.get_data(element.quest).title
-				part.uuid.text = element.quest
-				part.refresh()
+					# Load GUI block
+					part.quest.text = database.get_data(element.quest).title
+					part.uuid.text = element.quest
+					part.refresh()
 
 				part.connect("quest_select", self, "has_quest_changed")
 				part.connect("delete", self, "delete_constraint_part")
@@ -159,20 +163,21 @@ func load_workspace():
 
 				# Get item data
 				var item_data = item_db.find_data(element.item, element.category)
-				if not item_data:
+				#if not item_data:
+				#	
+				#	# Log
+				#	print("[questie]: item data not found")
+				#	
+				#	return
 					
-					# Log
-					print("[questie]: item data not found")
-					
-					return
-					
-				print(data.title)
 				
-				# Update interface block
-				part.item.text = item_data.title
-				part.category.text = part.category.get_popup().get_item_text(element.category - 1)
-				part.quantity.value = element.quantity
-				part.refresh(element.category)
+				if item_data:
+				
+					# Update interface block
+					part.item.text = item_data.title
+					part.category.text = part.category.get_popup().get_item_text(element.category - 1)
+					part.quantity.value = element.quantity
+					part.refresh(element.category)
 
 				part.connect("item_changed", self, "has_item_changed")
 				part.connect("category_changed", self, "has_item_category_changed")
@@ -217,9 +222,11 @@ func load_workspace():
 					return
 
 				# Update constraint block
-				part.quest.text = database.get_data(element.quest).title
-				part.state.text = part.state.get_popup().get_item_text(element.state)
-				part.refresh()
+				var pqdata = database.get_data(element.quest)
+				if pqdata:
+					part.quest.text = database.get_data(element.quest).title
+					part.state.text = part.state.get_popup().get_item_text(element.state)
+					part.refresh()
 
 				# Subscribe events
 				part.connect("delete", self, "delete_constraint_part")
