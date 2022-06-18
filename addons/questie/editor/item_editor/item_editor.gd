@@ -457,6 +457,9 @@ func weapon_damage_changed(var id):
 		item.damage_type = id
 		weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(id)
 
+		#Log
+		print("[questie]: set weapon.damage_type to " + var2str(id) + " for weapon item with [uuid]: " + uuid)
+
 		# Save Database
 		ResourceSaver.save("res://questie/item-db.tres", database)
 
