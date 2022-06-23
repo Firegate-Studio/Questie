@@ -15,7 +15,7 @@ enum DamageType{
     AIR,            # magic damage based on air
     LIGHT,          
     DARKNESS,
-    SPIRIT          # magic damage based on spirit (i.e. conjuring, necromancy)
+    SPIRIT          # magic damage based on spirit (i.e. conjuring)
 }
 
 # the kind of damaged dealt from this weapon

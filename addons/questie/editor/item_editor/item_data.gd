@@ -1,6 +1,6 @@
 # The data structure for each game item
 
-tool
+#tool
 extends Resource
 
 # the item identifier
@@ -11,6 +11,9 @@ export(String) var title
 
 # The description of the item
 export(String) var description
+
+# The weight for this item
+export(float) var weight = 0.1
 
 # The item category
 # See [QuestDatabase.ItemCategory] for possible values
