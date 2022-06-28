@@ -3,6 +3,7 @@ extends Control
 
 var title = LineEdit
 var description = LineEdit
+var weight : SpinBox
 var icon_path : LineEdit
 var icon_preview : TextureRect
 var armor : SpinBox
@@ -18,6 +19,7 @@ func _enter_tree():
 	description = $VBoxContainer/VBoxContainer/Description
 	icon_path = $"VBoxContainer/HBoxContainer3/Icon path"
 	icon_preview = $VBoxContainer/HBoxContainer3/Panel/Icon
+	weight = $VBoxContainer/HBoxContainer5/Weight
 	armor = $VBoxContainer/HBoxContainer2/Armor
 	armor_type = $VBoxContainer/HBoxContainer2/Type
 	can_be_sold = $"VBoxContainer/HBoxContainer4/Can Be Sold"

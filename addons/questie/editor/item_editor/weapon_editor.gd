@@ -4,6 +4,7 @@ extends Control
 var title : LineEdit
 var description : TextEdit
 var icon : LineEdit
+var weight : SpinBox
 var min_damage : SpinBox
 var max_damage : SpinBox
 var damage_type : MenuButton
@@ -17,6 +18,7 @@ func _enter_tree():
 	title = $VBoxContainer/HBoxContainer/Title
 	description = get_node("VBoxContainer/VBoxContainer/Description")
 	icon = get_node("VBoxContainer/HBoxContainer4/icon")
+	weight = get_node("VBoxContainer/HBoxContainer5/Weight")
 	min_damage = get_node("VBoxContainer/VBoxContainer2/HBoxContainer/Min Damage")
 	max_damage = $"VBoxContainer/VBoxContainer2/HBoxContainer/Max Damage"
 	damage_type = $"VBoxContainer/VBoxContainer2/HBoxContainer2/Damage Type"

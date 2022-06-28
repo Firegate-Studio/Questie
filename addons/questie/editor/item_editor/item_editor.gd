@@ -181,6 +181,7 @@ func tree_item_selected():
 			# Load weapon data
 			weapon_editor.title.text = item.title
 			weapon_editor.description.text = item.description
+			weapon_editor.weight.value = item.weight
 			weapon_editor.icon.text = item.icon_path
 			weapon_editor.damage_type.text = weapon_editor.damage_type.get_popup().get_item_text(item.damage_type)
 			weapon_editor.min_damage.value = item.min_damage
@@ -220,6 +221,7 @@ func tree_item_selected():
 		armor_editor.title.text = data.title
 		armor_editor.description.text = data.description
 		armor_editor.icon_path.text = data.icon_path
+		armor_editor.weight.value = data.weight
 		if not data.icon_path == "": armor_editor.icon_preview.set_texture(load(data.icon_path))
 		else: armor_editor.icon_preview.set_texture(null)
 		armor_editor.armor.value = data.armor
@@ -258,8 +260,9 @@ func tree_item_selected():
 		# Load data from database
 		consumable_editor.title.text = data.title
 		consumable_editor.description.text = data.description
-		consumable_editor.icon_path = data.icon_path
+		consumable_editor.weight.value = data.weight
 
+		consumable_editor.icon_path = data.icon_path
 		if not data.icon_path == "": consumable_editor.icon_preview.set_texture(data.icon)
 		else: consumable_editor.icon_preview.set_texture(null)
 
@@ -304,8 +307,9 @@ func tree_item_selected():
 		# Load material data
 		material_editor.title.text = data.title
 		material_editor.description.text = data.description
+		material_editor.weight.value = data.weight
+
 		material_editor.icon_path.text = data.icon_path
-		
 		if not data.icon: material_editor.icon_preview.set_texture(null)
 		else: material_editor.icon_preview.set_texture(data.icon)
 
@@ -343,6 +347,7 @@ func tree_item_selected():
 		# Load data from database
 		special_editor.title.text = data.title
 		special_editor.description.text = data.description
+		special_editor.weight.value = data.weight
 		
 		special_editor.icon_path.text = data.icon_path
 		if not data.icon: 
@@ -441,6 +446,33 @@ func weapon_description_changed():
 	# Log error
 	print("[questie]: can't update weapon description for weapon with [UUID]:" + uuid)
 
+# @brief				update weapon weight
+# @param value			the new weight
+func weapon_weight_changed(var value):
+
+	# Get weapon UUID
+	var uuid = items_tree.weapon_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.weapons:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.weight = value
+		
+		# Log changes
+		print("[questie]: weapon weight changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the weapon weight")
+
 # @brief				update weapon damage type
 func weapon_damage_changed(var id):
 
@@ -494,7 +526,6 @@ func weapon_min_damage_changed(var value):
 	
 	# Log error
 	print("[questie]: can't update the weapon min value")
-
 
 # @brief				update the max damage dealt from a weapon
 # @param value			the new value
@@ -698,6 +729,33 @@ func armor_description_changed():
 
 	# Log error
 	print("[questie]: can't update armor description with [uuid]: " + uuid)
+
+# @brief				update armor weight
+# @param value			the new weight
+func armor_weight_changed(var value):
+	
+	# Get weapon UUID
+	var uuid = items_tree.armor_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.armors:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.weight = value
+		
+		# Log changes
+		print("[questie]: armor weight changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the armor weight")
 
 # @brief 					update the icon path and workspace preview
 # @param path				the updated path
@@ -950,6 +1008,33 @@ func consumable_description_changed():
 	# Log error
 	print("[questie]: can't update consumable description for consumable with [UUID]: " + uuid)
 
+# @brief				update consumable weight
+# @param value			the new weight
+func consumable_weight_changed(var value):
+	
+	# Get weapon UUID
+	var uuid = items_tree.consumable_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.consumables:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.weight = value
+		
+		# Log changes
+		print("[questie]: consumable weight changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the consumable weight")
+
 # @brief				update consumable icon
 # @param path			the new path to icon
 func consumable_icon_changed(var path):
@@ -1152,6 +1237,33 @@ func material_description_changed():
 	# Log error
 	print("[questie]: unable to set a new description for material item with [uuid]: " + uuid)
 
+# @brief				update material weight
+# @param value			the new weight
+func material_weight_changed(var value):
+	
+	# Get weapon UUID
+	var uuid = items_tree.material_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.materials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.weight = value
+		
+		# Log changes
+		print("[questie]: material weight changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the material weight")
+
 # @brief				update material icon
 # @param path			the new icon path
 func material_icon_changed(var path):
@@ -1327,6 +1439,33 @@ func special_description_changed():
 
 	# Save Database
 	ResourceSaver.save("res://questie/item-db.tres", database)
+
+# @brief				update special weight
+# @param value			the new weight
+func special_weight_changed(var value):
+	
+	# Get weapon UUID
+	var uuid = items_tree.special_uuid_map[items_tree.get_selected().get_instance_id()]
+
+	# Retrieve weapon data from database
+	for item in database.specials:
+
+		# Ignore invalid UUIDs
+		if not item.uuid == uuid: continue
+
+		# Update damage
+		item.weight = value
+		
+		# Log changes
+		print("[questie]: special weight changed to " + var2str(value))
+
+		# Save Database
+		ResourceSaver.save("res://questie/item-db.tres", database)
+
+		return
+	
+	# Log error
+	print("[questie]: can't update the special weight")
 
 # @brief 				update special icon
 # @param path			the new icon path
@@ -1725,6 +1864,7 @@ func _ready():
 	weapon_editor.title.connect("text_changed", self, "weapon_name_changed")
 	weapon_editor.description.connect("text_changed", self, "weapon_description_changed")
 	weapon_editor.damage_type.get_popup().connect("id_pressed", self, "weapon_damage_changed")
+	weapon_editor.weight.connect("value_changed", self, "weapon_weight_changed")
 	weapon_editor.min_damage.connect("value_changed", self, "weapon_min_damage_changed")
 	weapon_editor.max_damage.connect("value_changed", self, "weapon_max_damage_changed")
 	weapon_editor.can_be_sold.connect("toggled", self, "weapon_sellable_changed")
@@ -1736,6 +1876,7 @@ func _ready():
 	armor_editor.title.connect("text_changed", self, "armor_name_changed")
 	armor_editor.description.connect("text_changed", self, "armor_description_changed")
 	armor_editor.icon_path.connect("text_changed", self, "armor_icon_changed")
+	armor_editor.weight.connect("value_changed", self, "armor_weight_changed")
 	armor_editor.armor.connect("value_changed", self, "armor_value_changed")
 	armor_editor.armor_type.get_popup().connect("id_pressed", self, "armor_type_changed")
 	armor_editor.can_be_sold.connect("toggled", self, "armor_sellable_changed")
@@ -1746,6 +1887,7 @@ func _ready():
 	consumable_editor.title.connect("text_changed", self, "consumable_name_changed")
 	consumable_editor.description.connect("text_changed", self, "consumable_description_changed")
 	consumable_editor.icon_path.connect("text_changed", self, "consumable_icon_changed")
+	consumable_editor.weight.connect("value_changed", self, "consumable_weight_changed")
 	consumable_editor.can_be_sold.connect("toggled", self, "consumable_sellability_changed")
 	consumable_editor.purchase_price.connect("value_changed", self, "consumable_purchase_price_changed")
 	consumable_editor.sell_price.connect("value_changed", self, "consumable_sell_price_changed")
@@ -1755,6 +1897,7 @@ func _ready():
 	material_editor.title.connect("text_changed", self, "material_name_changed")
 	material_editor.description.connect("text_changed", self, "material_description_changed")
 	material_editor.icon_path.connect("text_changed", self, "material_icon_changed")
+	material_editor.weight.connect("value_changed", self, "material_weight_changed")
 	material_editor.can_be_sold.connect("toggled", self, "material_sellability_changed")
 	material_editor.purchase_price.connect("value_changed", self, "material_purchase_price_changed")
 	material_editor.sell_price.connect("value_changed", self, "material_sell_price_changed")
@@ -1763,6 +1906,7 @@ func _ready():
 	special_editor.title.connect("text_changed", self, "special_name_changed")
 	special_editor.description.connect("text_changed", self, "special_description_changed")
 	special_editor.icon_path.connect("text_changed", self, "special_icon_changed")
+	special_editor.weight.connect("value_changed", self, "special_weight_changed")
 	special_editor.can_be_sold.connect("toggled", self, "special_sellability_changed")
 	special_editor.purchase_price.connect("value_changed", self, "special_purchase_price_changed")
 	special_editor.sell_price.connect("value_changed", self, "special_sell_price_changed")

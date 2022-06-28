@@ -105,10 +105,28 @@ margin_right = -10.0
 margin_bottom = -10.0
 expand = true
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+[node name="HBoxContainer13" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 193.0
 margin_right = 1004.0
-margin_bottom = 233.0
+margin_bottom = 217.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer13"]
+margin_top = 5.0
+margin_right = 49.0
+margin_bottom = 19.0
+text = "Weight:"
+
+[node name="Weight" type="SpinBox" parent="ScrollContainer/VBoxContainer/HBoxContainer13"]
+margin_left = 53.0
+margin_right = 127.0
+margin_bottom = 24.0
+step = 0.1
+allow_greater = true
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 221.0
+margin_right = 1004.0
+margin_bottom = 261.0
 
 [node name="Sellable" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer5"]
 margin_right = 154.0
@@ -142,9 +160,9 @@ margin_bottom = 40.0
 allow_greater = true
 
 [node name="HBoxContainer6" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 237.0
+margin_top = 265.0
 margin_right = 1004.0
-margin_bottom = 251.0
+margin_bottom = 279.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer6"]
 margin_right = 52.0
@@ -158,9 +176,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer7" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 255.0
+margin_top = 283.0
 margin_right = 1004.0
-margin_bottom = 295.0
+margin_bottom = 323.0
 
 [node name="As Weapon" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer7"]
 margin_right = 149.0
@@ -209,9 +227,9 @@ margin_bottom = 40.0
 allow_greater = true
 
 [node name="HBoxContainer8" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 299.0
+margin_top = 327.0
 margin_right = 1004.0
-margin_bottom = 313.0
+margin_bottom = 341.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer8"]
 margin_right = 40.0
@@ -225,9 +243,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer9" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 317.0
+margin_top = 345.0
 margin_right = 1004.0
-margin_bottom = 357.0
+margin_bottom = 385.0
 
 [node name="As armor" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer9"]
 margin_right = 138.0
@@ -263,9 +281,9 @@ margin_bottom = 40.0
 allow_greater = true
 
 [node name="HBoxContainer10" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 361.0
+margin_top = 389.0
 margin_right = 1004.0
-margin_bottom = 375.0
+margin_bottom = 403.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer10"]
 margin_right = 79.0
@@ -279,9 +297,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="HBoxContainer11" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 379.0
+margin_top = 407.0
 margin_right = 1004.0
-margin_bottom = 419.0
+margin_bottom = 447.0
 
 [node name="As Consumable" type="CheckButton" parent="ScrollContainer/VBoxContainer/HBoxContainer11"]
 margin_right = 178.0
@@ -302,9 +320,9 @@ margin_bottom = 40.0
 allow_greater = true
 
 [node name="HBoxContainer12" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 423.0
+margin_top = 451.0
 margin_right = 1004.0
-margin_bottom = 437.0
+margin_bottom = 465.0
 
 [node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/HBoxContainer12"]
 margin_right = 45.0
@@ -318,7 +336,7 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="Is Unique" type="CheckButton" parent="ScrollContainer/VBoxContainer"]
-margin_top = 441.0
+margin_top = 469.0
 margin_right = 1004.0
-margin_bottom = 481.0
+margin_bottom = 509.0
 text = "Is Unique"

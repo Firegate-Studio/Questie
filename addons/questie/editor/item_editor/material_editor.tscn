@@ -99,10 +99,28 @@ margin_right = -10.0
 margin_bottom = -10.0
 expand = true
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 218.0
 margin_right = 1004.0
-margin_bottom = 258.0
+margin_bottom = 242.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer6"]
+margin_top = 5.0
+margin_right = 49.0
+margin_bottom = 19.0
+text = "Weight:"
+
+[node name="Weight" type="SpinBox" parent="VBoxContainer/HBoxContainer6"]
+margin_left = 53.0
+margin_right = 127.0
+margin_bottom = 24.0
+step = 0.1
+allow_greater = true
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 246.0
+margin_right = 1004.0
+margin_bottom = 286.0
 
 [node name="Sellable" type="CheckButton" parent="VBoxContainer/HBoxContainer5"]
 margin_right = 154.0

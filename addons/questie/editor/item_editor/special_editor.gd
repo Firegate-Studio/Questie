@@ -5,6 +5,7 @@ var title : LineEdit
 var description : TextEdit
 var icon_path : LineEdit
 var icon_preview : TextureRect
+var weight : SpinBox
 var can_be_sold : CheckButton
 var purchase_price : SpinBox
 var sell_price : SpinBox
@@ -26,6 +27,7 @@ func _enter_tree():
 	description = $ScrollContainer/VBoxContainer/HBoxContainer3/Description
 	icon_path = $"ScrollContainer/VBoxContainer/HBoxContainer4/Icon Path"
 	icon_preview = $ScrollContainer/VBoxContainer/HBoxContainer4/Panel/Icon
+	weight = $ScrollContainer/VBoxContainer/HBoxContainer13/Weight
 	can_be_sold = $ScrollContainer/VBoxContainer/HBoxContainer5/Sellable
 	purchase_price = $"ScrollContainer/VBoxContainer/HBoxContainer5/Purchase Price"
 	sell_price = $"ScrollContainer/VBoxContainer/HBoxContainer5/Sell price"
