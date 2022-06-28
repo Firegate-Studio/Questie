@@ -11,8 +11,6 @@ class item:
 	var data
 	var quantity : int
 
-var data : Array
-
 func fetch_item(var uuid : String)->item:
 	for context in data:
 
@@ -47,6 +45,7 @@ func add_item(var uuid, var quantity : int = 1):
 		container = item.new()
 		container.uuid = uuid
 		
+
 		# Binary search data from database
 		if InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.WEAPON): 
 			container.data = InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.WEAPON)
@@ -61,6 +60,13 @@ func add_item(var uuid, var quantity : int = 1):
 		if not container.data:
 			print("[questie]: can't retrieve data from database")
 			return
+		
+		# Detect category from UUID
+		var category = InventorySystem.item_db.get_item_category(uuid)
+		if not category:
+			# Log error
+			print("[questie]: can't retrieve category for item with uuid: " + uuid)
+			return
 
 		# Inspect quantity
 		if container.data.weight * quantity > max_weight:
@@ -69,6 +75,7 @@ func add_item(var uuid, var quantity : int = 1):
 			for n in quantity:
 				if get_current_weight() + container.data.weight <= max_weight:
 					container.quantity += 1
+					#emit_signal("add_item", uuid, category)
 				else:
 					break
 		else:
@@ -83,6 +90,7 @@ func add_item(var uuid, var quantity : int = 1):
 			for n in quantity:
 				if get_current_weight() + container.data.weight <= max_weight:
 					container.quantity += 1
+					
 				else:
 					break
 		else:

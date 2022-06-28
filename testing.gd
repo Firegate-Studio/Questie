@@ -20,3 +20,17 @@ func _ready():
 	inv.add_item(InventorySystem.weapons["Damascus"], 1000)
 	inv.debug()
 
+	var sinv = get_parent().get_node("SlotInventory")
+	sinv.add_item(InventorySystem.weapons["Damascus"], 1)
+	sinv.debug()
+	sinv.add_item(InventorySystem.weapons["Damascus"], 5)
+	sinv.debug()
+	sinv.add_item(InventorySystem.weapons["Damascus"], 500)
+	sinv.debug()
+	sinv.remove_item(InventorySystem.weapons["Damascus"], 1)
+	sinv.debug()
+	sinv.remove_item(InventorySystem.weapons["Damascus"], 499)
+	sinv.debug()
+	sinv.remove_item(InventorySystem.weapons["Damascus"], 499)
+	sinv.debug()
+

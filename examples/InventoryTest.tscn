@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/questie/runtime/Inventory System/inventory_system.gd" type="Script" id=1]
 [ext_resource path="res://testing.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/runtime/Inventory System/weighted_inventory.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/runtime/Inventory System/slot_inventory.gd" type="Script" id=4]
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,3 +17,9 @@ script = ExtResource( 2 )
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )
+
+[node name="SlotInventory" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+max_slots_count = 50

@@ -181,3 +181,26 @@ func find_data(var uuid : String, var category):
 				if not item.uuid == uuid: continue
 
 				return item
+
+# @brief							Get the item category by UUID
+# @param uuid						The item UUID
+# @result							The item category
+func get_item_category(var uuid: String):
+
+	if find_data(uuid, ItemCategory.WEAPON): 
+		return ItemCategory.WEAPON
+	
+	if find_data(uuid, ItemCategory.ARMOR): 
+		return ItemCategory.ARMOR
+	
+	if find_data(uuid, ItemCategory.CONSUMABLE): 
+		return ItemCategory.CONSUMABLE
+	
+	if find_data(uuid, ItemCategory.MATERIAL): 
+		return ItemCategory.MATERIAL
+	
+	if find_data(uuid, ItemCategory.SPECIAL): 
+		return ItemCategory.SPECIAL
+
+	return null
+
