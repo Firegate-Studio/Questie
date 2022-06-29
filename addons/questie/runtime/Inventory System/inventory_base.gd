@@ -15,3 +15,7 @@ func add_item(var item): pass
 
 # @brief                    Remove an item from inventory
 func remove_item(var item): pass
+
+# @brief                    Removes all stored items from inventory
+func purge():
+    data.clear()

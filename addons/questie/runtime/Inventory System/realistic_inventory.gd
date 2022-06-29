@@ -92,9 +92,6 @@ func remove_item(var uuid : String, var quantity : int = 1)->void:
 		container.quantity -= quantity
 		emit_signal("item_removed", uuid, category)
 
-# @brief                    Removes all stored data
-func purge()->void:
-	data.clear()
 
 # Log inventory informations
 func debug()->void:

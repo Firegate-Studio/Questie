@@ -157,7 +157,8 @@ Questie provides some inventories which can be used to store items while playing
 
 * **Weighted**: an inventory that allows to add items from `item database` untill the **max weight** is reached. For this inventory, the quantity for each slot is infinite; limited only from the current weight (i.e, fallout inventory system).
 * **Slot Based**: an inventory that allows to add items untill a free slot is availbale. For this inventory there is not a quantity, each item fills a slot; if there is no slot available, the player must free at least one slot to add another item.
-* **Grid**(Not ported yet): an inventory where the items can fill one or more slots based on their size. When the size to add an item is not availble (i.e., trying to fill 2x1 but only 1x1 is free); the item will not be added to the inventory (i.e, Diablo 3, Path of exile, Last epoch, ..., etc.)
+* **Grid**(Not ported yet): an inventory that works like the `slot based` inventory, but each slot has a maximum quantity(default 99) that must be reached before to fill a new slot in inventory
+* **Visual Grid**(Not ported yet): an inventory where the items can fill one or more slots based on their size. When the size to add an item is not availble (i.e., trying to fill 2x1 but only 1x1 is free); the item will not be added to the inventory (i.e, Diablo 3, Path of exile, Last epoch, ..., etc.)
 * **Realistic**: an inventory with limited capacity for each slot. The number of items that can be added is infinite; but has a several limited capacity. This is called realistic, because just like the real life the amount of items you can carry is limited (i.e., Dark Soul inventory)
 
 ### Adding an inventory to the scene
@@ -224,3 +225,38 @@ func your_function():
 For further information about signals you can check [godot documentation](https://docs.godotengine.org/it/stable/getting_started/step_by_step/signals.html)
 
 
+
+### Actions
+while using the inventory, you can use some typical actions to modify and update them at runtime.
+
+#### Get  inventory reference
+```
+var inventory = get_parent().get_node(viewport_name)
+```
+where `viewport_name` is the name of your inventory node from **scene hierarchy**
+
+#### Add item to inventory
+```
+inventory.add_item(InventorySystem.weapons["Item Name"], 5)
+```
+The `InventorySystem` contains the `item database`(aka item_db) and all items dived by categories. 
+
+- `InventorySystem.weapons`: a list of all weapons created from the item editor
+- `InventorySystem.armors`: a list of all armors created from the item editor
+- `InventorySystem.consumables`: a list of all consumable items created from the item editor
+- `InventorySystem.materials`: a list of all materials created from the item editor
+- `InventorySystem.specials`: a list of all special itmes created from the item editor
+
+> NB: Be sure that `InventorySystem` is added to scene as the subnode of the root node.
+
+#### Remove item from database
+```
+inventory.remove_item(Inventory.weapons["Item Name], 1)
+```
+Is equal to the add_item function, with the only difference the removes a stored item from inventory.
+
+#### Purge inventory
+```
+inventory.purge()
+```
+Removes all stored data from inventory
