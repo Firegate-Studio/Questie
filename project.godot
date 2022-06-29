@@ -110,6 +110,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/questie_module.gd"
 }, {
 "base": "Control",
+"class": "RealisticInventory",
+"language": "GDScript",
+"path": "res://addons/questie/runtime/Inventory System/realistic_inventory.gd"
+}, {
+"base": "Control",
 "class": "SlotInventory",
 "language": "GDScript",
 "path": "res://addons/questie/runtime/Inventory System/slot_inventory.gd"
@@ -145,6 +150,7 @@ _global_script_class_icons={
 "QuestDatabase": "",
 "QuestDirector": "",
 "QuestieModule": "",
+"RealisticInventory": "res://addons/questie/editor/icons/inventory.png",
 "SlotInventory": "res://addons/questie/editor/icons/inventory.png",
 "UUID": "",
 "WeightedInventory": "res://addons/questie/editor/icons/inventory.png"

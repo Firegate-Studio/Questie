@@ -2,7 +2,7 @@ extends Node
 
 func _ready():
 
-	var data = InventorySystem.get_item_data(InventorySystem.weapons["Sword of destiny"], ItemDatabase.ItemCategory.WEAPON)
+	var data = InventorySystem.get_item_data(InventorySystem.weapons["Damascus"], ItemDatabase.ItemCategory.WEAPON)
 	print(data.title)
 	print("damage: " + var2str(InventorySystem.get_weapon_damage(data.uuid)))
 	print("damage: " + var2str(InventorySystem.get_weapon_damage(data.uuid)))
@@ -20,17 +20,25 @@ func _ready():
 	inv.add_item(InventorySystem.weapons["Damascus"], 1000)
 	inv.debug()
 
+	print() # space
+
 	var sinv = get_parent().get_node("SlotInventory")
-	sinv.add_item(InventorySystem.weapons["Damascus"], 1)
+	sinv.add_item(InventorySystem.weapons["Damascus"], 1000)
 	sinv.debug()
-	sinv.add_item(InventorySystem.weapons["Damascus"], 5)
-	sinv.debug()
-	sinv.add_item(InventorySystem.weapons["Damascus"], 500)
-	sinv.debug()
-	sinv.remove_item(InventorySystem.weapons["Damascus"], 1)
-	sinv.debug()
-	sinv.remove_item(InventorySystem.weapons["Damascus"], 499)
-	sinv.debug()
-	sinv.remove_item(InventorySystem.weapons["Damascus"], 499)
-	sinv.debug()
+
+	print() # space
+
+	var rinv = get_parent().get_node("RealisticInventory")
+	rinv.add_item(InventorySystem.weapons["Damascus"], 10)
+	rinv.debug()
+	rinv.add_item(InventorySystem.weapons["Damascus"], 50)
+	rinv.debug()
+	rinv.remove_item(InventorySystem.weapons["Damascus"], 10)
+	rinv.debug()
+	rinv.remove_item(InventorySystem.weapons["Damascus"], 50)
+	rinv.debug()
+	rinv.add_item(InventorySystem.weapons["Damascus"], 100)
+	rinv.debug()
+	rinv.purge()
+	rinv.debug()
 
