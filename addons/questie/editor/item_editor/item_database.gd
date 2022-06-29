@@ -2,7 +2,7 @@
 
 tool
 extends Resource
-class_name ItemDatabase
+class_name ItemDatabase, "res://addons/questie/editor/icons/database.png"
 
 # the unique identifier of the database
 export(String) var uuid

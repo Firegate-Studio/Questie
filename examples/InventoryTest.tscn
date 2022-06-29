@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/questie/runtime/Inventory System/inventory_system.gd" type="Script" id=1]
 [ext_resource path="res://testing.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/runtime/Inventory System/weighted_inventory.gd" type="Script" id=3]
 [ext_resource path="res://addons/questie/runtime/Inventory System/slot_inventory.gd" type="Script" id=4]
 [ext_resource path="res://addons/questie/runtime/Inventory System/realistic_inventory.gd" type="Script" id=5]
+[ext_resource path="res://addons/questie/nodes/get_item.tscn" type="PackedScene" id=6]
 
 [node name="Node2D" type="Node2D"]
 
@@ -29,3 +30,5 @@ max_slots_count = 50
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 5 )
+
+[node name="Get Item" parent="RealisticInventory" instance=ExtResource( 6 )]

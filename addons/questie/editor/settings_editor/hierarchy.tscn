@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/questie/editor/settings_editor/hierarchy_tree.gd" type="Script" id=1]
+
+[node name="Hierarchy" type="Control"]
+margin_right = 275.0
+margin_bottom = 600.0
+rect_min_size = Vector2( 275, 0 )
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_vertical = 3
+
+[node name="Tree" type="Tree" parent="ScrollContainer"]
+margin_right = 255.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+hide_root = true
+script = ExtResource( 1 )

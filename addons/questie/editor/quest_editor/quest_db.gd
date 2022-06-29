@@ -4,7 +4,7 @@
 
 tool
 extends Resource
-class_name QuestDatabase
+class_name QuestDatabase, "res://addons/questie/editor/icons/database.png"
 
 # The database identifier. 
 # When you generate a [QuestDB]; the [uuid] will be generated automatically.

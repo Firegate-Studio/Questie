@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_editor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/item_editor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://addons/questie/editor/settings_editor/settings_editor.tscn" type="PackedScene" id=3]
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -23,4 +24,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="Items Editor" parent="TabContainer" instance=ExtResource( 2 )]
+visible = false
+
+[node name="Settings Editor" parent="TabContainer" instance=ExtResource( 3 )]
 visible = false

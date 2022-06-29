@@ -13,6 +13,9 @@ var quest_database
 # The database that contains all items of the game
 var item_database
 
+# Stores tool settings data
+var settings_data
+
 var quest_editor = preload("res://addons/questie/editor/main.tscn")
 var quest_editor_instance
 
@@ -52,6 +55,12 @@ func _enter_tree():
 		item_database.uuid = UUID.generate()
 		ResourceSaver.save("res://questie/item-db.tres", item_database)
 		print("[questie]: item database created at path res://quesite/item-db.tres")
+
+	if not file.file_exists("res://questie/settings.tres"):
+		print("[questie]: creating settings ...")
+		settings_data = SettingsData.new()
+		ResourceSaver.save("res://questie/settings.tres", settings_data)
+		print("[questie]: settings saves created at path res://questie/settings.tres")
 
 
 	# loading questie interface
