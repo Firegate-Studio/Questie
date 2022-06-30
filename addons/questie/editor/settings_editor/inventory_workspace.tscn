@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/questie/editor/settings_editor/inventory_workspace.gd" type="Script" id=1]
+
+[node name="Inventory Workspace" type="Control"]
+margin_left = 279.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
+margin_right = 725.0
+margin_bottom = 580.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
+margin_right = 725.0
+margin_bottom = 580.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+margin_right = 725.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 24 )
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 108.0
+margin_bottom = 19.0
+text = "Player Inventory:"
+
+[node name="Inventory Path" type="LineEdit" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 112.0
+margin_right = 697.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+align = 1
+editable = false
+selecting_enabled = false
+placeholder_text = "use the pickup button to gather an inventory to display"
+
+[node name="inventory pickup" type="ToolButton" parent="MarginContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+margin_left = 701.0
+margin_right = 725.0
+margin_bottom = 24.0
+text = "..."
+
+[node name="Panel" type="Panel" parent="MarginContainer/ScrollContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 725.0
+margin_bottom = 580.0
+size_flags_vertical = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="MarginContainer/ScrollContainer/VBoxContainer/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+stretch = true
+
+[node name="Viewport" type="Viewport" parent="MarginContainer/ScrollContainer/VBoxContainer/Panel/ViewportContainer"]
+size = Vector2( 705, 532 )
+size_override_stretch = true
+transparent_bg = true
+handle_input_locally = false
+disable_3d = true
+usage = 1
+render_target_update_mode = 3
+gui_disable_input = true
+
+[node name="Inventory Picker" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -157.5
+margin_top = -65.0
+margin_right = 157.5
+margin_bottom = 167.0
+window_title = "Open a File"
+dialog_hide_on_ok = true
+mode = 0

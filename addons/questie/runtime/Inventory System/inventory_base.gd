@@ -1,3 +1,4 @@
+class_name InventoryBase, "res://addons/questie/editor/icons/inventory.png"
 extends Control
 
 # Called when an item is added to inventory

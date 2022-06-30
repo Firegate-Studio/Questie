@@ -79,10 +79,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
 }, {
+"base": "Control",
+"class": "InventoryBase",
+"language": "GDScript",
+"path": "res://addons/questie/runtime/Inventory System/inventory_base.gd"
+}, {
 "base": "Node",
 "class": "InventorySystem",
 "language": "GDScript",
 "path": "res://addons/questie/runtime/Inventory System/inventory_system.gd"
+}, {
+"base": "Control",
+"class": "InventoryWorkspace",
+"language": "GDScript",
+"path": "res://addons/questie/editor/settings_editor/inventory_workspace.gd"
 }, {
 "base": "Resource",
 "class": "ItemDatabase",
@@ -149,7 +159,9 @@ _global_script_class_icons={
 "DialogicResources": "",
 "DialogicUtil": "",
 "HistoryRow": "",
+"InventoryBase": "res://addons/questie/editor/icons/inventory.png",
 "InventorySystem": "",
+"InventoryWorkspace": "",
 "ItemDatabase": "res://addons/questie/editor/icons/database.png",
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
@@ -171,6 +183,10 @@ config/icon="res://icon.png"
 
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/questie/plugin.cfg" )
 
 [physics]
 

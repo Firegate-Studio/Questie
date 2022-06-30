@@ -35,6 +35,7 @@ func add_subnode(var parent : TreeItem, var name : String, var icon_path : Strin
     result.set_icon_max_width(0, icon_size)
     result.set_editable(0, false)
     result.set_selectable(0, selectable)
+    result.set_custom_as_button(0, true)
 
     return result
 
@@ -65,6 +66,7 @@ func item_selected():
 
 # Called when an invalid items is selected (i.e, empty area)
 func nothing_selected():
+    
     print("[questie]: invalid selection")
     emit_signal("invalid_selection")
 
