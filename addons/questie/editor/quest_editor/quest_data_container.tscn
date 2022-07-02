@@ -97,7 +97,7 @@ size_flags_horizontal = 3
 [node name="constraints section" type="Control" parent="."]
 margin_top = 197.0
 margin_right = 429.0
-margin_bottom = 655.0
+margin_bottom = 317.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -113,11 +113,35 @@ margin_bottom = -5.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="triggers section" type="Control" parent="."]
-visible = false
-margin_top = 411.0
+[node name="Trigger section header" type="Control" parent="."]
+margin_top = 321.0
 margin_right = 429.0
-margin_bottom = 655.0
+margin_bottom = 351.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Trigger section header"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Label" type="Label" parent="Trigger section header/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 14.0
+text = "Triggers"
+
+[node name="HSeparator" type="HSeparator" parent="Trigger section header/HBoxContainer"]
+margin_left = 54.0
+margin_right = 409.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="triggers section" type="Control" parent="."]
+margin_top = 355.0
+margin_right = 429.0
+margin_bottom = 475.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -129,26 +153,39 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="triggers section/margin"]
+[node name="container" type="VBoxContainer" parent="triggers section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="triggers section/margin/VBoxContainer"]
+[node name="task section header" type="Control" parent="."]
+margin_top = 479.0
+margin_right = 429.0
+margin_bottom = 509.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="task section header"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Label" type="Label" parent="task section header/HBoxContainer"]
+margin_right = 35.0
+margin_bottom = 14.0
+text = "Tasks"
+
+[node name="HSeparator" type="HSeparator" parent="task section header/HBoxContainer"]
+margin_left = 39.0
 margin_right = 409.0
 margin_bottom = 14.0
-text = "Triggers"
-
-[node name="Panel" type="Panel" parent="triggers section/margin/VBoxContainer"]
-margin_top = 18.0
-margin_right = 409.0
-margin_bottom = 234.0
-size_flags_vertical = 3
+size_flags_horizontal = 3
 
 [node name="tasks section" type="Control" parent="."]
-visible = false
-margin_top = 411.0
+margin_top = 513.0
 margin_right = 429.0
-margin_bottom = 655.0
+margin_bottom = 633.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -160,26 +197,39 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="tasks section/margin"]
+[node name="container" type="VBoxContainer" parent="tasks section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="tasks section/margin/VBoxContainer"]
+[node name="reward section header" type="Control" parent="."]
+margin_top = 637.0
+margin_right = 429.0
+margin_bottom = 667.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="reward section header"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+
+[node name="Label" type="Label" parent="reward section header/HBoxContainer"]
+margin_right = 53.0
+margin_bottom = 14.0
+text = "Rewards"
+
+[node name="HSeparator" type="HSeparator" parent="reward section header/HBoxContainer"]
+margin_left = 57.0
 margin_right = 409.0
 margin_bottom = 14.0
-text = "Tasks"
-
-[node name="Panel" type="Panel" parent="tasks section/margin/VBoxContainer"]
-margin_top = 18.0
-margin_right = 409.0
-margin_bottom = 234.0
-size_flags_vertical = 3
+size_flags_horizontal = 3
 
 [node name="rewards section" type="Control" parent="."]
-visible = false
-margin_top = 493.0
+margin_top = 671.0
 margin_right = 429.0
-margin_bottom = 655.0
+margin_bottom = 791.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -191,17 +241,6 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="rewards section/margin"]
+[node name="container" type="VBoxContainer" parent="rewards section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-
-[node name="Label" type="Label" parent="rewards section/margin/VBoxContainer"]
-margin_right = 409.0
-margin_bottom = 14.0
-text = "Rewards"
-
-[node name="Panel" type="Panel" parent="rewards section/margin/VBoxContainer"]
-margin_top = 18.0
-margin_right = 409.0
-margin_bottom = 152.0
-size_flags_vertical = 3

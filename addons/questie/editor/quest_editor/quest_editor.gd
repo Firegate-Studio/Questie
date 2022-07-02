@@ -36,11 +36,13 @@ var toolbar
 # when clicking on a quest item, this section will be replaced from the workspace
 var empty_workspace
 
-# The list containing all quest constraints
-var constraints_list
 
-# Contains all constraints [UUID] generated
-var constraints_uuid_map = {}
+var constraints_list					# The list containing all quest constraints
+var triggers_list						# The list containing all quest constraints
+
+
+var constraints_uuid_map = {}			# Contains all constraints [UUID] generated
+var triggers_uuid_map = {}				# Contains all triggers [UUID] generated
 
 var database = preload("res://questie/quest-db.tres")
 
@@ -76,6 +78,10 @@ func load_workspace():
 	# Clear viewport
 	for child in constraints_list.get_children():
 		constraints_list.remove_child(child)
+		child.queue_free()
+
+	for child in triggers_list.get_children():
+		triggers_list.remove_child(child)
 		child.queue_free()
 
 	# Load quest informations
@@ -235,7 +241,41 @@ func load_workspace():
 
 				# Log 
 				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)
-			
+
+		for element in data.triggers:
+
+			if element is Trigger_GetItem:
+
+				# Preload scene block
+				var part = load("res://addons/questie/editor/quest_editor/parts/get_item_part.tscn").instance()
+				
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in constraints_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+					constraints_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+				
+				triggers_list.add_child(part)
+				
+				var qdata = database.get_data(element.trigger_owner)
+				if qdata:
+					var db = load("res://questie/item-db.tres")
+					part.uuid.text = element.item_uuid
+					part.item.text = db.find_data(element.item_uuid, element.item_category).title
+					part.category.text = part.category.get_popup().get_item_text(element.item_category - 1)
+
+				# Subscribe trigger events
+				part.connect("item_selected", self, "trigger_get_item_selected", [part, element])
+				part.connect("destruction_requested", self, "trigger_get_item_delete", [part, element])
+
 	# Swap workspace visibility
 	empty_workspace.hide()
 	workspace.show()
@@ -731,6 +771,70 @@ func quest_state_state_changed(var part, var state_id):
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 
+func get_item_trigger(): 
+
+	# Load trigger part
+	var trigger = load("res://addons/questie/editor/quest_editor/parts/get_item_part.tscn").instance()
+	if not trigger:
+		# Log error
+		print("[questie]: can't load trigger part in quest editor")
+		return
+
+	# Get quest informations
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()] 			# Opened quest in editor UUID
+	var qdata = database.get_data(quuid)													# quest data stored inside the database
+	if not qdata:
+		# Log error
+		print("[questie]: can't retrieve quest data from database for quest with [uuid]: " + quuid)
+		return
+	
+	# Generates trigger data
+	var trigger_data = qdata.push_trigger(qdata.TriggerType.GET_ITEM, quuid) 
+	if not trigger_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+
+	# Update UUID map
+	triggers_uuid_map[trigger.get_instance_id()] = trigger_data.uuid
+	print("[questie]: added trigger with [uuid]: " + trigger_data.uuid + " to quest with [uuid]: " + quuid)
+	
+	# Add trigger to scene
+	triggers_list.add_child(trigger)
+
+	# Subscribe trigger events
+	trigger.connect("item_selected", self, "trigger_get_item_selected", [trigger, trigger_data])
+	trigger.connect("destruction_requested", self, "trigger_get_item_delete", [trigger, trigger_data])	
+
+	# Update database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func trigger_get_item_selected(var item_uuid, var category, var data, var part, var trigger):
+
+	trigger.item_uuid = item_uuid						# update trigger item UUID
+	trigger.item_category = category					# update item category
+
+	# update data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func trigger_get_item_delete(var control, var data):
+
+	var qdata = database.get_data(data.trigger_owner)
+	if not qdata:
+		# Log error
+		print("[questie]: can't retrieve data from database fro quest: " + data.trigger_owner)
+		return
+
+	# Erase trigger
+	triggers_list.remove_child(control)
+	control.disconnect("item_selected", self, "trigger_get_item_selected")					# Disable item selected event
+	control.disconnect("destruction_requested", self, "trigger_get_item_delete")			# Disable destruction request event
+	triggers_uuid_map.erase(control.get_instance_id())
+	qdata.erase_trigger(data.uuid)
+	control.queue_free()
+
+	# update database
+	ResourceSaver.save("res://quest-db.tres", database)
 
 
 ###############################################################################################################
@@ -743,6 +847,7 @@ func _enter_tree():
 	quest_data_container = workspace.get_node("HBoxContainer/ScrollContainer/data")
 	blocks = workspace.get_node("HBoxContainer/Quest Blocks")
 	constraints_list = workspace.get_node("HBoxContainer/ScrollContainer/data/constraints section/margin/container")
+	triggers_list = workspace.get_node("HBoxContainer/ScrollContainer/data/triggers section/margin/container")
 	
 func _ready():
 	toolbar.new_quest_btn.connect("button_down", self, "new_quest_request")
@@ -757,5 +862,6 @@ func _ready():
 	blocks.connect("has_quest_request", self, "has_quest_constraint")
 	blocks.connect("has_item_request", self,  "has_item_constraint")
 	blocks.connect("quest_state_request", self, "quest_state_constraint")
+	blocks.connect("get_item_request", self, "get_item_trigger")
 
 

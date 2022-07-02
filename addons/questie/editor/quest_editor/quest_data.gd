@@ -34,6 +34,11 @@ enum ConstraintType {
 	QUEST_STATE                 # check the state of activity(complention) of a specific quest
 }
 
+enum TriggerType{
+	IS_LOCATION,
+	GET_ITEM
+}
+
 # quest constraints represents rules that should be satisfied 
 # to activate a quest when triggered
 export(Array, Resource) var constraints
@@ -134,3 +139,39 @@ func get_constraint(var uuid : String):
 	
 	# Nullify data
 	return null
+
+# @brief					push a new 
+func push_trigger(var type : int, var owner : String):
+	
+	var result = null
+
+	match type:
+		TriggerType.IS_LOCATION: 
+			print("[questie]: TODO:QuestData.IsLocation")
+		TriggerType.GET_ITEM:
+			result = load("res://addons/questie/editor/quest_editor/get_item_trigger.gd").new()
+	
+	result.trigger_owner = owner
+
+	# Add constraint
+	triggers.push_back(result)
+
+	# Log
+	print("[questie]: generated constraint with [uuid]: " + result.uuid)
+		
+	return result
+
+func erase_trigger(var uuid : String): 
+
+	var trigger = null
+
+	# Binary search the trigger to remove
+	for item in triggers:
+		if not item.uuid == uuid: continue
+		
+		trigger = item
+		break
+	
+	# Remove trigger
+	triggers.erase(trigger)
+	print("[questie]: removed trigger from quest with uuid: " + uuid)
