@@ -7,5 +7,5 @@ func _enter_tree():
 
 func _input(event):
 
-    if Input.is_key_pressed(KEY_SPACE):
+    if Input.is_key_pressed(KEY_SPACE) and event.is_pressed() and not event.is_echo():
         questie.player_inventory.add_item(InventorySystem.weapons["Damascus"], 1)

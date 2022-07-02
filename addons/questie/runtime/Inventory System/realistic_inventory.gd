@@ -86,6 +86,19 @@ func remove_item(var uuid : String, var quantity : int = 1)->void:
 		container.quantity -= quantity
 		emit_signal("item_removed", uuid, category)
 
+# @brief					Return the item inside inventory if exists
+# @param uuid				the item UUID
+func get_item(var uuid : String)->ResultItem:
+	for item in data:
+		if not item.uuid == uuid: continue
+		
+		var result = ResultItem.new()
+		result.uuid = uuid
+		result.data = item.data
+		result.quantity = item.quantity
+		return result
+
+	return null
 
 # Log inventory informations
 func debug()->void:

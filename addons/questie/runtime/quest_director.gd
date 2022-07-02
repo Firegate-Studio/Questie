@@ -27,6 +27,7 @@ func setup_inventory():
 		for constraint in quest.constraints:
 
 			if constraint is Constraint_HasItem:
+				# TODO: has_item node
 				pass
 
 		for trigger in quest.triggers:
@@ -91,8 +92,16 @@ func on_trigger_activated(var quest_uuid : String, var trigger_uuid, var node):
 		for constraint in quest_data.constraints:
 
 			if constraint is Constraint_HasItem: 
-				# TODO
-				pass
+				var buffer = player_inventory.get_item(constraint.item)
+				if not buffer: 
+					# Log error
+					print("[questie]: player inventory does not has the item to bypass quest constraint")
+					emit_signal("constraint_failed", quest_data.uuid, constraint.uuid)
+					return
+				
+				if buffer.uuid == constraint.item and buffer.quantity == constraint.quantity:
+					print("[questie]: quest constraint bypassed from player inventory - constraint rule fullfilled")
+					emit_signal("contraint_passed", quest_data.uuid, constraint.uuid, null)
 
 			if constraint is Constraint_HasQuest:
 				# TODO
@@ -103,8 +112,10 @@ func on_trigger_activated(var quest_uuid : String, var trigger_uuid, var node):
 				pass
 	
 	# Remove trigger node from parent
-	if node is Trigger_GetItem:
-		player_inventory.remove_childe(node)
+	if node.tag == "QN_GetItem":
+		player_inventory.remove_child(node)
+	else:
+		print("not trigger!")
 	
 	# TODO: set trigger to completed
 	# TODO: add quest to active_quests

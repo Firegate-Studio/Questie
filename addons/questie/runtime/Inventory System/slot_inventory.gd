@@ -96,6 +96,27 @@ func remove_item(var uuid: String, var quantity : int = 1):
 		emit_signal("item_removed", uuid, category)
 	return
 
+func get_item(var uuid: String):
+	
+	var quantity = 0
+	var tmp_data 
+	for item in data:
+		if not item.uuid == uuid:
+			continue
+		
+		quantity += 1
+		data = item
+
+	if quantity == 0: return null 
+
+	var result = ResultItem.new()
+	result.uuid = uuid
+	result.data = tmp_data
+	result.quantity = quantity
+
+	return result
+		
+
 func debug():
 	print("[questie]: current slot-inv size: " + var2str(get_current_size()))
 

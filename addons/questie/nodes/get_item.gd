@@ -2,6 +2,9 @@ extends Node
 
 var questie : QuestDirector 
 
+# A tag to identify this node from questie director
+var tag : String = "QN_GetItem"
+
 # The inventory
 var inventory 
 

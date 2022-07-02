@@ -107,6 +107,19 @@ func remove_item(var item, var quantity : int = 1):
 
 	container.quantity -= quantity
 
+func get_item(var uuid : String)->ResultItem:
+	for item in data:
+		if not item.uuid == uuid: continue
+
+		var result = ResultItem.new()
+		result.uuid = item.uuid
+		result.data = item.data
+		result.quantity = item.quantity
+
+		return result	
+
+	return null
+
 func debug():
 
 	print("total weight: " + var2str(get_current_weight()))
