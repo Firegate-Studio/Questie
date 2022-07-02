@@ -47,7 +47,7 @@ func add_item(var uuid : String, var quantity : int = 1)->void:
 	if get_current_size() + quantity <= max_slots_count:
 		for n in quantity:
 			data.push_back(new_item)
-			emit_signal("add_item", uuid, item_category)
+			emit_signal("item_added", uuid, item_category)
 	else:
 		var free_slots = max_slots_count - get_current_size()
 		if free_slots == 0:
@@ -57,7 +57,7 @@ func add_item(var uuid : String, var quantity : int = 1)->void:
 		# Add items untill inventorty is filled
 		for n in max_slots_count - get_current_size():
 			data.push_back(new_item)
-			emit_signal("add_item", uuid, item_category)
+			emit_signal("item_added", uuid, item_category)
 
 func remove_item(var uuid: String, var quantity : int = 1):
 
@@ -88,12 +88,12 @@ func remove_item(var uuid: String, var quantity : int = 1):
 		# Removes the available amount of items
 		for n in count:
 			data.erase(cache)
-			emit_signal("remove_item", uuid, category)
+			emit_signal("item_removed", uuid, category)
 		return
 	
 	for n in quantity:
 		data.erase(cache)
-		emit_signal("remove_item", uuid, category)
+		emit_signal("item_removed", uuid, category)
 	return
 
 func debug():

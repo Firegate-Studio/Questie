@@ -2,10 +2,10 @@ class_name InventoryBase, "res://addons/questie/editor/icons/inventory.png"
 extends Control
 
 # Called when an item is added to inventory
-signal add_item(uuid, category)
+signal item_added(uuid, category)
 
 # Called when an item is removed from inventory
-signal remove_item(uuid, category)
+signal item_removed(uuid, category)
 
 signal call_error(message)
 

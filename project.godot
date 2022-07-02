@@ -170,7 +170,7 @@ _global_script_class_icons={
 "ItemDatabase": "res://addons/questie/editor/icons/database.png",
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
-"QuestDirector": "",
+"QuestDirector": "res://addons/questie/editor/icons/director.png",
 "QuestieModule": "",
 "RealisticInventory": "res://addons/questie/editor/icons/inventory.png",
 "SettingsData": "res://addons/questie/editor/icons/settings.png",

@@ -1,12 +1,6 @@
 class_name RealisticInventory, "res://addons/questie/editor/icons/inventory.png"
 extends "res://addons/questie/runtime/Inventory System/inventory_base.gd"
 
-# Called when any item with any quantity is added to inventory
-signal item_added(uuid, category)
-
-# Called when any item with any quantity is removed from inventory
-signal item_removed(uuid, category)
-
 # The maximum amount of accumulable items for each slot in inventory
 export(int) var max_slot_capacity = 25
 

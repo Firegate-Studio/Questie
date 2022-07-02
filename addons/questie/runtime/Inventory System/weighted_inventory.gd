@@ -75,7 +75,7 @@ func add_item(var uuid, var quantity : int = 1):
 			for n in quantity:
 				if get_current_weight() + container.data.weight <= max_weight:
 					container.quantity += 1
-					#emit_signal("add_item", uuid, category)
+					emit_signal("item_added", uuid, category)
 				else:
 					break
 		else:
