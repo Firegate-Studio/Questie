@@ -35,8 +35,13 @@ enum ConstraintType {
 }
 
 enum TriggerType{
-	IS_LOCATION,
-	GET_ITEM
+	IS_LOCATION,				# Change to Enter Location
+	EXIT_LOCATION				# the player enters to location
+	GET_ITEM			
+}
+
+enum TaskType{
+	COLLECT_ITEM				# The player gathered an amount of items
 }
 
 # quest constraints represents rules that should be satisfied 
@@ -175,3 +180,55 @@ func erase_trigger(var uuid : String):
 	# Remove trigger
 	triggers.erase(trigger)
 	print("[questie]: removed trigger from quest with uuid: " + uuid)
+
+# @brief					Add a task to the quest
+# @param type				the kind of task to add. See quest_data.TaskType for further information
+# @param owner				the quest owning this task
+func push_task(var type : int, var owner : String):
+	var task = null
+	match type:
+		TaskType.COLLECT_ITEM:
+			task = load("res://addons/questie/editor/quest_editor/collect_item_task.gd").new()
+
+
+	if not task:
+		# Log error
+		print("[questie]: can't generated taks for quest(" + owner + ")")
+		return
+
+	task.owner = owner
+	tasks.push_back(task)
+
+	# Log
+	print("[questie]: generated task with [uuid]: " + task.uuid)
+
+	return task
+
+# @brief					Removes the task from the quest
+# @param uuid				the UUID of the taks to remove
+func erase_task(var uuid : String):
+	var task = null
+
+	for item in tasks:
+		if not item.uuid == uuid: continue
+
+		task = item
+		break
+	
+	if not task:
+		# Log error
+		print("[questie]: can't retrieve data for task with uuid: " + uuid)
+		return
+
+	tasks.erase(task)
+	print("[questie]: removed task from quest with uuid: " + task.owner)
+
+# @ brief					Binary search for the task at UUID and return it it found
+# @param uuid				the task UUID
+func get_task(var uuid : String):
+	for task in tasks:
+		if not task.uuid == uuid: continue
+		
+		return task	
+
+	return null

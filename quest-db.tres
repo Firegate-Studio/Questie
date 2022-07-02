@@ -1,0 +1,59 @@
+[gd_resource type="Resource" load_steps=10 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/collect_item_task.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/has_quest_constraint.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=4]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 4 )
+uuid = "f378f2b1-0a8b-4e87-9242-6dbccfe076e1"
+title = "The Man And The Slave"
+status = 0
+description = "Ogni giorno Rowan doveva assecondare i desideri del proprio padrone, e anche oggi non faceva eccezione."
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+uuid = "e1bed75f-2dff-442d-9021-aac9edfe02d7"
+owner = "cd4c5a58-d8b0-4edd-be0d-163db47db3cf"
+quest = "f378f2b1-0a8b-4e87-9242-6dbccfe076e1"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 4 )
+uuid = "cd4c5a58-d8b0-4edd-be0d-163db47db3cf"
+title = "The Wanderer"
+status = 0
+description = "Un'avventuriero errante era arrivato alla taverna del villaggio di Rowan"
+constraints = [ SubResource( 5 ) ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 1 )
+uuid = "b3be0dd2-be8d-4aa8-98c8-35f815b70fb8"
+owner = "cf03667e-c3ab-49d1-a20d-080aa69cd494"
+state = 0
+item_uuid = "e4abb5bd-8516-4e67-b3ae-6f81b5adff2c"
+category = 3
+quantity = 20.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+uuid = "cf03667e-c3ab-49d1-a20d-080aa69cd494"
+title = "Lorgaran"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
+triggers = [  ]
+tasks = [ SubResource( 8 ) ]
+rewards = [  ]
+
+[resource]
+script = ExtResource( 3 )
+uuid = "93545d28-0890-4735-8ee2-6a271fb74491"
+data = [ SubResource( 1 ), SubResource( 2 ), SubResource( 6 ) ]

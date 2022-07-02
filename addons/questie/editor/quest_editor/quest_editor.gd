@@ -39,10 +39,14 @@ var empty_workspace
 
 var constraints_list					# The list containing all quest constraints
 var triggers_list						# The list containing all quest constraints
+var tasks_list							# The list containing all quest tasks
+var rewards_list						# The list containing all quest rewards
 
 
 var constraints_uuid_map = {}			# Contains all constraints [UUID] generated
 var triggers_uuid_map = {}				# Contains all triggers [UUID] generated
+var tasks_uuid_map = {}					# Contains all tasks [UUID] generated
+var rewards_uuid_map = {}				# Contains all rewards [UUID] generated
 
 var database = preload("res://questie/quest-db.tres")
 
@@ -83,6 +87,15 @@ func load_workspace():
 	for child in triggers_list.get_children():
 		triggers_list.remove_child(child)
 		child.queue_free()
+
+	for child in tasks_list.get_children():
+		tasks_list.remove_child(child)
+		child.queue_free()
+	
+	# delete # when initializing rewars list in _enter_tree() function
+	#for child in rewards_list.get_children():
+	#	rewards_list.remove_child(child)
+	#	child.queue_free()
 
 	# Load quest informations
 	for data in database.data:
@@ -251,17 +264,17 @@ func load_workspace():
 				
 				# Check if the constraints map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
-				if element.uuid in constraints_uuid_map.values():
+				if element.uuid in triggers_uuid_map.values():
 
 					# Register new instance id and remove old keys from UUID map
-					constraints_uuid_map[part.get_instance_id()] = element.uuid
-					constraints_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+					triggers_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
 					
 				else:
 
 					# Generated instance and id
 					element.uuid = UUID.generate()
-					constraints_uuid_map[part.get_instance_id()] = element.uuid
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
 				
 				triggers_list.add_child(part)
 				
@@ -275,7 +288,50 @@ func load_workspace():
 				# Subscribe trigger events
 				part.connect("item_selected", self, "trigger_get_item_selected", [part, element])
 				part.connect("destruction_requested", self, "trigger_get_item_delete", [part, element])
+		
+		for element in data.tasks:
+			
+			if element is Task_CollectItem:
 
+				# Preload scene block
+				var part = load("res://addons/questie/editor/quest_editor/parts/collect_item_part.tscn").instance()
+				
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in tasks_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+					tasks_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+				
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+			
+				tasks_list.add_child(part)
+			
+				var qdata = database.get_data(element.owner)
+				if qdata:
+					var db = load("res://questie/item-db.tres")
+					var item_data = db.find_data(element.item_uuid, element.category)
+					if not item_data:
+						part.item.text = "item"
+						part.category.text = part.category.get_popup().get_item_text(element.category)
+						part.quantity.value = element.quantity
+					else:	
+						part.item.text = item_data.title
+						part.category.text = part.category.get_popup().get_item_text(element.category - 1)
+						part.quantity.value = element.quantity
+
+				# Subscribe events
+				part.connect("item_selected", self, "task_collect_item_selected",[qdata, element])
+				part.connect("category_selected", self, "task_collect_category_selected", [qdata, element])
+				part.connect("quantity_changed", self, "taks_collect_quantity_changed", [qdata, element])
+				part.connect("delete_part_requested", self, "task_collect_delete", [qdata, element])
+
+			pass
 	# Swap workspace visibility
 	empty_workspace.hide()
 	workspace.show()
@@ -836,6 +892,96 @@ func trigger_get_item_delete(var control, var data):
 	# update database
 	ResourceSaver.save("res://quest-db.tres", database)
 
+##################################################################################################################
+# TASKS
+##################################################################################################################
+
+func collect_item_task():
+	var part = load("res://addons/questie/editor/quest_editor/parts/collect_item_part.tscn").instance()
+	if not part:
+		# Log error
+		print("[questie]: can't load collect_item_part from file system")
+		return
+
+	# Retrieve quest data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+	var qdata = database.get_data(quuid)
+	if not qdata:
+		# Log error
+		print("[questie]: can't retrieve quest data for quest with [uuid]: " + quuid)
+		return
+	
+	var tdata = qdata.push_task(qdata.TaskType.COLLECT_ITEM, quuid)
+	if not tdata:
+		print("[questie]: can't generate task data for quest with [uuid]: " + quuid)
+		return
+	
+	# Update UUID map
+	tasks_uuid_map[part.get_instance_id()] = tdata.uuid
+	print("[questie]: added trigger with [uuid]: " + tdata.uuid + " to quest with [uuid]: " + quuid)
+
+	tasks_list.add_child(part)					# Add part to scene
+
+	# Subscribe events
+	part.connect("item_selected", self, "task_collect_item_selected",[qdata, tdata])
+	part.connect("category_selected", self, "task_collect_category_selected", [qdata, tdata])
+	part.connect("quantity_changed", self, "taks_collect_quantity_changed", [qdata, tdata])
+	part.connect("delete_part_requested", self, "task_collect_delete", [qdata, tdata])
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func task_collect_item_selected(var item_uuid : String, var part, var quest_data, var task_data):
+	
+	task_data.item_uuid = item_uuid
+	print("[questie]: set task: Collect item/Item UUID: " + item_uuid)
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func task_collect_category_selected(var category, var part, var quest_data, var task_data):
+
+	var item_db = load("res://questie/item-db.tres")
+
+	task_data.category = category
+	print("[questie]: set task: Collect item/Category: " + var2str(category))
+
+	var new_item = item_db.find_data_by_slot(0, category)
+	if not new_item:
+		return
+
+	task_data.item_uuid = new_item.uuid
+	print("[questie]: set task: Collect item/Item UUID: " + new_item.uuid)
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func taks_collect_quantity_changed(var new_amount, var part, var quest_data, var task_data):
+
+	task_data.quantity = new_amount
+	print("[questie]: set task: Collec item/Quantity: " + var2str(new_amount))
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func task_collect_delete(var part, var quest_data, var task_data):
+
+	quest_data.erase_task(task_data.uuid)				# purge data stored
+
+	# Unsubscibe events
+	part.disconnect("item_selected", self, "task_collect_item_selected")
+	part.disconnect("category_selected", self, "task_collect_category_selected")
+	part.disconnect("quantity_changed", self, "taks_collect_quantity_changed")
+	part.disconnect("delete_part_requested", self, "task_collect_delete")
+
+	# Free memory
+	tasks_uuid_map.erase(part.get_instance_id())		# erase task uuid from map
+	tasks_list.remove_child(part)						# remove part from scene
+	part.queue_free()									# release memory
+	print("[questie]: task action: delete on task/Collect item")
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 ###############################################################################################################
 
@@ -848,6 +994,7 @@ func _enter_tree():
 	blocks = workspace.get_node("HBoxContainer/Quest Blocks")
 	constraints_list = workspace.get_node("HBoxContainer/ScrollContainer/data/constraints section/margin/container")
 	triggers_list = workspace.get_node("HBoxContainer/ScrollContainer/data/triggers section/margin/container")
+	tasks_list = workspace.get_node("HBoxContainer/ScrollContainer/data/tasks section/margin/container")
 	
 func _ready():
 	toolbar.new_quest_btn.connect("button_down", self, "new_quest_request")
@@ -863,5 +1010,6 @@ func _ready():
 	blocks.connect("has_item_request", self,  "has_item_constraint")
 	blocks.connect("quest_state_request", self, "quest_state_constraint")
 	blocks.connect("get_item_request", self, "get_item_trigger")
+	blocks.connect("collect_request", self, "collect_item_task")
 
 

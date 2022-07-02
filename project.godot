@@ -135,6 +135,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/runtime/Inventory System/slot_inventory.gd"
 }, {
 "base": "Resource",
+"class": "Task_CollectItem",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/collect_item_task.gd"
+}, {
+"base": "Resource",
 "class": "Trigger_GetItem",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/get_item_trigger.gd"
@@ -175,6 +180,7 @@ _global_script_class_icons={
 "RealisticInventory": "res://addons/questie/editor/icons/inventory.png",
 "SettingsData": "res://addons/questie/editor/icons/settings.png",
 "SlotInventory": "res://addons/questie/editor/icons/inventory.png",
+"Task_CollectItem": "",
 "Trigger_GetItem": "",
 "UUID": "",
 "WeightedInventory": "res://addons/questie/editor/icons/inventory.png"
