@@ -19,6 +19,10 @@ func setup_inventory():
 	add_child(inventory_system)
 
 	# Spawn inventory
+	if settings.items_settings.inventory == "":
+		print("[questie]: plauyer inventory is not set - reload your inventory using the settings editor")
+		return
+	
 	player_inventory = load(settings.items_settings.inventory).instance()
 	add_child(player_inventory)
 
