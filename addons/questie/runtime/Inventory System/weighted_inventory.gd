@@ -75,13 +75,13 @@ func add_item(var uuid, var quantity : int = 1):
 			for n in quantity:
 				if get_current_weight() + container.data.weight <= max_weight:
 					container.quantity += 1
-					emit_signal("item_added", uuid, category)
 				else:
 					break
 		else:
 			container.quantity = quantity
-
+			
 		data.push_back(container)
+		emit_signal("item_added", uuid, category)
 	else:
 		# Inspect quantity
 		if container.data.weight * quantity + get_current_weight() > max_weight:
@@ -94,7 +94,8 @@ func add_item(var uuid, var quantity : int = 1):
 				else:
 					break
 		else:
-			container.quantity += quantity			
+			container.quantity += quantity
+			emit_signal("item_added", uuid, InventorySystem.item_db.get_item_category(uuid))			
 
 func remove_item(var item, var quantity : int = 1):
 
@@ -108,13 +109,13 @@ func remove_item(var item, var quantity : int = 1):
 	container.quantity -= quantity
 
 func get_item(var uuid : String)->ResultItem:
-	for item in data:
-		if not item.uuid == uuid: continue
+	for obj in data:
+		if not obj.uuid == uuid: continue
 
 		var result = ResultItem.new()
-		result.uuid = item.uuid
-		result.data = item.data
-		result.quantity = item.quantity
+		result.uuid = obj.uuid
+		result.data = obj.data
+		result.quantity = obj.quantity
 
 		return result	
 

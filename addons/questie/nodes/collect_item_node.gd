@@ -13,21 +13,26 @@ export(int) var item_quantity = 1       # the amount needed to complete the task
 
 func item_added(var item_uuid : String, var item_category : int):
 
-    if state == TaskComplention.ONGOING:
-        if item_uuid == self.item_uuid:     
-            var obj = inventory.get_item(item_uuid)
-            if obj.quantity >= item_quantity:
-                state = TaskComplention.COMPLETED
-                emit_signal("task_completed", task_uuid)
-            else:
-                emit_signal("task_updated", task_uuid)
+	if state == TaskComplention.ONGOING:
+		if item_uuid == self.item_uuid:     
+			
+			var obj = inventory.get_item(item_uuid)
+			if not obj:
+				print("[questie]: can't retrieve item data from uuid: " + item_uuid)
+				return
+				
+			if obj.quantity >= item_quantity:
+				state = TaskComplention.COMPLETED
+				emit_signal("task_completed", task_uuid)
+			else:
+				emit_signal("task_updated", task_uuid)
 
 func _enter_tree():
-    tag = "QN_CollectItem"
-    inventory = get_parent()
+	tag = "QN_CollectItem"
+	inventory = get_parent()
 
-    inventory.connect("item_added", self, "item_added")
+	inventory.connect("item_added", self, "item_added")
 
 func _exit_tree():
-    inventory.disconnect("item_added", self, "item_added")
+	inventory.disconnect("item_added", self, "item_added")
 
