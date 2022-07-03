@@ -4,7 +4,7 @@ class_name WeightedInventory, "res://addons/questie/editor/icons/inventory.png"
 extends "res://addons/questie/runtime/Inventory System/inventory_base.gd"
 
 # The max weight for this inventory
-export(float) var max_weight = 120
+export(float) var max_weight = 200
 
 class item:
 	var uuid : String
