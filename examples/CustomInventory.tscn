@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/questie/runtime/Inventory System/weighted_inventory.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/runtime/Inventory System/realistic_inventory.gd" type="Script" id=1]
 
 [node name="SlotInventory" type="Control"]
 anchor_left = 0.5

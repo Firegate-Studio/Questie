@@ -47,7 +47,7 @@ func add_item(var uuid : String, var quantity : int = 1):
 		
 		# Store data
 		data.push_back(container)
-		emit_signal("add_item", uuid, category)
+		emit_signal("item_added", uuid, category)
 	else:
 		# update item quantity
 		if container.quantity + quantity > max_slot_capacity:
