@@ -319,10 +319,12 @@ func load_workspace():
 					if not item_data:
 						part.item.text = "item"
 						part.category.text = part.category.get_popup().get_item_text(element.category)
+						part.load_items_from_database(element.category)
 						part.quantity.value = element.quantity
 					else:	
 						part.item.text = item_data.title
 						part.category.text = part.category.get_popup().get_item_text(element.category - 1)
+						part.load_items_from_database(element.category)
 						part.quantity.value = element.quantity
 
 				# Subscribe events

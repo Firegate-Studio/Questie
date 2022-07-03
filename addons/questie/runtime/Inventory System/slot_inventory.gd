@@ -105,7 +105,7 @@ func get_item(var uuid: String):
 			continue
 		
 		quantity += 1
-		data = item
+		tmp_data = item
 
 	if quantity == 0: return null 
 

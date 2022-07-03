@@ -53,10 +53,11 @@ func load_items_from_database(var category : int)->void:
 				popup.add_item(context.title)
 		database.ItemCategory.MATERIAL:
 			for context in database.materials:
-				item.add_item(context.title)
+				popup.add_item(context.title)
+				print(context.title)
 		database.ItemCategory.SPECIAL:
 			for context in database.specials:
-				item.add_item(context.title)
+				popup.add_item(context.title)
 
 func item_id_pressed(var idx : int):
 
