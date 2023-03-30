@@ -31,7 +31,24 @@ func setup_inventory():
 		for constraint in quest.constraints:
 
 			if constraint is Constraint_HasItem:
-				# TODO: has_item node
+				
+				# Setup has item constraint node
+				var node = load("res://addons/questie/nodes/constraint_has_item_node.tscn").instance()
+				player_inventory.add_child(node)
+				node.questie = self
+				node.inventory = player_inventory
+				node.quest_uuid = quest.uuid
+				node.item_uuid = constraint.item
+				node.item_category = constraint.category
+				node.item_quantity = constraint.quantity
+				node.uuid = constraint.uuid
+
+			if constraint is Constraint_QuestState:
+				# TODO: quest_state node
+				pass	
+
+			if constraint is Constraint_HasQuest:
+				# TODO: has_quest node
 				pass
 
 		for trigger in quest.triggers:
@@ -83,6 +100,10 @@ func setup_quests():
 
 		# Enlist quest to the game
 		game_quests.push_back(current)
+
+		# Activate the quest if no constraints and no triggers
+		if quest.constraints.size() == 0 and quest.triggers.size() == 0:
+			activate_quest(quest.uuid)
 
 
 # Get a quest data from quest database
@@ -211,7 +232,6 @@ func task_updated(var task_uuid : String, var quest_uuid, var node):
 	print("[questie]: task action: update on task:" + task_uuid)
 	emit_signal("task_updated", quest_uuid, task_uuid, node)	
 	
-
 func task_completed(var task_uuid : String, var quest_uuid : String, var node):
 	print("[questie]: task action: complete on task:" + task_uuid)
 	emit_signal("task_completed", quest_uuid, task_uuid, node)
@@ -245,4 +265,4 @@ func _ready():
 
 		# Subscribe events
 		connect("trigger_activated", self, "on_trigger_activated")
-		#connect("quest_activated", self, "quest_activated")
+		connect("quest_activated", self, "quest_activated")

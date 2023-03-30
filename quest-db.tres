@@ -1,0 +1,77 @@
+[gd_resource type="Resource" load_steps=13 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/collect_item_task.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/has_item_constraint.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/get_item_trigger.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 4 )
+uuid = "865de3a8-1bd8-4cb7-ab64-927b6fb6ffc4"
+owner = "5bbcd137-3451-4940-9658-13f154792b16"
+item = "31d242d5-1e35-4cda-88ec-bef709fd556b"
+category = 1
+quantity = 1
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 4 )
+uuid = "06927324-f825-4e65-b319-7c5017a58f9c"
+owner = "5bbcd137-3451-4940-9658-13f154792b16"
+item = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+category = 3
+quantity = 1
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 1 )
+uuid = "4ac8e34a-2bc7-4470-8838-8bd158327251"
+owner = "5bbcd137-3451-4940-9658-13f154792b16"
+state = 0
+item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+category = 3
+quantity = 5.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+uuid = "9bcb45c7-c624-4708-a77a-cb0dfdf8a506"
+trigger_owner = "5bbcd137-3451-4940-9658-13f154792b16"
+item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+item_category = 3
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 3 )
+uuid = "5bbcd137-3451-4940-9658-13f154792b16"
+title = "Gather Resources"
+status = 0
+description = "Quest Example Description"
+constraints = [ SubResource( 7 ), SubResource( 8 ) ]
+triggers = [ SubResource( 6 ) ]
+tasks = [ SubResource( 2 ) ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+uuid = "e99a2cf1-a41f-4408-bf17-0fc08b2e6953"
+title = "The Potion"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+uuid = "a9afa905-3cdd-4b23-9bae-6e8aff8b59ac"
+title = "Example"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
+[resource]
+script = ExtResource( 2 )
+uuid = "93545d28-0890-4735-8ee2-6a271fb74491"
+data = [ SubResource( 1 ), SubResource( 4 ), SubResource( 9 ) ]

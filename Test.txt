@@ -1,0 +1,14 @@
+public class inventory_base{
+public virtual void add_item(){}
+}
+
+public class RIventory : Inventory_base
+{
+public virtual void add_item()override{
+
+}
+}
+
+Invetory_base inv= new RInventory();
+
+inv.add_item();

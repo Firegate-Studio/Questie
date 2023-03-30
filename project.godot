@@ -201,6 +201,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Quest System For Godot"
+run/main_scene="res://examples/QuestieTest.tscn"
 config/icon="res://icon.png"
 
 [display]

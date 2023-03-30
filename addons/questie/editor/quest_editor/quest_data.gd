@@ -37,7 +37,7 @@ enum ConstraintType {
 enum TriggerType{
 	IS_LOCATION,				# Change to Enter Location
 	EXIT_LOCATION				# the player enters to location
-	GET_ITEM			
+	GET_ITEM					# player has an item in inventory
 }
 
 enum TaskType{
