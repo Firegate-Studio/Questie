@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "Constraint",
+"language": "GDScript",
+"path": "res://addons/questie/nodes/constraints/constraint_node.gd"
+}, {
 "base": "Resource",
 "class": "Constraint_HasItem",
 "language": "GDScript",
@@ -165,6 +170,7 @@ _global_script_classes=[ {
 "path": "res://addons/questie/runtime/Inventory System/weighted_inventory.gd"
 } ]
 _global_script_class_icons={
+"Constraint": "",
 "Constraint_HasItem": "",
 "Constraint_HasQuest": "",
 "Constraint_QuestState": "",

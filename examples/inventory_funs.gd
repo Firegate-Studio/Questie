@@ -14,4 +14,6 @@ func _input(event):
 		questie.player_inventory.debug()
 
 	if Input.is_key_pressed(KEY_R) and event.is_pressed() and not event.is_echo():
-		questie.player_inventory.add_item(InventorySystem.weapons["Sword"])
+		questie.player_inventory.add_item(InventorySystem.materials["Verbena"], 1)
+		questie.player_inventory.add_item(InventorySystem.materials["Water"], 1)
+		questie.player_inventory.add_item(InventorySystem.materials["Moon Powder"], 1)

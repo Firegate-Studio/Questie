@@ -1,4 +1,4 @@
-extends "res://addons/questie/nodes/questie_node.gd"
+extends "res://addons/questie/nodes/constraints/constraint_node.gd"
 
 signal constraint_passed(constraint_uuid)
 signal constraint_failed(constraint_uuid)
@@ -34,8 +34,12 @@ func on_item_added(var item_uuid : String, var item_category : int):
         return
 
     if obj.quantity >= item_quantity:
+        bypassed = true
+        print("[Questie]: constraint rule check bypassed")
         emit_signal("constraint_passed", constraint_uuid)
 
     else:
+        bypassed = false
+        print("[Questie]: constrain rule check failed!")
         emit_signal("constraint_failed", constraint_uuid)
 

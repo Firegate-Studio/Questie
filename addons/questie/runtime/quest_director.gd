@@ -43,20 +43,12 @@ func setup_inventory():
 				node.item_quantity = constraint.quantity
 				node.uuid = constraint.uuid
 
-			if constraint is Constraint_QuestState:
-				# TODO: quest_state node
-				pass	
-
-			if constraint is Constraint_HasQuest:
-				# TODO: has_quest node
-				pass
-
 		for trigger in quest.triggers:
 
 			if trigger is Trigger_GetItem:
 				
 				# Setup get item node
-				var node = load("res://addons/questie/nodes/get_item.tscn").instance()
+				var node = load("res://addons/questie/nodes/triggers/get_item.gd").new()
 				player_inventory.add_child(node)
 				node.questie = self
 				node.inventory = player_inventory
@@ -97,6 +89,18 @@ func setup_quests():
 
 		# Subscribe events
 		current.connect("state_changed", self, "quest_state_changed")
+
+		# generate quest constraints
+		if quest.constraints.size() > 0:
+			for constraint in quest.constraints:
+				
+				if constraint is Constraint_QuestState:
+					var constraint_node = load("res://addons/questie/nodes/constraints/quest_state.gd").new()
+					constraint_node.uuid = constraint.quest
+					constraint_node.questie = self
+					constraint_node.quest_uuid = quest.uuid
+					constraint_node.target_state = constraint.state
+					current.add_child(constraint_node)
 
 		# Enlist quest to the game
 		game_quests.push_back(current)
@@ -144,30 +148,13 @@ func on_trigger_activated(var quest_uuid : String, var trigger_uuid, var node):
 	if not quest_data:
 		print("[questie]: can't retrieve data from database from quest with uuid: " + quest_uuid)
 		return
-	
-	# Check quest constraints
-	if not quest_data.constraints.size() == 0: 
-		for constraint in quest_data.constraints:
 
-			if constraint is Constraint_HasItem: 
-				var buffer = player_inventory.get_item(constraint.item)
-				if not buffer: 
-					# Log error
-					print("[questie]: player inventory does not has the item to bypass quest constraint")
-					emit_signal("constraint_failed", quest_data.uuid, constraint.uuid)
-					return
-				
-				if buffer.uuid == constraint.item and buffer.quantity == constraint.quantity:
-					print("[questie]: quest constraint bypassed from player inventory - constraint rule fullfilled")
-					emit_signal("contraint_passed", quest_data.uuid, constraint.uuid, null)
+	var quest = get_game_quest(quest_uuid)
+	if not quest: 
+		print("[Questie]: game quest with uuid: " + quest_uuid + "was not found")
+		return
 
-			if constraint is Constraint_HasQuest:
-				# TODO
-				pass
-			
-			if constraint is Constraint_QuestState:
-				# TODO
-				pass
+	if not quest_constraints_bypassed(quest_uuid): return
 	
 	# Remove trigger node from parent
 	if node.tag == "QN_GetItem":
@@ -211,7 +198,7 @@ func quest_activated(var quest_uuid : String):
 		if task is Task_CollectItem:
 
 			# Generate task-node
-			var node = load("res://addons/questie/nodes/collect_item_node.tscn").instance()
+			var node = load("res://addons/questie/nodes/tasks/collect_item.gd").new()
 			player_inventory.add_child(node)
 			node.questie = self
 			node.task_uuid = task.uuid
@@ -253,7 +240,27 @@ func quest_completed(var quest_uuid, var task_uuid):
 	
 	game_quest.change_state(Quest.QuestComplention.COMPLETED)
 	print("[questie]: quest action: complete on quest:" + quest_uuid)
+
+# check if all quest constraint has been bypassed
+func quest_constraints_bypassed(quest_uuid : String)->bool:
 	
+	var game_quest = get_game_quest(quest_uuid)
+	if not game_quest:
+		print("[Questie]: game quest with uuid: " + quest_uuid + "was not found!")
+		return false
+	
+	# check if the constraint children nodes 
+	for node in game_quest.get_children():
+		if not node is Constraint: continue
+
+		if not node.bypassed: return false
+
+	return true
+
+		
+
+
+
 #------------------------------------------------------------------------------------
 
 
@@ -262,6 +269,7 @@ func _ready():
 		# initial setup
 		setup_inventory()
 		setup_quests()
+		
 
 		# Subscribe events
 		connect("trigger_activated", self, "on_trigger_activated")
