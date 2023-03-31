@@ -1,0 +1,4 @@
+extends QuestieNode
+class_name TriggerNode
+
+signal trigger_activated(trigger_id)

@@ -6,7 +6,7 @@ var is_opened = false
 
 func _enter_tree():
 
-	questie = get_parent().get_node("QuestDirector")
+	questie = get_parent().get_node("Questie")
 
 
 func _input(event):

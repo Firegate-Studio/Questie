@@ -1,20 +1,9 @@
 extends "res://addons/questie/nodes/constraints/constraint_node.gd"
 
-signal constraint_passed(quest_uuid, constraint_uuid)
-signal constraint_failed(quest_uuid, constraint_uuid)
-
-var questie : QuestDirector                 # the quest director
-
-export(String) var uuid                     # The UUID of the node
-export(String) var quest_uuid               # the UUID of the quest owning this constraint
 export(String) var target_state             # the UUID of the quest state to pass this constraint
 
 func _enter_tree():
 	tag = "QN_QuestStateConstraint"
-
-	# Subscribe events
-	questie.connect("quest_completed", self, "on_constraint_update")
-	questie.connect("quest_failed", self, "on_constraint_update")
 
 
 func _exit_tree():
