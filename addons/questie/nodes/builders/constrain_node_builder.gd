@@ -18,7 +18,7 @@ static func has_item_node(constraint_data, constraint_id, quest_id, inventory)->
 
 	return node
 
-static func has_state_node(constraint_data, constraint_id, quest_id)->Constraint:
+static func quest_state_node(constraint_data, constraint_id, quest_id, quest)->Constraint:
 
 	var node = load("res://addons/questie/nodes/constraints/quest_state.gd").new()
 	if not node:
@@ -26,9 +26,10 @@ static func has_state_node(constraint_data, constraint_id, quest_id)->Constraint
 		return null
 
 	# setup constraint node
-	node.constraint_id = constraint_id
+	node.id = constraint_id
 	node.quest_id = constraint_data.quest
-	node.quest_state = constraint_data.state
+	node.target_state = constraint_data.state
+	node.quest = quest
 
 	return node
 

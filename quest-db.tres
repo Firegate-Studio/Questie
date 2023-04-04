@@ -1,31 +1,48 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
-[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/collect_item_task.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=5]
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 1 )
+uuid = "2b21b382-eaf0-4b0f-bb60-059ed11f6996"
+owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+state = 0
+item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
+category = 4
+quantity = 3.0
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 1 )
+uuid = "075b807c-fee0-4184-883d-4b408a5e7f72"
+owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+state = 0
+item_uuid = "f67bbaa7-294d-4471-8386-00ae361337ce"
+category = 4
+quantity = 2.0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 1 )
+uuid = "b2a9e101-8278-4752-b6ee-b8d505ef8d48"
+owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+state = 0
+item_uuid = "684bd8d1-07fa-487e-953b-d155b1d72678"
+category = 4
+quantity = 10.0
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 4 )
-uuid = "5b98eedb-d22b-404d-9e0f-bf4f31c8e5e9"
-title = "Of Master and Slaves"
-status = 0
-description = "just like every day Rowan was appointed to satisfy his master desires"
-constraints = [  ]
-triggers = [  ]
-tasks = [  ]
-rewards = [  ]
-
-[sub_resource type="Resource" id=11]
-script = ExtResource( 4 )
-uuid = "c5c0b6cf-dd75-461f-b946-25d1c040a36f"
-title = "fill quest title here"
+script = ExtResource( 3 )
+uuid = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+title = "TEST #1"
 status = 0
 description = "fill quest description here"
 constraints = [  ]
 triggers = [  ]
-tasks = [  ]
+tasks = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ]
 rewards = [  ]
 
 [resource]
-script = ExtResource( 3 )
+script = ExtResource( 5 )
 uuid = "93545d28-0890-4735-8ee2-6a271fb74491"
-data = [ SubResource( 1 ), SubResource( 11 ) ]
+data = [ SubResource( 1 ) ]

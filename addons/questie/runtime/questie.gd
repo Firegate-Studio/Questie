@@ -63,6 +63,8 @@ signal generate_rewards(reward_data)
 
 var game_quests : Array
 var active_quests : Array				# Contains all the active quests
+var completed_quests = {}				# Contains the quest id and releated quest node (i.e., completed_quest[quest_id] = QuestNodeInstance)
+var failed_quests = {}
 
 var constraints = {}
 var triggers = {}
@@ -83,6 +85,7 @@ func setup_quests():
 		current.description = quest.description
 
 		# subscribe events
+		current.connect("state_changed", self, "handle_quest_state_changed")
 		current.connect("constraint_added", self, "handle_quest_constraint_added", [current.uuid])
 		current.connect("constraint_removed", self, "handle_quest_constraint_removed", [current.uuid])
 		current.connect("trigger_added", self, "handle_quest_trigger_added", [current.uuid])
@@ -117,16 +120,27 @@ func setup_constraints(constraint_id, quest_id, quest_data):
 
 		if constraint_data is Constraint_HasItem:
 			var constraint_node = ConstraintNodeBuilder.has_item_node(constraint_data, constraint_id, quest_id, player_inventory)
+			emit_signal("contraint_passed", self, "handle_quest_constraint_bypassed")
+			emit_signal("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
 		if constraint_data is Constraint_QuestState: 
-			var constraint_node = ConstraintNodeBuilder.quest_state_node(constraint_data, constraint_id, quest_id)
+			var quest = get_game_quest(constraint_data.quest)
+			if not quest: 
+				print("[Questie]: can not retrieve quest node with identifier: " + quest_id + " while creating constraints")
+				return
+
+			var constraint_node = ConstraintNodeBuilder.quest_state_node(constraint_data, constraint_id, quest_id, quest)
+			emit_signal("contraint_passed", self, "handle_quest_constraint_bypassed")
+			emit_signal("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
 		if constraint_data is Constraint_HasQuest:
 			var constraint_node = ConstraintNodeBuilder.has_quest_node(constraint_data, constraint_id, quest_id)
+			emit_signal("contraint_passed", self, "handle_quest_constraint_bypassed")
+			emit_signal("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
@@ -147,9 +161,14 @@ func setup_triggers(trigger_id, quest_id, quest_data):
 		emit_signal("generate_triggers", trigger_data)
 
 # create or load all task nodes
-func setup_task(task_id, quest_id, quest_data):
+func setup_tasks(task_id, quest_id, quest_data):
 	
+
 	for task_data in quest_data.tasks:
+		
+		if not task_data.uuid == task_id: continue
+
+		print("[Questie]: generating task " + task_id + "for quest with identifier: " + quest_id)
 
 		if task_data is Task_CollectItem:
 			var task_node = TaskNodeBuilder.collect_item_node(task_data, task_id, quest_id, player_inventory)
@@ -159,6 +178,7 @@ func setup_task(task_id, quest_id, quest_data):
 			add_child(task_node)
 
 		emit_signal("generate_tasks", task_data)
+		
 
 
 # Get a quest data from quest database
@@ -179,6 +199,20 @@ func get_game_quest(var uuid : String)->Quest:
 
 	return null
 			
+func get_active_quest(quest_id : String)->Quest:
+
+	for quest_node in active_quests:
+		if not quest_node.uuid == quest_id: continue
+
+		return quest_node
+
+	return null
+
+func get_completed_quest(quest_id : String)->Quest:
+
+	if completed_quests.size() == 0: return null
+	if not completed_quests.has(quest_id): return null
+	return completed_quests[quest_id]
 
 func activate_quest(var uuid : String)->void:
 	var quest = get_game_quest(uuid)
@@ -186,8 +220,136 @@ func activate_quest(var uuid : String)->void:
 	
 	# activate the new quest if not already active
 	if not active_quests.has(quest): 
+		destroy_all_quest_constraints(quest)
+		destroy_all_quest_triggers(quest)
+		activate_all_quest_tasks(quest)
+		game_quests.erase(quest)
+		active_quests.append(quest)
 		quest.change_state(Quest.QuestComplention.ONGOING)
+		emit_signal("quest_activated", uuid)
 
+func activate_all_quest_tasks(quest_node):
+
+	for task_id in quest_node.tasks:
+
+		if not tasks[task_id]:
+			print("[Questie]: can not retrieve quest node from tasks table for task with identifier: " + task_id)
+			return
+
+		var task_node = tasks[task_id]
+
+		# activate task
+		task_node.state = QuestieNode.TaskComplention.ONGOING
+
+func complete_quest(quest_node):
+
+	var id = quest_node.uuid
+	active_quests.erase(quest_node)
+	completed_quests.append(quest_node)
+	destroy_all_quest_tasks(quest_node)
+
+# check if all quest constraint has been fulfilled
+func all_quest_constraints_bypassed(quest_node)->bool:
+
+	if quest_node.constraints.size() == 0: return true
+
+	for constraint_id in quest_node.constraints:
+		
+		if not constraints[constraint_id].bypassed: return false
+
+	return true
+
+# check if all quest triggers has been passed rule check
+func all_quest_triggers_completed(quest_node)->bool:
+
+	# BUG: for some reason this command ever activates the quest ignoring triggers rules
+	if quest_node.triggers.size() == 0: return true
+
+	for trigger_id in quest_node.triggers:
+
+		if not triggers.has(trigger_id):
+			print("[Questie]: can not retrieve trigger node from triggers table for trigger with key: " + trigger_id)
+			return false
+
+		var trigger_node = triggers[trigger_id]
+		if not trigger_node.state == QuestieNode.TaskComplention.COMPLETED: return false
+
+	return true
+
+# check if all quest task has been completed
+func all_quest_task_completed(quest_node)->bool:
+
+	if quest_node.tasks.size() == 0: return true
+
+	for task_id in quest_node.tasks:
+
+		if not tasks[task_id].state == QuestieNode.TaskComplention.COMPLETED: return false
+
+	return true
+
+func destroy_all_quest_constraints(quest_node):
+	for id in quest_node.constraints:
+		if not constraints.has(id):
+			print("[Questie]: constraint node was not found in constraint table for constraint with identifier: " + id)
+			return
+
+		var deleting_constraint = constraints[id]
+		constraints.erase(id)
+		deleting_constraint.queue_free()
+		print("[Questie]: removed constraint [" + id + "] from quest [" + quest_node.title + "]")
+
+func destroy_all_quest_triggers(quest_node):
+	for id in quest_node.triggers:
+		if not triggers.has(id):
+			print("[Questie]: can not retrieve trigger node for node with identifier: " + id)
+			return
+		
+		# destroy trigger node
+		var trigger_node = triggers[id]
+		triggers.erase(id)
+		trigger_node.queue_free()
+		print("[Questie]: detroyed trigger [" + id + "] from quest [" + quest_node.title + "]")
+
+func destroy_all_quest_tasks(quest_node):
+	for id in quest_node.tasks:
+		if not tasks.has(id):
+			print("[Questie]: can not retrieve trigger node with id " + id + " from quest [" + quest_node.title + "]")
+			return
+
+		var task_node = tasks[id]
+		tasks.erase(id)
+		task_node.queue_free()
+		print("[Questie]: detroyed task node [" + id + "] from quest [" + quest_node.title + "]")
+
+# check if a quest meets all requirements for activation
+func can_activate_quest(quest_node)->bool:
+
+	if not all_quest_constraints_bypassed(quest_node): 
+		return false
+	if not all_quest_triggers_completed(quest_node): 
+		return false
+
+	return true
+
+# check if a quest can be completed - has finished all required tasks
+func can_complete_quest(quest_node)->bool:
+
+	if quest_node.tasks.size() ==0: return true
+
+	for task_id in quest_node.tasks:
+
+		if not tasks.has(task_id):
+			print("[Questie]: can not retrieve task node from task table for task with identifier: " + task_id)
+			return false
+		
+		# retrieve task node
+		var task_node = tasks[task_id]
+
+		if not task_node.state == QuestieNode.TaskComplention.COMPLETED: 
+			return false
+
+	print("[Questie]: all tasks completed for quest [" + quest_node.title + "]")
+	return true
 
 #-----------------------------------------------------------------------------------
 # CALLBACKS
@@ -215,10 +377,10 @@ func handle_quest_task_added(task_id, quest_id):
 
 	var quest_data = get_quest_from_database(quest_id)
 	if not quest_data:
-		print("[Questie]: can not retrieve informtation from quest with id: " + quest_id)
+		print("[Questie]: can not retrieve information from quest with id: " + quest_id)
 		return
 
-	setup_task(task_id, quest_id, quest_data)
+	setup_tasks(task_id, quest_id, quest_data)
 	
 func handle_quest_reward_added(reward_id, quest_id): pass
 
@@ -226,6 +388,53 @@ func handle_quest_constraint_removed(constraint_id, quest_id): pass
 func handle_quest_trigger_removed(trigger_id, quest_id): pass
 func handle_quest_task_removed(task_id, quest_id): pass
 func handle_quest_reward_removed(reward_id, quest_id): pass
+
+func handle_quest_state_changed(quest_id, state): 
+
+	var quest_node = get_active_quest(quest_id)
+	if not quest_node:
+		print("[Questie]: active quest node not found for quest with identifier: " + quest_id)
+		return
+	
+	match state:
+		Quest.QuestComplention.ONGOING:
+			print("[Questie]: activated quest [" + quest_node.title + "]")
+			
+		Quest.QuestComplention.FAILED: 
+			active_quests.erase(quest_node)
+			failed_quests[quest_id] = quest_node
+			print("[Questie]: failed quest [" + quest_node.title + "]")
+			emit_signal("quest_failed", quest_id)
+
+		Quest.QuestComplention.COMPLETED:
+			active_quests.erase(quest_node)
+			completed_quests[quest_id] = quest_node
+			print("[Questie]: completed quest ["+ quest_node.title + "]")
+			emit_signal("quest_completed", quest_id)
+
+func handle_quest_constraint_bypassed(constraint_id): 
+
+
+	if not constraints.has(constraint_id):
+		print("[Questie]: can not find constraint node with identifier: " + constraint_id + " from constraints table")
+		return
+
+	var constraint_node = constraints[constraint_id]
+	
+	# retrieve constraint owner(quest node)
+	var quest_id = constraint_node.quest_id
+	var quest_node = get_active_quest(quest_id)
+	if not quest_node:
+		print("[Questie]: can not retrieve quest node with identifier: " + constraint_id + " for constraint rule check")
+		return
+
+	if not can_activate_quest(quest_node): return
+
+	activate_quest(quest_id)
+
+
+
+func handle_quest_constraint_failed(constraint_id): pass
 
 # called when a trigger receive activation
 func handle_quest_trigger_activated(trigger_id): 
@@ -239,19 +448,53 @@ func handle_quest_trigger_activated(trigger_id):
 	var quest_node = get_game_quest(trigger_node.quest_id)
 	if not quest_node:
 		print("[Questie]: can not find quest node at the given key in table: " + trigger_node.quest_id)
+		return
 
-	remove_child(trigger_node)
-	quest_node.remove_trigger(trigger_id)
-	
-	# Todo: add a global check for all triggers and constraints before activating the quest
+	if not can_activate_quest(quest_node): return
 	
 	activate_quest(quest_id)
 
 # called when a quest task is completed
-func handle_quest_task_completed(task_id): pass
+func handle_quest_task_completed(task_id): 
+
+	if not tasks.has(task_id): 
+		print("[Questie]: can not find task with identifier [" + task_id + "] from tasks table")
+		return
+	
+	var task_node = tasks[task_id]
+	var quest_id = task_node.quest_id
+	var quest_node = get_active_quest(task_node.quest_id)
+	if not quest_node:
+		print("[Questie]: can not find task node with identifier: " + task_node.quest_id)
+		return
+
+	print("[Questie]: completed task with identifier: " + task_id)
+
+	if not can_complete_quest(quest_node): 
+		return
+	
+	quest_node.change_state(Quest.QuestComplention.COMPLETED)
 
 # called when a quest task is updated
-func handle_quest_task_updated(task_id): pass
+func handle_quest_task_updated(task_id): 
+
+	if not tasks.has(task_id):
+		print("[Questie]: can not retrieve quest node from tasks table for task with identifier: " + task_id)
+		return
+
+	var task_node = tasks[task_id]
+	if not task_node:
+		print("[Questie]: can not find task node with identifier: " + task_id)
+		return
+
+	var quest_id = task_node.quest_id
+	var quest_node = get_active_quest(task_node.quest_id)
+	if not quest_node:
+		print("[Questie]: can not find quest node with identifier: " + task_id)
+		return
+
+	print("[Questie]: updated task [" + task_id + "] for quest ["+quest_node.title+"]")
+
 #------------------------------------------------------------------------------------
 
 func _ready(): 
@@ -261,3 +504,11 @@ func _ready():
 
 		# quest system
 		setup_quests()
+
+		# activate all triggerable quests
+		for quest_node in game_quests:
+
+			if not can_activate_quest(quest_node): continue
+
+			activate_quest(quest_node.uuid)
+

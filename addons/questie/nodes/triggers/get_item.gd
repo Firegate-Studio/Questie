@@ -8,11 +8,16 @@ var target_uuid : String
 
 func on_item_added(var uuid : String, var category : int):
 
+	#if state == TaskComplention.ONGOING:
 	var target_item = inventory.get_item(uuid)
 	if not target_item:
 		return
+		
+	# check if is the correct item
+	if not target_uuid == uuid:
+		return
 	
-	print("[Questie]: activated trigger with identifier: " + self.id)
+	state = TaskComplention.COMPLETED
 	emit_signal("trigger_activated", id)
 
 func _enter_tree():

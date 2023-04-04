@@ -169,7 +169,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/collect_item_task.gd"
 }, {
-"base": "Node",
+"base": "QuestieNode",
 "class": "TriggerNode",
 "language": "GDScript",
 "path": "res://addons/questie/nodes/triggers/trigger_node.gd"
