@@ -33,7 +33,7 @@ static func quest_state_node(constraint_data, constraint_id, quest_id, quest)->C
 
 	return node
 
-static func has_quest_node(constraint_data, constraint_id, quest_id)->Constraint:
+static func has_quest_node(constraint_data, constraint_id, quest_id, quest_node)->Constraint:
 
 	var node = load("res://addons/questie/nodes/constraints/has_quest.gd").new()
 	if not node:
@@ -43,6 +43,7 @@ static func has_quest_node(constraint_data, constraint_id, quest_id)->Constraint
 	# setup constraint node
 	node.id = constraint_id
 	node.quest_id = quest_id
+	node.quest = quest_node
 
 	return node
 

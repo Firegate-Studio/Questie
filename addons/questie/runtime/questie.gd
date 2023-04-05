@@ -138,7 +138,12 @@ func setup_constraints(constraint_id, quest_id, quest_data):
 			add_child(constraint_node)
 
 		if constraint_data is Constraint_HasQuest:
-			var constraint_node = ConstraintNodeBuilder.has_quest_node(constraint_data, constraint_id, quest_id)
+			var quest = get_game_quest(constraint_data.quest)
+			if not quest: 
+				print("[Questie]: can not retrieve quest node with identifier: " + quest_id + " while creating constraints")
+				return
+
+			var constraint_node = ConstraintNodeBuilder.has_quest_node(constraint_data, constraint_id, quest_id, quest)
 			constraint_node.connect("constraint_passed", self, "handle_quest_constraint_bypassed")
 			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
