@@ -1,6 +1,6 @@
 extends "res://addons/questie/nodes/constraints/constraint_node.gd"
 
-export(String) var target_state             # the UUID of the quest state to pass this constraint
+var target_state             # the UUID of the quest state to pass this constraint
 var quest : Quest
 
 func _enter_tree():
@@ -14,14 +14,14 @@ func _exit_tree():
 
 func constraint_update(quest_id, state):
 
+	#print("quest state: " + var2str(quest.state) + "/" + var2str(target_state))
+
 	if quest.state == target_state: 
 		bypassed = true
-		print("[Questie]: constraint check passed - quest state matches")
-		emit_signal("constraint_passed")
+		emit_signal("constraint_passed", id)
 	else:
 		bypassed = false
-		print("[Questie]: constraint check failed - quest state does not matches")
-		emit_signal("constraint_failed")
+		emit_signal("constraint_failed", id)
 
 
 

@@ -23,8 +23,8 @@ var rewards : Array                 # contains UUID for any quest reward
 enum QuestComplention{
 	IDLE,
 	ONGOING,
-	COMPLETED,
-	FAILED
+	FAILED,
+	COMPLETED
 }
 var state : int = QuestComplention.IDLE
 

@@ -27,7 +27,7 @@ static func quest_state_node(constraint_data, constraint_id, quest_id, quest)->C
 
 	# setup constraint node
 	node.id = constraint_id
-	node.quest_id = constraint_data.quest
+	node.quest_id = quest_id
 	node.target_state = constraint_data.state
 	node.quest = quest
 

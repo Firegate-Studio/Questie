@@ -120,8 +120,8 @@ func setup_constraints(constraint_id, quest_id, quest_data):
 
 		if constraint_data is Constraint_HasItem:
 			var constraint_node = ConstraintNodeBuilder.has_item_node(constraint_data, constraint_id, quest_id, player_inventory)
-			emit_signal("contraint_passed", self, "handle_quest_constraint_bypassed")
-			emit_signal("constraint_failed", self, "handle_quest_constraint_failed")
+			constraint_node.connect("constraint_passed", self, "handle_quest_constraint_bypassed")
+			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
@@ -132,15 +132,15 @@ func setup_constraints(constraint_id, quest_id, quest_data):
 				return
 
 			var constraint_node = ConstraintNodeBuilder.quest_state_node(constraint_data, constraint_id, quest_id, quest)
-			emit_signal("contraint_passed", self, "handle_quest_constraint_bypassed")
-			emit_signal("constraint_failed", self, "handle_quest_constraint_failed")
+			constraint_node.connect("constraint_passed", self, "handle_quest_constraint_bypassed")
+			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
 		if constraint_data is Constraint_HasQuest:
 			var constraint_node = ConstraintNodeBuilder.has_quest_node(constraint_data, constraint_id, quest_id)
-			emit_signal("contraint_passed", self, "handle_quest_constraint_bypassed")
-			emit_signal("constraint_failed", self, "handle_quest_constraint_failed")
+			constraint_node.connect("constraint_passed", self, "handle_quest_constraint_bypassed")
+			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
@@ -325,8 +325,10 @@ func destroy_all_quest_tasks(quest_node):
 func can_activate_quest(quest_node)->bool:
 
 	if not all_quest_constraints_bypassed(quest_node): 
+		print("[Questie]: constraint check not bypassed for quest: " + quest_node.uuid)
 		return false
 	if not all_quest_triggers_completed(quest_node): 
+		print("[Questie]: trigger check rule not fulfilled for quest: " + quest_node.uuid)
 		return false
 
 	return true
@@ -414,6 +416,7 @@ func handle_quest_state_changed(quest_id, state):
 
 func handle_quest_constraint_bypassed(constraint_id): 
 
+	print("[Questie]: quest constraint check rule bypassed for constraint with identifier: " + constraint_id)
 
 	if not constraints.has(constraint_id):
 		print("[Questie]: can not find constraint node with identifier: " + constraint_id + " from constraints table")
@@ -423,18 +426,18 @@ func handle_quest_constraint_bypassed(constraint_id):
 	
 	# retrieve constraint owner(quest node)
 	var quest_id = constraint_node.quest_id
-	var quest_node = get_active_quest(quest_id)
+	var quest_node = get_game_quest(quest_id)
 	if not quest_node:
 		print("[Questie]: can not retrieve quest node with identifier: " + constraint_id + " for constraint rule check")
 		return
 
-	if not can_activate_quest(quest_node): return
+	if not can_activate_quest(quest_node): 
+		return
 
 	activate_quest(quest_id)
 
-
-
-func handle_quest_constraint_failed(constraint_id): pass
+func handle_quest_constraint_failed(constraint_id): 
+	print("[Questie]: constraint check rule failed for constraint with identifier: " + constraint_id)
 
 # called when a trigger receive activation
 func handle_quest_trigger_activated(trigger_id): 
@@ -473,6 +476,7 @@ func handle_quest_task_completed(task_id):
 	if not can_complete_quest(quest_node): 
 		return
 	
+	print("[Questie]: change quest state to [" + var2str(Quest.QuestComplention.COMPLETED) + "]")
 	quest_node.change_state(Quest.QuestComplention.COMPLETED)
 
 # called when a quest task is updated

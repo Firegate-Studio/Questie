@@ -1,29 +1,13 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=17 format=2]
 
-[ext_resource path="res://addons/questie/editor/quest_editor/collect_item_task.gd" type="Script" id=1]
-[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=5]
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 1 )
-uuid = "2b21b382-eaf0-4b0f-bb60-059ed11f6996"
-owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
-state = 0
-item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
-category = 4
-quantity = 3.0
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 1 )
-uuid = "075b807c-fee0-4184-883d-4b408a5e7f72"
-owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
-state = 0
-item_uuid = "f67bbaa7-294d-4471-8386-00ae361337ce"
-category = 4
-quantity = 2.0
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_state_constraint.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/get_item_trigger.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/collect_item_task.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=5]
-script = ExtResource( 1 )
+script = ExtResource( 5 )
 uuid = "b2a9e101-8278-4752-b6ee-b8d505ef8d48"
 owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
 state = 0
@@ -31,18 +15,99 @@ item_uuid = "684bd8d1-07fa-487e-953b-d155b1d72678"
 category = 4
 quantity = 10.0
 
+[sub_resource type="Resource" id=7]
+script = ExtResource( 5 )
+uuid = "da44ba6e-b957-4a4d-8142-17770aefe602"
+owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+state = 0
+item_uuid = "f67bbaa7-294d-4471-8386-00ae361337ce"
+category = 4
+quantity = 2.0
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+uuid = "07cd6782-7b3e-4bc0-ace9-c851ebaad6ff"
+owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+state = 0
+item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
+category = 4
+quantity = 5.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+uuid = "e328b173-403f-4867-a739-738c88511b70"
+trigger_owner = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+item_category = 3
+
 [sub_resource type="Resource" id=1]
-script = ExtResource( 3 )
+script = ExtResource( 2 )
 uuid = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
 title = "TEST #1"
 status = 0
 description = "fill quest description here"
 constraints = [  ]
+triggers = [ SubResource( 9 ) ]
+tasks = [ SubResource( 5 ), SubResource( 7 ), SubResource( 8 ) ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+uuid = "41c05901-a238-4d56-b5c2-50a170c6063a"
+owner = "cb67e6ad-f29d-4d71-88f4-4efcb8fe58a2"
+state = 0
+item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+category = 3
+quantity = 3.0
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+uuid = "5abc8630-1c69-49e2-884a-2e68f60b0b11"
+owner = "cb67e6ad-f29d-4d71-88f4-4efcb8fe58a2"
+state = 0
+item_uuid = "f67bbaa7-294d-4471-8386-00ae361337ce"
+category = 4
+quantity = 2.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+uuid = "cb67e6ad-f29d-4d71-88f4-4efcb8fe58a2"
+title = "TEST #2"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
 triggers = [  ]
-tasks = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ]
+tasks = [ SubResource( 11 ), SubResource( 12 ) ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+uuid = "20be0922-b2fb-4592-86cf-80d550a47dcf"
+owner = "d5058be8-7bb1-499f-8fb4-c50a336112b8"
+quest = "36ce5b44-29cd-4e7b-927d-ae99cf1de303"
+state = 3
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 5 )
+uuid = "f029a476-ee74-43d4-976a-d82241a00976"
+owner = "d5058be8-7bb1-499f-8fb4-c50a336112b8"
+state = 0
+item_uuid = "b1d4ec87-748b-4e2e-b6b2-b68100c030ed"
+category = 5
+quantity = 1
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 2 )
+uuid = "d5058be8-7bb1-499f-8fb4-c50a336112b8"
+title = "TEST #3"
+status = 0
+description = "fill quest description here"
+constraints = [ SubResource( 14 ) ]
+triggers = [  ]
+tasks = [ SubResource( 16 ) ]
 rewards = [  ]
 
 [resource]
-script = ExtResource( 5 )
+script = ExtResource( 1 )
 uuid = "93545d28-0890-4735-8ee2-6a271fb74491"
-data = [ SubResource( 1 ) ]
+data = [ SubResource( 1 ), SubResource( 6 ), SubResource( 13 ) ]
