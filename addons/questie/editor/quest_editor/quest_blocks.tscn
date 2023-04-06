@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/completed_quest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/has_item_block.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/fetch_block.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/area_bounds_block.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_blocks.gd" type="Script" id=9]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/rewards/get_item_block.tscn" type="PackedScene" id=10]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/rewards/new quest block.tscn" type="PackedScene" id=11]
 
 [node name="Quest Blocks" type="Control"]
 margin_left = 754.0
@@ -33,7 +35,7 @@ size_flags_vertical = 3
 
 [node name="Constraints" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_right = 250.0
-margin_bottom = 82.0
+margin_bottom = 142.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Constraints"]
 margin_right = 250.0
@@ -54,27 +56,27 @@ size_flags_horizontal = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/Constraints"]
 margin_top = 18.0
 margin_right = 250.0
-margin_bottom = 82.0
+margin_bottom = 142.0
 columns = 2
 
 [node name="has item block" parent="ScrollContainer/VBoxContainer/Constraints/GridContainer" instance=ExtResource( 2 )]
 margin_right = 120.0
-margin_bottom = 30.0
+margin_bottom = 60.0
 
 [node name="has quest block" parent="ScrollContainer/VBoxContainer/Constraints/GridContainer" instance=ExtResource( 3 )]
 margin_left = 124.0
 margin_right = 244.0
-margin_bottom = 30.0
+margin_bottom = 60.0
 
 [node name="state quest block" parent="ScrollContainer/VBoxContainer/Constraints/GridContainer" instance=ExtResource( 1 )]
-margin_top = 34.0
+margin_top = 64.0
 margin_right = 120.0
-margin_bottom = 64.0
+margin_bottom = 124.0
 
 [node name="Triggers" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 86.0
+margin_top = 146.0
 margin_right = 250.0
-margin_bottom = 134.0
+margin_bottom = 224.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Triggers"]
 margin_right = 250.0
@@ -95,7 +97,7 @@ size_flags_horizontal = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/Triggers"]
 margin_top = 18.0
 margin_right = 250.0
-margin_bottom = 48.0
+margin_bottom = 78.0
 columns = 2
 
 [node name="area bounds block" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 8 )]
@@ -105,12 +107,12 @@ margin_bottom = 30.0
 
 [node name="get item block" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 5 )]
 margin_right = 120.0
-margin_bottom = 30.0
+margin_bottom = 60.0
 
 [node name="Tasks" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 138.0
+margin_top = 228.0
 margin_right = 250.0
-margin_bottom = 186.0
+margin_bottom = 306.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Tasks"]
 margin_right = 250.0
@@ -131,21 +133,57 @@ size_flags_horizontal = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/Tasks"]
 margin_top = 18.0
 margin_right = 250.0
-margin_bottom = 48.0
+margin_bottom = 78.0
 columns = 2
 
 [node name="collect block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 6 )]
 margin_right = 120.0
-margin_bottom = 30.0
+margin_bottom = 60.0
 
 [node name="fetch block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 7 )]
 visible = false
 margin_left = 124.0
 margin_right = 244.0
-margin_bottom = 30.0
+margin_bottom = 60.0
 
 [node name="kill block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 4 )]
 visible = false
+margin_top = 64.0
+margin_right = 120.0
+margin_bottom = 94.0
+
+[node name="Rewards" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
+margin_top = 310.0
+margin_right = 250.0
+margin_bottom = 388.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Rewards"]
+margin_right = 250.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/Rewards/HBoxContainer"]
+margin_right = 53.0
+margin_bottom = 14.0
+text = "Rewards"
+
+[node name="HSeparator" type="HSeparator" parent="ScrollContainer/VBoxContainer/Rewards/HBoxContainer"]
+margin_left = 57.0
+margin_right = 250.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/Rewards"]
+margin_top = 18.0
+margin_right = 250.0
+margin_bottom = 78.0
+columns = 2
+
+[node name="Item Block" parent="ScrollContainer/VBoxContainer/Rewards/GridContainer" instance=ExtResource( 10 )]
+margin_right = 120.0
+margin_bottom = 60.0
+
+[node name="quest block" parent="ScrollContainer/VBoxContainer/Rewards/GridContainer" instance=ExtResource( 11 )]
 margin_left = 124.0
 margin_right = 244.0
-margin_bottom = 30.0
+margin_bottom = 60.0

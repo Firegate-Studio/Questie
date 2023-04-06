@@ -14,6 +14,11 @@ signal get_item_request()
 # Called when clicling on the collect task
 signal collect_request()
 
+# called when clicking on the get item reward button
+signal add_item_reward_request()
+# called when clicking on the new quest reward button
+signal new_quest_reward_request()
+
 var constraint_has_item : Button
 var constraint_has_quest : Button
 var constraint_quest_state : Button
@@ -24,6 +29,9 @@ var trigger_get_item : Button
 var task_collect : Button
 var task_fetch : Button
 var task_kill : Button
+
+var reward_get_item : Button
+var reward_new_quest : Button
 
 # constraints-----------------------------------------------------------------
 
@@ -54,6 +62,16 @@ func task_collect_pressed():
 	print("[questie]: collect task requested")
 	emit_signal("collect_request")
 
+# Rewards-------------------------------------------------------------------------
+
+func get_item_reward_pressed():
+	print("[Questie]: get item reward requested")
+	emit_signal("add_item_reward_request")
+	
+func new_quest_reward_pressed():
+	print("[Questie]: new quest reward requested")
+	emit_signal("new_quest_reward_request")	
+
 func _enter_tree():
 
 	# Get references from interface
@@ -64,6 +82,9 @@ func _enter_tree():
 	trigger_get_item = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/get item block"
 
 	task_collect = $"ScrollContainer/VBoxContainer/Tasks/GridContainer/collect block"
+
+	reward_get_item = $"ScrollContainer/VBoxContainer/Rewards/GridContainer/Item Block"
+	reward_new_quest = $"ScrollContainer/VBoxContainer/Rewards/GridContainer/quest block"
 
 	# Subscribe constraints events
 	constraint_has_item.connect("button_down", self, "constraint_has_item_pressed")
@@ -76,6 +97,10 @@ func _enter_tree():
 	# Subscribe task events
 	task_collect.connect("button_down", self,  "task_collect_pressed")
 
+	# Subscribe reward events
+	reward_get_item.connect("button_down", self, "get_item_reward_pressed")
+	reward_new_quest.connect("button_down", self, "new_quest_reward_pressed")
+
 func _exit_tree():
 
 	# Unsubscribe constraints events
@@ -83,8 +108,12 @@ func _exit_tree():
 	constraint_has_quest.disconnect("button_down", self, "constraint_has_quest_pressed")
 	constraint_quest_state.disconnect("button_down",self, "constraint_quest_state_pressed")
 
-	# Unubscribe trigger events
+	# Unsubscribe trigger events
 	trigger_get_item.disconnect("button_down", self, "trigger_get_item_pressed")
 
-	# Subscribe task events
+	# Unsubscribe task events
 	task_collect.disconnect("button_down", self,  "task_collect_pressed")
+
+	# Subscribe reward events
+	reward_get_item.disconnect("button_down", self, "get_item_reward_pressed")
+	reward_new_quest.disconnect("button_down", self, "new_quest_reward_pressed")

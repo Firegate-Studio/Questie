@@ -145,6 +145,16 @@ _global_script_classes=[ {
 "path": "res://addons/questie/runtime/Inventory System/realistic_inventory.gd"
 }, {
 "base": "Resource",
+"class": "Reward_AddItem",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/reward_data/add_item_reward.gd"
+}, {
+"base": "Resource",
+"class": "Reward_NewQuest",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/reward_data/new_quest_reward.gd"
+}, {
+"base": "Resource",
 "class": "SettingsData",
 "language": "GDScript",
 "path": "res://addons/questie/editor/settings_editor/settings_data.gd"
@@ -222,6 +232,8 @@ _global_script_class_icons={
 "QuestieModule": "",
 "QuestieNode": "",
 "RealisticInventory": "res://addons/questie/editor/icons/inventory.png",
+"Reward_AddItem": "",
+"Reward_NewQuest": "",
 "SettingsData": "res://addons/questie/editor/icons/settings.png",
 "SlotInventory": "res://addons/questie/editor/icons/inventory.png",
 "TaskNode": "",

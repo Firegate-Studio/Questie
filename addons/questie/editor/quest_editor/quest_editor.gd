@@ -91,6 +91,10 @@ func load_workspace():
 	for child in tasks_list.get_children():
 		tasks_list.remove_child(child)
 		child.queue_free()
+
+	for child in rewards_list.get_children():
+		rewards_list.remove_child(child)
+		child.queue_free()
 	
 	# delete # when initializing rewars list in _enter_tree() function
 	#for child in rewards_list.get_children():
@@ -334,6 +338,50 @@ func load_workspace():
 				part.connect("delete_part_requested", self, "task_collect_delete", [qdata, element])
 
 			pass
+	
+		for element in data.rewards:
+
+			if element is Reward_AddItem:
+
+				var part = load("res://addons/questie/editor/quest_editor/parts/rewards/item_reward_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in rewards_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					rewards_uuid_map[part.get_instance_id()] = element.uuid
+					rewards_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+				
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					rewards_uuid_map[part.get_instance_id()] = element.uuid
+			
+				rewards_list.add_child(part)
+
+				var qdata = database.get_data(element.owner)
+				if qdata:
+					var db = load("res://questie/item-db.tres")
+					var item_data = db.find_data(element.item_id, element.item_category)
+					if not item_data:
+						part.item_menu.text = "item"
+						part.item_category.text = part.category.get_popup().get_item_text(element.category)
+						part.load_items_from_database(element.category)
+						part.quantity_box.value = element.quantity
+					else:	
+						part.item_menu.text = item_data.title
+						part.category_menu.text = part.category_menu.get_popup().get_item_text(element.item_category - 1)
+						part.load_items_from_database(element.item_category)
+						part.quantity_box.value = element.item_quantity
+
+				# Subscribe events
+				part.connect("item_selected", self, "handle_add_item_reward_item_selected",[qdata, element])
+				part.connect("category_selected", self, "handle_add_item_reward_category_selected", [qdata, element])
+				part.connect("quantity_changed", self, "handle_add_item_reward_quantity_changed", [qdata, element])
+				part.connect("delete_part_requested", self, "handle_add_item_reward_deletion", [qdata, element])
+
 	# Swap workspace visibility
 	empty_workspace.hide()
 	workspace.show()
@@ -986,6 +1034,94 @@ func task_collect_delete(var part, var quest_data, var task_data):
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 ###############################################################################################################
+# REWARDS 
+###############################################################################################################
+
+func create_add_item_reward():
+
+	print("hello world!")
+
+	var part = load("res://addons/questie/editor/quest_editor/parts/rewards/item_reward_part.tscn").instance()
+	if not part:
+		# log error
+		print("[Questie]: can't load item_reward_part from file system")
+		return
+
+	# retrieve quest data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+	var qdata = database.get_data(quuid)
+	if not qdata:
+		# Log error
+		print("[questie]: can't retrieve quest data for quest with [uuid]: " + quuid)
+		return
+
+	var rdata = qdata.push_reward(qdata.RewardType.ADD_ITEM, quuid)
+	if not rdata:
+		print("[questie]: can't generate task data for quest with [uuid]: " + quuid)
+		return
+	
+	# Update UUID map
+	rewards_uuid_map[part.get_instance_id()] = rdata.uuid
+	print("[questie]: added trigger with [uuid]: " + rdata.uuid + " to quest with [uuid]: " + quuid)
+
+	rewards_list.add_child(part)					# add the part to the scene
+
+	# subscribe events
+	part.connect("item_selected", self, "handle_add_item_reward_item_selected", [qdata, rdata])
+	part.connect("category_selected", self, "handle_add_item_reward_category_selected", [qdata, rdata])
+	part.connect("quantity_changed", self, "handle_add_item_reward_quantity_changed", [qdata, rdata])
+	part.connect("delete_part_requested", self, "handle_add_item_reward_deletion", [qdata, rdata])
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+func handle_add_item_reward_item_selected(item_id : String, part, quest_data, reward_data)->void:
+	reward_data.item_id = item_id
+	print("[questie]: set task: Collect item/Item UUID: " + item_id)
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func handle_add_item_reward_category_selected(category,  part, quest_data, reward_data):
+	var item_db = load("res://questie/item-db.tres")
+
+	reward_data.item_category = category
+	print("[questie]: set task: Collect item/Category: " + var2str(category))
+
+	var new_item = item_db.find_data_by_slot(0, category)
+	if not new_item:
+		return
+
+	reward_data.item_id = new_item.uuid
+	print("[questie]: set task: Collect item/Item UUID: " + new_item.uuid)
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func handle_add_item_reward_quantity_changed(new_amount, part, quest_data, reward_data):
+	reward_data.item_quantity = new_amount
+	print("[questie]: set task: Collec item/Quantity: " + var2str(new_amount))
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func handle_add_item_reward_deletion(part, quest_data, reward_data):
+	quest_data.erase_reward(reward_data.uuid)				# purge data stored
+
+	# Unsubscibe events
+	part.disconnect("item_selected", self, "handle_add_item_reward_item_selected")
+	part.disconnect("category_selected", self, "handle_add_item_reward_category_selected")
+	part.disconnect("quantity_changed", self, "handle_add_item_reward_quantity_changed")
+	part.disconnect("delete_part_requested", self, "handle_add_item_reward_deletion")
+
+	# Free memory
+	rewards_uuid_map.erase(part.get_instance_id())		# erase task uuid from map
+	rewards_list.remove_child(part)						# remove part from scene
+	part.queue_free()									# release memory
+	print("[questie]: reward action: delete on Reward/Add item")
+
+	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 func _enter_tree():
 	quest_tree = get_node("VBoxContainer/HBoxContainer2/quest tree/Tree")
@@ -997,6 +1133,7 @@ func _enter_tree():
 	constraints_list = workspace.get_node("HBoxContainer/ScrollContainer/data/constraints section/margin/container")
 	triggers_list = workspace.get_node("HBoxContainer/ScrollContainer/data/triggers section/margin/container")
 	tasks_list = workspace.get_node("HBoxContainer/ScrollContainer/data/tasks section/margin/container")
+	rewards_list = workspace.get_node("HBoxContainer/ScrollContainer/data/rewards section/margin/container")
 	
 func _ready():
 	toolbar.new_quest_btn.connect("button_down", self, "new_quest_request")
@@ -1013,5 +1150,6 @@ func _ready():
 	blocks.connect("quest_state_request", self, "quest_state_constraint")
 	blocks.connect("get_item_request", self, "get_item_trigger")
 	blocks.connect("collect_request", self, "collect_item_task")
+	blocks.connect("add_item_reward_request", self, "create_add_item_reward")
 
 

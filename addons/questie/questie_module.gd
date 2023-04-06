@@ -1,7 +1,7 @@
 # The [QuestieModule] is responsable for manage the [QuestEditorTool] lifecycle and functionality.
 # If your are looking for some tool functionality; the tool-chain shoudl be placed here
 
-# If you notice a bug or you want let me know how I can improve this tool; write me at questie@firegate-studio.com or open an issue at https://github.com/Firegate-Studio/Questie.git
+# If you notice a bug or you want let me know how I can improve this tool; write me at questie@firegateentertainment.com or open an issue at https://github.com/Firegate-Studio/Questie.git
 
 tool
 extends EditorPlugin
@@ -21,7 +21,10 @@ var quest_editor_instance
 
 func get_plugin_name(): return "Questie"
 
-func get_plugin_icon(): return get_editor_interface().get_base_control().get_icon("Spatial", "EditorIcons")
+func get_plugin_icon(): 
+	#return get_editor_interface().get_base_control().get_icon("Spatial", "EditorIcons")
+	var icon = load("res://addons/questie/editor/icons/questie.png")
+	return icon
 
 func has_main_screen(): return true
 

@@ -44,6 +44,11 @@ enum TaskType{
 	COLLECT_ITEM				# The player gathered an amount of items
 }
 
+enum RewardType{
+	ADD_ITEM 					# Add a specific amount of items as quest reward
+	NEW_QUEST					# Activates a new quest as quest reward
+}
+
 # quest constraints represents rules that should be satisfied 
 # to activate a quest when triggered
 export(Array, Resource) var constraints
@@ -230,5 +235,59 @@ func get_task(var uuid : String):
 		if not task.uuid == uuid: continue
 		
 		return task	
+
+	return null
+
+# @brief					Add a reward to the quest
+# @param type				the kind of reward to add. See quest_data.RewardType for further information
+# @param owner				the quest owning this reward
+func push_reward(type : int, owner : String):
+	var reward = null
+	match type:
+		RewardType.ADD_ITEM: 
+			reward = load("res://addons/questie/editor/quest_editor/reward_data/add_item_reward.gd").new()
+
+		RewardType.NEW_QUEST:
+			reward = load("res://addons/questie/editor/quest_editor/reward_data/new_quest_reward.gd").new()
+	
+	if not reward:
+		# Log error
+		print("[questie]: can't generated taks for quest(" + owner + ")")
+		return
+
+	reward.owner = owner
+	rewards.push_back(reward)
+
+	# Log
+	print("[questie]: generated task with [uuid]: " + reward.uuid)
+
+	return reward
+
+# @brief					Removes a reward from the quest
+# @param uuid				the UUID of the reward to remove
+func erase_reward(uuid : String):
+	var reward = null
+
+	for item in rewards:
+		if not item.uuid == uuid: continue
+
+		reward = item
+		break
+	
+	if not reward:
+		# Log error
+		print("[questie]: can't retrieve data for task with uuid: " + uuid)
+		return
+
+	rewards.erase(reward)
+	print("[questie]: removed task from quest with uuid: " + reward.owner)
+
+# @ brief					Binary search for the reward at UUID and return it if found
+# @param uuid				the reward UUID	
+func get_reward(uuid : String):
+	for reward in rewards:
+		if not reward.uuid == uuid: continue
+		
+		return reward	
 
 	return null
