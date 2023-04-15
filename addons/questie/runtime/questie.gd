@@ -183,8 +183,27 @@ func setup_tasks(task_id, quest_id, quest_data):
 			add_child(task_node)
 
 		emit_signal("generate_tasks", task_data)
-		
 
+# create or load all reward nodes
+func setup_rewards(reward_id, quest_id, quest_data): 
+	for reward_data in quest_data.rewards:
+
+		if not reward_data.uuid == reward_id: continue
+
+		if reward_data is Reward_AddItem:
+			var reward_node = RewardNodeBuilder.add_item_node(reward_data, reward_id, quest_id, player_inventory)
+			connect("quest_completed", reward_node, "complete")
+			rewards[reward_id] = reward_node
+			add_child(reward_node)
+
+		if reward_data is Reward_NewQuest:
+			var reward_node = RewardNodeBuilder.new_quest_node(reward_data, reward_id, quest_id)
+			connect("quest_completed", reward_node, "complete")
+			reward_node.connect("activate_quest", self, "activate_quest")
+			rewards[reward_id] = reward_node
+			add_child(reward_node)
+
+		emit_signal("generate_rewards", reward_data)
 
 # Get a quest data from quest database
 # If no quest is found returns **null**
@@ -389,7 +408,14 @@ func handle_quest_task_added(task_id, quest_id):
 
 	setup_tasks(task_id, quest_id, quest_data)
 	
-func handle_quest_reward_added(reward_id, quest_id): pass
+func handle_quest_reward_added(reward_id, quest_id): 
+
+	var quest_data = get_quest_from_database(quest_id)
+	if not quest_data:
+		print("[Questie]: can not retrieve information from quest with id: " + quest_id)
+		return
+
+	setup_rewards(reward_id, quest_id, quest_data)
 
 func handle_quest_constraint_removed(constraint_id, quest_id): pass
 func handle_quest_trigger_removed(trigger_id, quest_id): pass
