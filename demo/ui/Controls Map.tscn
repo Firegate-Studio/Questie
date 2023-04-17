@@ -1,0 +1,16 @@
+[gd_scene format=2]
+
+[node name="Controls Map" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 960, 540 )
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchor_right = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = 58.0
+text = " Arrows - Movement
+ J - Quest Journal"
+readonly = true
