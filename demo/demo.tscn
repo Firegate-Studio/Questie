@@ -120,14 +120,12 @@ margin_right = 1921.0
 margin_bottom = 1083.0
 
 [node name="QuestJournal" parent="." instance=ExtResource( 5 )]
-visible = false
 margin_left = 559.0
 margin_top = 234.0
 margin_right = 1359.0
 margin_bottom = 834.0
 
 [node name="QuestPopup" parent="." instance=ExtResource( 7 )]
-visible = false
 margin_left = 730.0
 margin_top = 283.0
 margin_right = 1230.0
