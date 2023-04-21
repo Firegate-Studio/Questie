@@ -2,77 +2,108 @@ tool
 extends Tree
 class_name Location_CategoryTree
 
+signal category_selected(item)
+signal category_renamed(item, new_name)
+signal category_deletion(id)
+
 var root : TreeItem
 
 var location_database = preload("res://questie/location-db.tres")
 
-var categories = []
+var categories = {}
 
 func _enter_tree():
-
-	root = create_item(null)
-	root.set_text(0, "Categories")
+	root = create_item()
 	
-	set_hide_root(true)
+	connect("item_selected", self, "on_item_selected")
+	connect("item_edited", self, "on_item_edited")
+	connect("button_pressed", self, "on_button_pressed")
 
-	connect("item_edited", self, "on_category_edited")
-	connect("item_double_clicked", self, "on_category_double_clicked")
-	connect("button_pressed", self, "on_category_button_pressed")
-	
-	# load categories
-	for key in location_database.data:
-		create_category(key)
+	for category in location_database.categories:
+		print("[Questie]: loading " + category.title)
+		load_category(null, category.title, category.id)
+	print("[Quesite]: all categories loaded")
 
+func on_item_selected():
+	emit_signal("category_selected", get_selected())
 
-func on_category_edited(): 
+func on_item_edited():
 	var selected_category = get_selected()
 	if not selected_category:
-		print("[Questie]: can not detect selected category")
+		print("[Questie]: the selected category is not valid")
 		return
 
-	location_database.add_category(selected_category.get_text(0))
-	location_database.clenup_categories(get_all_categories_name())
-	ResourceSaver.save("res://questie/location-db.tres", location_database)
-
-func on_category_double_clicked():
-	var category = get_selected()
-	if not category:
-		print("[Questie]: category item is invalid for modification")
+	if not categories.has(selected_category):
+		print("[Questie]: can't edit the current category cause is not exists anymore")
 		return
+
+	var category_id = categories[selected_category]
+	for category in location_database.categories:
+		if not category.id == category_id: continue
+
+		category.title = selected_category.get_text(0)
+		print("[Questie]: category title changed to " + selected_category.get_text(0) + " for category with identifier: " + category_id)
+		ResourceSaver.save("res://questie/location-db.tres", location_database)
+
+		emit_signal("category_renamed", selected_category, selected_category.get_text(0))
+
+		break
+
+func on_button_pressed(item, column, id):
 	
-	category.set_editable(0, true)
+	var location_id : String
 
-func on_category_button_pressed(item, column, id): 
-	print("category deletion requested for category: " + item.get_text(0))
+	# search item from database
+	for tree_item in categories:
+		if not tree_item == item: continue
 
-	root.remove_child(item)
+		location_id = categories[tree_item]
+		categories.erase(tree_item)
+		break
 
-	location_database.remove_category(item.get_text(0))
+	item.get_parent().remove_child(item)
+	location_database.remove_category(location_id)
+	emit_signal("category_deletion", location_id)
+
 	ResourceSaver.save("res://questie/location-db.tres", location_database)
 
-# Create a new category
-func create_category(title):
-	var category_item : TreeItem = create_item(root)
+func create_category(parent, title, id):
+
+	# generate category
+	var category_item = create_item(parent)
 	category_item.set_text(0, title)
 	category_item.set_editable(0, true)
 	category_item.set_expand_right(0, true)
+	category_item.set_custom_as_button(0, true)
 	category_item.set_icon(0, load("res://addons/questie/editor/icons/village.png"))
 	category_item.set_icon_max_width(0, 32)
-	category_item.set_custom_as_button(0, true)
+	category_item.add_button(0, load("res://addons/questie/editor/icons/trash_32x32.png"))
 
-	var icon : Texture = load("res://addons/questie/editor/icons/trash_32x32.png")
-	category_item.add_button(0, icon)
+	# generate identifier
+	categories[category_item] = id
+	
+	# generate category data
+	var data = LocationCategoryData.new()
+	data.id = id
+	data.title = title
 
-	categories.push_back(category_item)
-
-	location_database.add_category(category_item.get_text(0))
+	# save category
+	location_database.add_category(data)
 	ResourceSaver.save("res://questie/location-db.tres", location_database)
 
-func get_all_categories_name()->Array:
+func load_category(parent, title, id):
 
-	var result = []
-	
-	for category in categories:
-		result.push_back(category.get_text(0))
+	print("[Questie]: loading " + title)
 
-	return result
+	# generate category
+	var category_item = create_item(root)
+	category_item.set_text(0, title)
+	category_item.set_editable(0, true)
+	category_item.set_expand_right(0, true)
+	category_item.set_custom_as_button(0, true)
+	category_item.set_icon(0, load("res://addons/questie/editor/icons/village.png"))
+	category_item.set_icon_max_width(0, 32)
+	category_item.add_button(0, load("res://addons/questie/editor/icons/trash_32x32.png"))
+
+	# generate identifier
+	categories[category_item] = id

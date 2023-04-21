@@ -1,11 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/questie/editor/icons/map.png" type="Texture" id=1]
+[ext_resource path="res://addons/questie/editor/location_editor/location_viewport.gd" type="Script" id=2]
 
 [node name="Location Viewport" type="VBoxContainer"]
 margin_left = 312.0
 margin_right = 1870.0
 margin_bottom = 980.0
+script = ExtResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_right = 1558.0
