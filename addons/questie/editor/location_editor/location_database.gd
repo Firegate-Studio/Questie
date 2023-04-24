@@ -27,6 +27,14 @@ func remove_category(id):
 		print("[Questie]: removed category from location database for category with identifier: " + id)
 		break;
 
+func get_category(id):
+	for category in categories:
+		if not category.id == id: continue
+
+		return category
+	
+	return null
+
 func add_location(location_data):
 	locations.push_back(location_data)
 

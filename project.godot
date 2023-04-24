@@ -84,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
+"base": "Reference",
+"class": "GameLocations",
+"language": "GDScript",
+"path": "res://questie/locations.generated.gd"
+}, {
 "base": "PanelContainer",
 "class": "HistoryRow",
 "language": "GDScript",
@@ -138,6 +143,11 @@ _global_script_classes=[ {
 "class": "LocationEditor",
 "language": "GDScript",
 "path": "res://addons/questie/editor/location_editor/location_editor.gd"
+}, {
+"base": "Reference",
+"class": "LocationFileBuilder",
+"language": "GDScript",
+"path": "res://addons/questie/editor/location_editor/location_file_builder.gd"
 }, {
 "base": "Panel",
 "class": "LocationSlot",
@@ -280,6 +290,7 @@ _global_script_class_icons={
 "DialogicParser": "",
 "DialogicResources": "",
 "DialogicUtil": "",
+"GameLocations": "",
 "HistoryRow": "",
 "InventoryBase": "res://addons/questie/editor/icons/inventory.png",
 "InventorySystem": "",
@@ -291,6 +302,7 @@ _global_script_class_icons={
 "LocationData": "",
 "LocationDatabase": "",
 "LocationEditor": "",
+"LocationFileBuilder": "",
 "LocationSlot": "",
 "LocationViewport": "",
 "Location_CategoryTree": "",
