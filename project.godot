@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/has_quest_constraint.gd"
 }, {
 "base": "Resource",
+"class": "Constraint_IsLocation",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/constraints_data/is_location_constraint.gd"
+}, {
+"base": "Resource",
 "class": "Constraint_QuestState",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/quest_state_constraint.gd"
@@ -279,6 +284,7 @@ _global_script_class_icons={
 "ConstraintNodeBuilder": "",
 "Constraint_HasItem": "",
 "Constraint_HasQuest": "",
+"Constraint_IsLocation": "",
 "Constraint_QuestState": "",
 "DTS": "",
 "Dialogic": "",

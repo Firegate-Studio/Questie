@@ -20,35 +20,40 @@ size_flags_vertical = 3
 
 [node name="Toolbar" parent="VBoxContainer" instance=ExtResource( 1 )]
 anchor_right = 0.0
-margin_right = 1024.0
+margin_right = 1920.0
 margin_bottom = 72.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 76.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_right = 1920.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="quest tree" parent="VBoxContainer/HBoxContainer2" instance=ExtResource( 3 )]
 anchor_bottom = 0.0
 margin_right = 275.0
-margin_bottom = 524.0
+margin_bottom = 1004.0
 rect_min_size = Vector2( 275, 0 )
 size_flags_vertical = 3
 
 [node name="workspace area" parent="VBoxContainer/HBoxContainer2" instance=ExtResource( 4 )]
 visible = false
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 279.0
+margin_right = 1097.0
+margin_bottom = 1004.0
 
 [node name="empty" type="CenterContainer" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 279.0
-margin_right = 1024.0
-margin_bottom = 524.0
+margin_right = 1920.0
+margin_bottom = 1004.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2/empty"]
-margin_left = 276.0
-margin_top = 255.0
-margin_right = 469.0
-margin_bottom = 269.0
+margin_left = 724.0
+margin_top = 495.0
+margin_right = 917.0
+margin_bottom = 509.0
 text = "Create a quest to start to work"

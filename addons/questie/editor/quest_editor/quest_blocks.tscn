@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/completed_quest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/has_item_block.tscn" type="PackedScene" id=2]
@@ -6,11 +6,12 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/kill_block.tscn" type="PackedScene" id=4]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/get_item_block.tscn" type="PackedScene" id=5]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/collect_block.tscn" type="PackedScene" id=6]
-[ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/fetch_block.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/area_bounds_block.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/go_to_block.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/is_location_block.tscn" type="PackedScene" id=8]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_blocks.gd" type="Script" id=9]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/rewards/get_item_block.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/rewards/new quest block.tscn" type="PackedScene" id=11]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/is_location_block.tscn" type="PackedScene" id=12]
 
 [node name="Quest Blocks" type="Control"]
 margin_left = 754.0
@@ -73,6 +74,12 @@ margin_top = 64.0
 margin_right = 120.0
 margin_bottom = 124.0
 
+[node name="Is Location block" parent="ScrollContainer/VBoxContainer/Constraints/GridContainer" instance=ExtResource( 8 )]
+margin_left = 124.0
+margin_top = 64.0
+margin_right = 244.0
+margin_bottom = 124.0
+
 [node name="Triggers" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 146.0
 margin_right = 250.0
@@ -100,13 +107,13 @@ margin_right = 250.0
 margin_bottom = 78.0
 columns = 2
 
-[node name="area bounds block" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 8 )]
-visible = false
-margin_right = 120.0
-margin_bottom = 30.0
-
 [node name="get item block" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 5 )]
 margin_right = 120.0
+margin_bottom = 60.0
+
+[node name="is location block" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 12 )]
+margin_left = 124.0
+margin_right = 244.0
 margin_bottom = 60.0
 
 [node name="Tasks" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
@@ -140,8 +147,7 @@ columns = 2
 margin_right = 120.0
 margin_bottom = 60.0
 
-[node name="fetch block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 7 )]
-visible = false
+[node name="go to block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 7 )]
 margin_left = 124.0
 margin_right = 244.0
 margin_bottom = 60.0

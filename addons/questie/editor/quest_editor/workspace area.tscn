@@ -16,13 +16,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer"]
-margin_right = 750.0
-margin_bottom = 600.0
+margin_right = 1646.0
+margin_bottom = 1080.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="data" parent="HBoxContainer/ScrollContainer" instance=ExtResource( 4 )]
-margin_right = 738.0
-margin_bottom = 791.0
+margin_right = 1646.0
+margin_bottom = 1080.0
 
 [node name="Quest Blocks" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_left = 1650.0
+margin_right = 1920.0
+margin_bottom = 1080.0

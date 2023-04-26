@@ -31,6 +31,7 @@ export(String) var description = "fill quest description here"
 enum ConstraintType {
 	HAS_QUEST,                  # the player must have a specific quest
 	HAS_ITEM,                   # the player must own a specific item with a minimum quantity
+	IS_LOCATION,				# the player is within a specific location
 	QUEST_STATE                 # check the state of activity(complention) of a specific quest
 }
 
@@ -41,7 +42,8 @@ enum TriggerType{
 }
 
 enum TaskType{
-	COLLECT_ITEM				# The player gathered an amount of items
+	COLLECT_ITEM,				# The player gathered an amount of items
+	GO_TO						# The player has to go to a specific location
 }
 
 enum RewardType{
@@ -80,6 +82,8 @@ func push_constraint(var type : int, var owner : String):
 			result = load("res://addons/questie/editor/quest_editor/has_item_constraint.gd").new()
 		ConstraintType.QUEST_STATE: 		
 			result = load("res://addons/questie/editor/quest_editor/quest_state_constraint.gd").new()
+		ConstraintType.IS_LOCATION:
+			result = load("res://addons/questie/editor/quest_editor/constraints_data/is_location_constraint.gd").new()
 	
 	# Generate constraint UUID
 	result.uuid = UUID.generate()

@@ -259,6 +259,50 @@ func load_workspace():
 				# Log 
 				print("[questie]: loaded constraint item with [uuid]: " + element.uuid)
 
+			if element is Constraint_IsLocation:
+				var part = load("res://addons/questie/editor/quest_editor/parts/constraints/is_location_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in constraints_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+					constraints_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, constraints_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					constraints_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				constraints_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+
+				# update constraint block
+				part.category_id = element.category_id
+				part.location_id = element.location_id
+				part.load_locations_from_database(element.category_id)
+				part.category_menu.text = part.category_menu.get_popup().get_item_text(element.category_index)
+				part.location_menu.text = part.location_menu.get_popup().get_item_text(element.location_index)
+
+				# subscribe events
+				part.connect("category_selected", self, "is_location_constraint_category_selected", [element, quest_data])
+				part.connect("location_selected", self, "is_location_constraint_location_selected", [element, quest_data])
+				part.connect("deletion_request", self, "is_location_constraint_deletion_requested", [element, quest_data])
+
 		for element in data.triggers:
 
 			if element is Trigger_GetItem:
@@ -470,7 +514,7 @@ func update_quest_description():
 	# Save database
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
-# @brief					Find an old keu in dictionary
+# @brief					Find an old key in dictionary
 # @param new				the new key in dictionary
 # @param value				the value to compare
 # @param dictionary			the dictionary to inspect
@@ -905,6 +949,76 @@ func quest_state_state_changed(var part, var state_id):
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 
+func create_is_location_constraint():
+
+	# load constraint part
+	var part = load("res://addons/questie/editor/quest_editor/parts/constraints/is_location_part.tscn").instance()
+	if not part:
+		print("[Questie]: can not constraint part in quest editor")
+		return
+	
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+
+		return
+
+	# Generates constraint data
+	var constraint_data = quest_data.push_constraint(quest_data.ConstraintType.IS_LOCATION, quuid) 
+	if not constraint_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+
+	# Update UUID map
+	constraints_uuid_map[part.get_instance_id()] = constraint_data.uuid
+	print("[questie]: added constraint with [uuid]: " + constraint_data.uuid + " to quest with [uuid]: " + quuid)
+	
+	# add constraint to the quest editor viewport
+	constraints_list.add_child(part)
+
+	# subscribe events
+	part.connect("category_selected", self, "is_location_constraint_category_selected", [constraint_data, quest_data])
+	part.connect("location_selected", self, "is_location_constraint_location_selected", [constraint_data, quest_data])
+	part.connect("deletion_request", self, "is_location_constraint_deletion_requested", [constraint_data, quest_data])
+
+	# update database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func is_location_constraint_category_selected(category_id, category_index, constraint_data, quest_data):
+
+	constraint_data.category_id = category_id
+	constraint_data.category_index = category_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func is_location_constraint_location_selected(location_id, location_index, constraint_data, quest_data):
+
+	constraint_data.location_id = location_id
+	constraint_data.location_index = location_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func is_location_constraint_deletion_requested(node, constraint_data, quest_data):
+	
+	constraints_list.remove_child(node)
+
+	node.disconnect("category_selected", self, "is_location_constraint_category_selected")
+	node.disconnect("location_selected", self, "is_location_constraint_location_selected")
+	node.disconnect("deletion_request", self, "is_location_constraint_deletion_requested")
+
+	constraints_uuid_map.erase(node.get_instance_id())
+	quest_data.erase_constraint(constraint_data.uuid)
+
+	node.queue_free()
+
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+
 func get_item_trigger(): 
 
 	# Load trigger part
@@ -968,7 +1082,8 @@ func trigger_get_item_delete(var control, var data):
 	control.queue_free()
 
 	# update database
-	ResourceSaver.save("res://quest-db.tres", database)
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
 
 ##################################################################################################################
 # TASKS
@@ -1233,7 +1348,11 @@ func _ready():
 	blocks.connect("has_quest_request", self, "has_quest_constraint")
 	blocks.connect("has_item_request", self,  "has_item_constraint")
 	blocks.connect("quest_state_request", self, "quest_state_constraint")
+	blocks.connect("is_location_constraint_request", self, "create_is_location_constraint")
+
 	blocks.connect("get_item_request", self, "get_item_trigger")
+
 	blocks.connect("collect_request", self, "collect_item_task")
+
 	blocks.connect("add_item_reward_request", self, "create_add_item_reward")
 	blocks.connect("new_quest_reward_request", self, "create_quest_reward")
