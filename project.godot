@@ -254,6 +254,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/collect_item_task.gd"
 }, {
+"base": "Resource",
+"class": "Task_GoTo",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/task_data/go_to_task.gd"
+}, {
 "base": "QuestieNode",
 "class": "TriggerNode",
 "language": "GDScript",
@@ -268,6 +273,11 @@ _global_script_classes=[ {
 "class": "Trigger_GetItem",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/get_item_trigger.gd"
+}, {
+"base": "Resource",
+"class": "Trigger_IsLocation",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/trigger_data/is_location_trigger.gd"
 }, {
 "base": "Object",
 "class": "UUID",
@@ -329,9 +339,11 @@ _global_script_class_icons={
 "TaskNode": "",
 "TaskNodeBuilder": "",
 "Task_CollectItem": "",
+"Task_GoTo": "",
 "TriggerNode": "",
 "TriggerNodeBuilder": "",
 "Trigger_GetItem": "",
+"Trigger_IsLocation": "",
 "UUID": "",
 "WeightedInventory": "res://addons/questie/editor/icons/inventory.png"
 }

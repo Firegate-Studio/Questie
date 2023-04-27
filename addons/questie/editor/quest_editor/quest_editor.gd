@@ -294,6 +294,7 @@ func load_workspace():
 				# update constraint block
 				part.category_id = element.category_id
 				part.location_id = element.location_id
+				part.load_categories_from_database()
 				part.load_locations_from_database(element.category_id)
 				part.category_menu.text = part.category_menu.get_popup().get_item_text(element.category_index)
 				part.location_menu.text = part.location_menu.get_popup().get_item_text(element.location_index)
@@ -337,6 +338,51 @@ func load_workspace():
 				part.connect("item_selected", self, "trigger_get_item_selected", [part, element])
 				part.connect("destruction_requested", self, "trigger_get_item_delete", [part, element])
 		
+			if element is Trigger_IsLocation:
+				var part = load("res://addons/questie/editor/quest_editor/parts/triggers/is_location_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in triggers_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+					triggers_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, triggers_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				triggers_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+
+				# update constraint block
+				part.category_id = element.category_id
+				part.location_id = element.location_id
+				part.load_categories_from_database()
+				part.load_locations_from_database(element.category_id)
+				part.category_menu.text = part.category_menu.get_popup().get_item_text(element.category_index)
+				part.location_menu.text = part.location_menu.get_popup().get_item_text(element.location_index)
+
+				# subscribe events
+				part.connect("category_selected", self, "is_location_trigger_category_selected", [element, quest_data])
+				part.connect("location_selected", self, "is_location_trigger_location_selected", [element, quest_data])
+				part.connect("deletion_request", self, "is_location_trigger_deletion_requested", [element, quest_data])
+
 		for element in data.tasks:
 			
 			if element is Task_CollectItem:
@@ -381,7 +427,52 @@ func load_workspace():
 				part.connect("quantity_changed", self, "taks_collect_quantity_changed", [qdata, element])
 				part.connect("delete_part_requested", self, "task_collect_delete", [qdata, element])
 
-			pass
+			if element is Task_GoTo:
+				var part = load("res://addons/questie/editor/quest_editor/parts/triggers/is_location_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in tasks_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+					tasks_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, tasks_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				tasks_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+
+				# update constraint block
+				part.category_id = element.category_id
+				part.location_id = element.location_id
+				part.load_categories_from_database()
+				part.load_locations_from_database(element.category_id)
+				part.category_menu.text = part.category_menu.get_popup().get_item_text(element.category_index)
+				part.location_menu.text = part.location_menu.get_popup().get_item_text(element.location_index)
+
+				# subscribe events
+				part.connect("category_selected", self, "go_to_task_category_selected", [element, quest_data])
+				part.connect("location_selected", self, "go_to_task_location_selected", [element, quest_data])
+				part.connect("deletion_request", self, "go_to_task_deletion_requested", [element, quest_data])
+
+
 	
 		for element in data.rewards:
 
@@ -1018,6 +1109,9 @@ func is_location_constraint_deletion_requested(node, constraint_data, quest_data
 
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
+##################################################################################################################
+# TRIGGERS
+##################################################################################################################
 
 func get_item_trigger(): 
 
@@ -1067,7 +1161,7 @@ func trigger_get_item_selected(var item_uuid, var category, var data, var part, 
 
 func trigger_get_item_delete(var control, var data):
 
-	var qdata = database.get_data(data.trigger_owner)
+	var qdata = database.get_data(data.owner)
 	if not qdata:
 		# Log error
 		print("[questie]: can't retrieve data from database fro quest: " + data.trigger_owner)
@@ -1084,6 +1178,71 @@ func trigger_get_item_delete(var control, var data):
 	# update database
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
+
+func create_is_location_trigger():
+	# load constraint part
+	var part = load("res://addons/questie/editor/quest_editor/parts/triggers/is_location_part.tscn").instance()
+	if not part:
+		print("[Questie]: can not constraint part in quest editor")
+		return
+	
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+
+		return
+
+	# Generates constraint data
+	var trigger_data = quest_data.push_trigger(quest_data.TriggerType.IS_LOCATION, quuid) 
+	if not trigger_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+
+	# Update UUID map
+	triggers_uuid_map[part.get_instance_id()] = trigger_data.uuid
+	print("[questie]: added trigger with [uuid]: " + trigger_data.uuid + " to quest with [uuid]: " + quuid)
+	
+	# add constraint to the quest editor viewport
+	triggers_list.add_child(part)
+
+	# subscribe events
+	part.connect("category_selected", self, "is_location_trigger_category_selected", [trigger_data, quest_data])
+	part.connect("location_selected", self, "is_location_trigger_location_selected", [trigger_data, quest_data])
+	part.connect("deletion_request", self, "is_location_trigger_deletion_requested", [trigger_data, quest_data])
+
+	# update database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func is_location_trigger_category_selected(category_id, category_index, trigger_data, quest_data): 
+	trigger_data.category_id = category_id
+	trigger_data.category_index = category_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func is_location_trigger_location_selected(location_id, location_index, trigger_data, quest_data):
+	trigger_data.location_id = location_id
+	trigger_data.location_index = location_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func is_location_trigger_deletion_requested(node, trigger_data, quest_data): 
+	triggers_list.remove_child(node)
+
+	node.disconnect("category_selected", self, "is_location_trigger_category_selected")
+	node.disconnect("location_selected", self, "is_location_trigger_location_selected")
+	node.disconnect("deletion_request", self, "is_location_trigger_deletion_requested")
+
+	triggers_uuid_map.erase(node.get_instance_id())
+	quest_data.erase_trigger(trigger_data.uuid)
+
+	node.queue_free()
+
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 ##################################################################################################################
 # TASKS
@@ -1174,6 +1333,72 @@ func task_collect_delete(var part, var quest_data, var task_data):
 	print("[questie]: task action: delete on task/Collect item")
 
 	# Save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+
+func create_go_to_task():
+	# load constraint part
+	var part = load("res://addons/questie/editor/quest_editor/parts/tasks/go_to_part.tscn").instance()
+	if not part:
+		print("[Questie]: can not constraint part in quest editor")
+		return
+	
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+
+		return
+
+	# Generates constraint data
+	var task_data = quest_data.push_task(quest_data.TaskType.GO_TO, quuid) 
+	if not task_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+
+	# Update UUID map
+	tasks_uuid_map[part.get_instance_id()] = task_data.uuid
+	print("[questie]: added task with [uuid]: " + task_data.uuid + " to quest with [uuid]: " + quuid)
+	
+	# add constraint to the quest editor viewport
+	tasks_list.add_child(part)
+
+	# subscribe events
+	part.connect("category_selected", self, "go_to_task_category_selected", [task_data, quest_data])
+	part.connect("location_selected", self, "go_to_task_location_selected", [task_data, quest_data])
+	part.connect("deletion_request", self, "go_to_task_deletion_requested", [task_data, quest_data])
+
+	# update database
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func go_to_task_category_selected(category_id, category_index, task_data, quest_data): 
+	task_data.category_id = category_id
+	task_data.category_index = category_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func go_to_task_location_selected(location_id, location_index, task_data, quest_data): 
+	task_data.location_id = location_id
+	task_data.location_index = location_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func go_to_task_deletion_requested(node, task_data, quest_data): 
+	tasks_list.remove_child(node)
+
+	node.disconnect("category_selected", self, "go_to_task_category_selected")
+	node.disconnect("location_selected", self, "go_to_task_location_selected")
+	node.disconnect("deletion_request", self, "go_to_task_deletion_requested")
+
+	tasks_uuid_map.erase(node.get_instance_id())
+	quest_data.erase_task(task_data.uuid)
+
+	node.queue_free()
+
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 ###############################################################################################################
@@ -1351,8 +1576,10 @@ func _ready():
 	blocks.connect("is_location_constraint_request", self, "create_is_location_constraint")
 
 	blocks.connect("get_item_request", self, "get_item_trigger")
+	blocks.connect("is_location_trigger_request", self, "create_is_location_trigger")
 
 	blocks.connect("collect_request", self, "collect_item_task")
+	blocks.connect("go_to_task_request", self, "create_go_to_task")
 
 	blocks.connect("add_item_reward_request", self, "create_add_item_reward")
 	blocks.connect("new_quest_reward_request", self, "create_quest_reward")

@@ -161,11 +161,11 @@ func push_trigger(var type : int, var owner : String):
 
 	match type:
 		TriggerType.IS_LOCATION: 
-			print("[questie]: TODO:QuestData.IsLocation")
+			result = load("res://addons/questie/editor/quest_editor/trigger_data/is_location_trigger.gd").new()
 		TriggerType.GET_ITEM:
 			result = load("res://addons/questie/editor/quest_editor/get_item_trigger.gd").new()
 	
-	result.trigger_owner = owner
+	result.owner = owner
 
 	# Add constraint
 	triggers.push_back(result)
@@ -198,6 +198,8 @@ func push_task(var type : int, var owner : String):
 	match type:
 		TaskType.COLLECT_ITEM:
 			task = load("res://addons/questie/editor/quest_editor/collect_item_task.gd").new()
+		TaskType.GO_TO:
+			task = load("res://addons/questie/editor/quest_editor/task_data/go_to_task.gd").new()
 
 
 	if not task:

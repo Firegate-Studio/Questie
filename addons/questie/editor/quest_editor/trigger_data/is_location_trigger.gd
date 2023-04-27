@@ -1,5 +1,5 @@
-extends "res://addons/questie/editor/quest_editor/quest_constraint.gd"
-class_name Constraint_IsLocation
+extends "res://addons/questie/editor/quest_editor/trigger_data/quest_trigger.gd"
+class_name Trigger_IsLocation
 
 # the category identifier of the location
 export(String) var category_id
