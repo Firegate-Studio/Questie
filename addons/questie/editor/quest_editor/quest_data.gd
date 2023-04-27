@@ -77,13 +77,13 @@ func push_constraint(var type : int, var owner : String):
 	# Generate data
 	match type:
 		ConstraintType.HAS_QUEST: 			
-			result = load("res://addons/questie/editor/quest_editor/has_quest_constraint.gd").new()
+			result = load("res://addons/questie/editor/quest_editor/data/constraint/has_quest_constraint.gd").new()
 		ConstraintType.HAS_ITEM:			
-			result = load("res://addons/questie/editor/quest_editor/has_item_constraint.gd").new()
+			result = load("res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd").new()
 		ConstraintType.QUEST_STATE: 		
-			result = load("res://addons/questie/editor/quest_editor/quest_state_constraint.gd").new()
+			result = load("res://addons/questie/editor/quest_editor/data/constraint/quest_state_constraint.gd").new()
 		ConstraintType.IS_LOCATION:
-			result = load("res://addons/questie/editor/quest_editor/constraints_data/is_location_constraint.gd").new()
+			result = load("res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd").new()
 	
 	# Generate constraint UUID
 	result.uuid = UUID.generate()
@@ -161,9 +161,9 @@ func push_trigger(var type : int, var owner : String):
 
 	match type:
 		TriggerType.IS_LOCATION: 
-			result = load("res://addons/questie/editor/quest_editor/trigger_data/is_location_trigger.gd").new()
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/is_location_trigger.gd").new()
 		TriggerType.GET_ITEM:
-			result = load("res://addons/questie/editor/quest_editor/get_item_trigger.gd").new()
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd").new()
 	
 	result.owner = owner
 
@@ -197,9 +197,9 @@ func push_task(var type : int, var owner : String):
 	var task = null
 	match type:
 		TaskType.COLLECT_ITEM:
-			task = load("res://addons/questie/editor/quest_editor/collect_item_task.gd").new()
+			task = load("res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd").new()
 		TaskType.GO_TO:
-			task = load("res://addons/questie/editor/quest_editor/task_data/go_to_task.gd").new()
+			task = load("res://addons/questie/editor/quest_editor/data/task/go_to_task.gd").new()
 
 
 	if not task:
@@ -251,10 +251,10 @@ func push_reward(type : int, owner : String):
 	var reward = null
 	match type:
 		RewardType.ADD_ITEM: 
-			reward = load("res://addons/questie/editor/quest_editor/reward_data/add_item_reward.gd").new()
+			reward = load("res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd").new()
 
 		RewardType.NEW_QUEST:
-			reward = load("res://addons/questie/editor/quest_editor/reward_data/new_quest_reward.gd").new()
+			reward = load("res://addons/questie/editor/quest_editor/data/reward/new_quest_reward.gd").new()
 	
 	if not reward:
 		# Log error

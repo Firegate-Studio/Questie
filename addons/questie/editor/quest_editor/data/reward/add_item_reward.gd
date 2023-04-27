@@ -1,4 +1,4 @@
-extends "res://addons/questie/editor/quest_editor/reward_data/quest_reward.gd"
+extends "res://addons/questie/editor/quest_editor/data/reward/quest_reward.gd"
 class_name Reward_AddItem
 
 # the id of the item to add

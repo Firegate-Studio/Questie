@@ -116,7 +116,7 @@ func load_workspace():
 			if element is Constraint_HasQuest:
 
 				# Construct part
-				var part = load("res://addons/questie/editor/quest_editor/parts/has_quest_part.tscn").instance()
+				var part = load("res://addons/questie/editor/quest_editor/parts/constraints/has_quest_part.tscn").instance()
 
 				# Check if the constraints map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
@@ -152,7 +152,7 @@ func load_workspace():
 			if element is Constraint_HasItem:
 
 				# Construct part
-				var part = load("res://addons/questie/editor/quest_editor/parts/has_item_part.tscn").instance()
+				var part = load("res://addons/questie/editor/quest_editor/parts/constraints/has_item_part.tscn").instance()
 
 				# Check if the constraints map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
@@ -213,7 +213,7 @@ func load_workspace():
 			if element is Constraint_QuestState:
 
 				# Construct part
-				var part = load("res://addons/questie/editor/quest_editor/parts/quest_state_part.tscn").instance()
+				var part = load("res://addons/questie/editor/quest_editor/parts/constraints/quest_state_part.tscn").instance()
 
 				# Check if the constraints map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
@@ -309,7 +309,7 @@ func load_workspace():
 			if element is Trigger_GetItem:
 
 				# Preload scene block
-				var part = load("res://addons/questie/editor/quest_editor/parts/get_item_part.tscn").instance()
+				var part = load("res://addons/questie/editor/quest_editor/parts/triggers/get_item_part.tscn").instance()
 				
 				# Check if the constraints map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
@@ -388,7 +388,7 @@ func load_workspace():
 			if element is Task_CollectItem:
 
 				# Preload scene block
-				var part = load("res://addons/questie/editor/quest_editor/parts/collect_item_part.tscn").instance()
+				var part = load("res://addons/questie/editor/quest_editor/parts/tasks/collect_item_part.tscn").instance()
 				
 				# Check if the constraints map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
@@ -654,7 +654,7 @@ func remap_uuid_map(var dictionary, var value):
 func has_quest_constraint():
 
 	# Prepare part to add 
-	var part = load("res://addons/questie/editor/quest_editor/parts/has_quest_part.tscn").instance()
+	var part = load("res://addons/questie/editor/quest_editor/parts/constraints/has_quest_part.tscn").instance()
 
 	# Get quest UUID
 	var uuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
@@ -762,7 +762,7 @@ func delete_constraint_part(var part):
 func has_item_constraint():
 
 	# Prepare part to add 
-	var part = load("res://addons/questie/editor/quest_editor/parts/has_item_part.tscn").instance()
+	var part = load("res://addons/questie/editor/quest_editor/parts/constraints/has_item_part.tscn").instance()
 
 	# Get quest UUID
 	var uuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
@@ -915,11 +915,12 @@ func has_item_quantity_changed(var part, var quantity):
 	# Save database
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
+
 # @brief					Generates a quest state contraint inside the quest
 func quest_state_constraint(): 
 
 	# Load constraint part to add to quest
-	var part = load("res://addons/questie/editor/quest_editor/parts/quest_state_part.tscn").instance()
+	var part = load("res://addons/questie/editor/quest_editor/parts/constraints/quest_state_part.tscn").instance()
 
 	# Get current quest(the quest displayed in quest editor) data
 	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
@@ -1116,7 +1117,7 @@ func is_location_constraint_deletion_requested(node, constraint_data, quest_data
 func get_item_trigger(): 
 
 	# Load trigger part
-	var trigger = load("res://addons/questie/editor/quest_editor/parts/get_item_part.tscn").instance()
+	var trigger = load("res://addons/questie/editor/quest_editor/parts/triggers/get_item_part.tscn").instance()
 	if not trigger:
 		# Log error
 		print("[questie]: can't load trigger part in quest editor")
@@ -1249,7 +1250,7 @@ func is_location_trigger_deletion_requested(node, trigger_data, quest_data):
 ##################################################################################################################
 
 func collect_item_task():
-	var part = load("res://addons/questie/editor/quest_editor/parts/collect_item_part.tscn").instance()
+	var part = load("res://addons/questie/editor/quest_editor/parts/tasks/collect_item_part.tscn").instance()
 	if not part:
 		# Log error
 		print("[questie]: can't load collect_item_part from file system")
