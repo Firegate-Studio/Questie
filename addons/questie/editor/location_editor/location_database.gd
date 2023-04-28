@@ -41,7 +41,8 @@ func add_location(location_data):
 func remove_location(location_id):
 	
 	for item in locations:
-		if not item.id == location_id: continue
+		if not item.id == location_id: 
+			continue
 
 		locations.erase(item)
 		print("[Questie]: removed location with identifier: " + location_id)

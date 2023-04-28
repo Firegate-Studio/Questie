@@ -32,18 +32,18 @@ func on_category_selected(category):
 
 func on_category_deletion(id):
 
+	var stored_locations = []
 	# erase location from database
 	for location_data in location_database.locations:
-		if not location_data.category_id == id: continue
-
-			
+		if not location_data.category_id == id: 
+			stored_locations.push_back(location_data)
+			continue
+	
 		# destroy location slots
 		for child in workspace.location_slots_container.get_children():
-			if not child.id == location_data.category_id: continue
+			if not child.id == location_data.id: continue
 					
-			child.queue_free()
-		
-		location_database.remove_location(location_data.id)
+	location_database.locations = stored_locations
 
 	ResourceSaver.save("res://questie/location-db.tres", location_database)
 
