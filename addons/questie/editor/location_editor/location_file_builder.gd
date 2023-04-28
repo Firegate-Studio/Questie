@@ -29,15 +29,30 @@ static func build():
 		var location_name = remove_invalid_characters(item.name)
 
 		file.store_string(category_name + "_" + location_name + "\n")
-		index_map[category_name + "_" + location_name] = item.id
+		index_map[str2var("Locations." + category_name + "_" + location_name)] = item.id
 
 	file.store_string("}\n\n")
 
 	# generating index map
 	file.store_string("# a dictionary containing all locations id associated to a location enumaration \n")
-	file.store_string("var location_map = " + var2str(index_map) + "\n")
+	file.store_string("const location_map = {\n")
+	
+	var template = "{0} : {1}"
+	var printings = 0
+	for value in index_map:
+
+		if printings == index_map.size() - 1:
+			var source = template.format([str2var(value), var2str(index_map[value])])
+			file.store_string(source + "\n")
+			continue
+
+		var source = template.format([str2var(value), var2str(index_map[value])])
+		file.store_string(source + ",\n")
+		++printings
+	file.store_string("}\n")
 
 	file.close()
+
 	   
 
 static func remove_invalid_characters(word : String)->String:

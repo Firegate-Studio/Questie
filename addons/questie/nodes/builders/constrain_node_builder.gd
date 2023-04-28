@@ -47,3 +47,16 @@ static func has_quest_node(constraint_data, constraint_id, quest_id, quest_node)
 
 	return node
 
+static func is_location_node(constraint_data, constraint_id, quest_id)->Constraint: 
+	var node = load("res://addons/questie/nodes/constraints/is_location.gd").new()
+	if not node:
+		print("[Questie]: constraint node is not valid for constraint with identifier: " + constraint_id)
+	
+	# setup constraint node
+	node.id = constraint_id
+	node.quest_id = quest_id
+	node.location_id = constraint_data.location_id
+	node.category_id = constraint_data.category_id
+
+	return node
+

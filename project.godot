@@ -189,6 +189,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/runtime/questie.gd"
 }, {
+"base": "Area2D",
+"class": "QuestieLocation",
+"language": "GDScript",
+"path": "res://addons/questie/runtime/location/location.gd"
+}, {
 "base": "EditorPlugin",
 "class": "QuestieModule",
 "language": "GDScript",
@@ -326,6 +331,7 @@ _global_script_class_icons={
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
 "Questie": "res://addons/questie/editor/icons/director.png",
+"QuestieLocation": "res://addons/questie/editor/icons/village.png",
 "QuestieModule": "",
 "QuestieNode": "",
 "RealisticInventory": "res://addons/questie/editor/icons/inventory.png",

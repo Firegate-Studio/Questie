@@ -327,7 +327,7 @@ func load_workspace():
 				
 				triggers_list.add_child(part)
 				
-				var qdata = database.get_data(element.trigger_owner)
+				var qdata = database.get_data(element.owner)
 				if qdata:
 					var db = load("res://questie/item-db.tres")
 					part.uuid.text = element.item_uuid
@@ -472,8 +472,6 @@ func load_workspace():
 				part.connect("location_selected", self, "go_to_task_location_selected", [element, quest_data])
 				part.connect("deletion_request", self, "go_to_task_deletion_requested", [element, quest_data])
 
-
-	
 		for element in data.rewards:
 
 			if element is Reward_AddItem:

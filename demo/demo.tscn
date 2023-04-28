@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://demo/items/item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demo/player/player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://demo/items/grass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://demo/items/moon_powder.tscn" type="PackedScene" id=9]
 [ext_resource path="res://demo/items/Water.tscn" type="PackedScene" id=10]
+[ext_resource path="res://demo/locations/location_b.tscn" type="PackedScene" id=11]
+[ext_resource path="res://demo/locations/location_a.tscn" type="PackedScene" id=12]
 
 [node name="Node2D" type="Node2D"]
 
@@ -19,23 +21,29 @@ script = ExtResource( 6 )
 [node name="Questie" type="Node" parent="."]
 script = ExtResource( 4 )
 
+[node name="Green Garden" parent="." instance=ExtResource( 12 )]
+position = Vector2( 237, 179 )
+
+[node name="Stone Road" parent="." instance=ExtResource( 11 )]
+position = Vector2( 1653, 253 )
+
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 126, 488 )
 
 [node name="Item" parent="." instance=ExtResource( 1 )]
-position = Vector2( 906, 128 )
+position = Vector2( 1672, 187 )
 
 [node name="Item2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1534, 232 )
+position = Vector2( 1528, 73 )
 
 [node name="Item3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1236, 358 )
+position = Vector2( 1817, 324 )
 
 [node name="Item4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1518, 551 )
+position = Vector2( 1818, 84 )
 
 [node name="Item5" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1002, 657 )
+position = Vector2( 1520, 245 )
 
 [node name="Moon Powder" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1402, 185 )
@@ -44,7 +52,7 @@ position = Vector2( 1402, 185 )
 position = Vector2( 343, 758 )
 
 [node name="Moon Powder3" parent="." instance=ExtResource( 9 )]
-position = Vector2( 266, 609 )
+position = Vector2( 383, 48 )
 
 [node name="Moon Powder4" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1266, 541 )
@@ -65,13 +73,13 @@ position = Vector2( 864, 569 )
 position = Vector2( 1132, 790 )
 
 [node name="Grass" parent="." instance=ExtResource( 8 )]
-position = Vector2( 392, 511 )
+position = Vector2( 318, 105 )
 
 [node name="Grass2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 432, 648 )
+position = Vector2( 118, 245 )
 
 [node name="Grass3" parent="." instance=ExtResource( 8 )]
-position = Vector2( 555, 750 )
+position = Vector2( 229, 241 )
 
 [node name="Grass4" parent="." instance=ExtResource( 8 )]
 position = Vector2( 1280, 698 )
@@ -80,10 +88,10 @@ position = Vector2( 1280, 698 )
 position = Vector2( 1088, 446 )
 
 [node name="Grass6" parent="." instance=ExtResource( 8 )]
-position = Vector2( 921, 273 )
+position = Vector2( 217, 92 )
 
 [node name="Grass7" parent="." instance=ExtResource( 8 )]
-position = Vector2( 751, 183 )
+position = Vector2( 115, 97 )
 
 [node name="Water" parent="." instance=ExtResource( 10 )]
 position = Vector2( 897, 414 )
@@ -95,7 +103,7 @@ position = Vector2( 963, 839 )
 position = Vector2( 1400, 826 )
 
 [node name="Water4" parent="." instance=ExtResource( 10 )]
-position = Vector2( 674, 531 )
+position = Vector2( 353, 260 )
 
 [node name="Water5" parent="." instance=ExtResource( 10 )]
 position = Vector2( 273, 373 )
@@ -110,22 +118,25 @@ position = Vector2( 704, 275 )
 position = Vector2( 644, 876 )
 
 [node name="Water9" parent="." instance=ExtResource( 10 )]
-position = Vector2( 173, 687 )
+position = Vector2( 63, 167 )
 
 [node name="Water10" parent="." instance=ExtResource( 10 )]
 position = Vector2( 1549, 405 )
 
 [node name="Controls Map" parent="." instance=ExtResource( 3 )]
+visible = false
 margin_right = 1921.0
 margin_bottom = 1083.0
 
 [node name="QuestJournal" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = 559.0
 margin_top = 234.0
 margin_right = 1359.0
 margin_bottom = 834.0
 
 [node name="QuestPopup" parent="." instance=ExtResource( 7 )]
+visible = false
 margin_left = 730.0
 margin_top = 283.0
 margin_right = 1230.0

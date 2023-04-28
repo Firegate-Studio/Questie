@@ -15,3 +15,17 @@ static func get_item_node(trigger_data, trigger_id, quest_id, inventory)->Trigge
 	node.target_uuid = trigger_data.item_uuid
 
 	return node
+
+static func is_location_node(trigger_data, trigger_id, quest_id)->TriggerNode:
+	
+	var node = load("res://addons/questie/nodes/triggers/is_location.gd").new()
+	if not node:
+		print("[Questie]: trigger node is not valid for trigger with identifier: " + trigger_id)
+		return null
+
+	node.id = trigger_id
+	node.quest_id = quest_id
+	node.location_id = trigger_data.location_id
+	node.category_id = trigger_data.category_id
+
+	return node

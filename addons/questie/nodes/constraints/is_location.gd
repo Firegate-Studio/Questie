@@ -1,4 +1,4 @@
-extends TaskNode
+extends "res://addons/questie/nodes/constraints/constraint_node.gd"
 
 # the location identifier
 var location_id : String
@@ -18,6 +18,7 @@ func _enter_tree():
 		print(location_id + "==" + target_id)
 		if not location_id == target_id: continue
 			
+		print("location registred")
 		child.connect("player_entered", self, "on_player_enter_location")
 		child.connect("player_exited", self, "on_player_exit_location")
 
@@ -34,13 +35,9 @@ func _exit_tree():
 		child.disconnect("player_exited", self, "on_player_exit_location")
 
 func on_player_enter_location(player, location_id): 
-	state = TaskComplention.COMPLETED
-	emit_signal("task_completed", id)
+	bypassed = true
 
-func on_player_exit_location(player, location_id): 
-	state = TaskComplention.ONGOING
-	emit_signal("task_updated", id)
+func on_player_exit_location(player, loaction_id): 
+	bypassed = false
 
-
-
-
+   

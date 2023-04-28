@@ -44,7 +44,7 @@ func on_location_item_selected(id):
 
 	location_menu.text = location_menu.get_popup().get_item_text(id)
 
-	location_id = location_database.locations[0].id
+	location_id = location_database.locations[id].id
 	location_index = id
 	emit_signal("location_selected", location_id, location_index)
 

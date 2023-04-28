@@ -148,6 +148,14 @@ func setup_constraints(constraint_id, quest_id, quest_data):
 			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
+		
+		if constraint_data is Constraint_IsLocation:
+			
+			var constraint_node = ConstraintNodeBuilder.is_location_node(constraint_data, constraint_id, quest_id)
+			constraint_node.connect("constraint_passed", self, "handle_quest_constraint_bypassed")
+			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
+			constraints[constraint_id] = constraint_node
+			add_child(constraint_node)
 
 		emit_signal("generate_constraints", constraint_data)
 
@@ -163,6 +171,13 @@ func setup_triggers(trigger_id, quest_id, quest_data):
 			triggers[trigger_id] = trigger_node
 			add_child(trigger_node)	
 
+		if trigger_data is Trigger_IsLocation:
+			var trigger_node = TriggerNodeBuilder.is_location_node(trigger_data, trigger_id, quest_id)
+			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
+			triggers[trigger_id] = trigger_node
+			add_child(trigger_node)	
+			
+
 		emit_signal("generate_triggers", trigger_data)
 
 # create or load all task nodes
@@ -177,6 +192,13 @@ func setup_tasks(task_id, quest_id, quest_data):
 
 		if task_data is Task_CollectItem:
 			var task_node = TaskNodeBuilder.collect_item_node(task_data, task_id, quest_id, player_inventory)
+			task_node.connect("task_completed", self, "handle_quest_task_completed")
+			task_node.connect("task_updated", self, "handle_quest_task_updated")
+			tasks[task_id] = task_node
+			add_child(task_node)
+
+		if task_data is Task_GoTo:
+			var task_node = TaskNodeBuilder.go_to_node(task_data, task_id, quest_id)
 			task_node.connect("task_completed", self, "handle_quest_task_completed")
 			task_node.connect("task_updated", self, "handle_quest_task_updated")
 			tasks[task_id] = task_node
