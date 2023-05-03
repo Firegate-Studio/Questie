@@ -1554,10 +1554,10 @@ func _enter_tree():
 	workspace = get_node("VBoxContainer/HBoxContainer2/workspace area")
 	quest_data_container = workspace.get_node("HBoxContainer/ScrollContainer/data")
 	blocks = workspace.get_node("HBoxContainer/Quest Blocks")
-	constraints_list = workspace.get_node("HBoxContainer/ScrollContainer/data/constraints section/margin/container")
-	triggers_list = workspace.get_node("HBoxContainer/ScrollContainer/data/triggers section/margin/container")
-	tasks_list = workspace.get_node("HBoxContainer/ScrollContainer/data/tasks section/margin/container")
-	rewards_list = workspace.get_node("HBoxContainer/ScrollContainer/data/rewards section/margin/container")
+	constraints_list = workspace.get_node("HBoxContainer/ScrollContainer/data/constraints section/margin/ScrollContainer/container")
+	triggers_list = workspace.get_node("HBoxContainer/ScrollContainer/data/triggers section/margin/ScrollContainer/container")
+	tasks_list = workspace.get_node("HBoxContainer/ScrollContainer/data/tasks section/margin/ScrollContainer/container")
+	rewards_list = workspace.get_node("HBoxContainer/ScrollContainer/data/rewards section/margin/ScrollContainer/container")
 	
 func _ready():
 	toolbar.new_quest_btn.connect("button_down", self, "new_quest_request")

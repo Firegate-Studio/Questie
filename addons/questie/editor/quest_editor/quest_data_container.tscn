@@ -109,9 +109,15 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="container" type="VBoxContainer" parent="constraints section/margin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="constraints section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="container" type="VBoxContainer" parent="constraints section/margin/ScrollContainer"]
+margin_right = 409.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Trigger section header" type="Control" parent="."]
 margin_top = 321.0
@@ -153,9 +159,15 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="container" type="VBoxContainer" parent="triggers section/margin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="triggers section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="container" type="VBoxContainer" parent="triggers section/margin/ScrollContainer"]
+margin_right = 409.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="task section header" type="Control" parent="."]
 margin_top = 479.0
@@ -197,9 +209,17 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="container" type="VBoxContainer" parent="tasks section/margin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="tasks section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_right = 12.0
+margin_bottom = 12.0
+
+[node name="container" type="VBoxContainer" parent="tasks section/margin/ScrollContainer"]
+margin_right = 421.0
+margin_bottom = 122.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="reward section header" type="Control" parent="."]
 margin_top = 637.0
@@ -241,6 +261,12 @@ margin_top = 5.0
 margin_right = -10.0
 margin_bottom = -5.0
 
-[node name="container" type="VBoxContainer" parent="rewards section/margin"]
+[node name="ScrollContainer" type="ScrollContainer" parent="rewards section/margin"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="container" type="VBoxContainer" parent="rewards section/margin/ScrollContainer"]
+margin_right = 409.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
