@@ -12,5 +12,4 @@ export_presets.cfg
 data_*/
 
 # Generated data from questie & testing dependencies
-questie/**
 addons/dialogic

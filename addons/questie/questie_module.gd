@@ -67,6 +67,7 @@ func _enter_tree():
 		location_database = LocationDatabase.new()
 		location_database.id = UUID.generate()
 		ResourceSaver.save("res://questie/location-db.tres", location_database)
+		LocationFileBuilder.create_file()
 		print("[Questie]: location database created at path res://questie/location-db.tres")
 
 	if not file.file_exists("res://questie/settings.tres"):

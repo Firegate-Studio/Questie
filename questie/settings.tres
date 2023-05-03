@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://addons/questie/editor/settings_editor/items_settings_data.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/settings_editor/settings_data.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 1 )
+inventory = "res://examples/CustomInventory.tscn"
+
+[resource]
+script = ExtResource( 2 )
+uuid = "7181f3f5-8dcb-4ba9-bf17-78ce3d2a1220"
+items_settings = SubResource( 1 )

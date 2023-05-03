@@ -1,0 +1,36 @@
+[gd_resource type="Resource" load_steps=8 format=2]
+
+[ext_resource path="res://addons/questie/editor/location_editor/location_database.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/location_editor/category_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/location_editor/location_data.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+title = "Demo Region"
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+id = "3a044932-8fee-42c2-b610-8e944789d7b7"
+category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+name = "Location A"
+note = ""
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 3 )
+id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
+category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+name = "Location B"
+note = ""
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 3 )
+id = "3cd3ec0b-b5b1-4345-8c36-b176603b54c5"
+category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+name = "Location C"
+note = ""
+
+[resource]
+script = ExtResource( 1 )
+categories = [ SubResource( 14 ) ]
+locations = [ SubResource( 15 ), SubResource( 16 ), SubResource( 18 ) ]

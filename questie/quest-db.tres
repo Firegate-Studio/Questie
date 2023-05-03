@@ -1,0 +1,141 @@
+[gd_resource type="Resource" load_steps=23 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/reward/new_quest_reward.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd" type="Script" id=5]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/is_location_trigger.gd" type="Script" id=7]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/quest_state_constraint.gd" type="Script" id=8]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 4 )
+uuid = "dea8980f-471b-4402-b2c3-daac6f518bca"
+owner = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
+quest_id = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+uuid = "802ca875-7ee0-4eac-9b63-92fa7fab0150"
+owner = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
+state = 0
+item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+category = 3
+quantity = 5.0
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+uuid = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
+title = "Demo Quest #1"
+status = 0
+description = "Description for demo quest 1"
+constraints = [  ]
+triggers = [  ]
+tasks = [ SubResource( 3 ) ]
+rewards = [ SubResource( 4 ) ]
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 6 )
+uuid = "5720e224-7b06-499f-97ac-7ffd06e3a06f"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+location_id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
+category_index = 0
+location_index = 1
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 8 )
+uuid = "65f33acb-2065-4b75-9992-8f626a79b24f"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+quest = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
+state = 3
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 5 )
+uuid = "8e8551a4-bbb1-4e07-a0f2-a2157547781c"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+item_id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+item_category = 3
+item_quantity = 1.0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 3 )
+uuid = "f497d381-68ca-458c-bfe1-945cfdebdae5"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+state = 0
+item_uuid = "684bd8d1-07fa-487e-953b-d155b1d72678"
+category = 4
+quantity = 10.0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+uuid = "3ac1849d-78c9-4805-95ce-fea4e17d6748"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+state = 0
+item_uuid = "f67bbaa7-294d-4471-8386-00ae361337ce"
+category = 4
+quantity = 2.0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+uuid = "55b72d37-914b-4dac-8551-c78023cd51ac"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+state = 0
+item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
+category = 4
+quantity = 5.0
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 7 )
+uuid = "852132bf-edd7-481c-878b-0d83227a3e60"
+owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+location_id = "3a044932-8fee-42c2-b610-8e944789d7b7"
+category_index = 0
+location_index = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+uuid = "6736e004-46d5-4d88-a30b-accf3eb657a7"
+title = "Demo Quest #2"
+status = 0
+description = "Description for demo quest 2"
+constraints = [ SubResource( 9 ), SubResource( 14 ) ]
+triggers = [ SubResource( 10 ) ]
+tasks = [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
+rewards = [ SubResource( 8 ) ]
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 3 )
+uuid = "5b719f3d-8dd7-42ce-8f8f-be9fc4848b07"
+owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
+state = 0
+item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
+category = 4
+quantity = 5.0
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 7 )
+uuid = "32c2840f-680b-4068-aaa6-846145d15bc3"
+owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
+category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
+location_id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
+category_index = 0
+location_index = 1
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 2 )
+uuid = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
+title = "Location Quest"
+status = 0
+description = "Go to the garden to gather some flowers!"
+constraints = [  ]
+triggers = [ SubResource( 12 ) ]
+tasks = [ SubResource( 13 ) ]
+rewards = [  ]
+
+[resource]
+script = ExtResource( 1 )
+uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
+data = [ SubResource( 1 ), SubResource( 2 ), SubResource( 11 ) ]

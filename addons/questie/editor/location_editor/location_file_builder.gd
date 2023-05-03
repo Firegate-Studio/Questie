@@ -53,7 +53,23 @@ static func build():
 
 	file.close()
 
-	   
+static func create_file():  
+	var file_path = "res://questie/locations.generated.gd"
+	var index_map = {}
+
+	var file = File.new()
+
+	print("[Questie]: generating location file...")
+	file.open(file_path, File.WRITE)
+	file.store_string("# This is a generated file - do not try to modify it manually \n")
+	file.store_string("class_name GameLocations \n\n")
+	file.store_string("enum Locations {}\n")
+
+	# generating index map
+	file.store_string("# a dictionary containing all locations id associated to a location enumaration \n")
+	file.store_string("const location_map = {}\n")
+
+	file.close()
 
 static func remove_invalid_characters(word : String)->String:
 	word.capitalize()
