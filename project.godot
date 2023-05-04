@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Resource",
+"class": "CharacterDatabase",
+"language": "GDScript",
+"path": "res://addons/questie/editor/character_editor/data/characters_database.gd"
+}, {
 "base": "Node",
 "class": "Constraint",
 "language": "GDScript",
@@ -295,6 +300,7 @@ _global_script_classes=[ {
 "path": "res://addons/questie/runtime/Inventory System/weighted_inventory.gd"
 } ]
 _global_script_class_icons={
+"CharacterDatabase": "",
 "Constraint": "",
 "ConstraintNodeBuilder": "",
 "Constraint_HasItem": "",

@@ -16,6 +16,9 @@ var item_database
 # the database that contains all locations of the game
 var location_database
 
+# the database that contains all characters of the game
+var characters_database
+
 # Stores tool settings data
 var settings_data
 
@@ -69,6 +72,12 @@ func _enter_tree():
 		ResourceSaver.save("res://questie/location-db.tres", location_database)
 		LocationFileBuilder.create_file()
 		print("[Questie]: location database created at path res://questie/location-db.tres")
+
+	if not file.file_exists("res://questie/character-db.tres"):
+		print("[Questie]: creating characters database...")
+		characters_database = CharacterDatabase.new()
+		characters_database.id = UUID.generate()
+		ResourceSaver.save("res://questie/characters-db.tres", characters_database)
 
 	if not file.file_exists("res://questie/settings.tres"):
 		print("[questie]: creating settings ...")
