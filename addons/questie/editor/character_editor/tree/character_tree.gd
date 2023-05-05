@@ -3,6 +3,8 @@ extends Tree
 
 signal character_deleted(character_id)
 signal folder_deleted(folder_id)
+signal folder_selected(folder_id)
+signal character_selected(character_id)
 
 var root
 var folders = {}
@@ -30,6 +32,7 @@ func _enter_tree():
 
 	connect("item_edited", self, "on_item_edited")
 	connect("button_pressed", self, "on_button_pressed")
+	connect("item_selected", self, "on_item_selected")
 
 func on_item_edited():
 	var selected_item = get_selected()
@@ -47,7 +50,7 @@ func on_item_edited():
 
 	if is_character(selected_item):
 		var data = database.get_character_data(characters[selected_item])
-		data.name = selected_item.get_text(0)
+		data.title = selected_item.get_text(0)
 		ResourceSaver.save("res://questie/characters-db.tres", database)
 		return
 
@@ -138,7 +141,24 @@ func on_button_pressed(item, column, id):
 
 				emit_signal("character_deleted", identifier)
 		return
-			
+
+func on_item_selected(): 
+	var selected_item = get_selected()
+	if not selected_item:
+		print("[Questie]: invalid selected item")
+		return
+	
+	var identifier = ""
+	if is_folder(selected_item): 
+		identifier = folders[selected_item]
+		emit_signal("folder_selected", identifier)
+	
+	if is_character(selected_item): 
+		identifier = characters[selected_item]
+		emit_signal("character_selected", identifier)
+
+	print("[Questie]: selected item " + identifier)
+
 
 func create_folder_item(): 
 
@@ -205,7 +225,7 @@ func create_character_item():
 	var data = load("res://addons/questie/editor/character_editor/data/character.gd").new()
 	var identifier = UUID.generate()
 	data.id = identifier
-	data.name = "NewCharacter"
+	data.title = "NewCharacter"
 	database.add_character(data)
 	characters[item] = identifier
 	ResourceSaver.save("res://questie/characters-db.tres", database)
@@ -229,7 +249,7 @@ func create_subcharacter_item():
 	var data = load("res://addons/questie/editor/character_editor/data/character.gd").new()
 	var identifier = UUID.generate()
 	data.id = identifier
-	data.name = "NewCharacter"
+	data.title = "NewCharacter"
 	data.parent = folders[selected_item]
 	database.add_character(data)
 	characters[item] = identifier
@@ -292,7 +312,7 @@ func load_characters():
 		if not character.parent == "": continue
 		
 		var item = create_item()
-		item.set_text(0, character.name)
+		item.set_text(0, character.title)
 		item.set_editable(0, true)
 		item.set_expand_right(0, true)
 		item.set_icon(0, load("res://addons/questie/editor/icons/character_32x32.png"))

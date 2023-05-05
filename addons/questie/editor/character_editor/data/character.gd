@@ -4,6 +4,9 @@ extends Resource
 # the identifier of the character
 export(String) var id
 
+# the name for the character item
+export(String) var title
+
 # the character name
 export(String) var name
 
@@ -27,6 +30,9 @@ export(bool) var is_vendor
 
 # check if the character is a mob
 export(bool) var has_loot
+
+# check if the character has an inventory
+export(bool) var has_inventory
 
 # the inventory of the character
 export(Array) var inventory
