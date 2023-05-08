@@ -11,13 +11,13 @@
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 4 )
-uuid = "dea8980f-471b-4402-b2c3-daac6f518bca"
+uuid = "1704fa05-867c-4a92-b58e-99ffd8d646ec"
 owner = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
 quest_id = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 3 )
-uuid = "802ca875-7ee0-4eac-9b63-92fa7fab0150"
+uuid = "e545ca25-b39b-4d8b-9ac4-dbd684be4cfc"
 owner = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
 state = 0
 item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"

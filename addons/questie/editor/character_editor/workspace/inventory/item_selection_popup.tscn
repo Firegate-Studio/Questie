@@ -1,0 +1,102 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/questie/editor/character_editor/workspace/inventory/items_list_container.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/character_editor/workspace/inventory/item_selection_popup.gd" type="Script" id=2]
+
+[node name="ConfirmationDialog" type="ConfirmationDialog"]
+margin_right = 976.0
+margin_bottom = 584.0
+rect_min_size = Vector2( 960, 540 )
+window_title = "Select your item"
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+visible = false
+margin_right = 920.0
+margin_bottom = 14.0
+text = "Filters"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 960.0
+margin_bottom = 40.0
+alignment = 1
+
+[node name="weapon-check" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 123.0
+margin_right = 259.0
+margin_bottom = 40.0
+pressed = true
+text = "weapons"
+
+[node name="armor-check" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 263.0
+margin_right = 388.0
+margin_bottom = 40.0
+pressed = true
+text = "armors"
+
+[node name="consumables-check" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 392.0
+margin_right = 557.0
+margin_bottom = 40.0
+pressed = true
+text = "consumables"
+
+[node name="materials-check" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 561.0
+margin_right = 701.0
+margin_bottom = 40.0
+pressed = true
+text = "materials"
+
+[node name="specials-check" type="CheckButton" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 705.0
+margin_right = 837.0
+margin_bottom = 40.0
+pressed = true
+text = "specials"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 44.0
+margin_right = 960.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 42.0
+margin_bottom = 19.0
+text = "Search"
+
+[node name="search-line-text" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+margin_left = 46.0
+margin_right = 960.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 960.0
+margin_bottom = 540.0
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ScrollContainer"]
+margin_right = 890.0
+margin_bottom = 244.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ScrollContainer/CenterContainer"]
+margin_right = 890.0
+margin_bottom = 244.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+script = ExtResource( 1 )

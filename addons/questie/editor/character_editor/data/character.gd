@@ -43,5 +43,23 @@ export(Array) var shop
 # the loot of the character
 export(Array) var loot
 
+# add the inventory data to the inventory
+func add_item_data_to_inventory(data):
+    inventory.push_back(data)
 
+
+func remove_item_data_to_inventory(item_id):
+    for item in inventory:
+        if not item.id == item_id: continue
+        
+        inventory.erase(item)
+        break 
+
+# try to find and get the item data from inventory - if none is found will return NULL
+func get_item_data_from_inventory(item_id):
+    for item in inventory:
+        if not item.id == item_id: continue
+
+        return item
+    return null
 

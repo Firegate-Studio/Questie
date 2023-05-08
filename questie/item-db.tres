@@ -1,12 +1,17 @@
-[gd_resource type="Resource" load_steps=16 format=2]
+[gd_resource type="Resource" load_steps=21 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/item_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/armor_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/item_editor/consumable_data.gd" type="Script" id=3]
 [ext_resource path="res://addons/questie/editor/item_editor/weapon_data.gd" type="Script" id=4]
 [ext_resource path="res://addons/questie/editor/item_editor/item_data.gd" type="Script" id=5]
-[ext_resource path="res://addons/questie/editor/icons/fetch.png" type="Texture" id=6]
+[ext_resource path="res://addons/questie/editor/icons/armor.png" type="Texture" id=6]
 [ext_resource path="res://addons/questie/editor/item_editor/special_data.gd" type="Script" id=7]
+[ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=8]
+[ext_resource path="res://addons/questie/editor/icons/potion.png" type="Texture" id=9]
+[ext_resource path="res://addons/questie/editor/icons/material.png" type="Texture" id=10]
+[ext_resource path="res://addons/questie/editor/icons/chest.png" type="Texture" id=11]
+[ext_resource path="res://addons/questie/editor/icons/coin.png" type="Texture" id=12]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
@@ -15,7 +20,7 @@ title = "Armor"
 description = "This is a mighty armor!"
 weight = 0.1
 category = 0
-icon_path = "res://addons/questie/editor/icons/fetch.png"
+icon_path = "res://addons/questie/editor/icons/armor.png"
 icon = ExtResource( 6 )
 can_be_sold = true
 purchase_price = 50.0
@@ -30,7 +35,8 @@ title = "Mana Potion"
 description = "This is a mana potion"
 weight = 0.1
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/potion.png"
+icon = ExtResource( 9 )
 can_be_sold = true
 purchase_price = 50.0
 sell_price = 10.0
@@ -43,7 +49,8 @@ title = "Moon Powder"
 description = ""
 weight = 0.0
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/material.png"
+icon = ExtResource( 10 )
 can_be_sold = true
 purchase_price = 10.0
 sell_price = 1.0
@@ -55,7 +62,8 @@ title = "Water"
 description = ""
 weight = 0.1
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/material.png"
+icon = ExtResource( 10 )
 can_be_sold = true
 purchase_price = 2.0
 sell_price = 1.0
@@ -67,7 +75,8 @@ title = "Verbena"
 description = ""
 weight = 0.1
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/material.png"
+icon = ExtResource( 10 )
 can_be_sold = true
 purchase_price = 5.0
 sell_price = 1.0
@@ -79,7 +88,8 @@ title = "The Ring"
 description = "The ring of the dark lord"
 weight = 0.1
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/chest.png"
+icon = ExtResource( 11 )
 can_be_sold = false
 purchase_price = 50.0
 sell_price = 10.0
@@ -101,7 +111,8 @@ title = "Will of Wish Ring"
 description = ""
 weight = 0.1
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/coin.png"
+icon = ExtResource( 12 )
 can_be_sold = true
 purchase_price = 50.0
 sell_price = 10.0
@@ -123,7 +134,8 @@ title = "Sword"
 description = "A mighty sword"
 weight = 0.1
 category = 0
-icon_path = ""
+icon_path = "res://addons/questie/editor/icons/item.png"
+icon = ExtResource( 8 )
 can_be_sold = true
 purchase_price = 50.0
 sell_price = 10.0

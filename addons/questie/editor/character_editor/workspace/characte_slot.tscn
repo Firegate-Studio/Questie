@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/workspace/character_slot.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/character_editor/workspace/inventory/Inventory.tscn" type="PackedScene" id=2]
 
 [node name="Character Slot" type="Panel"]
 anchor_right = 1.0
@@ -126,20 +127,13 @@ margin_right = 1098.0
 margin_bottom = 50.0
 
 [node name="TabContainer" type="TabContainer" parent="ScrollContainer/VBoxContainer"]
-visible = false
 margin_top = 554.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_vertical = 3
 tab_align = 0
 
-[node name="Inventory" type="Control" parent="ScrollContainer/VBoxContainer/TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+[node name="Inventory" parent="ScrollContainer/VBoxContainer/TabContainer" instance=ExtResource( 2 )]
 
 [node name="Shop" type="Control" parent="ScrollContainer/VBoxContainer/TabContainer"]
 visible = false

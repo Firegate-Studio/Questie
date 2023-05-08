@@ -43,3 +43,4 @@ func get_character_data(character_id):
 
         return character
     return null
+
