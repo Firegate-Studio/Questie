@@ -13,7 +13,7 @@ var slot_asset = preload("res://addons/questie/editor/character_editor/workspace
 # the character database
 var database = preload("res://questie/characters-db.tres")
 
-var item_selection_popup = load("res://addons/questie/editor/character_editor/workspace/inventory/item_selection_popup.tscn").instance()
+var item_selection_popup = load("res://addons/questie/editor/character_editor/item_selection_popup.tscn").instance()
 
 # the selected item who has opened the item selection popup
 var selected_slot

@@ -1,26 +1,8 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
-[ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
-
-[sub_resource type="Resource" id=1]
-script = ExtResource( 2 )
-id = "3fd978a8-dbc1-4fd9-add0-77589167273f"
-title = "Severalcode"
-name = "Several"
-surname = "Code"
-biography = ""
-background = ""
-note = ""
-parent = ""
-is_vendor = true
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
 
 [resource]
 script = ExtResource( 1 )
 folders = [  ]
-characters = [ SubResource( 1 ) ]
+characters = [  ]

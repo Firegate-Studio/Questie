@@ -10,6 +10,7 @@ var _loot_checkbox : CheckBox
 var _shop_checkbox : CheckBox
 var _tab_container : TabContainer
 var _inventory
+var _shop
 
 # the identifier of the character inside the database
 var id : String
@@ -27,6 +28,7 @@ func _enter_tree():
 	_shop_checkbox = $"ScrollContainer/VBoxContainer/HBoxContainer3/Shop Checkbox"
 	_tab_container = $"ScrollContainer/VBoxContainer/TabContainer"
 	_inventory = $"ScrollContainer/VBoxContainer/TabContainer/Inventory"
+	_shop = $ScrollContainer/VBoxContainer/TabContainer/Shop
 
 	_name.connect("text_changed", self, "on_name_changed")
 	_surname.connect("text_changed", self, "on_surname_changed")
@@ -132,3 +134,4 @@ func setup(character_id):
 	_loot_checkbox.pressed = data.has_loot
 	
 	_inventory.setup(id)
+	_shop.setup(id)
