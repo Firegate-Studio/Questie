@@ -1,8 +1,35 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+name = "Mana Potion"
+icon = "res://addons/questie/editor/icons/potion.png"
+quantity = 1
+percentage = 79.0
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+id = "102f0b28-3c28-462a-9ca4-6cf68e354814"
+title = "NewCharacter"
+name = ""
+surname = ""
+biography = ""
+background = ""
+note = ""
+parent = ""
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [ SubResource( 2 ) ]
 
 [resource]
 script = ExtResource( 1 )
 folders = [  ]
-characters = [  ]
+characters = [ SubResource( 1 ) ]

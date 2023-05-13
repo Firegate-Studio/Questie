@@ -2,10 +2,16 @@
 extends Resource
 
 # the identifier of the item
-var id : String
+export(String) var id 
+
+# the name of the item
+export(String) var name
+
+# the icon path
+export(String) var icon
 
 # the quantity of the item
-var quantity : int
+export(int) var quantity
 
 # the percentage to get this item
-var percentage : float
+export(float) var percentage
