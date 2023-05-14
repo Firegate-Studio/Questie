@@ -38,12 +38,17 @@ enum ConstraintType {
 enum TriggerType{
 	IS_LOCATION,				# Change to Enter Location
 	EXIT_LOCATION				# the player enters to location
-	GET_ITEM					# player has an item in inventory
+	GET_ITEM,					# player has an item in inventory
+	INTERACT_ITEM,				# player has to interact with an item
+	INTERACT_CHARACTER			# player has to interact with a character
 }
 
 enum TaskType{
 	COLLECT_ITEM,				# The player gathered an amount of items
-	GO_TO						# The player has to go to a specific location
+	GO_TO,						# The player has to go to a specific location
+	KILL,						# the player has to kill a specific number of characters
+	TALK,						# the player has to talk with a specific character
+	INTERACT					# the player has to interact with a specific item
 }
 
 enum RewardType{

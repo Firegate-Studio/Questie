@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/completed_quest.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/constraints/has_item_block.tscn" type="PackedScene" id=2]
@@ -12,6 +12,11 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/rewards/get_item_block.tscn" type="PackedScene" id=10]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/rewards/new quest block.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/is_location_block.tscn" type="PackedScene" id=12]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/talk_block.tscn" type="PackedScene" id=13]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/interact_character.tscn" type="PackedScene" id=14]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/interact_item_block.tscn" type="PackedScene" id=15]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/triggers/interact_character_block.tscn" type="PackedScene" id=16]
+[ext_resource path="res://addons/questie/editor/quest_editor/blocks/tasks/interact_item.tscn" type="PackedScene" id=17]
 
 [node name="Quest Blocks" type="Control"]
 margin_left = 754.0
@@ -83,7 +88,7 @@ margin_bottom = 124.0
 [node name="Triggers" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 146.0
 margin_right = 250.0
-margin_bottom = 224.0
+margin_bottom = 288.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Triggers"]
 margin_right = 250.0
@@ -104,7 +109,7 @@ size_flags_horizontal = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/Triggers"]
 margin_top = 18.0
 margin_right = 250.0
-margin_bottom = 78.0
+margin_bottom = 142.0
 columns = 2
 
 [node name="get item block" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 5 )]
@@ -116,10 +121,21 @@ margin_left = 124.0
 margin_right = 244.0
 margin_bottom = 60.0
 
+[node name="Interact Item" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 15 )]
+margin_top = 64.0
+margin_right = 120.0
+margin_bottom = 124.0
+
+[node name="Interact character" parent="ScrollContainer/VBoxContainer/Triggers/GridContainer" instance=ExtResource( 16 )]
+margin_left = 124.0
+margin_top = 64.0
+margin_right = 244.0
+margin_bottom = 124.0
+
 [node name="Tasks" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 228.0
+margin_top = 292.0
 margin_right = 250.0
-margin_bottom = 306.0
+margin_bottom = 498.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Tasks"]
 margin_right = 250.0
@@ -140,7 +156,7 @@ size_flags_horizontal = 3
 [node name="GridContainer" type="GridContainer" parent="ScrollContainer/VBoxContainer/Tasks"]
 margin_top = 18.0
 margin_right = 250.0
-margin_bottom = 78.0
+margin_bottom = 206.0
 columns = 2
 
 [node name="collect block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 6 )]
@@ -153,15 +169,31 @@ margin_right = 244.0
 margin_bottom = 60.0
 
 [node name="kill block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 4 )]
-visible = false
 margin_top = 64.0
 margin_right = 120.0
-margin_bottom = 94.0
+margin_bottom = 124.0
+
+[node name="Talk to block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 13 )]
+margin_left = 124.0
+margin_top = 64.0
+margin_right = 244.0
+margin_bottom = 124.0
+
+[node name="Interact Item Block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 17 )]
+margin_top = 128.0
+margin_right = 120.0
+margin_bottom = 188.0
+
+[node name="interact character block" parent="ScrollContainer/VBoxContainer/Tasks/GridContainer" instance=ExtResource( 14 )]
+margin_left = 124.0
+margin_top = 128.0
+margin_right = 244.0
+margin_bottom = 188.0
 
 [node name="Rewards" type="VBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 310.0
+margin_top = 502.0
 margin_right = 250.0
-margin_bottom = 388.0
+margin_bottom = 580.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/VBoxContainer/Rewards"]
 margin_right = 250.0

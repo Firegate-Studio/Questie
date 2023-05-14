@@ -1,4 +1,4 @@
-# Version Alpha.3 - *Coming Soon*
+# Version Alpha.3-Beta.1 - *Coming Soon*
 This version introduces the character editor that allows creating new characters for use with the quest editor. The character editor has new blocks for creating quests, including the **Kill** Task block where the player must kill a specific amount of a particular character to complete the quest and the **Talk** Task block where the player must talk with a specific character to complete the quest.
 
 Additionally, the `character-tool` has dedicated sections to define the shop items sold by vendors and the loot that characters drop when defeated. These features enhance the character editor's functionality and allow for more detailed and customizable game development.
@@ -13,5 +13,6 @@ At its current version, Questie comes equipped with a set of useful features, in
 - **Quest Editor**
 - **Inventory System**
 - **Location Editor**
+- **Character Editor**
 
 These tools allow for easier management of items, the creation of custom quests, and an inventory system to keep track of in-game items. With these features, users can efficiently develop engaging and dynamic quests for their Godot Engine projects.

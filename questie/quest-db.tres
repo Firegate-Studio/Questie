@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=23 format=2]
+[gd_resource type="Resource" load_steps=24 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
@@ -11,13 +11,13 @@
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 4 )
-uuid = "1704fa05-867c-4a92-b58e-99ffd8d646ec"
+uuid = "3a6432a5-f521-41e0-892e-1ee59bef5623"
 owner = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
 quest_id = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 3 )
-uuid = "e545ca25-b39b-4d8b-9ac4-dbd684be4cfc"
+uuid = "bb45f26d-ed86-4a93-8865-b6ecfca16296"
 owner = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
 state = 0
 item_uuid = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
@@ -135,7 +135,18 @@ triggers = [ SubResource( 12 ) ]
 tasks = [ SubResource( 13 ) ]
 rewards = [  ]
 
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+uuid = "7244c87c-1323-4ead-9fac-886a881f9a56"
+title = "New Quest"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
 [resource]
 script = ExtResource( 1 )
 uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
-data = [ SubResource( 1 ), SubResource( 2 ), SubResource( 11 ) ]
+data = [ SubResource( 1 ), SubResource( 2 ), SubResource( 11 ), SubResource( 15 ) ]

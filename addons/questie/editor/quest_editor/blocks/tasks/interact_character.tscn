@@ -1,8 +1,8 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/questie/editor/icons/kill.png" type="Texture" id=1]
+[ext_resource path="res://addons/questie/editor/icons/character_32x32.png" type="Texture" id=1]
 
-[node name="quest block" type="Button"]
+[node name="interact character block" type="Button"]
 margin_right = 12.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 120, 60 )
@@ -24,16 +24,16 @@ margin_right = -5.0
 margin_bottom = -5.0
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
-margin_right = 48.0
+margin_right = 32.0
 margin_bottom = 50.0
-rect_min_size = Vector2( 20, 0 )
+rect_min_size = Vector2( 32, 32 )
 texture = ExtResource( 1 )
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-margin_left = 52.0
+margin_left = 36.0
 margin_top = 18.0
 margin_right = 110.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
-text = "Kill"
+text = "Interact"
