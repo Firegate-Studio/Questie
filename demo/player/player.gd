@@ -1,6 +1,6 @@
-extends KinematicBody2D
+extends QuestieCharacter
 
-export(float) var speed = 1
+export(float) var speed = 1.0
 var velocity = Vector2()
 
 func _process(_delta):

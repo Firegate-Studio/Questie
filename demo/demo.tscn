@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://demo/items/item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demo/player/player.tscn" type="PackedScene" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://demo/items/Water.tscn" type="PackedScene" id=10]
 [ext_resource path="res://demo/locations/location_b.tscn" type="PackedScene" id=11]
 [ext_resource path="res://demo/locations/location_a.tscn" type="PackedScene" id=12]
+[ext_resource path="res://demo/characters/severalcode.tscn" type="PackedScene" id=13]
+[ext_resource path="res://addons/questie/runtime/questie_events.gd" type="Script" id=14]
 
 [node name="Node2D" type="Node2D"]
 
@@ -21,6 +23,9 @@ script = ExtResource( 6 )
 [node name="Questie" type="Node" parent="."]
 script = ExtResource( 4 )
 
+[node name="QuestieEvents" type="Node" parent="."]
+script = ExtResource( 14 )
+
 [node name="Green Garden" parent="." instance=ExtResource( 12 )]
 position = Vector2( 237, 179 )
 
@@ -29,6 +34,9 @@ position = Vector2( 1653, 253 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 126, 488 )
+
+[node name="SeveralCode" parent="." instance=ExtResource( 13 )]
+position = Vector2( 926, 108 )
 
 [node name="Item" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1672, 187 )

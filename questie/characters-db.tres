@@ -1,10 +1,9 @@
-[gd_resource type="Resource" load_steps=25 format=2]
+[gd_resource type="Resource" load_steps=18 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/character_editor/data/shop_item.gd" type="Script" id=3]
 [ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=4]
-[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
@@ -46,81 +45,6 @@ has_inventory = false
 inventory = [  ]
 shop = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]
 loot = [  ]
-
-[sub_resource type="Resource" id=10]
-script = ExtResource( 5 )
-id = "f67bbaa7-294d-4471-8386-00ae361337ce"
-name = "Water"
-icon = "res://addons/questie/editor/icons/material.png"
-quantity = 1
-percentage = 77.0
-
-[sub_resource type="Resource" id=7]
-script = ExtResource( 2 )
-id = "8b346e1f-0c74-45dd-b633-b2fdbbdb200d"
-title = "Enemy A"
-name = ""
-surname = ""
-biography = ""
-background = ""
-note = ""
-parent = "52914443-c496-48bf-8df9-bc3ec020217e"
-is_vendor = false
-has_loot = true
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [ SubResource( 10 ) ]
-
-[sub_resource type="Resource" id=11]
-script = ExtResource( 5 )
-id = "3d689495-736e-49e5-8052-1c42d41da16b"
-name = "Verbena"
-icon = "res://addons/questie/editor/icons/material.png"
-quantity = 1
-percentage = 90.0
-
-[sub_resource type="Resource" id=8]
-script = ExtResource( 2 )
-id = "3498359f-19b7-452c-9ea7-83be26fab2c3"
-title = "Enemy B"
-name = ""
-surname = ""
-biography = ""
-background = ""
-note = ""
-parent = "52914443-c496-48bf-8df9-bc3ec020217e"
-is_vendor = false
-has_loot = true
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [ SubResource( 11 ) ]
-
-[sub_resource type="Resource" id=12]
-script = ExtResource( 5 )
-id = "684bd8d1-07fa-487e-953b-d155b1d72678"
-name = "Moon Powder"
-icon = "res://addons/questie/editor/icons/material.png"
-quantity = 1
-percentage = 66.0
-
-[sub_resource type="Resource" id=9]
-script = ExtResource( 2 )
-id = "4e3bf0e7-3b7a-4171-bb4b-81dc9f16ea71"
-title = "Enemy C"
-name = ""
-surname = ""
-biography = ""
-background = ""
-note = ""
-parent = "52914443-c496-48bf-8df9-bc3ec020217e"
-is_vendor = false
-has_loot = true
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [ SubResource( 12 ) ]
 
 [sub_resource type="Resource" id=15]
 script = ExtResource( 3 )
@@ -196,12 +120,22 @@ inventory = [  ]
 shop = [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]
 loot = [  ]
 
-[sub_resource type="Resource" id=6]
-script = ExtResource( 4 )
-id = "52914443-c496-48bf-8df9-bc3ec020217e"
-name = "Mobs"
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+id = "6869fdbf-9ee1-4b3f-980f-a44763ddde73"
+title = "Player"
+name = "Player"
+surname = ""
+biography = ""
+background = ""
+note = ""
 parent = ""
-children = [  ]
+is_vendor = false
+has_loot = false
+has_inventory = true
+inventory = [  ]
+shop = [  ]
+loot = [  ]
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 4 )
@@ -212,5 +146,5 @@ children = [  ]
 
 [resource]
 script = ExtResource( 1 )
-folders = [ SubResource( 6 ), SubResource( 13 ) ]
-characters = [ SubResource( 1 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 14 ), SubResource( 17 ) ]
+folders = [ SubResource( 13 ) ]
+characters = [ SubResource( 1 ), SubResource( 14 ), SubResource( 17 ), SubResource( 21 ) ]
