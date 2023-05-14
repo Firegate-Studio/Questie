@@ -26,7 +26,8 @@ func on_new_folder():
 func on_new_character(): 
 	tree.create_character_item()
 
-func on_compile(): pass
+func on_compile(): 
+	CharactersFileGenerator.compile()
 
 func on_character_selected(character_id):
 	workspace.setup(character_id)

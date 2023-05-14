@@ -1,35 +1,216 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
-[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/character_editor/data/shop_item.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=5]
 
 [sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+id = "75215c86-0845-4dda-b68c-455ecce3e193"
+name = "Armor"
+icon = "res://addons/questie/editor/icons/armor.png"
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=3]
 script = ExtResource( 3 )
 id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
 name = "Mana Potion"
 icon = "res://addons/questie/editor/icons/potion.png"
-quantity = 1
-percentage = 79.0
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+id = "31d242d5-1e35-4cda-88ec-bef709fd556b"
+name = "Sword"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 50.0
+quantity = 99.0
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-id = "102f0b28-3c28-462a-9ca4-6cf68e354814"
-title = "NewCharacter"
+id = "d8f5354f-e744-4774-beff-024671e6e1e3"
+title = "SeveralCode"
+name = "Several"
+surname = "Code"
+biography = ""
+background = ""
+note = ""
+parent = ""
+is_vendor = true
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]
+loot = [  ]
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+id = "f67bbaa7-294d-4471-8386-00ae361337ce"
+name = "Water"
+icon = "res://addons/questie/editor/icons/material.png"
+quantity = 1
+percentage = 77.0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+id = "8b346e1f-0c74-45dd-b633-b2fdbbdb200d"
+title = "Enemy A"
 name = ""
 surname = ""
 biography = ""
 background = ""
 note = ""
-parent = ""
+parent = "52914443-c496-48bf-8df9-bc3ec020217e"
 is_vendor = false
-has_loot = false
+has_loot = true
 has_inventory = false
 inventory = [  ]
 shop = [  ]
-loot = [ SubResource( 2 ) ]
+loot = [ SubResource( 10 ) ]
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+id = "3d689495-736e-49e5-8052-1c42d41da16b"
+name = "Verbena"
+icon = "res://addons/questie/editor/icons/material.png"
+quantity = 1
+percentage = 90.0
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+id = "3498359f-19b7-452c-9ea7-83be26fab2c3"
+title = "Enemy B"
+name = ""
+surname = ""
+biography = ""
+background = ""
+note = ""
+parent = "52914443-c496-48bf-8df9-bc3ec020217e"
+is_vendor = false
+has_loot = true
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [ SubResource( 11 ) ]
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+id = "684bd8d1-07fa-487e-953b-d155b1d72678"
+name = "Moon Powder"
+icon = "res://addons/questie/editor/icons/material.png"
+quantity = 1
+percentage = 66.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+id = "4e3bf0e7-3b7a-4171-bb4b-81dc9f16ea71"
+title = "Enemy C"
+name = ""
+surname = ""
+biography = ""
+background = ""
+note = ""
+parent = "52914443-c496-48bf-8df9-bc3ec020217e"
+is_vendor = false
+has_loot = true
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [ SubResource( 12 ) ]
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 3 )
+id = "31d242d5-1e35-4cda-88ec-bef709fd556b"
+name = "Sword"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 3 )
+id = "75215c86-0845-4dda-b68c-455ecce3e193"
+name = "Armor"
+icon = "res://addons/questie/editor/icons/armor.png"
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 2 )
+id = "6a039f7b-1332-4450-bc63-37a2dfe00ed5"
+title = "Blacksmith"
+name = "Nemo"
+surname = "Fatehammer"
+biography = ""
+background = ""
+note = ""
+parent = "b5d0326f-df56-49e5-9c6b-cf65a935e634"
+is_vendor = true
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [ SubResource( 15 ), SubResource( 16 ) ]
+loot = [  ]
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 3 )
+id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
+name = "Mana Potion"
+icon = "res://addons/questie/editor/icons/potion.png"
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 3 )
+id = "b1d4ec87-748b-4e2e-b6b2-b68100c030ed"
+name = "The Ring"
+icon = "res://addons/questie/editor/icons/chest.png"
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 3 )
+id = "039cd4f8-ecfa-4a44-a1a2-437d4ab18a0d"
+name = "Will of Wish Ring"
+icon = "res://addons/questie/editor/icons/coin.png"
+value = 50.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+id = "b036d5f2-e6fe-43e2-a071-3dbe636eb409"
+title = "Artisan"
+name = "Jaina"
+surname = "Proudmore"
+biography = ""
+background = ""
+note = ""
+parent = "b5d0326f-df56-49e5-9c6b-cf65a935e634"
+is_vendor = true
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]
+loot = [  ]
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 4 )
+id = "52914443-c496-48bf-8df9-bc3ec020217e"
+name = "Mobs"
+parent = ""
+children = [  ]
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 4 )
+id = "b5d0326f-df56-49e5-9c6b-cf65a935e634"
+name = "Vendors"
+parent = ""
+children = [  ]
 
 [resource]
 script = ExtResource( 1 )
-folders = [  ]
-characters = [ SubResource( 1 ) ]
+folders = [ SubResource( 6 ), SubResource( 13 ) ]
+characters = [ SubResource( 1 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 14 ), SubResource( 17 ) ]

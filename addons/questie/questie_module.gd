@@ -73,11 +73,15 @@ func _enter_tree():
 		LocationFileBuilder.create_file()
 		print("[Questie]: location database created at path res://questie/location-db.tres")
 
-	if not file.file_exists("res://questie/character-db.tres"):
+	if not file.file_exists("res://questie/characters-db.tres"):
 		print("[Questie]: creating characters database...")
 		characters_database = CharacterDatabase.new()
 		characters_database.id = UUID.generate()
 		ResourceSaver.save("res://questie/characters-db.tres", characters_database)
+
+	if not file.file_exists("res://questie/characters.generated.gd"):
+		print("[Questie]: generating characters file...")
+		CharactersFileGenerator.create()
 
 	if not file.file_exists("res://questie/settings.tres"):
 		print("[questie]: creating settings ...")

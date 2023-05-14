@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/character_editor/data/characters_database.gd"
 }, {
+"base": "Reference",
+"class": "CharactersFileGenerator",
+"language": "GDScript",
+"path": "res://addons/questie/editor/character_editor/file_generator.gd"
+}, {
 "base": "Node",
 "class": "Constraint",
 "language": "GDScript",
@@ -93,6 +98,11 @@ _global_script_classes=[ {
 "class": "DialogicUtil",
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
+}, {
+"base": "Reference",
+"class": "GameCharacters",
+"language": "GDScript",
+"path": "res://questie/characters.generated.gd"
 }, {
 "base": "Reference",
 "class": "GameLocations",
@@ -301,6 +311,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "CharacterDatabase": "",
+"CharactersFileGenerator": "",
 "Constraint": "",
 "ConstraintNodeBuilder": "",
 "Constraint_HasItem": "",
@@ -317,6 +328,7 @@ _global_script_class_icons={
 "DialogicParser": "",
 "DialogicResources": "",
 "DialogicUtil": "",
+"GameCharacters": "",
 "GameLocations": "",
 "HistoryRow": "",
 "InventoryBase": "res://addons/questie/editor/icons/inventory.png",
