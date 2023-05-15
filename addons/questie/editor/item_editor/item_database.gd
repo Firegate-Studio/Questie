@@ -182,6 +182,49 @@ func find_data(var uuid : String, var category):
 
 				return item
 
+# @brief							Find the data index from database
+# @param uuid						the item identifier
+# @param category					the item category
+func find_data_index(uuid, category):
+
+	var index = -1
+	match category:
+		ItemCategory.WEAPON:
+			for item in weapons:
+				++index
+				if not item.uuid == uuid: continue
+
+				return index
+
+		ItemCategory.ARMOR:
+			for item in armors:
+				++index
+				if not item.uuid == uuid: continue
+
+				return index
+
+		ItemCategory.CONSUMABLE:
+			for item in consumables:
+				++index
+				if not item.uuid == uuid: continue
+
+				return index
+
+		ItemCategory.MATERIAL:
+			for item in materials:
+				++index
+				if not item.uuid == uuid: continue
+
+				return index
+
+		ItemCategory.SPECIAL:
+			for item in specials:
+				++index
+				if not item.uuid == uuid: continue
+
+				return index
+
+
 # @brief							Get the item category by UUID
 # @param uuid						The item UUID
 # @result							The item category

@@ -37,7 +37,7 @@ enum ConstraintType {
 
 enum TriggerType{
 	IS_LOCATION,				# Change to Enter Location
-	EXIT_LOCATION				# the player enters to location
+	EXIT_LOCATION				# the player exits from location
 	GET_ITEM,					# player has an item in inventory
 	INTERACT_ITEM,				# player has to interact with an item
 	INTERACT_CHARACTER			# player has to interact with a character
@@ -48,7 +48,8 @@ enum TaskType{
 	GO_TO,						# The player has to go to a specific location
 	KILL,						# the player has to kill a specific number of characters
 	TALK,						# the player has to talk with a specific character
-	INTERACT					# the player has to interact with a specific item
+	INTERACT_ITEM,				# the player has to interact with a specific item
+	INTERACT_CHARACTER			# the player has to interact with a specific character
 }
 
 enum RewardType{
@@ -159,7 +160,9 @@ func get_constraint(var uuid : String):
 	# Nullify data
 	return null
 
-# @brief					push a new 
+# @brief					Add a new trigger to quest data
+# @param type				The TriggerType
+# @param owner				The quest owning this trigger
 func push_trigger(var type : int, var owner : String):
 	
 	var result = null
@@ -169,6 +172,10 @@ func push_trigger(var type : int, var owner : String):
 			result = load("res://addons/questie/editor/quest_editor/data/trigger/is_location_trigger.gd").new()
 		TriggerType.GET_ITEM:
 			result = load("res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd").new()
+		TriggerType.INTERACT_ITEM:
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/item_interaction.gd").new()
+		TriggerType.INTERACT_CHARACTER:
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd").new()
 	
 	result.owner = owner
 
@@ -205,6 +212,14 @@ func push_task(var type : int, var owner : String):
 			task = load("res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd").new()
 		TaskType.GO_TO:
 			task = load("res://addons/questie/editor/quest_editor/data/task/go_to_task.gd").new()
+		TaskType.KILL:
+			task = load("res://addons/questie/editor/quest_editor/data/task/kill_task.gd").new()
+		TaskType.TALK:
+			task = load("res://addons/questie/editor/quest_editor/data/task/talk_to_task.gd").new()
+		TaskType.INTERACT_ITEM:
+			task = load("res://addons/questie/editor/quest_editor/data/task/item_interaction.gd").new()
+		TaskType.INTERACT_CHARACTER:
+			task = load("res://addons/questie/editor/quest_editor/data/task/character_interaction.gd").new()
 
 
 	if not task:
