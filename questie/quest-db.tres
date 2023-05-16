@@ -108,7 +108,7 @@ rewards = [ SubResource( 8 ) ]
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 3 )
-uuid = "5dbc1bab-0fd1-4dee-97c8-394d9cc0bf63"
+uuid = "641328bf-bff4-45ed-8d54-9c1e59942496"
 owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
 state = 0
 item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
@@ -117,7 +117,7 @@ quantity = 5.0
 
 [sub_resource type="Resource" id=12]
 script = ExtResource( 7 )
-uuid = "b37245dd-fe30-4373-bc9c-9f667a041a8b"
+uuid = "b6524db6-d4b6-445f-aff9-4e218cd00e46"
 owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
 location_id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"

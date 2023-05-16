@@ -429,6 +429,51 @@ func load_workspace():
 				part.connect("category_selected", self, "item_interaction_trigger_category_selected", [element, quest_data])
 				part.connect("item_selected", self, "item_interaction_trigger_item_selected", [element, quest_data])
 				part.connect("deletion_request", self, "item_interaction_trigger_deletion_requested", [element, quest_data, part])
+				
+			if element is Trigger_CharacterInteraction:
+				var part = load("res://addons/questie/editor/quest_editor/parts/triggers/character_interaction_part.tscn").instance()
+
+				# Check if the triggers  map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in triggers_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+					triggers_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, triggers_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				triggers_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+				
+				# get character_data
+				var character_data = load("res://questie/characters-db.tres").characters[element.character_idx]
+				if not character_data:
+					print("[Questie]: can not retrieve character data from characters database for character with id: " + element.character_id)
+					return
+
+				# update part information
+				part.autoload(character_data.title, element.character_id, element.character_idx)
+
+				# subscribe events
+				part.connect("character_selected", self, "interaction_character_trigger_character_selected", [element, quest_data])
+				part.connect("deletion_request", self, "interaction_character_trigger_deletion_request", [element, quest_data, part])
 
 		for element in data.tasks:
 			
@@ -1358,6 +1403,57 @@ func item_interaction_trigger_deletion_requested(trigger_data, quest_data, node)
 	# clear viewport
 	node.queue_free()
 
+
+func create_interaction_character_trigger():
+	# load constraint part
+	var part = load("res://addons/questie/editor/quest_editor/parts/triggers/character_interaction_part.tscn").instance()
+	if not part:
+		print("[Questie]: can not constraint part in quest editor")
+		return
+	
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+
+	# Check quest data validation
+	if not quest_data:
+
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+
+		return
+
+	# Generates constraint data
+	var trigger_data = quest_data.push_trigger(quest_data.TriggerType.INTERACT_CHARACTER, quuid) 
+	if not trigger_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+
+	# Update UUID map
+	triggers_uuid_map[part.get_instance_id()] = trigger_data.uuid
+	print("[questie]: added trigger with [uuid]: " + trigger_data.uuid + " to quest with [uuid]: " + quuid)
+	
+	# add constraint to the quest editor viewport
+	triggers_list.add_child(part)
+
+	# subscribe events
+	part.connect("character_selected", self, "interaction_character_trigger_character_selected", [trigger_data, quest_data])
+	part.connect("deletion_request", self, "interaction_character_trigger_deletion_request", [trigger_data, quest_data, part])
+
+func  interaction_character_trigger_character_selected(character_id, character_idx, trigger_data, quest_data):
+	trigger_data.character_id = character_id
+	trigger_data.character_idx = character_idx
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+func interaction_character_trigger_deletion_request(trigger_data, quest_data, node):
+	quest_data.erase_trigger(trigger_data.uuid)
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+	# cleanup viewport
+	node.queue_free()
+
+
 ##################################################################################################################
 # TASKS
 ##################################################################################################################
@@ -1692,6 +1788,7 @@ func _ready():
 	blocks.connect("get_item_request", self, "get_item_trigger")
 	blocks.connect("is_location_trigger_request", self, "create_is_location_trigger")
 	blocks.connect("interact_item_trigger_requested", self,  "create_interact_item_trigger")
+	blocks.connect("interact_character_trigger_requested", self, "create_interaction_character_trigger")
 
 	blocks.connect("collect_request", self, "collect_item_task")
 	blocks.connect("go_to_task_request", self, "create_go_to_task")

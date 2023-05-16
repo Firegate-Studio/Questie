@@ -300,6 +300,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/nodes/builders/trigger_node_builder.gd"
 }, {
 "base": "Resource",
+"class": "Trigger_CharacterInteraction",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd"
+}, {
+"base": "Resource",
 "class": "Trigger_GetItem",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd"
@@ -383,6 +388,7 @@ _global_script_class_icons={
 "Task_GoTo": "",
 "TriggerNode": "",
 "TriggerNodeBuilder": "",
+"Trigger_CharacterInteraction": "",
 "Trigger_GetItem": "",
 "Trigger_IsLocation": "",
 "Trigger_ItemInteraction": "",
