@@ -1,150 +1,68 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
-[ext_resource path="res://addons/questie/editor/character_editor/data/shop_item.gd" type="Script" id=3]
 [ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=4]
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 3 )
-id = "75215c86-0845-4dda-b68c-455ecce3e193"
-name = "Armor"
-icon = "res://addons/questie/editor/icons/armor.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 3 )
-id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
-name = "Mana Potion"
-icon = "res://addons/questie/editor/icons/potion.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 3 )
-id = "31d242d5-1e35-4cda-88ec-bef709fd556b"
-name = "Sword"
-icon = "res://addons/questie/editor/icons/item.png"
-value = 50.0
-quantity = 99.0
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-id = "d8f5354f-e744-4774-beff-024671e6e1e3"
-title = "SeveralCode"
+id = "1469ea5b-4647-495b-ba0a-6c038153a639"
+title = "Several Code"
 name = "Several"
 surname = "Code"
 biography = ""
 background = ""
 note = ""
 parent = ""
-is_vendor = true
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]
-loot = [  ]
-
-[sub_resource type="Resource" id=15]
-script = ExtResource( 3 )
-id = "31d242d5-1e35-4cda-88ec-bef709fd556b"
-name = "Sword"
-icon = "res://addons/questie/editor/icons/item.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=16]
-script = ExtResource( 3 )
-id = "75215c86-0845-4dda-b68c-455ecce3e193"
-name = "Armor"
-icon = "res://addons/questie/editor/icons/armor.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=14]
-script = ExtResource( 2 )
-id = "6a039f7b-1332-4450-bc63-37a2dfe00ed5"
-title = "Blacksmith"
-name = "Nemo"
-surname = "Fatehammer"
-biography = ""
-background = ""
-note = ""
-parent = "b5d0326f-df56-49e5-9c6b-cf65a935e634"
-is_vendor = true
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [ SubResource( 15 ), SubResource( 16 ) ]
-loot = [  ]
-
-[sub_resource type="Resource" id=18]
-script = ExtResource( 3 )
-id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
-name = "Mana Potion"
-icon = "res://addons/questie/editor/icons/potion.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=19]
-script = ExtResource( 3 )
-id = "b1d4ec87-748b-4e2e-b6b2-b68100c030ed"
-name = "The Ring"
-icon = "res://addons/questie/editor/icons/chest.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=20]
-script = ExtResource( 3 )
-id = "039cd4f8-ecfa-4a44-a1a2-437d4ab18a0d"
-name = "Will of Wish Ring"
-icon = "res://addons/questie/editor/icons/coin.png"
-value = 50.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=17]
-script = ExtResource( 2 )
-id = "b036d5f2-e6fe-43e2-a071-3dbe636eb409"
-title = "Artisan"
-name = "Jaina"
-surname = "Proudmore"
-biography = ""
-background = ""
-note = ""
-parent = "b5d0326f-df56-49e5-9c6b-cf65a935e634"
-is_vendor = true
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [ SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]
-loot = [  ]
-
-[sub_resource type="Resource" id=21]
-script = ExtResource( 2 )
-id = "6869fdbf-9ee1-4b3f-980f-a44763ddde73"
-title = "Player"
-name = "Player"
-surname = ""
-biography = ""
-background = ""
-note = ""
-parent = ""
 is_vendor = false
 has_loot = false
-has_inventory = true
+has_inventory = false
 inventory = [  ]
 shop = [  ]
 loot = [  ]
 
-[sub_resource type="Resource" id=13]
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+id = "a7c2ce70-3edd-42dc-875c-809a93c5c954"
+title = "Enemy_A"
+name = ""
+surname = ""
+biography = ""
+background = ""
+note = ""
+parent = "41c53467-83f9-4c14-ac40-6a8f8bd12d7c"
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+id = "d26cf9dd-8d11-49c8-a578-9c5573b8b5d0"
+title = "Enemy_B"
+name = ""
+surname = ""
+biography = ""
+background = ""
+note = ""
+parent = "41c53467-83f9-4c14-ac40-6a8f8bd12d7c"
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
+
+[sub_resource type="Resource" id=2]
 script = ExtResource( 4 )
-id = "b5d0326f-df56-49e5-9c6b-cf65a935e634"
-name = "Vendors"
+id = "41c53467-83f9-4c14-ac40-6a8f8bd12d7c"
+name = "Enemies"
 parent = ""
 children = [  ]
 
 [resource]
 script = ExtResource( 1 )
-folders = [ SubResource( 13 ) ]
-characters = [ SubResource( 1 ), SubResource( 14 ), SubResource( 17 ), SubResource( 21 ) ]
+folders = [ SubResource( 2 ) ]
+characters = [ SubResource( 1 ), SubResource( 3 ), SubResource( 4 ) ]

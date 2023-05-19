@@ -3,16 +3,14 @@ class_name GameCharacters
  
 # A list of all characters
 enum Characters{
-SeveralCode,
-Blacksmith,
-Artisan,
-Player,
+Several_Code,
+Enemy_A,
+Enemy_B,
 }
 
 # A dictionary containing the characters identifiers associated to the character enumaration
 const characters_map = {
-Characters.SeveralCode : "d8f5354f-e744-4774-beff-024671e6e1e3",
-Characters.Blacksmith : "6a039f7b-1332-4450-bc63-37a2dfe00ed5",
-Characters.Artisan : "b036d5f2-e6fe-43e2-a071-3dbe636eb409",
-Characters.Player : "6869fdbf-9ee1-4b3f-980f-a44763ddde73",
+Characters.Several_Code : "1469ea5b-4647-495b-ba0a-6c038153a639",
+Characters.Enemy_A : "a7c2ce70-3edd-42dc-875c-809a93c5c954",
+Characters.Enemy_B : "d26cf9dd-8d11-49c8-a578-9c5573b8b5d0",
 }
