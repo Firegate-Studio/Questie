@@ -37,7 +37,7 @@ rewards = [ SubResource( 4 ) ]
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 6 )
-uuid = "5720e224-7b06-499f-97ac-7ffd06e3a06f"
+uuid = "fca2f291-915e-43ec-9d1a-5281fcca8d17"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
 location_id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
@@ -46,14 +46,14 @@ location_index = 1
 
 [sub_resource type="Resource" id=14]
 script = ExtResource( 8 )
-uuid = "65f33acb-2065-4b75-9992-8f626a79b24f"
+uuid = "22862a0c-d4d5-433b-859a-d140f27e4d83"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 quest = "dfd68a81-3d0b-42bd-8623-56f6e5ac9307"
 state = 3
 
 [sub_resource type="Resource" id=8]
 script = ExtResource( 5 )
-uuid = "8e8551a4-bbb1-4e07-a0f2-a2157547781c"
+uuid = "b0f2e3d8-4d3d-46d3-91b1-cbfd1a6eefd8"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 item_id = "980e24c5-dcec-41a5-bdec-5ba8b9c0ebe5"
 item_category = 3
@@ -61,7 +61,7 @@ item_quantity = 1.0
 
 [sub_resource type="Resource" id=5]
 script = ExtResource( 3 )
-uuid = "f497d381-68ca-458c-bfe1-945cfdebdae5"
+uuid = "1c260229-44e0-4876-b38b-88e6a02d38d1"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 state = 0
 item_uuid = "684bd8d1-07fa-487e-953b-d155b1d72678"
@@ -70,7 +70,7 @@ quantity = 10.0
 
 [sub_resource type="Resource" id=6]
 script = ExtResource( 3 )
-uuid = "3ac1849d-78c9-4805-95ce-fea4e17d6748"
+uuid = "bd985dae-e32d-404c-b7c9-54a68d8797ae"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 state = 0
 item_uuid = "f67bbaa7-294d-4471-8386-00ae361337ce"
@@ -79,7 +79,7 @@ quantity = 2.0
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
-uuid = "55b72d37-914b-4dac-8551-c78023cd51ac"
+uuid = "1e5f7716-d501-4be6-b221-eae1108e8c64"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 state = 0
 item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
@@ -88,7 +88,7 @@ quantity = 5.0
 
 [sub_resource type="Resource" id=10]
 script = ExtResource( 7 )
-uuid = "852132bf-edd7-481c-878b-0d83227a3e60"
+uuid = "3cd66c7d-d228-4cb1-a15e-4e806e7ff0f7"
 owner = "6736e004-46d5-4d88-a30b-accf3eb657a7"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
 location_id = "3a044932-8fee-42c2-b610-8e944789d7b7"
@@ -108,7 +108,7 @@ rewards = [ SubResource( 8 ) ]
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 3 )
-uuid = "641328bf-bff4-45ed-8d54-9c1e59942496"
+uuid = "245e998b-617a-44fe-9de7-9786b0643227"
 owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
 state = 0
 item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
@@ -117,7 +117,7 @@ quantity = 5.0
 
 [sub_resource type="Resource" id=12]
 script = ExtResource( 7 )
-uuid = "b6524db6-d4b6-445f-aff9-4e218cd00e46"
+uuid = "58ee3d42-8157-4acb-988a-a1edffd46968"
 owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
 location_id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
