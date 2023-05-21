@@ -386,8 +386,6 @@ func load_workspace():
 			if element is Trigger_ItemInteraction:
 				var part = load("res://addons/questie/editor/quest_editor/parts/triggers/item_interaction_part.tscn").instance()
 
-				if element.item_id == "": continue
-
 				# Check if the triggers  map is has valid UUID
 				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
 				if element.uuid in triggers_uuid_map.values():
@@ -421,9 +419,10 @@ func load_workspace():
 				var item_db = load("res://questie/item-db.tres")
 				var item_index = item_db.find_data_index(element.item_id, element.category)
 				var item_data = item_db.find_data(element.item_id, element.category)
-
-				# update trigger interface
-				part.autoload(element.category, item_data.title, item_index)
+				
+				if item_data: 
+					# update trigger interface
+					part.autoload(element.category, item_data.title, item_index)
 
 				# subscribe events
 				part.connect("category_selected", self, "item_interaction_trigger_category_selected", [element, quest_data])
@@ -467,9 +466,10 @@ func load_workspace():
 				if not character_data:
 					print("[Questie]: can not retrieve character data from characters database for character with id: " + element.character_id)
 					return
-
-				# update part information
-				part.autoload(character_data.title, element.character_id, element.character_idx)
+				
+				if element.character_idx > -1:
+					# update part information
+					part.autoload(character_data.title, element.character_id, element.character_idx)
 
 				# subscribe events
 				part.connect("character_selected", self, "interaction_character_trigger_character_selected", [element, quest_data])
@@ -726,9 +726,10 @@ func load_workspace():
 				if not character_data:
 					print("[Questie]: can not retrieve character data from characters database for character with id: " + element.character_id)
 					return
-
-				# update part information
-				part.autoload(character_data.title, element.character_id, element.character_idx)
+				
+				if element.character_idx > -1: 
+					# update part information
+					part.autoload(character_data.title, element.character_id, element.character_idx)
 
 				# subscribe events
 				part.connect("character_selected", self, "interaction_character_task_character_selected", [element, quest_data])
@@ -1545,6 +1546,9 @@ func create_interact_item_trigger():
 	part.connect("category_selected", self, "item_interaction_trigger_category_selected", [trigger_data, quest_data])
 	part.connect("item_selected", self, "item_interaction_trigger_item_selected", [trigger_data, quest_data])
 	part.connect("deletion_request", self, "item_interaction_trigger_deletion_requested", [trigger_data, quest_data, part])
+
+	# save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 func item_interaction_trigger_category_selected(category_idx, trigger_data, quest_data):
 	trigger_data.category = category_idx
