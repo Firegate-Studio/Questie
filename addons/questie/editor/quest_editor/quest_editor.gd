@@ -643,7 +643,98 @@ func load_workspace():
 				part.connect("character_selected", self, "kill_task_character_selected", [element, quest_data])
 				part.connect("deletion_request", self, "kill_task_deletion_requested", [element, quest_data, part])
 			
-			
+			if element is Task_ItemInteraction:
+				var part = load("res://addons/questie/editor/quest_editor/parts/tasks/item_interaction_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in tasks_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+					tasks_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, tasks_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				tasks_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+
+				# get item database
+				var item_db = load("res://questie/item-db.tres")
+				var item_index = item_db.find_data_index(element.item_id, element.category)
+				var item_data = item_db.find_data(element.item_id, element.category)
+				
+				if item_data:
+					# update trigger interface
+					part.autoload(element.category, item_data.title, item_index)
+
+				# subscribe events
+				part.connect("category_selected", self, "item_interaction_task_category_selected", [element, quest_data])
+				part.connect("item_selected", self, "item_interaction_task_item_selected", [element, quest_data])
+				part.connect("deletion_request", self, "item_interaction_task_deletion_requested", [element, quest_data, part])
+
+			if element is Task_CharacterInteraction:
+				var part = load("res://addons/questie/editor/quest_editor/parts/tasks/character_interaction_part.tscn").instance()
+
+				# Check if the constraints map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in tasks_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+					tasks_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, tasks_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					tasks_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				tasks_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+				
+				# get character_data
+				var character_data = load("res://questie/characters-db.tres").characters[element.character_idx]
+				if not character_data:
+					print("[Questie]: can not retrieve character data from characters database for character with id: " + element.character_id)
+					return
+
+				# update part information
+				part.autoload(character_data.title, element.character_id, element.character_idx)
+
+				# subscribe events
+				part.connect("character_selected", self, "interaction_character_task_character_selected", [element, quest_data])
+				part.connect("deletion_request", self, "interaction_character_task_deletion_request", [element, quest_data, part])
+
+				
 
 		for element in data.rewards:
 
@@ -1416,6 +1507,7 @@ func is_location_trigger_deletion_requested(node, trigger_data, quest_data):
 
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
+
 func create_interact_item_trigger():
 	# load constraint part
 	var part = load("res://addons/questie/editor/quest_editor/parts/triggers/item_interaction_part.tscn").instance()
@@ -1752,6 +1844,7 @@ func kill_task_deletion_requested(task_data, quest_data, part):
 	# clear viewport
 	part.queue_free()
 
+
 func create_talk_to_task():
 	# load constraint part
 	var part = load("res://addons/questie/editor/quest_editor/parts/tasks/talk_to_part.tscn").instance()
@@ -1800,6 +1893,132 @@ func talk_to_task_character_selected(character_id, character_index, task_data, q
 func talk_to_task_deletion_requested(task_data, quest_data, node):
 	quest_data.erase_task(task_data.uuid)
 	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+
+func create_interact_item_task():
+	# load constraint part
+	var part = load("res://addons/questie/editor/quest_editor/parts/tasks/item_interaction_part.tscn").instance()
+	if not part:
+		print("[Questie]: can not constraint part in quest editor")
+		return
+		
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+	
+	# Check quest data validation
+	if not quest_data:
+	
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+	
+		return
+	
+	# Generates constraint data
+	var task_data = quest_data.push_task(quest_data.TaskType.INTERACT_ITEM, quuid) 
+	if not task_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+	
+	# Update UUID map
+	tasks_uuid_map[part.get_instance_id()] = task_data.uuid
+	print("[questie]: added trigger with [uuid]: " + task_data.uuid + " to quest with [uuid]: " + quuid)
+		
+	# add constraint to the quest editor viewport
+	tasks_list.add_child(part)
+	
+	# subscribe events
+	part.connect("category_selected", self, "item_interaction_task_category_selected", [task_data, quest_data])
+	part.connect("item_selected", self, "item_interaction_task_item_selected", [task_data, quest_data])
+	part.connect("deletion_request", self, "item_interaction_task_deletion_requested", [task_data, quest_data, part])
+
+	# save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+func item_interaction_task_category_selected(category_idx, task_data, quest_data):
+	task_data.category = category_idx
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+func item_interaction_task_item_selected(item_idx, category_idx, task_data, quest_data):
+	var item_db = load("res://questie/item-db.tres")
+	
+	var item_data
+	match category_idx:
+		ItemDatabase.ItemCategory.WEAPON:
+			item_data = item_db.weapons[item_idx]
+		ItemDatabase.ItemCategory.ARMOR:
+			item_data = item_db.armors[item_idx]
+		ItemDatabase.ItemCategory.CONSUMABLE:
+			item_data = item_db.consumables[item_idx]
+		ItemDatabase.ItemCategory.MATERIAL:
+			item_data = item_db.materials[item_idx]
+		ItemDatabase.ItemCategory.SPECIAL:
+			item_data = item_db.specials[item_idx]
+	
+	task_data.item_id = item_data.uuid
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+func item_interaction_task_deletion_requested(task_data, quest_data, node):
+	quest_data.erase_task(task_data.uuid)
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+	# clear viewport
+	node.queue_free()
+
+
+func create_interaction_character_task():
+	# load constraint part
+	var part = load("res://addons/questie/editor/quest_editor/parts/tasks/character_interaction_part.tscn").instance()
+	if not part:
+		print("[Questie]: can not constraint part in quest editor")
+		return
+		
+	# Get current quest(the quest displayed in quest editor) data
+	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
+	var quest_data = database.get_data(quuid)
+	
+	# Check quest data validation
+	if not quest_data:
+	
+		# Log Error
+		print("[questie]: can't retrieve quest data from quest item with [uuid]: " + quuid)
+	
+		return
+	
+	# Generates constraint data
+	var task_data = quest_data.push_task(quest_data.TaskType.INTERACT_CHARACTER, quuid) 
+	if not task_data:
+		# Log error
+		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
+		return
+	
+	# Update UUID map
+	tasks_uuid_map[part.get_instance_id()] = task_data.uuid
+	print("[questie]: added trigger with [uuid]: " + task_data.uuid + " to quest with [uuid]: " + quuid)
+		
+	# add constraint to the quest editor viewport
+	tasks_list.add_child(part)
+	
+	# subscribe events
+	part.connect("character_selected", self, "interaction_character_task_character_selected", [task_data, quest_data])
+	part.connect("deletion_request", self, "interaction_character_task_deletion_request", [task_data, quest_data, part])
+
+	# save data
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+func  interaction_character_task_character_selected(character_id, character_idx, task_data, quest_data):
+	task_data.character_id = character_id
+	task_data.character_idx = character_idx
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+func interaction_character_task_deletion_request(task_data, quest_data, node):
+	quest_data.erase_task(task_data.uuid)
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+	
+	# cleanup viewport
+	node.queue_free()
+	
 
 ###############################################################################################################
 # REWARDS 
@@ -1984,6 +2203,8 @@ func _ready():
 	blocks.connect("go_to_task_request", self, "create_go_to_task")
 	blocks.connect("kill_task_request", self, "create_kill_task")
 	blocks.connect("talk_to_request", self, "create_talk_to_task")
+	blocks.connect("interact_item_task_requested", self, "create_interact_item_task")
+	blocks.connect("interact_character_task_requested", self, "create_interaction_character_task")
 
 	blocks.connect("add_item_reward_request", self, "create_add_item_reward")
 	blocks.connect("new_quest_reward_request", self, "create_quest_reward")

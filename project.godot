@@ -280,6 +280,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/nodes/builders/task_node_builder.gd"
 }, {
 "base": "Resource",
+"class": "Task_CharacterInteraction",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/task/character_interaction.gd"
+}, {
+"base": "Resource",
 "class": "Task_CollectItem",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd"
@@ -288,6 +293,11 @@ _global_script_classes=[ {
 "class": "Task_GoTo",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/data/task/go_to_task.gd"
+}, {
+"base": "Resource",
+"class": "Task_ItemInteraction",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/task/item_interaction.gd"
 }, {
 "base": "Resource",
 "class": "Task_Kill",
@@ -394,8 +404,10 @@ _global_script_class_icons={
 "SlotInventory": "res://addons/questie/editor/icons/inventory.png",
 "TaskNode": "",
 "TaskNodeBuilder": "",
+"Task_CharacterInteraction": "",
 "Task_CollectItem": "",
 "Task_GoTo": "",
+"Task_ItemInteraction": "",
 "Task_Kill": "",
 "Task_TalkTo": "",
 "TriggerNode": "",
