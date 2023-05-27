@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://demo/items/item.tscn" type="PackedScene" id=1]
 [ext_resource path="res://demo/player/player.tscn" type="PackedScene" id=2]
@@ -17,6 +17,11 @@
 [ext_resource path="res://demo/items/interactable.tscn" type="PackedScene" id=15]
 [ext_resource path="res://demo/characters/blacksmith.tscn" type="PackedScene" id=16]
 [ext_resource path="res://demo/character_interaction_example.gd" type="Script" id=17]
+[ext_resource path="res://demo/character_talk_example.gd" type="Script" id=18]
+[ext_resource path="res://demo/characters/wolf.tscn" type="PackedScene" id=19]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 71.5, 80 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 64.5, 62.5 )
@@ -44,6 +49,13 @@ position = Vector2( 126, 488 )
 [node name="SeveralCode" parent="." instance=ExtResource( 13 )]
 position = Vector2( 899, 76 )
 
+[node name="Talking Trigger" type="Area2D" parent="SeveralCode"]
+script = ExtResource( 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SeveralCode/Talking Trigger"]
+position = Vector2( 1, 36 )
+shape = SubResource( 2 )
+
 [node name="blacksmith" parent="." instance=ExtResource( 16 )]
 position = Vector2( 664, 73 )
 character_type = 1
@@ -54,6 +66,66 @@ script = ExtResource( 17 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="blacksmith/Area2D"]
 position = Vector2( 1.5, 0.5 )
 shape = SubResource( 1 )
+
+[node name="wolf" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1497, 596 )
+
+[node name="wolf5" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1388, 598 )
+
+[node name="wolf2" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1609, 594 )
+
+[node name="wolf3" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1718, 597 )
+
+[node name="wolf4" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1827, 597 )
+
+[node name="wolf6" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1497, 697 )
+
+[node name="wolf7" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1388, 699 )
+
+[node name="wolf8" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1609, 695 )
+
+[node name="wolf9" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1718, 698 )
+
+[node name="wolf10" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1827, 698 )
+
+[node name="wolf11" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1492, 985 )
+
+[node name="wolf12" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1383, 987 )
+
+[node name="wolf13" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1604, 983 )
+
+[node name="wolf14" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1713, 986 )
+
+[node name="wolf15" parent="." instance=ExtResource( 19 )]
+position = Vector2( 1822, 986 )
+
+[node name="wolf16" parent="." instance=ExtResource( 19 )]
+position = Vector2( 475, 1004 )
+
+[node name="wolf17" parent="." instance=ExtResource( 19 )]
+position = Vector2( 366, 1006 )
+
+[node name="wolf18" parent="." instance=ExtResource( 19 )]
+position = Vector2( 587, 1002 )
+
+[node name="wolf19" parent="." instance=ExtResource( 19 )]
+position = Vector2( 696, 1005 )
+
+[node name="wolf20" parent="." instance=ExtResource( 19 )]
+position = Vector2( 805, 1005 )
 
 [node name="Item" parent="." instance=ExtResource( 1 )]
 position = Vector2( 1672, 187 )

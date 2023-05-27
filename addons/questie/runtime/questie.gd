@@ -74,7 +74,7 @@ var rewards = {}
 # create or load all quests nodes
 func setup_quests():
 
-	# todo: quest saves should loded here
+	# todo: quest saves should be loded here
 
 	for quest in quest_database.data:
 		
@@ -111,7 +111,7 @@ func setup_quests():
 		for reward in quest.rewards:
 			current.add_reward(reward.uuid)
 
-		# Enlist quest to the game
+		# Enlist quest for the game
 		game_quests.push_back(current)
 
 # create or load constraint nodes
@@ -209,6 +209,31 @@ func setup_tasks(task_id, quest_id, quest_data):
 
 		if task_data is Task_GoTo:
 			var task_node = TaskNodeBuilder.go_to_node(task_data, task_id, quest_id)
+			task_node.connect("task_completed", self, "handle_quest_task_completed")
+			task_node.connect("task_updated", self, "handle_quest_task_updated")
+			tasks[task_id] = task_node
+			add_child(task_node)
+
+		if task_data is Task_ItemInteraction:
+			var task_node = TaskNodeBuilder.item_interaction_node(task_data, task_id, quest_id)
+			task_node.connect("task_completed", self, "handle_quest_task_completed")
+			tasks[task_id] = task_node
+			add_child(task_node)
+
+		if task_data is Task_CharacterInteraction:
+			var task_node = TaskNodeBuilder.character_interaction_node(task_data, task_id, quest_id)
+			task_node.connect("task_completed", self, "handle_quest_task_completed")
+			tasks[task_id] = task_node
+			add_child(task_node)
+
+		if task_data is Task_TalkTo:
+			var task_node = TaskNodeBuilder.talk_to_node(task_data, task_id, quest_id)
+			task_node.connect("task_completed", self, "handle_quest_task_completed")
+			tasks[task_id] = task_node
+			add_child(task_node)
+
+		if task_data is Task_Kill:
+			var task_node = TaskNodeBuilder.kill_node(task_data, task_id, quest_id)
 			task_node.connect("task_completed", self, "handle_quest_task_completed")
 			task_node.connect("task_updated", self, "handle_quest_task_updated")
 			tasks[task_id] = task_node
@@ -576,6 +601,6 @@ func _ready():
 		for quest_node in game_quests:
 
 			if not can_activate_quest(quest_node): continue
-
+			
 			activate_quest(quest_node.uuid)
 

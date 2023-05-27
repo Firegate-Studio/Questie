@@ -1,0 +1,21 @@
+{
+	"color": "#ff48e117",
+	"description": "",
+	"display_name": "",
+	"display_name_bool": false,
+	"id": "character-1685197992.json",
+	"mirror_portraits": false,
+	"name": "Severalcode",
+	"nickname": "",
+	"nickname_bool": false,
+	"offset_x": 0,
+	"offset_y": 0,
+	"portraits": [
+		{
+			"name": "Default",
+			"path": "res://demo/characters/Wordpress Transparent.png"
+		}
+	],
+	"scale": 100,
+	"theme": ""
+}

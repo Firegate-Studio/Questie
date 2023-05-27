@@ -1,7 +1,8 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=9 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=3]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -54,7 +55,31 @@ inventory = [  ]
 shop = [  ]
 loot = [  ]
 
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+id = "f6a089d9-247d-4735-88a1-d145957b0079"
+title = "Wolf"
+name = "Wolf"
+surname = ""
+biography = ""
+background = ""
+note = ""
+parent = "c056aee7-cf7c-448f-af6c-9a8976edb43a"
+is_vendor = false
+has_loot = true
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+id = "c056aee7-cf7c-448f-af6c-9a8976edb43a"
+name = "Monsters"
+parent = ""
+children = [  ]
+
 [resource]
 script = ExtResource( 1 )
-folders = [  ]
-characters = [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ) ]
+folders = [ SubResource( 7 ) ]
+characters = [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ), SubResource( 8 ) ]

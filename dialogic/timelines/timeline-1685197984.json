@@ -1,0 +1,212 @@
+{
+	"events": [
+		{
+			"animation": "[Default]",
+			"animation_length": 0,
+			"change_mirror_portrait": false,
+			"change_z_index": false,
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_002",
+			"mirror_portrait": false,
+			"portrait": "Default",
+			"portrait_definition": "",
+			"position": {
+				"0": false,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": true
+			},
+			"type": 0,
+			"z_index": 0
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Greetings fellow developer.\nThis is me, Severalcode,"
+		},
+		{
+			"event_id": "dialogic_015",
+			"id": "anchor-1634488067",
+			"index": 0,
+			"name": "Checkpoint"
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "How can I help you?"
+		},
+		{
+			"choice": "What is Questie?",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Questie is an addon for Godot Engine that offers a comprehensive suite of tools for building engaging quests in your games. \nWith Questie, you can easily create and manage quests, define objectives, and reward players for their achievements. \nWhether you're designing a complex RPG or a simple adventure game, Questie has everything you need to create immersive quests that keep players coming back for more."
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"choice": "Constraints",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "Constraints are blocks that verify requirements to be met in order to proceed with the initiation of a specific quest.\nFor example, if to start a mission it is necessary to talk to a character, placing a constraint on a specific location; then the quest will not trigger unless you speak to that character in that specific location."
+		},
+		{
+			"event_id": "dialogic_015",
+			"id": "anchor-1634488067",
+			"index": 0,
+			"name": "Constraints check"
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_010",
+			"options": [
+
+			],
+			"portrait": "",
+			"question": "Which block did you want to have more information about?"
+		},
+		{
+			"choice": "Has Item",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This constraint verifies that an object is present in the inventory"
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"choice": "Has Quest",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This constraint checks if a specific quest is currently active."
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"choice": "Quest State",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This constraint verifies the completion status of a specific quest. \nAll quests can be in the following states: Idle, OnGoing, Completed, and Failed.\nAn Idle Quest is a mission that has not yet started.\nAn Ongoing Quest is a mission currently in progress.\nA Completed Quest is a quest that has been successfully completed.\nA Failed Quest is a quest that, for some reason, has failed and cannot be completed anymore."
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"choice": "Is Location",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"character": "character-1685197992.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "This constraint checks if the player is located in a specific place."
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"choice": "Nothing",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 1
+		},
+		{
+			"event_id": "dialogic_013"
+		},
+		{
+			"anchor_id": "anchor-1634488067",
+			"event_id": "dialogic_016"
+		},
+		{
+			"choice": "Triggers",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"choice": "Tasks",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"choice": "Rewards",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"choice": "Documentation",
+			"condition": "",
+			"definition": "",
+			"event_id": "dialogic_011",
+			"value": ""
+		},
+		{
+			"event_id": "dialogic_013"
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.4.2 - Dev",
+		"file": "timeline-1685197984.json",
+		"name": "Tutorial"
+	}
+}

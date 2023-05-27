@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/item_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/armor_data.gd" type="Script" id=2]
@@ -81,6 +81,54 @@ can_be_sold = true
 purchase_price = 5.0
 sell_price = 1.0
 
+[sub_resource type="Resource" id=9]
+script = ExtResource( 5 )
+uuid = "fb263464-4cdf-4549-9d8f-45873811a62b"
+title = "White Meat"
+description = ""
+weight = 0.1
+category = 0
+icon_path = ""
+can_be_sold = true
+purchase_price = 50.0
+sell_price = 10.0
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 5 )
+uuid = "0a758e9e-525e-4802-bfc0-46aacca6ff02"
+title = "Leather"
+description = ""
+weight = 0.1
+category = 0
+icon_path = ""
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+uuid = "4b66447f-f950-4331-86ce-2ceb922f65c6"
+title = "Red Meat"
+description = ""
+weight = 0.1
+category = 0
+icon_path = ""
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+uuid = "6a977b2a-5f14-45f4-bb78-69a600371de3"
+title = "Black Leather"
+description = ""
+weight = 0.1
+category = 0
+icon_path = ""
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
 [sub_resource type="Resource" id=5]
 script = ExtResource( 7 )
 uuid = "b1d4ec87-748b-4e2e-b6b2-b68100c030ed"
@@ -149,5 +197,5 @@ uuid = "7776dc2e-a605-414b-93ae-3a5fbf198130"
 weapons = [ SubResource( 1 ) ]
 armors = [ SubResource( 2 ) ]
 consumables = [ SubResource( 4 ) ]
-materials = [ SubResource( 3 ), SubResource( 6 ), SubResource( 7 ) ]
+materials = [ SubResource( 3 ), SubResource( 6 ), SubResource( 7 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ) ]
 specials = [ SubResource( 5 ), SubResource( 8 ) ]
