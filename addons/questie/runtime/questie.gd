@@ -165,7 +165,6 @@ func setup_triggers(trigger_id, quest_id, quest_data):
 	for trigger_data in quest_data.triggers:
 
 		if trigger_data is Trigger_GetItem:
-			
 			var trigger_node = TriggerNodeBuilder.get_item_node(trigger_data, trigger_id, quest_id, player_inventory)
 			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
 			triggers[trigger_id] = trigger_node
@@ -176,7 +175,18 @@ func setup_triggers(trigger_id, quest_id, quest_data):
 			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
 			triggers[trigger_id] = trigger_node
 			add_child(trigger_node)	
+
+		if trigger_data is Trigger_ItemInteraction:
+			var trigger_node = TriggerNodeBuilder.item_interaction_node(trigger_data, trigger_id, quest_id)
+			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
+			triggers[trigger_id] = trigger_node
+			add_child(trigger_node)
 			
+		if trigger_data is Trigger_CharacterInteraction:
+			var trigger_node = TriggerNodeBuilder.character_interaction_node(trigger_data, trigger_id, quest_id)
+			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
+			triggers[trigger_id] = trigger_node
+			add_child(trigger_node)
 
 		emit_signal("generate_triggers", trigger_data)
 

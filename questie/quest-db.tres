@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=24 format=2]
+[gd_resource type="Resource" load_steps=29 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd" type="Script" id=6]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/is_location_trigger.gd" type="Script" id=7]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/quest_state_constraint.gd" type="Script" id=8]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/item_interaction.gd" type="Script" id=9]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd" type="Script" id=10]
 
 [sub_resource type="Resource" id=4]
 script = ExtResource( 4 )
@@ -108,7 +110,7 @@ rewards = [ SubResource( 8 ) ]
 
 [sub_resource type="Resource" id=13]
 script = ExtResource( 3 )
-uuid = "805d2dfe-9ba0-47bc-b9c4-15876ff1ddfb"
+uuid = "3ed0493b-6261-4c87-b741-993369f0654e"
 owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
 state = 0
 item_uuid = "3d689495-736e-49e5-8052-1c42d41da16b"
@@ -117,7 +119,7 @@ quantity = 5.0
 
 [sub_resource type="Resource" id=12]
 script = ExtResource( 7 )
-uuid = "ac736343-954a-4d79-b71d-a99ba2e6e057"
+uuid = "bd0d389c-bcc4-4fce-9641-430bfdd5c18f"
 owner = "96d27e6c-c927-47df-9f41-18bcf9f230eb"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
 location_id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
@@ -135,18 +137,43 @@ triggers = [ SubResource( 12 ) ]
 tasks = [ SubResource( 13 ) ]
 rewards = [  ]
 
+[sub_resource type="Resource" id=16]
+script = ExtResource( 9 )
+uuid = "a30e901d-5e75-4234-a293-b1c78b8d3677"
+owner = "3394fa65-e472-424b-96e8-a651bd89c18f"
+item_id = "31d242d5-1e35-4cda-88ec-bef709fd556b"
+category = 1
+
 [sub_resource type="Resource" id=15]
 script = ExtResource( 2 )
 uuid = "3394fa65-e472-424b-96e8-a651bd89c18f"
-title = "testing"
+title = "Item Interaction Trigger"
 status = 0
 description = "fill quest description here"
 constraints = [  ]
-triggers = [  ]
+triggers = [ SubResource( 16 ) ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 10 )
+uuid = "d7e75547-129d-45bf-b5e7-1d3e966ca117"
+owner = "5c0e94f0-f374-4318-bf6a-48060596df3d"
+character_id = "1fafdf9b-c412-42c6-a015-499b3ae261fd"
+character_idx = 1
+
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+uuid = "5c0e94f0-f374-4318-bf6a-48060596df3d"
+title = "Character Interaction Trigger"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
+triggers = [ SubResource( 18 ) ]
 tasks = [  ]
 rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
-data = [ SubResource( 1 ), SubResource( 2 ), SubResource( 11 ), SubResource( 15 ) ]
+data = [ SubResource( 1 ), SubResource( 2 ), SubResource( 11 ), SubResource( 15 ), SubResource( 17 ) ]

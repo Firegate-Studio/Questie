@@ -1,8 +1,7 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
-[ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -21,48 +20,41 @@ inventory = [  ]
 shop = [  ]
 loot = [  ]
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=5]
 script = ExtResource( 2 )
-id = "a7c2ce70-3edd-42dc-875c-809a93c5c954"
-title = "Enemy_A"
-name = ""
-surname = ""
-biography = ""
+id = "1fafdf9b-c412-42c6-a015-499b3ae261fd"
+title = "Blacksmith"
+name = "Edward"
+surname = "Sinner"
+biography = "A wonderful blacksmith"
 background = ""
 note = ""
-parent = "41c53467-83f9-4c14-ac40-6a8f8bd12d7c"
-is_vendor = false
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-id = "d26cf9dd-8d11-49c8-a578-9c5573b8b5d0"
-title = "Enemy_B"
-name = ""
-surname = ""
-biography = ""
-background = ""
-note = ""
-parent = "41c53467-83f9-4c14-ac40-6a8f8bd12d7c"
-is_vendor = false
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 4 )
-id = "41c53467-83f9-4c14-ac40-6a8f8bd12d7c"
-name = "Enemies"
 parent = ""
-children = [  ]
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+id = "cf1cd4b4-c412-4cc0-8e70-7d85f7fd05f7"
+title = "Magician"
+name = "Tylor"
+surname = "Swift"
+biography = ""
+background = ""
+note = ""
+parent = ""
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
 
 [resource]
 script = ExtResource( 1 )
-folders = [ SubResource( 2 ) ]
-characters = [ SubResource( 1 ), SubResource( 3 ), SubResource( 4 ) ]
+folders = [  ]
+characters = [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ) ]

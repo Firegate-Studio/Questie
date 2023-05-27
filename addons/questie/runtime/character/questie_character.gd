@@ -1,14 +1,22 @@
 extends KinematicBody2D
 class_name QuestieCharacter, "res://addons/questie/editor/icons/character_64x64.png"
 
-export(GameCharacters.Characters) var character
+export(GameCharacters.Characters) var character_type
 
 # define if this character is the main character or not
 export(bool) var is_player = false
 
+func _enter_tree():
+	property_list_changed_notify()
+	print("enter character: " + var2str(character_type))
+
+func _init():
+	print("init character: " + var2str(character_type))
+
 # get the character identier as string
 func get_id()->String:
-	return GameCharacters.characters_map[character]
+	print("character: " + var2str(character_type))
+	return GameCharacters.characters_map[character_type]
 
 # try to get character data - if none is found returns NULL
 func get_data():
