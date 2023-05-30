@@ -80,6 +80,7 @@ func setup_quests():
 		
 		# Create quest
 		var current = load("res://addons/questie/runtime/quest_system/quest.gd").new()
+		current.name = quest.title
 		current.uuid = quest.uuid
 		current.title = quest.title
 		current.description = quest.description
@@ -112,7 +113,18 @@ func setup_quests():
 			current.add_reward(reward.uuid)
 
 		# Enlist quest for the game
+		print("[Questie]: pushing quest: " + quest.title)
 		game_quests.push_back(current)
+
+		# activate all triggerable quests
+		for quest_node in game_quests:
+
+			if not can_activate_quest(quest_node): 
+				print("[Questie]: quest [" + quest_node.title + "] can't be activated due rules check")
+				continue
+
+			print("[Questie]: activating quest [" + quest_node.title + "] for activation")
+			activate_quest(quest_node.uuid)
 
 # create or load constraint nodes
 func setup_constraints(constraint_id, quest_id, quest_data): 
@@ -344,7 +356,7 @@ func all_quest_constraints_bypassed(quest_node)->bool:
 func all_quest_triggers_completed(quest_node)->bool:
 
 	# BUG: for some reason this command ever activates the quest ignoring triggers rules
-	if quest_node.triggers.size() == 0: return true
+	#if quest_node.triggers.size() == 0: return true
 
 	for trigger_id in quest_node.triggers:
 
@@ -406,10 +418,10 @@ func destroy_all_quest_tasks(quest_node):
 func can_activate_quest(quest_node)->bool:
 
 	if not all_quest_constraints_bypassed(quest_node): 
-		print("[Questie]: constraint check not bypassed for quest: " + quest_node.uuid)
+		print("[Questie]: constraint check not bypassed for quest: " + quest_node.title)
 		return false
 	if not all_quest_triggers_completed(quest_node): 
-		print("[Questie]: trigger check rule not fulfilled for quest: " + quest_node.uuid)
+		print("[Questie]: trigger check rule not fulfilled for quest: " + quest_node.title)
 		return false
 
 	return true
@@ -596,11 +608,4 @@ func _ready():
 
 		# quest system
 		setup_quests()
-
-		# activate all triggerable quests
-		for quest_node in game_quests:
-
-			if not can_activate_quest(quest_node): continue
-			
-			activate_quest(quest_node.uuid)
 

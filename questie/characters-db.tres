@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=4]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -55,6 +56,14 @@ inventory = [  ]
 shop = [  ]
 loot = [  ]
 
+[sub_resource type="Resource" id=9]
+script = ExtResource( 4 )
+id = "75215c86-0845-4dda-b68c-455ecce3e193"
+name = "Armor"
+icon = "res://addons/questie/editor/icons/armor.png"
+quantity = 5.0
+percentage = 50.0
+
 [sub_resource type="Resource" id=8]
 script = ExtResource( 2 )
 id = "f6a089d9-247d-4735-88a1-d145957b0079"
@@ -70,7 +79,7 @@ has_loot = true
 has_inventory = false
 inventory = [  ]
 shop = [  ]
-loot = [  ]
+loot = [ SubResource( 9 ) ]
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
