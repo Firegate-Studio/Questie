@@ -13,7 +13,7 @@ title = "Demo Region"
 script = ExtResource( 3 )
 id = "3a044932-8fee-42c2-b610-8e944789d7b7"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-name = "Location A"
+name = "Long Lake Square"
 note = ""
 
 [sub_resource type="Resource" id=16]

@@ -116,16 +116,6 @@ func setup_quests():
 		print("[Questie]: pushing quest: " + quest.title)
 		game_quests.push_back(current)
 
-		# activate all triggerable quests
-		for quest_node in game_quests:
-
-			if not can_activate_quest(quest_node): 
-				print("[Questie]: quest [" + quest_node.title + "] can't be activated due rules check")
-				continue
-
-			print("[Questie]: activating quest [" + quest_node.title + "] for activation")
-			activate_quest(quest_node.uuid)
-
 # create or load constraint nodes
 func setup_constraints(constraint_id, quest_id, quest_data): 
 	for constraint_data in quest_data.constraints:
@@ -356,7 +346,7 @@ func all_quest_constraints_bypassed(quest_node)->bool:
 func all_quest_triggers_completed(quest_node)->bool:
 
 	# BUG: for some reason this command ever activates the quest ignoring triggers rules
-	#if quest_node.triggers.size() == 0: return true
+	if quest_node.triggers.size() == 0: return true
 
 	for trigger_id in quest_node.triggers:
 
@@ -601,11 +591,20 @@ func handle_quest_task_updated(task_id):
 
 #------------------------------------------------------------------------------------
 
-func _ready(): 
+func _enter_tree():
+	# initial setup
+	setup_inventory()
 
-		# initial setup
-		setup_inventory()
+	# quest system
+	setup_quests()
 
-		# quest system
-		setup_quests()
+func _ready():
+	# activate all triggerable quests
+	for quest_node in game_quests:
 
+		if not can_activate_quest(quest_node): 
+			print("[Questie]: quest [" + quest_node.title + "] can't be activated due rules check")
+			continue
+
+		print("[Questie]: activating quest [" + quest_node.title + "] for activation")
+		activate_quest(quest_node.uuid)
