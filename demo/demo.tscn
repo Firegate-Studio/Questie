@@ -108,7 +108,7 @@ margin_top = 283.0
 margin_right = 1230.0
 margin_bottom = 783.0
 
-[node name="Item6" parent="." instance=ExtResource( 15 )]
+[node name="Interactable" parent="." instance=ExtResource( 15 )]
 position = Vector2( 92, 1003 )
 
 [node name="QuestieLocation" type="Area2D" parent="."]

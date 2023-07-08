@@ -325,6 +325,16 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd"
 }, {
 "base": "Resource",
+"class": "Trigger_EnterLocation",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd"
+}, {
+"base": "Resource",
+"class": "Trigger_ExitLocation",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/trigger/exit_location.gd"
+}, {
+"base": "Resource",
 "class": "Trigger_GetItem",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd"
@@ -413,6 +423,8 @@ _global_script_class_icons={
 "TriggerNode": "",
 "TriggerNodeBuilder": "",
 "Trigger_CharacterInteraction": "",
+"Trigger_EnterLocation": "",
+"Trigger_ExitLocation": "",
 "Trigger_GetItem": "",
 "Trigger_IsLocation": "",
 "Trigger_ItemInteraction": "",

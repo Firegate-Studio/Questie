@@ -36,7 +36,7 @@ enum ConstraintType {
 }
 
 enum TriggerType{
-	IS_LOCATION,				# Change to Enter Location
+	ENTER_LOCATION,				# the player enter questie location
 	EXIT_LOCATION				# the player exits from location
 	GET_ITEM,					# player has an item in inventory
 	INTERACT_ITEM,				# player has to interact with an item
@@ -168,8 +168,10 @@ func push_trigger(var type : int, var owner : String):
 	var result = null
 
 	match type:
-		TriggerType.IS_LOCATION: 
-			result = load("res://addons/questie/editor/quest_editor/data/trigger/is_location_trigger.gd").new()
+		TriggerType.ENTER_LOCATION: 
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd").new()
+		TriggerType.EXIT_LOCATION:
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/exit_location.gd").new()
 		TriggerType.GET_ITEM:
 			result = load("res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd").new()
 		TriggerType.INTERACT_ITEM:

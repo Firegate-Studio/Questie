@@ -20,14 +20,14 @@ note = ""
 script = ExtResource( 3 )
 id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-name = "Location B"
+name = "Cave"
 note = ""
 
 [sub_resource type="Resource" id=18]
 script = ExtResource( 3 )
 id = "3cd3ec0b-b5b1-4345-8c36-b176603b54c5"
 category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-name = "Location C"
+name = "Mountains"
 note = ""
 
 [resource]

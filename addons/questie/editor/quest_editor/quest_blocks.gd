@@ -13,7 +13,8 @@ signal is_location_constraint_request()
 # Called when clicking on the get_item trigger
 signal get_item_request()
 # Called when clicking on is_location trigger
-signal is_location_trigger_request()
+signal enter_location_trigger_request()
+signal exit_location_trigger_request()
 signal interact_item_trigger_requested()
 signal interact_character_trigger_requested()
 
@@ -37,7 +38,8 @@ var constraint_is_location: Button
 
 var trigger_area_bounds : Button
 var trigger_get_item : Button
-var trigger_is_location : Button
+var trigger_enter_location : Button
+var trigger_exit_location : Button
 var trigger_interact_item : Button
 var trigger_interact_character : Button
 
@@ -78,9 +80,13 @@ func trigger_get_item_pressed():
 	print("[questie]: get item trigger requested")
 	emit_signal("get_item_request")
 	
-func trigger_is_location_pressed():
-	print("[Questie]: is location trigger requested")
-	emit_signal("is_location_trigger_request")
+func trigger_enter_location_pressed():
+	print("[Questie]: enter location tregger requested")
+	emit_signal("enter_location_trigger_request")
+	
+func trigger_exit_location_pressed():
+	print("[Questie]: exit location trigger requested")
+	emit_signal("exit_location_trigger_request")
 
 func trigger_interact_item_pressed():
 	print("[Questie]: interact with item trigger requested")
@@ -135,7 +141,8 @@ func _enter_tree():
 	constraint_is_location = $"ScrollContainer/VBoxContainer/Constraints/GridContainer/Is Location block"
 
 	trigger_get_item = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/get item block"
-	trigger_is_location = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/is location block"
+	trigger_enter_location = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/Enter Location"
+	trigger_exit_location = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/Exit Location"
 	trigger_interact_item = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/Interact Item"
 	trigger_interact_character = $"ScrollContainer/VBoxContainer/Triggers/GridContainer/Interact character"
 
@@ -157,7 +164,8 @@ func _enter_tree():
 
 	# Subscribe trigger events
 	trigger_get_item.connect("button_down", self, "trigger_get_item_pressed")
-	trigger_is_location.connect("button_down", self, "trigger_is_location_pressed")
+	trigger_enter_location.connect("button_down", self, "trigger_enter_location_pressed")
+	trigger_exit_location.connect("button_down", self, "trigger_exit_location_pressed")
 	trigger_interact_item.connect("button_down", self, "trigger_interact_item_pressed")
 	trigger_interact_character.connect("button_down", self, "trigger_interact_character_pressed")
 
@@ -183,7 +191,8 @@ func _exit_tree():
 
 	# Unsubscribe trigger events
 	trigger_get_item.disconnect("button_down", self, "trigger_get_item_pressed")
-	trigger_is_location.disconnect("button_down", self, "trigger_is_location_pressed")
+	trigger_enter_location.disconnect("button_down", self, "trigger_enter_location_pressed")
+	trigger_exit_location.disconnect("button_down", self, "trigger_exit_location_pressed")
 	trigger_interact_item.disconnect("button_down", self, "trigger_interact_item_pressed")
 	trigger_interact_character.disconnect("button_down", self, "trigger_interact_character_pressed")
 

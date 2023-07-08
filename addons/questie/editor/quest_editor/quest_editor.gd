@@ -475,6 +475,44 @@ func load_workspace():
 				part.connect("character_selected", self, "interaction_character_trigger_character_selected", [element, quest_data])
 				part.connect("deletion_request", self, "interaction_character_trigger_deletion_request", [element, quest_data, part])
 
+			if element is Trigger_EnterLocation: 
+				var part = load("res://addons/questie/editor/quest_editor/parts/triggers/enter_location_part.tscn").instance()
+
+				# Check if the triggers  map is has valid UUID
+				# NB: the second case should be used for startup; because the maps are not stored anywhere. Only at runtime editor execution
+				if element.uuid in triggers_uuid_map.values():
+
+					# Register new instance id and remove old keys from UUID map
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+					triggers_uuid_map.erase(find_old_key_in_dictionary(part.get_instance_id(), element.uuid, triggers_uuid_map))
+					
+				else:
+
+					# Generated instance and id
+					element.uuid = UUID.generate()
+					triggers_uuid_map[part.get_instance_id()] = element.uuid
+
+
+				triggers_list.add_child(part)
+					
+				# Get quest data
+				var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
+				var quest_data = database.get_data(quuid)
+
+				# Check quest data validation
+				if not quest_data:
+
+					# Log error
+					print("[questie]: can't retrieve data form quest item with [uuid]: " + quuid)
+
+					return
+
+				part.autoload(element.location_id, element.location_index, element.category_index)
+
+				part.connect("location_selected", self, "enter_location_trigger_location_selected", [element, quest_data])
+				part.connect("category_selected", self, "enter_location_trigger_category_selected", [element, quest_data])
+				part.connect("deletion_request", self, "enter_location_trigger_deletion_requested", [part, element, quest_data])
+
 		for element in data.tasks:
 			
 			if element is Task_CollectItem:
@@ -1443,13 +1481,12 @@ func trigger_get_item_delete(var control, var data):
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 
-func create_is_location_trigger():
-	# load constraint part
-	var part = load("res://addons/questie/editor/quest_editor/parts/triggers/is_location_part.tscn").instance()
+func create_enter_location_trigger():
+	var part = load("res://addons/questie/editor/quest_editor/parts/triggers/enter_location_part.tscn").instance()
 	if not part:
-		print("[Questie]: can not constraint part in quest editor")
+		print("Questie: can not load enter_location part in quest editor")
 		return
-	
+
 	# Get current quest(the quest displayed in quest editor) data
 	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]			# Get the current quest UUID
 	var quest_data = database.get_data(quuid)
@@ -1463,7 +1500,7 @@ func create_is_location_trigger():
 		return
 
 	# Generates constraint data
-	var trigger_data = quest_data.push_trigger(quest_data.TriggerType.IS_LOCATION, quuid) 
+	var trigger_data = quest_data.push_trigger(quest_data.TriggerType.ENTER_LOCATION, quuid) 
 	if not trigger_data:
 		# Log error
 		print("[questie]: quest contraint generation failed for quest with [uuid]: " + quuid)
@@ -1477,35 +1514,32 @@ func create_is_location_trigger():
 	triggers_list.add_child(part)
 
 	# subscribe events
-	part.connect("category_selected", self, "is_location_trigger_category_selected", [trigger_data, quest_data])
-	part.connect("location_selected", self, "is_location_trigger_location_selected", [trigger_data, quest_data])
-	part.connect("deletion_request", self, "is_location_trigger_deletion_requested", [trigger_data, quest_data])
+	part.connect("location_selected", self, "enter_location_trigger_location_selected", [trigger_data, quest_data])
+	part.connect("category_selected", self, "enter_location_trigger_category_selected", [trigger_data, quest_data])
+	part.connect("deletion_request", self, "enter_location_trigger_deletion_requested", [part, trigger_data, quest_data])
 
-	# update database
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
-func is_location_trigger_category_selected(category_id, category_index, trigger_data, quest_data): 
-	trigger_data.category_id = category_id
+func enter_location_trigger_location_selected(location_id, location_index, trigger_data, quest_data):
+	trigger_data.location_id = location_id
+	trigger_data.location_index = location_index
+	ResourceSaver.save("res://questie/quest-db.tres", database)	
+
+func enter_location_trigger_category_selected(category_index, trigger_data, quest_data):
 	trigger_data.category_index = category_index
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
-func is_location_trigger_location_selected(location_id, location_index, trigger_data, quest_data):
-	trigger_data.location_id = location_id
-	trigger_data.location_index = location_index
-	ResourceSaver.save("res://questie/quest-db.tres", database)
-
-func is_location_trigger_deletion_requested(node, trigger_data, quest_data): 
-	triggers_list.remove_child(node)
-
-	node.disconnect("category_selected", self, "is_location_trigger_category_selected")
-	node.disconnect("location_selected", self, "is_location_trigger_location_selected")
-	node.disconnect("deletion_request", self, "is_location_trigger_deletion_requested")
+func enter_location_trigger_deletion_requested(node, part, trigger_data, quest_data):
+	part.disconnect("location_selected", self, "enter_location_trigger_location_selected")
+	part.disconnect("category_selected", self, "enter_location_trigger_category_selected")
+	part.disconnect("deletion_request", self, "enter_location_trigger_deletion_requested")
 
 	triggers_uuid_map.erase(node.get_instance_id())
 	quest_data.erase_trigger(trigger_data.uuid)
 
-	node.queue_free()
-
+	triggers_list.remove_child(part)
+	part.queue_free()
+	
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 
@@ -2199,9 +2233,9 @@ func _ready():
 	blocks.connect("is_location_constraint_request", self, "create_is_location_constraint")
 
 	blocks.connect("get_item_request", self, "get_item_trigger")
-	blocks.connect("is_location_trigger_request", self, "create_is_location_trigger")
 	blocks.connect("interact_item_trigger_requested", self,  "create_interact_item_trigger")
 	blocks.connect("interact_character_trigger_requested", self, "create_interaction_character_trigger")
+	blocks.connect("enter_location_trigger_request", self, "create_enter_location_trigger")
 
 	blocks.connect("collect_request", self, "collect_item_task")
 	blocks.connect("go_to_task_request", self, "create_go_to_task")
