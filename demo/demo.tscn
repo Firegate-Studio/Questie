@@ -34,6 +34,9 @@ script = ExtResource( 6 )
 position = Vector2( 959.5, 538.25 )
 scale = Vector2( 1.35532, 1.12565 )
 texture = ExtResource( 11 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Questie" type="Node" parent="."]
 script = ExtResource( 4 )

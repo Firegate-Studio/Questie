@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/questie/editor/icons/map.png" type="Texture" id=1]
 [ext_resource path="res://addons/questie/editor/icons/trash_32x32.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/parts/triggers/exit_location_part.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/icons/tag.png" type="Texture" id=4]
 
 [node name="Exit Location Part" type="Panel"]
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 560, 50 )
+script = ExtResource( 3 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -22,8 +25,20 @@ margin_right = 24.0
 margin_bottom = 27.0
 text = "exit"
 
-[node name="location menu" type="MenuButton" parent="HBoxContainer"]
+[node name="category menu" type="MenuButton" parent="HBoxContainer"]
 margin_left = 28.0
+margin_right = 263.0
+margin_bottom = 40.0
+focus_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource( 4 )
+flat = false
+align = 0
+expand_icon = true
+items = [ "Demo Region", null, 0, false, false, 0, 0, null, "", false ]
+
+[node name="location menu" type="MenuButton" parent="HBoxContainer"]
+margin_left = 267.0
 margin_right = 502.0
 margin_bottom = 40.0
 size_flags_horizontal = 3
@@ -31,7 +46,7 @@ icon = ExtResource( 1 )
 flat = false
 align = 0
 expand_icon = true
-items = [ "Several Code", null, 0, false, false, 0, 0, null, "", false, "Blacksmith", null, 0, false, false, 1, 0, null, "", false, "Magician", null, 0, false, false, 2, 0, null, "", false, "Wolf", null, 0, false, false, 3, 0, null, "", false ]
+items = [ "Long Lake Square", null, 0, false, false, 0, 0, null, "", false, "Cave", null, 0, false, false, 1, 0, null, "", false, "Mountains", null, 0, false, false, 2, 0, null, "", false ]
 
 [node name="delete button" type="Button" parent="HBoxContainer"]
 margin_left = 506.0
