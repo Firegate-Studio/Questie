@@ -199,11 +199,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/quest_db.gd"
 }, {
-"base": "Node",
-"class": "Questie",
-"language": "GDScript",
-"path": "res://addons/questie/runtime/questie.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "QuestieCharacter",
 "language": "GDScript",
@@ -393,7 +388,6 @@ _global_script_class_icons={
 "Quest": "",
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
-"Questie": "res://addons/questie/editor/icons/director.png",
 "QuestieCharacter": "res://addons/questie/editor/icons/character_64x64.png",
 "QuestieLocation": "res://addons/questie/editor/icons/village.png",
 "QuestieModule": "",
@@ -435,6 +429,7 @@ config/icon="res://icon.png"
 [autoload]
 
 QuestieEvents="*res://addons/questie/runtime/questie_events.gd"
+Questie="*res://addons/questie/runtime/questie.gd"
 
 [display]
 

@@ -1,5 +1,4 @@
 # The [QuestDirector] is a component that manages the database quests
-class_name Questie, "res://addons/questie/editor/icons/director.png"
 extends Node
 
 # A reference to the quest database
@@ -70,6 +69,25 @@ var constraints = {}
 var triggers = {}
 var tasks = {}
 var rewards = {}
+
+# @brief MASTER FUNCTION to initialize Questie pipeline
+# @note Call this only this function to initialize Questie
+func setup(): 
+	# initial setup
+	setup_inventory()
+
+	# quest system
+	setup_quests()
+
+	# activate all triggerable quests
+	for quest_node in game_quests:
+
+		if not can_activate_quest(quest_node): 
+			print("[Questie]: quest [" + quest_node.title + "] can't be activated due rules check")
+			continue
+
+		print("[Questie]: activating quest [" + quest_node.title + "] for activation")
+		activate_quest(quest_node.uuid)
 
 # create or load all quests nodes
 func setup_quests():
@@ -602,22 +620,3 @@ func handle_quest_task_updated(task_id):
 	print("[Questie]: updated task [" + task_id + "] for quest ["+quest_node.title+"]")
 
 #------------------------------------------------------------------------------------
-
-# todo: move wrap _enter_tree and _ready functions to initialize() to use Questie with autoloads 
-func _enter_tree():
-	# initial setup
-	setup_inventory()
-
-	# quest system
-	setup_quests()
-
-func _ready():
-	# activate all triggerable quests
-	for quest_node in game_quests:
-
-		if not can_activate_quest(quest_node): 
-			print("[Questie]: quest [" + quest_node.title + "] can't be activated due rules check")
-			continue
-
-		print("[Questie]: activating quest [" + quest_node.title + "] for activation")
-		activate_quest(quest_node.uuid)

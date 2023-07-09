@@ -2,13 +2,10 @@ extends Area2D
 
 var item_tag : ItemTag
 
-var questie : Questie 
-
 
 func _ready():
 
 	item_tag = $"ItemTag"
-	questie = get_node("../Questie")
 
 	connect("body_entered", self, "on_trigger_enter")
 

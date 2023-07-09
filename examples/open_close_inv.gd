@@ -1,12 +1,6 @@
 extends Node
 
-var questie 
-
 var is_opened = false
-
-func _enter_tree():
-
-	questie = get_parent().get_node("Questie")
 
 
 func _input(event):
@@ -15,9 +9,9 @@ func _input(event):
 
 		if not is_opened:
 			print("[questie]: opening inventory")
-			questie.player_inventory.show()
+			Questie.player_inventory.show()
 			is_opened = true
 		else:
 			print("[questie]: closing inventory")
-			questie.player_inventory.hide()
+			Questie.player_inventory.hide()
 			is_opened = false
