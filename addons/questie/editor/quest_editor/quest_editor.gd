@@ -2031,6 +2031,7 @@ func talk_to_task_character_selected(character_id, character_index, task_data, q
 
 func talk_to_task_deletion_requested(task_data, quest_data, node):
 	quest_data.erase_task(task_data.uuid)
+	node.queue_free()
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 
