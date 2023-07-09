@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=26 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/data/task/kill_task.gd" type="Script" id=6]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd" type="Script" id=7]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/task/go_to_task.gd" type="Script" id=8]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd" type="Script" id=9]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/exit_location.gd" type="Script" id=10]
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 3 )
@@ -107,18 +109,45 @@ triggers = [  ]
 tasks = [ SubResource( 18 ), SubResource( 21 ) ]
 rewards = [ SubResource( 19 ), SubResource( 20 ) ]
 
+[sub_resource type="Resource" id=23]
+script = ExtResource( 9 )
+uuid = "3dc27efc-67d4-474e-8fd6-743fc84f13eb"
+owner = "22c29700-fb63-47e3-a37b-1f4502950688"
+location_id = "3a044932-8fee-42c2-b610-8e944789d7b7"
+location_index = 0
+category_index = 0
+
 [sub_resource type="Resource" id=22]
 script = ExtResource( 2 )
-uuid = "ea307792-e5e2-4c8c-b488-99d2d06cd032"
-title = "TEST!@"
+uuid = "22c29700-fb63-47e3-a37b-1f4502950688"
+title = "Location Test"
 status = 0
-description = "fill quest description here"
+description = "Il giocatore era entrato in un nuova zona di caccia!"
 constraints = [  ]
-triggers = [  ]
+triggers = [ SubResource( 23 ) ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 10 )
+uuid = "d8d2051b-7df5-4181-844e-250791e20089"
+owner = "21b5d5d2-9e45-412a-aae4-917ba4b33f8f"
+location_id = "3a044932-8fee-42c2-b610-8e944789d7b7"
+location_index = 0
+category_index = 0
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+uuid = "21b5d5d2-9e45-412a-aae4-917ba4b33f8f"
+title = "Location Test 22"
+status = 0
+description = "Il giocatore aveva lasciato un posto affascinante!"
+constraints = [  ]
+triggers = [ SubResource( 25 ) ]
 tasks = [  ]
 rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
-data = [ SubResource( 8 ), SubResource( 10 ), SubResource( 16 ), SubResource( 22 ) ]
+data = [ SubResource( 8 ), SubResource( 10 ), SubResource( 16 ), SubResource( 22 ), SubResource( 24 ) ]

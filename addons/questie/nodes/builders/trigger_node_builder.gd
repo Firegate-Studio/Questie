@@ -54,3 +54,27 @@ static func character_interaction_node(trigger_data, trigger_id, quest_id)->Trig
 	node.quest_id = quest_id
 	node.character_id = trigger_data.character_id
 	return node
+
+static func enter_location_node(trigger_data, trigger_id, quest_id)->TriggerNode:
+
+	var node = load("res://addons/questie/nodes/triggers/enter_location.gd").new()
+	if not node:
+		print("[Questie]: trigger node is not valid for trigger with identifier: " + trigger_id)
+		return null
+
+	node.id = trigger_id
+	node.quest_id = quest_id
+	node.location_id = trigger_data.location_id
+	return node
+
+static func exit_location_node(trigger_data, trigger_id, quest_id)->TriggerNode:
+
+	var node = load("res://addons/questie/nodes/triggers/exit_location.gd").new()
+	if not node:
+		print("[Questie]: trigger node is not valid for trigger with identifier: " + trigger_id)
+		return null
+
+	node.id = trigger_id
+	node.quest_id = quest_id
+	node.location_id = trigger_data.location_id
+	return node

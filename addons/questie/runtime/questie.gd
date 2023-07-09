@@ -190,6 +190,18 @@ func setup_triggers(trigger_id, quest_id, quest_data):
 			triggers[trigger_id] = trigger_node
 			add_child(trigger_node)
 
+		if trigger_data is Trigger_EnterLocation:
+			var trigger_node = TriggerNodeBuilder.enter_location_node(trigger_data, trigger_id, quest_id)
+			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
+			triggers[trigger_id] = trigger_node
+			add_child(trigger_node)
+
+		if trigger_data is Trigger_ExitLocation:
+			var trigger_node = TriggerNodeBuilder.exit_location_node(trigger_data, trigger_id, quest_id)
+			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
+			triggers[trigger_id] = trigger_node
+			add_child(trigger_node)
+
 		emit_signal("generate_triggers", trigger_data)
 
 # create or load all task nodes
@@ -591,6 +603,7 @@ func handle_quest_task_updated(task_id):
 
 #------------------------------------------------------------------------------------
 
+# todo: move wrap _enter_tree and _ready functions to initialize() to use Questie with autoloads 
 func _enter_tree():
 	# initial setup
 	setup_inventory()
