@@ -9,14 +9,11 @@ var target_kills : int
 # the current amount of kills
 var current_kills : int = 0
 
-var questie_events : QuestieEvents
-
 func _enter_tree():
-	questie_events = get_node("../../QuestieEvents")
-	questie_events.connect("kill", self, "on_character_kill")
+	QuestieEvents.connect("kill", self, "on_character_kill")
 
 func _exit_tree():
-	questie_events.disconnect("kill", self, "on_character_kill")
+	QuestieEvents.disconnect("kill", self, "on_character_kill")
 
 func on_character_kill(_character_id, is_player):
 

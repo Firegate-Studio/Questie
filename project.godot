@@ -209,11 +209,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/runtime/character/questie_character.gd"
 }, {
-"base": "Node",
-"class": "QuestieEvents",
-"language": "GDScript",
-"path": "res://addons/questie/runtime/questie_events.gd"
-}, {
 "base": "Area2D",
 "class": "QuestieLocation",
 "language": "GDScript",
@@ -400,7 +395,6 @@ _global_script_class_icons={
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
 "Questie": "res://addons/questie/editor/icons/director.png",
 "QuestieCharacter": "res://addons/questie/editor/icons/character_64x64.png",
-"QuestieEvents": "res://addons/questie/editor/icons/event_64x64.png",
 "QuestieLocation": "res://addons/questie/editor/icons/village.png",
 "QuestieModule": "",
 "QuestieNode": "",
@@ -437,6 +431,10 @@ _global_script_class_icons={
 config/name="Quest System For Godot"
 run/main_scene="res://demo/demo.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+QuestieEvents="*res://addons/questie/runtime/questie_events.gd"
 
 [display]
 

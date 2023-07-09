@@ -1,10 +1,6 @@
 extends Area2D
 
-var questie_events : QuestieEvents
-
 func _enter_tree():
-	questie_events = get_node("../../QuestieEvents")
-	
 	connect("body_entered", self, "on_player_entered")
 
 func _exit_tree():
@@ -23,6 +19,6 @@ func on_player_entered(body):
 	var character_id = owner.get_id()
 
 	# call kill event to notify questie
-	questie_events.emit_signal("kill", character_id, owner.is_player)
+	QuestieEvents.emit_signal("kill", character_id, owner.is_player)
 	
 	owner.queue_free()

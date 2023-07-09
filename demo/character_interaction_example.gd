@@ -1,10 +1,6 @@
 extends Area2D
 
-var questie_events : QuestieEvents
-
 func _enter_tree():
-	questie_events = get_node("../../QuestieEvents")
-
 	connect("body_entered", self, "on_player_enter_trigger")
 
 func on_player_enter_trigger(body):
@@ -21,4 +17,4 @@ func on_player_enter_trigger(body):
 	var character_id = parent.get_id()
 	
 	# call character interaction event            
-	questie_events.emit_signal("interact_character", character_id)
+	QuestieEvents.emit_signal("interact_character", character_id)

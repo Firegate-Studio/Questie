@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=20 format=2]
+[gd_resource type="Resource" load_steps=24 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
@@ -8,10 +8,11 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/data/task/kill_task.gd" type="Script" id=6]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd" type="Script" id=7]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/task/go_to_task.gd" type="Script" id=8]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/task/item_interaction.gd" type="Script" id=9]
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 3 )
-uuid = "c8124d62-336e-41a8-a333-22d2e79030e1"
+uuid = "db19c3f9-803c-4871-9a18-242923924175"
 owner = "ac5de724-691c-41f3-9152-3ef7e33755e0"
 state = 0
 character_id = "1469ea5b-4647-495b-ba0a-6c038153a639"
@@ -107,7 +108,34 @@ triggers = [  ]
 tasks = [ SubResource( 18 ), SubResource( 21 ) ]
 rewards = [ SubResource( 19 ), SubResource( 20 ) ]
 
+[sub_resource type="Resource" id=23]
+script = ExtResource( 9 )
+uuid = "08c66919-7e09-46bb-849f-f37aa3d9d7a2"
+owner = "b248cace-b5e7-4b7b-b05d-13fc461efa5b"
+state = 0
+item_id = "31d242d5-1e35-4cda-88ec-bef709fd556b"
+category = 1
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 5 )
+uuid = "76168691-b475-4c57-9bf3-ce43f5f1cbba"
+owner = "b248cace-b5e7-4b7b-b05d-13fc461efa5b"
+state = 0
+character_id = "1fafdf9b-c412-42c6-a015-499b3ae261fd"
+character_idx = 1
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 2 )
+uuid = "b248cace-b5e7-4b7b-b05d-13fc461efa5b"
+title = "Autoload"
+status = 0
+description = "Missione per testare gli autoload"
+constraints = [  ]
+triggers = [  ]
+tasks = [ SubResource( 23 ), SubResource( 24 ) ]
+rewards = [  ]
+
 [resource]
 script = ExtResource( 1 )
 uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
-data = [ SubResource( 8 ), SubResource( 10 ), SubResource( 16 ) ]
+data = [ SubResource( 8 ), SubResource( 10 ), SubResource( 16 ), SubResource( 22 ) ]

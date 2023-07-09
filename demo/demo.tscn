@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://addons/questie/runtime/location/location.gd" type="Script" id=1]
 [ext_resource path="res://demo/player/player.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://demo/journal/QuestPopup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://demo/locations/grond_test.png" type="Texture" id=11]
 [ext_resource path="res://demo/characters/severalcode.tscn" type="PackedScene" id=13]
-[ext_resource path="res://addons/questie/runtime/questie_events.gd" type="Script" id=14]
 [ext_resource path="res://demo/items/interactable.tscn" type="PackedScene" id=15]
 [ext_resource path="res://demo/characters/blacksmith.tscn" type="PackedScene" id=16]
 [ext_resource path="res://demo/character_interaction_example.gd" type="Script" id=17]
@@ -40,9 +39,6 @@ __meta__ = {
 
 [node name="Questie" type="Node" parent="."]
 script = ExtResource( 4 )
-
-[node name="QuestieEvents" type="Node" parent="."]
-script = ExtResource( 14 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 126, 488 )

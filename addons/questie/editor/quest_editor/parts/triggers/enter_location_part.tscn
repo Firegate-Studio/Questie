@@ -35,7 +35,7 @@ icon = ExtResource( 4 )
 flat = false
 align = 0
 expand_icon = true
-items = [ "Demo Region", null, 0, false, false, 0, 0, null, "", false ]
+items = [ "Demo Region", null, 0, false, false, 0, 0, null, "", false, "Test Region", null, 0, false, false, 1, 0, null, "", false ]
 
 [node name="location menu" type="MenuButton" parent="HBoxContainer"]
 margin_left = 272.0
@@ -46,7 +46,6 @@ icon = ExtResource( 1 )
 flat = false
 align = 0
 expand_icon = true
-items = [ "Long Lake Square", null, 0, false, false, 0, 0, null, "", false, "Cave", null, 0, false, false, 1, 0, null, "", false, "Mountains", null, 0, false, false, 2, 0, null, "", false ]
 
 [node name="delete button" type="Button" parent="HBoxContainer"]
 margin_left = 506.0
