@@ -132,7 +132,7 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "ItemDatabase",
 "language": "GDScript",
-"path": "res://addons/questie/editor/item_editor/item_database.gd"
+"path": "res://addons/questie/editor/item_editor/data/item_database.gd"
 }, {
 "base": "Node",
 "class": "ItemTag",
@@ -432,11 +432,6 @@ config/name="Quest System For Godot"
 run/main_scene="res://demo/demo.tscn"
 config/icon="res://icon.png"
 
-[autoload]
-
-QuestieEvents="*res://addons/questie/runtime/questie_events.gd"
-Questie="*res://addons/questie/runtime/questie.gd"
-
 [display]
 
 window/size/width=1920
@@ -446,7 +441,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/questie/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
 
 [input]
 

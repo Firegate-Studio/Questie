@@ -4,23 +4,22 @@
 extends Resource
 
 # the item identifier
-export(String) var uuid
+export(String) var id
+
+# the identifier of the folder owning this item
+export(String) var folder_id 
+
+# the identifier of tag for this item
+export(String) var tag_id 
 
 # The name of the item which will be displayed in inventory
-export(String) var title
+export(String) var name
 
 # The description of the item
 export(String) var description
 
 # The weight for this item
 export(float) var weight = 0.1
-
-# The item category
-# See [QuestDatabase.ItemCategory] for possible values
-export(int) var category
-
-# The path of the icon loaded
-export(String) var icon_path = ""
 
 # The item icon for inventory
 export(Texture) var icon

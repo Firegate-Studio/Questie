@@ -1,80 +1,70 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://addons/questie/editor/item_editor/items_tree.tscn" type="PackedScene" id=1]
-[ext_resource path="res://addons/questie/editor/item_editor/toolbar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://addons/questie/editor/item_editor/item_editor.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/item_editor/weapon_editor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://addons/questie/editor/item_editor/armor_editor.tscn" type="PackedScene" id=5]
-[ext_resource path="res://addons/questie/editor/item_editor/consumable_editor.tscn" type="PackedScene" id=6]
-[ext_resource path="res://addons/questie/editor/item_editor/material_editor.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/questie/editor/item_editor/special_editor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://addons/questie/editor/icons/folder_64x64.png" type="Texture" id=1]
+[ext_resource path="res://addons/questie/editor/icons/compile_64x64.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/icons/folder_32x32.png" type="Texture" id=3]
+[ext_resource path="res://addons/questie/editor/icons/tag.png" type="Texture" id=4]
+[ext_resource path="res://addons/questie/editor/item_editor/items_tree.gd" type="Script" id=5]
+[ext_resource path="res://addons/questie/editor/icons/boxes_32x32.png" type="Texture" id=6]
+[ext_resource path="res://addons/questie/editor/icons/trash_32x32.png" type="Texture" id=7]
+[ext_resource path="res://addons/questie/editor/item_editor/item_editor.gd" type="Script" id=8]
 
 [node name="Items Editor" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource( 3 )
+script = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 25.0
 
-[node name="Toolbar" parent="VBoxContainer" instance=ExtResource( 2 )]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 1895.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 0, 64 )
+size_flags_horizontal = 3
+
+[node name="New Folder" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 0 )
+icon = ExtResource( 1 )
+icon_align = 1
+expand_icon = true
+
+[node name="Compile" type="Button" parent="VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 64, 0 )
+icon = ExtResource( 2 )
+icon_align = 1
+expand_icon = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer"]
-margin_top = 104.0
-margin_right = 1024.0
-margin_bottom = 600.0
+margin_top = 68.0
+margin_right = 1895.0
+margin_bottom = 1080.0
 size_flags_vertical = 3
 
-[node name="ItemTree" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 1 )]
-margin_bottom = 496.0
-
-[node name="Weapon Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 4 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 262.0
-margin_right = 1024.0
-margin_bottom = 496.0
-
-[node name="Armor Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 5 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 262.0
-margin_right = 1024.0
-margin_bottom = 496.0
-
-[node name="Consumable Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 6 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 262.0
-margin_right = 1024.0
-margin_bottom = 496.0
-
-[node name="Material Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 7 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 262.0
-margin_right = 1024.0
-margin_bottom = 496.0
-
-[node name="Special Editor" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 8 )]
-visible = false
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 262.0
-margin_right = 1024.0
-margin_bottom = 496.0
+[node name="Tree" type="Tree" parent="VBoxContainer/HSplitContainer"]
+margin_right = 400.0
+margin_bottom = 1012.0
+rect_min_size = Vector2( 400, 0 )
+hide_root = true
+script = ExtResource( 5 )
+folder_icon = ExtResource( 3 )
+item_icon = ExtResource( 6 )
+tag_icon = ExtResource( 4 )
+delete_icon = ExtResource( 7 )
 
 [node name="Empty" type="Control" parent="VBoxContainer/HSplitContainer"]
-margin_left = 262.0
-margin_right = 1024.0
-margin_bottom = 496.0
+margin_left = 412.0
+margin_right = 1895.0
+margin_bottom = 1012.0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HSplitContainer/Empty"]
 anchor_right = 1.0
@@ -85,8 +75,8 @@ margin_right = -10.0
 margin_bottom = -10.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/Empty/MarginContainer"]
-margin_top = 231.0
-margin_right = 742.0
-margin_bottom = 245.0
+margin_top = 489.0
+margin_right = 1463.0
+margin_bottom = 503.0
 text = "Select an item from the tree on the left side to start to work"
 align = 1
