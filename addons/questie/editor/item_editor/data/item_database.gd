@@ -22,14 +22,20 @@ func push_tag(tag):
 func push_item(item):
 	items.push_back(item)
 
-func erase_category(category):
-	categories.erase(category)
+func erase_category(id):
+	for item in categories:
+		if not item.id == id: continue
+		categories.erase(item)
 
-func erase_tag(tag):
-	tags.erase(tag)
+func erase_tag(id):
+	for item in tags:
+		if not item.id == id: continue
+		tags.erase(item) 
 
-func erase_item(item):
-	items.erase(items)  
+func erase_item(id):
+	for item in items:
+		if not item.id == id: continue
+		items.erase(item)
 
 func get_category(id):
 	for category in categories:

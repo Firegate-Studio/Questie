@@ -3,7 +3,7 @@ class_name ItemTag, "res://addons/questie/editor/icons/tag.png"
 
 # the name of the item created using the item editor
 export(String) var tag
-export(ItemDatabase.ItemCategory) var category
+export(ItemsCollection.Categories) var category
 
 func get_item_id():
 

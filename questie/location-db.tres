@@ -1,55 +1,8 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=2 format=2]
 
 [ext_resource path="res://addons/questie/editor/location_editor/location_database.gd" type="Script" id=1]
-[ext_resource path="res://addons/questie/editor/location_editor/category_data.gd" type="Script" id=2]
-[ext_resource path="res://addons/questie/editor/location_editor/location_data.gd" type="Script" id=3]
-
-[sub_resource type="Resource" id=14]
-script = ExtResource( 2 )
-id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-title = "Demo Region"
-
-[sub_resource type="Resource" id=19]
-script = ExtResource( 2 )
-id = "9e7f2164-cf71-46f7-93a7-f9cde53edef4"
-title = "Test Region"
-
-[sub_resource type="Resource" id=15]
-script = ExtResource( 3 )
-id = "3a044932-8fee-42c2-b610-8e944789d7b7"
-category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-name = "Long Lake Square"
-note = ""
-
-[sub_resource type="Resource" id=16]
-script = ExtResource( 3 )
-id = "9de61961-0e6b-4f92-9d18-853e6dee4d6f"
-category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-name = "Cave"
-note = ""
-
-[sub_resource type="Resource" id=18]
-script = ExtResource( 3 )
-id = "3cd3ec0b-b5b1-4345-8c36-b176603b54c5"
-category_id = "5a540796-b1a2-4783-b79f-6b770e89593b"
-name = "Mountains"
-note = ""
-
-[sub_resource type="Resource" id=20]
-script = ExtResource( 3 )
-id = "88ecde21-3040-4973-bd87-2315863a6426"
-category_id = "9e7f2164-cf71-46f7-93a7-f9cde53edef4"
-name = "Guglie Della Notte"
-note = ""
-
-[sub_resource type="Resource" id=21]
-script = ExtResource( 3 )
-id = "eeba25bf-bfef-40c7-8a85-5b33348a06d1"
-category_id = "9e7f2164-cf71-46f7-93a7-f9cde53edef4"
-name = "Alessio Was Here"
-note = ""
 
 [resource]
 script = ExtResource( 1 )
-categories = [ SubResource( 14 ), SubResource( 19 ) ]
-locations = [ SubResource( 15 ), SubResource( 16 ), SubResource( 18 ), SubResource( 20 ), SubResource( 21 ) ]
+categories = [  ]
+locations = [  ]

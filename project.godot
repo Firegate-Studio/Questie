@@ -139,6 +139,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/runtime/item/item_tag.gd"
 }, {
+"base": "Object",
+"class": "ItemsCollection",
+"language": "GDScript",
+"path": "res://questie/items.generated.gd"
+}, {
+"base": "Object",
+"class": "ItemsFileBuilder",
+"language": "GDScript",
+"path": "res://addons/questie/editor/item_editor/items_compiler.gd"
+}, {
 "base": "Control",
 "class": "LocationCategoryArea",
 "language": "GDScript",
@@ -381,6 +391,8 @@ _global_script_class_icons={
 "InventoryWorkspace": "",
 "ItemDatabase": "res://addons/questie/editor/icons/database.png",
 "ItemTag": "res://addons/questie/editor/icons/tag.png",
+"ItemsCollection": "",
+"ItemsFileBuilder": "",
 "LocationCategoryArea": "",
 "LocationCategoryData": "",
 "LocationData": "",
@@ -432,6 +444,11 @@ config/name="Quest System For Godot"
 run/main_scene="res://demo/demo.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+QuestieEvents="*res://addons/questie/runtime/questie_events.gd"
+Questie="*res://addons/questie/runtime/questie.gd"
+
 [display]
 
 window/size/width=1920
@@ -441,7 +458,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/questie/plugin.cfg" )
 
 [input]
 

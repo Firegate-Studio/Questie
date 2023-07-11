@@ -5,5 +5,5 @@ class_name Trigger_GetItem
 export(String) var item_uuid
 
 # The category of the tracked item
-export(ItemDatabase.ItemCategory) var item_category
+export(ItemsCollection.Categories) var item_category
 

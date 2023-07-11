@@ -51,7 +51,8 @@ func on_new_folder_button_clicked():
 	tree.create_new_folder()
 
 func on_compile_button_clicked():
-	print("[Questie]: todo - compile items")
+	print("[Questie]: compile all items")
+	ItemsFileBuilder.compile()
 
 func handle_new_folder_created(folder_id, data):
 	database.push_category(data)

@@ -63,6 +63,7 @@ func _enter_tree():
 		item_database = ItemDatabase.new()
 		item_database.uuid = UUID.generate()
 		ResourceSaver.save("res://questie/item-db.tres", item_database)
+		ItemsFileBuilder.generate_file()
 		print("[questie]: item database created at path res://quesite/item-db.tres")
 
 	if not file.file_exists("res://questie/location-db.tres"):

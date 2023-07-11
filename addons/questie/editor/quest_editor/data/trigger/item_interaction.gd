@@ -5,4 +5,4 @@ class_name Trigger_ItemInteraction
 export(String) var item_id
 
 # the category of the item
-export(ItemDatabase.ItemCategory) var category
+export(ItemsCollection.Categories) var category
