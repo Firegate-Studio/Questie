@@ -4,6 +4,8 @@ extends Control
 var new_folder_btn : Button
 var compile_btn : Button
 var tree 
+var editor
+var empty_space
 var database = preload("res://questie/item-db.tres")
 const DB_PATH = "res://questie/item-db.tres"
 
@@ -11,10 +13,13 @@ func _enter_tree():
 	new_folder_btn = $"VBoxContainer/HBoxContainer/New Folder"
 	compile_btn = $VBoxContainer/HBoxContainer/Compile
 	tree = $VBoxContainer/HSplitContainer/Tree
+	editor = $"VBoxContainer/HSplitContainer/Item Edit"
+	empty_space = $VBoxContainer/HSplitContainer/Empty
 
 	# subscibe events
 	new_folder_btn.connect("button_down", self, "on_new_folder_button_clicked")
 	compile_btn.connect("button_down", self, "on_compile_button_clicked")
+	tree.connect("object_selected", self, "handle_tree_object_selected")
 
 	tree.connect("new_folder_created", self, "handle_new_folder_created")
 	tree.connect("new_tag_created", self, "handle_new_tag_created")
@@ -54,6 +59,16 @@ func on_compile_button_clicked():
 	print("[Questie]: compile all items")
 	ItemsFileBuilder.compile()
 
+func handle_tree_object_selected(id):
+	var data = database.get_item(id)
+	if not data:
+		print("[Questie]: can't retrieve item data from database")
+		return
+		
+	empty_space.hide()
+	editor.show()
+	editor.setup(data.id)
+	
 func handle_new_folder_created(folder_id, data):
 	database.push_category(data)
 	ResourceSaver.save(DB_PATH, database)
@@ -88,14 +103,17 @@ func handle_item_renamed(id, text):
 func handle_folder_deleted(id):
 	database.erase_category(id)
 	ResourceSaver.save(DB_PATH, database)
+	swap_screens()
 
 func handle_tag_deleted(id):
 	database.erase_tag(id)
 	ResourceSaver.save(DB_PATH, database)
+	swap_screens()
 
 func handle_item_deleted(id):
 	database.erase_item(id)
 	ResourceSaver.save(DB_PATH, database)
+	swap_screens()
 
 # @brief loads all folders, tags and items from the items datatabase
 func load_tree_items():
@@ -111,3 +129,7 @@ func load_tree_items():
 	# load items
 	for item in database.items:
 		tree.load_item(item)
+
+func swap_screens():
+	editor.hide()
+	empty_space.show()

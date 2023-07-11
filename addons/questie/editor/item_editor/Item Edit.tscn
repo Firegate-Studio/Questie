@@ -1,0 +1,262 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/questie/editor/icons/boxes_64x64.png" type="Texture" id=1]
+[ext_resource path="res://addons/questie/editor/item_editor/item_edit.gd" type="Script" id=2]
+
+[node name="Item Edit" type="TabContainer"]
+visible = false
+margin_left = 412.0
+margin_right = 1895.0
+margin_bottom = 1012.0
+tab_align = 0
+script = ExtResource( 2 )
+
+[node name="Settings" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label" type="Label" parent="Settings"]
+margin_right = 1475.0
+margin_bottom = 14.0
+text = "Display Name"
+
+[node name="Display Name" type="LineEdit" parent="Settings"]
+margin_top = 18.0
+margin_right = 1475.0
+margin_bottom = 42.0
+placeholder_text = "Set Item Display Name"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings"]
+margin_top = 46.0
+margin_right = 1475.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="Label" type="Label" parent="Settings/HBoxContainer"]
+margin_top = 18.0
+margin_right = 28.0
+margin_bottom = 32.0
+text = "Icon"
+
+[node name="Icon Path" type="LineEdit" parent="Settings/HBoxContainer"]
+margin_left = 32.0
+margin_right = 1475.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+placeholder_text = "res://YOUR_ICON_PATH"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Settings"]
+margin_top = 100.0
+margin_right = 1475.0
+margin_bottom = 228.0
+rect_min_size = Vector2( 0, 128 )
+
+[node name="Icon Preview" type="TextureRect" parent="Settings/HBoxContainer2"]
+margin_right = 128.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 128, 32 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 4
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Settings"]
+margin_top = 232.0
+margin_right = 1475.0
+margin_bottom = 272.0
+
+[node name="Is Unique" type="CheckButton" parent="Settings/HBoxContainer3"]
+margin_right = 142.0
+margin_bottom = 40.0
+text = "Is Unique"
+
+[node name="Label2" type="Label" parent="Settings"]
+margin_top = 276.0
+margin_right = 1475.0
+margin_bottom = 290.0
+text = "Description"
+
+[node name="Description" type="TextEdit" parent="Settings"]
+margin_top = 294.0
+margin_right = 1475.0
+margin_bottom = 494.0
+rect_min_size = Vector2( 0, 200 )
+text = "Fill your item description"
+
+[node name="Values" type="VBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Values"]
+margin_right = 1475.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="Values/HBoxContainer"]
+margin_top = 5.0
+margin_right = 80.0
+margin_bottom = 19.0
+text = "Min Damage"
+
+[node name="Min Damage" type="SpinBox" parent="Values/HBoxContainer"]
+margin_left = 84.0
+margin_right = 158.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="Values/HBoxContainer"]
+margin_left = 162.0
+margin_top = 5.0
+margin_right = 244.0
+margin_bottom = 19.0
+text = "Max Damage"
+
+[node name="Max Damage" type="SpinBox" parent="Values/HBoxContainer"]
+margin_left = 248.0
+margin_right = 322.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Values"]
+margin_top = 28.0
+margin_right = 1475.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Values/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 81.0
+margin_bottom = 19.0
+text = "Min Defense"
+
+[node name="Min Defense" type="SpinBox" parent="Values/HBoxContainer2"]
+margin_left = 85.0
+margin_right = 159.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="Values/HBoxContainer2"]
+margin_left = 163.0
+margin_top = 5.0
+margin_right = 246.0
+margin_bottom = 19.0
+text = "Max Defense"
+
+[node name="Max Defense" type="SpinBox" parent="Values/HBoxContainer2"]
+margin_left = 250.0
+margin_right = 324.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Values"]
+margin_top = 56.0
+margin_right = 1475.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="Values/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 76.0
+margin_bottom = 19.0
+text = "Min Healing"
+
+[node name="Min Healing" type="SpinBox" parent="Values/HBoxContainer3"]
+margin_left = 80.0
+margin_right = 154.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="Values/HBoxContainer3"]
+margin_left = 158.0
+margin_top = 5.0
+margin_right = 236.0
+margin_bottom = 19.0
+text = "Max Healing"
+
+[node name="Max Healing" type="SpinBox" parent="Values/HBoxContainer3"]
+margin_left = 240.0
+margin_right = 314.0
+margin_bottom = 24.0
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Values"]
+margin_top = 84.0
+margin_right = 1475.0
+margin_bottom = 108.0
+
+[node name="Label" type="Label" parent="Values/HBoxContainer4"]
+margin_top = 5.0
+margin_right = 77.0
+margin_bottom = 19.0
+text = "Min Custom"
+
+[node name="Min Custom" type="SpinBox" parent="Values/HBoxContainer4"]
+margin_left = 81.0
+margin_right = 155.0
+margin_bottom = 24.0
+
+[node name="Label2" type="Label" parent="Values/HBoxContainer4"]
+margin_left = 159.0
+margin_top = 5.0
+margin_right = 238.0
+margin_bottom = 19.0
+text = "Max Custom"
+
+[node name="Max Custom" type="SpinBox" parent="Values/HBoxContainer4"]
+margin_left = 242.0
+margin_right = 316.0
+margin_bottom = 24.0
+
+[node name="Selling" type="VBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Selling"]
+margin_right = 1475.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="Selling/HBoxContainer"]
+margin_top = 5.0
+margin_right = 86.0
+margin_bottom = 19.0
+text = "Original Price"
+
+[node name="Original Price" type="SpinBox" parent="Selling/HBoxContainer"]
+margin_left = 90.0
+margin_right = 164.0
+margin_bottom = 24.0
+max_value = 9999.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Selling"]
+margin_top = 28.0
+margin_right = 1475.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Selling/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 78.0
+margin_bottom = 19.0
+text = "Selling Price"
+
+[node name="Selling Price" type="SpinBox" parent="Selling/HBoxContainer2"]
+margin_left = 82.0
+margin_right = 156.0
+margin_bottom = 24.0
+max_value = 1e+08
+
+[node name="Label2" type="Label" parent="Selling/HBoxContainer2"]
+margin_left = 160.0
+margin_top = 5.0
+margin_right = 254.0
+margin_bottom = 19.0
+text = "Purchase Price"
+
+[node name="Purchase Price" type="SpinBox" parent="Selling/HBoxContainer2"]
+margin_left = 258.0
+margin_right = 332.0
+margin_bottom = 24.0
+max_value = 1e+08

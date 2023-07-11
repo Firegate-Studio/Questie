@@ -1,8 +1,36 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://addons/questie/editor/location_editor/location_database.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/location_editor/category_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/location_editor/location_data.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+title = "Demo"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+name = "Long Lake"
+note = ""
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 3 )
+id = "e494fb15-7d74-48f6-bf21-9afcdaa5720f"
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+name = "Mountains"
+note = ""
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+id = "8ff72eb4-0945-4511-8c5f-fdada8c82dee"
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+name = "Severalcode Temple"
+note = ""
 
 [resource]
 script = ExtResource( 1 )
-categories = [  ]
-locations = [  ]
+categories = [ SubResource( 1 ) ]
+locations = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]

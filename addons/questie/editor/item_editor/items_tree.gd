@@ -10,6 +10,7 @@ signal tag_deleted(tag_id)
 signal item_renamed(item_id, new_name)
 signal folder_renamed(folder_id, new_name)
 signal tag_renamed(tag_id, new_name)
+signal object_selected(item_id)
 
 export var folder_icon : Texture
 export var item_icon : Texture
@@ -46,6 +47,7 @@ func _enter_tree():
 
 	connect("button_pressed", self, "handle_button_pressed")
 	connect("item_edited", self, "handle_item_edited")
+	connect("item_selected", self, "handle_item_selected")
 
 func _exit_tree():
 	disconnect("button_pressed", self, "handle_button_pressed")
@@ -93,6 +95,12 @@ func handle_item_edited():
 	if is_item(selected):
 		var id = get_item_data(selected).id
 		emit_signal("item_renamed", id, changed)
+
+func handle_item_selected():
+	var selected = get_selected()
+	if is_item(selected):
+		var id = get_item_data(selected).id
+		emit_signal("object_selected", id)
 
 func create_new_item(parent = null, folder_id = "", tag_id = ""):
 

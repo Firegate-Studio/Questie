@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/questie/editor/icons/folder_64x64.png" type="Texture" id=1]
 [ext_resource path="res://addons/questie/editor/icons/compile_64x64.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://addons/questie/editor/icons/boxes_32x32.png" type="Texture" id=6]
 [ext_resource path="res://addons/questie/editor/icons/trash_32x32.png" type="Texture" id=7]
 [ext_resource path="res://addons/questie/editor/item_editor/item_editor.gd" type="Script" id=8]
+[ext_resource path="res://addons/questie/editor/item_editor/Item Edit.tscn" type="PackedScene" id=9]
 
 [node name="Items Editor" type="Control"]
 anchor_right = 1.0
@@ -80,3 +81,5 @@ margin_right = 1463.0
 margin_bottom = 503.0
 text = "Select an item from the tree on the left side to start to work"
 align = 1
+
+[node name="Item Edit" parent="VBoxContainer/HSplitContainer" instance=ExtResource( 9 )]
