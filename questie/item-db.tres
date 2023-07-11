@@ -1,9 +1,118 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_database.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/item_editor/data/item_data.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+id = "fba53bb8-54de-44ed-b852-fa8bcbefd8eb"
+folder_id = ""
+tag_id = ""
+name = "Weapons"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+id = "6f177ae0-965d-4c26-b168-38ba87299683"
+folder_id = ""
+tag_id = "85531d17-36de-45fc-959c-8511b7f518b6"
+name = "Morningstar"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+id = "c1321217-be82-4a42-94ab-e20a6c058dcb"
+folder_id = ""
+tag_id = "85531d17-36de-45fc-959c-8511b7f518b6"
+name = "Bastard"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+id = "4bc22ba5-3abc-4776-a83d-cc4175048e5e"
+folder_id = ""
+tag_id = "85531d17-36de-45fc-959c-8511b7f518b6"
+name = "Longsword"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+id = "85531d17-36de-45fc-959c-8511b7f518b6"
+folder_id = "fba53bb8-54de-44ed-b852-fa8bcbefd8eb"
+tag_id = ""
+name = "Swords"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+id = "eff3f2a6-18ea-46fb-b279-30838b89802f"
+folder_id = "fba53bb8-54de-44ed-b852-fa8bcbefd8eb"
+tag_id = ""
+name = "Maces"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+id = "c5c38223-9139-4f4d-9b14-17cae947e0a9"
+folder_id = "fba53bb8-54de-44ed-b852-fa8bcbefd8eb"
+tag_id = ""
+name = "Staffs"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+id = "907b5b1c-40c1-4e7c-9a67-59708c5e3846"
+folder_id = "fba53bb8-54de-44ed-b852-fa8bcbefd8eb"
+tag_id = ""
+name = "Orbs"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+id = "302f9715-107e-4bcc-ab5b-ab7a79d4304b"
+folder_id = "fba53bb8-54de-44ed-b852-fa8bcbefd8eb"
+tag_id = ""
+name = "Grimoires"
+description = ""
+weight = 0.1
+can_be_sold = true
+purchase_price = 50
+sell_price = 10
 
 [resource]
 script = ExtResource( 1 )
-categories = [  ]
-tags = [  ]
-items = [  ]
+categories = [ SubResource( 1 ) ]
+tags = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ]
+items = [ SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ]

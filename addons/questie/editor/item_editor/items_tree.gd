@@ -117,6 +117,8 @@ func create_new_item(parent = null, folder_id = "", tag_id = ""):
 	# notify
 	emit_signal("new_item_created", data.id, data)
 
+	return new_item
+
 func create_new_folder(parent = null):
 	# setup
 	var new_folder = create_item(parent)
@@ -162,6 +164,8 @@ func create_new_tag(parent = null, folder_id = ""):
 
 	# notify
 	emit_signal("new_tag_created", data.id, data)
+
+	return new_tag
 
 func is_folder(item : TreeItem): return folders.has(item)
 
@@ -224,3 +228,68 @@ func delete_item(item : TreeItem):
 
 	# notify
 	emit_signal("item_deleted", id)
+
+func load_folder(folder_data):
+	
+	# setup
+	var new_folder = create_item()
+	new_folder.set_text(0, folder_data.name)
+	new_folder.set_editable(0, true)
+	new_folder.set_icon(0, folder_icon)
+	new_folder.set_icon_max_width(0, 32)
+	new_folder.add_button(0, tag_icon)
+	new_folder.add_button(0, item_icon)
+	new_folder.add_button(0, delete_icon)
+
+	# register new folder
+	folders[new_folder] = folder_data
+
+func load_tag(tag_data):
+
+	var parent = null
+	# retrieve parent
+	for folder in folders:
+		var data = get_folder_data(folder)
+		if not data.id == tag_data.folder_id: continue
+		parent = folder
+		break
+
+	# setup
+	var new_tag = create_item(parent)
+	new_tag.set_text(0, tag_data.name)
+	new_tag.set_editable(0, true)
+	new_tag.set_icon(0, tag_icon)
+	new_tag.set_icon_max_width(0, 32)
+	new_tag.add_button(0, item_icon)
+	new_tag.add_button(0, delete_icon)
+
+	# register new folder
+	tags[new_tag] = tag_data
+
+func load_item(item_data):
+
+	var parent = null
+
+	for folder in folders:
+		var data = get_folder_data(folder)
+		if not data.id == item_data.folder_id: continue
+		parent = folder
+		break
+
+	if not parent:
+		for tag in tags:
+			var data = get_tag_data(tag)
+			if not data.id == item_data.tag_id: continue
+			parent = tag
+			break
+
+	#setup
+	var new_item = create_item(parent)
+	new_item.set_text(0, item_data.name)
+	new_item.set_editable(0, true)
+	new_item.set_icon(0, item_icon)
+	new_item.set_icon_max_width(0, 32)
+	new_item.add_button(0, delete_icon)
+
+	# register item
+	items[new_item] = item_data

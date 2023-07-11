@@ -28,6 +28,9 @@ func _enter_tree():
 	tree.connect("tag_deleted", self, "handle_tag_deleted")
 	tree.connect("item_deleted", self, "handle_item_deleted")
 
+func _ready():
+	load_tree_items()
+
 func _exit_tree():
 	new_folder_btn.disconnect("button_down", self, "on_new_folder_button_clicked")
 	compile_btn.disconnect("button_down", self, "on_compile_button_clicked")
@@ -92,3 +95,18 @@ func handle_tag_deleted(id):
 func handle_item_deleted(id):
 	database.erase_item(id)
 	ResourceSaver.save(DB_PATH, database)
+
+# @brief loads all folders, tags and items from the items datatabase
+func load_tree_items():
+
+	# load folders
+	for folder in database.categories:
+		tree.load_folder(folder)
+	
+	# load tags
+	for tag in database.tags:
+		tree.load_tag(tag)
+
+	# load items
+	for item in database.items:
+		tree.load_item(item)
