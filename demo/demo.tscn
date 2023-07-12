@@ -111,7 +111,6 @@ margin_bottom = 783.0
 position = Vector2( 92, 1003 )
 
 [node name="QuestieLocation" type="Area2D" parent="."]
-visible = false
 position = Vector2( 1475, 503 )
 script = ExtResource( 1 )
 

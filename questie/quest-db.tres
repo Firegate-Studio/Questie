@@ -1,8 +1,29 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=6 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/task/talk_to_task.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+uuid = "d1d861eb-c804-458d-8ad6-bc5e03f0eef1"
+owner = "98474b5f-0e2a-4fa7-84d5-dcc29aa14814"
+state = 0
+character_id = "1469ea5b-4647-495b-ba0a-6c038153a639"
+character_index = 0
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+uuid = "98474b5f-0e2a-4fa7-84d5-dcc29aa14814"
+title = "fill quest title here"
+status = 0
+description = "fill quest description here"
+constraints = [  ]
+triggers = [  ]
+tasks = [ SubResource( 2 ) ]
+rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
-data = [  ]
+data = [ SubResource( 1 ) ]

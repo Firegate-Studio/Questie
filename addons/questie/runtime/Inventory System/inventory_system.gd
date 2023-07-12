@@ -62,22 +62,22 @@ func _enter_tree():
 		return
 
 	# Generate maps
-	if item_db.weapons.size() > 0:
-		for weapon in item_db.weapons:
-			weapons[weapon.title] = weapon.uuid
+	#if item_db.weapons.size() > 0:
+	#	for weapon in item_db.weapons:
+	#		weapons[weapon.title] = weapon.uuid
 
-	if item_db.armors.size() > 0:
-		for armor in item_db.armors:
-			armors[armor.title] = armor.uuid
+	#if item_db.armors.size() > 0:
+	#	for armor in item_db.armors:
+	#		armors[armor.title] = armor.uuid
 
-	if item_db.consumables.size() > 0:
-		for consumable in item_db.consumables:
-			consumables[consumable.title] = consumable.uuid
+	#if item_db.consumables.size() > 0:
+	#	for consumable in item_db.consumables:
+	#		consumables[consumable.title] = consumable.uuid
 
-	if item_db.materials.size() > 0:
-		for material in item_db.materials:
-			materials[material.title] = material.uuid
+	#if item_db.materials.size() > 0:
+	#	for material in item_db.materials:
+	#		materials[material.title] = material.uuid
 
-	if item_db.specials.size() > 0:
-		for special in item_db.specials:
-			specials[special.title] = special.uuid
+	#if item_db.specials.size() > 0:
+	#	for special in item_db.specials:
+	#		specials[special.title] = special.uuid
