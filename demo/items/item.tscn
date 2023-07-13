@@ -2,7 +2,7 @@
 
 [ext_resource path="res://addons/questie/runtime/item/questie_item.gd" type="Script" id=1]
 [ext_resource path="res://demo/locations/stone.jpg" type="Texture" id=2]
-[ext_resource path="res://demo/items/interactable_item.gd" type="Script" id=3]
+[ext_resource path="res://demo/items/pickable_item.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 26 )

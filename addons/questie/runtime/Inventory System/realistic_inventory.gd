@@ -45,7 +45,7 @@ func add_item(id : String, quantity : int = 1):
 		
 		# Store data
 		data.push_back(container)
-		emit_signal("item_added", id, quantity)
+		emit_signal("item_added", id)
 	else:
 		# update item quantity
 		if container.quantity + quantity > max_slot_capacity:
@@ -56,7 +56,7 @@ func add_item(id : String, quantity : int = 1):
 		else:
 			container.quantity += quantity
 		
-		emit_signal("item_added", id, quantity)
+		emit_signal("item_added", id)
 
 # @brief                    Remove one item or many from inventory
 # @param uuid               the item uuid

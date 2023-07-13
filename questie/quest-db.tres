@@ -1,31 +1,38 @@
-[gd_resource type="Resource" load_steps=5 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/exit_location.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/task/item_interaction.gd" type="Script" id=4]
 
-[sub_resource type="Resource" id=9]
+[sub_resource type="Resource" id=3]
+script = ExtResource( 4 )
+uuid = "ef29d7c4-1f74-49ad-b1f2-65010fec5e19"
+owner = "c8056a31-dbdd-4594-8f35-54e1e37f53c1"
+state = 0
+item_id = "06a7d5c3-abfc-4b59-ac88-316342905630"
+category = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+uuid = "ac185a48-0651-4121-86e2-7b46b9feaa61"
+owner = "c8056a31-dbdd-4594-8f35-54e1e37f53c1"
+location_id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
+location_index = 0
+category_index = 0
+
+[sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-uuid = "321499d0-3670-497d-8e2b-c0aa60b47d96"
-title = "fill quest title here"
+uuid = "c8056a31-dbdd-4594-8f35-54e1e37f53c1"
+title = "TEST"
 status = 0
 description = "fill quest description here"
 constraints = [  ]
-triggers = [  ]
-tasks = [  ]
-rewards = [  ]
-
-[sub_resource type="Resource" id=11]
-script = ExtResource( 2 )
-uuid = "2f7d2db8-f595-4aa3-8a44-aa0837dd58e4"
-title = "fill quest title here"
-status = 0
-description = "fill quest description here"
-constraints = [  ]
-triggers = [  ]
-tasks = [  ]
+triggers = [ SubResource( 2 ) ]
+tasks = [ SubResource( 3 ) ]
 rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "071ea536-5bde-4981-bb92-3176e62bf200"
-data = [ SubResource( 9 ), SubResource( 11 ) ]
+data = [ SubResource( 1 ) ]

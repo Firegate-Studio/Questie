@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://addons/questie/runtime/location/location.gd" type="Script" id=1]
 [ext_resource path="res://demo/player/player.tscn" type="PackedScene" id=2]
@@ -8,7 +8,10 @@
 [ext_resource path="res://demo/controls.gd" type="Script" id=6]
 [ext_resource path="res://demo/journal/QuestPopup.tscn" type="PackedScene" id=7]
 [ext_resource path="res://demo/items/item.tscn" type="PackedScene" id=8]
+[ext_resource path="res://demo/items/interactable_item.gd" type="Script" id=9]
+[ext_resource path="res://addons/questie/runtime/item/questie_item.gd" type="Script" id=10]
 [ext_resource path="res://demo/locations/grond_test.png" type="Texture" id=11]
+[ext_resource path="res://demo/sprites/potion.png" type="Texture" id=12]
 [ext_resource path="res://demo/characters/severalcode.tscn" type="PackedScene" id=13]
 [ext_resource path="res://demo/characters/blacksmith.tscn" type="PackedScene" id=16]
 [ext_resource path="res://demo/character_interaction_example.gd" type="Script" id=17]
@@ -23,6 +26,12 @@ extents = Vector2( 64.5, 62.5 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 353.5, 538.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 48.5, 56.5 )
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 89.9444
 
 [node name="Node2D" type="Node2D"]
 
@@ -135,3 +144,27 @@ script = ExtResource( 1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestieLocation"]
 position = Vector2( 89.5, 34.5 )
 shape = SubResource( 3 )
+
+[node name="QuestieItem" type="Area2D" parent="."]
+position = Vector2( 620, 131 )
+script = ExtResource( 10 )
+item = 4
+
+[node name="Sprite" type="Sprite" parent="QuestieItem"]
+texture = ExtResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestieItem"]
+position = Vector2( -2, 1.5 )
+shape = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Interaction Area" type="Area2D" parent="QuestieItem"]
+script = ExtResource( 9 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="QuestieItem/Interaction Area"]
+shape = SubResource( 5 )

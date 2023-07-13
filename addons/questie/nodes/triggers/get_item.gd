@@ -6,15 +6,15 @@ var inventory
 # The item uuid to track in inventory
 var target_uuid : String
 
-func on_item_added(var uuid : String, var category : int):
+func on_item_added(item_id : String):
 
 	#if state == TaskComplention.ONGOING:
-	var target_item = inventory.get_item(uuid)
+	var target_item = inventory.get_item(item_id)
 	if not target_item:
 		return
 		
 	# check if is the correct item
-	if not target_uuid == uuid:
+	if not target_uuid == item_id:
 		return
 	
 	state = TaskComplention.COMPLETED

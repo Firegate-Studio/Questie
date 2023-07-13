@@ -12,7 +12,6 @@ static func collect_item_node(task_data, task_id, quest_id, inventory)->TaskNode
 	node.quest_id = quest_id
 	node.inventory = inventory
 	node.item_id = task_data.item_uuid
-	node.item_category = task_data.category
 	node.item_quantity = task_data.quantity
 
 	return node
@@ -43,7 +42,6 @@ static func item_interaction_node(task_data, task_id, quest_id)->TaskNode:
 	node.id = task_id
 	node.quest_id = quest_id
 	node.item_id = task_data.item_id
-	node.category = task_data.category 
 	return node
 
 static func character_interaction_node(task_data, task_id, quest_id)->TaskNode:

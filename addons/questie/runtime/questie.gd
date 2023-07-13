@@ -562,6 +562,10 @@ func handle_quest_constraint_failed(constraint_id):
 # called when a trigger receive activation
 func handle_quest_trigger_activated(trigger_id): 
 
+	if not triggers.has(trigger_id):
+		print("[Questie]: can not activate the trigger cause the trigger with id: " + trigger_id + " is not valid!")
+		return
+
 	var trigger_node = triggers[trigger_id]
 	if not trigger_node:
 		print("[Questie]: can not find trigger node at the give key in table: " + trigger_id)

@@ -3,10 +3,9 @@ extends TaskNode
 var inventory                           # the player inventory. DO NOT SET IT!!!
 
 export(String) var item_id            # the UUID of the items from item database
-var item_category : int
 export(int) var item_quantity = 1       # the amount needed to complete the task
 
-func item_added(var item_uuid : String, var item_category : int):
+func item_added(var item_uuid : String):
 
 	if item_uuid == item_id and state == TaskComplention.ONGOING:     
 			

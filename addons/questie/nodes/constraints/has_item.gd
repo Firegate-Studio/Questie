@@ -17,7 +17,7 @@ func _enter_tree():
 func _exit_tree():
 	inventory.disconnect("item_added", self, "on_item_added")
 
-func on_item_added(var item_uuid : String, var item_category : int):
+func on_item_added(var item_uuid : String):
 
 	if item_uuid != self.item_uuid: return
 

@@ -3,9 +3,6 @@ extends TaskNode
 # the identifier of the item
 var item_id : String
 
-# the category of the item
-var category
-
 func _enter_tree():
 	QuestieEvents.connect("interact_item", self, "on_item_interaction")
 

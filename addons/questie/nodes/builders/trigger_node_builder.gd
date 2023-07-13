@@ -40,7 +40,6 @@ static func item_interaction_node(trigger_data, trigger_id, quest_id)->TriggerNo
 	node.id = trigger_id
 	node.quest_id = quest_id
 	node.item_id = trigger_data.item_id
-	node.item_category = trigger_data.category
 	return node
 
 static func character_interaction_node(trigger_data, trigger_id, quest_id)->TriggerNode:
