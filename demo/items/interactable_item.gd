@@ -1,17 +1,18 @@
 extends Area2D
 
-var item_tag : ItemTag
-
+var item : QuestieItem
 
 func _ready():
 
-	item_tag = $"ItemTag"
+	item = get_parent()
 
 	connect("body_entered", self, "on_trigger_enter")
 
 func on_trigger_enter(_body):
 
-	var item_id = item_tag.get_item_id()
-	QuestieEvents.emit_signal("interact_item", item_id)
+	Questie.player_inventory.add_item(item.get_item_id())
+	
+	item.interact()
+	queue_free()
 
 	

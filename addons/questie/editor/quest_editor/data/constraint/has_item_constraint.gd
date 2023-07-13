@@ -2,7 +2,7 @@ extends "res://addons/questie/editor/quest_editor/data/constraint/quest_constrai
 class_name Constraint_HasItem
 
 # the item identifier
-export(String) var item
+export(String) var item_id
 
 # The item category (i.e., Weapon, Armor, Consumable,..., etc.)
 export(int) var category = 0

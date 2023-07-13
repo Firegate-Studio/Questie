@@ -2,25 +2,25 @@
 
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_data.gd" type="Script" id=2]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/task/talk_to_task.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd" type="Script" id=3]
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
-uuid = "d1d861eb-c804-458d-8ad6-bc5e03f0eef1"
-owner = "98474b5f-0e2a-4fa7-84d5-dcc29aa14814"
-state = 0
-character_id = "1469ea5b-4647-495b-ba0a-6c038153a639"
-character_index = 0
+uuid = "ea10c1f9-072f-4131-941e-623e02f98597"
+owner = "4a56cfaa-7e67-4193-97c0-86a822c1940e"
+item_id = "a15f5d20-5fb8-4ecc-bae9-84c78768124f"
+category = 0
+quantity = 1
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-uuid = "98474b5f-0e2a-4fa7-84d5-dcc29aa14814"
-title = "fill quest title here"
+uuid = "4a56cfaa-7e67-4193-97c0-86a822c1940e"
+title = "Constraint Quest"
 status = 0
 description = "fill quest description here"
-constraints = [  ]
+constraints = [ SubResource( 2 ) ]
 triggers = [  ]
-tasks = [ SubResource( 2 ) ]
+tasks = [  ]
 rewards = [  ]
 
 [resource]

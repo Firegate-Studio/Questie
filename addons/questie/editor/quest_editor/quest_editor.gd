@@ -185,25 +185,16 @@ func load_workspace():
 					return
 
 				# Get item data
-				var item_data = item_db.find_data(element.item, element.category)
-				#if not item_data:
-				#	
-				#	# Log
-				#	print("[questie]: item data not found")
-				#	
-				#	return
+				var item_data = item_db.get_item(element.item_id)
 					
 				
 				if item_data:
 				
 					# Update interface block
-					part.item.text = item_data.title
-					part.category.text = part.category.get_popup().get_item_text(element.category - 1)
+					part.item.text = item_data.name
 					part.quantity.value = element.quantity
-					part.refresh(element.category)
 
 				part.connect("item_changed", self, "has_item_changed")
-				part.connect("category_changed", self, "has_item_category_changed")
 				part.connect("quantity_changed", self, "has_item_quantity_changed")
 				part.connect("delete_part", self, "delete_constraint_part")
 
@@ -1118,53 +1109,14 @@ func has_item_constraint():
 	constraints_uuid_map[part.get_instance_id()] = constraint.uuid
 
 	# Subscribe events
-	part.connect("item_changed", self, "has_item_changed")
-	part.connect("category_changed", self, "has_item_category_changed")
+	part.connect("item_changed", self, "has_item_changed", [part])
 	part.connect("quantity_changed", self, "has_item_quantity_changed")
 	part.connect("delete_part", self, "delete_constraint_part")
 
 	# Save database
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
-func has_item_category_changed(var part, var category):
-
-	# Get quest UUID for the current quest
-	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
-
-	# Get quest data
-	var data = database.get_data(quuid)
-
-	# Check quest data
-	if not data:
-
-		# Log error
-		print("[questie]: invalid quest data!")
-
-		return
-
-	# get constraint UUID
-	var cuuid = constraints_uuid_map[part.get_instance_id()]
-
-	# Get constraint of the displayed quest
-	var constraint = data.get_constraint(cuuid)
-
-	# Check if constraint is valid
-	if not constraint:
-
-		# Log error
-		print("[questie]: can't retrieve constraint data from quest with [uuid]: " + data.uuid)
-
-		return
-
-	# Update questo to the quest we want track over time
-	constraint.category = category
-	# Log
-	print("[questie]: set item_category to " + var2str(category) + " for constraint with [uuid]: " + constraint.uuid)
-
-	# Save database
-	ResourceSaver.save("res://questie/quest-db.tres", database)
-
-func has_item_changed(var part, var id, var category):
+func has_item_changed(item_id, part):
 
 	# Get quest UUID for the current quest
 	var quuid = quest_tree.uuid_map[quest_tree.get_selected().get_instance_id()]
@@ -1205,11 +1157,11 @@ func has_item_changed(var part, var id, var category):
 		
 		return
 
-	# Update constraint item UUID
-	constraint.item = item_db.find_data_by_slot(id, category).uuid
+	# Update constraint item identifier
+	constraint.item_id = item_id
 
 	# Log
-	print("[questie]: set item to " + var2str(constraint.item) + " for constraint with [uuid]: " + constraint.uuid)
+	print("[questie]: set item to " + item_id + " for constraint with [uuid]: " + constraint.uuid)
 
 	# Save database
 	ResourceSaver.save("res://questie/quest-db.tres", database)

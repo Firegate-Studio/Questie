@@ -5,36 +5,34 @@ extends "res://addons/questie/runtime/Inventory System/inventory_base.gd"
 export(int) var max_slot_capacity = 25
 
 class item:
-	var uuid : String
+	var id : String
 	var data
 	var quantity : int
 
 # @brief                Check if an item is present in inventory and get it
 # @param uuid           the item UUID
-func fetch(var uuid : String):
+func fetch(id : String):
 	for obj in data:
-		if obj.uuid == uuid:
+		if obj.id == id:
 			return obj
 	return null
 
-func add_item(var uuid : String, var quantity : int = 1):
+func add_item(id : String, quantity : int = 1):
 
 	# Get database
-	var database = InventorySystem.item_db
-
-	var category = database.get_item_category(uuid)
+	var database = load("res://questie/item-db.tres")
 
 	# Check if item is already added to inventory
-	var container = fetch(uuid)
+	var container = fetch(id)
 	if not container: 
 		# Add item for the first time
 		container = item.new()
-		container.uuid = uuid
+		container.id = id
 		
-		container.data = database.find_data(uuid, category)
+		container.data = database.get_item(id)
 		if not container.data:
 			# Log error
-			print("[questie]: can't retrieve data for item with uuid: " + uuid)
+			print("[questie]: can't retrieve data for item with uuid: " + id)
 			return
 
 		# Check quantity validation
@@ -47,7 +45,7 @@ func add_item(var uuid : String, var quantity : int = 1):
 		
 		# Store data
 		data.push_back(container)
-		emit_signal("item_added", uuid, category)
+		emit_signal("item_added", id, quantity)
 	else:
 		# update item quantity
 		if container.quantity + quantity > max_slot_capacity:
@@ -58,42 +56,39 @@ func add_item(var uuid : String, var quantity : int = 1):
 		else:
 			container.quantity += quantity
 		
-		emit_signal("item_added", uuid, quantity)
+		emit_signal("item_added", id, quantity)
 
 # @brief                    Remove one item or many from inventory
 # @param uuid               the item uuid
 # @param quantity           the amount to remove
-func remove_item(var uuid : String, var quantity : int = 1)->void:
+func remove_item(id : String, var quantity : int = 1)->void:
 
 	# Reference database
 	var database = InventorySystem.item_db
 
 	# Check item container validation
-	var container = fetch(uuid)
+	var container = fetch(id)
 	if not container:
 		# Log error
-		print("[questie]: can't retrived item from inventory for item with uuid: " + uuid)
+		print("[questie]: can't retrived item from inventory for item with uuid: " + id)
 		return
-
-	# Retrieve item category
-	var category = database.get_item_category(uuid)
 	
 	# Check if quantity nullify item
 	if container.quantity - quantity == 0 or container.quantity - quantity < 0:
 		data.erase(container)
-		emit_signal("item_removed", uuid, category)
+		emit_signal("item_removed", id)
 	else:
 		container.quantity -= quantity
-		emit_signal("item_removed", uuid, category)
+		emit_signal("item_removed", id)
 
 # @brief					Return the item inside inventory if exists
 # @param uuid				the item UUID
-func get_item(var uuid : String)->ResultItem:
+func get_item(var id : String)->ResultItem:
 	for item in data:
-		if not item.uuid == uuid: continue
+		if not item.id == id: continue
 		
 		var result = ResultItem.new()
-		result.uuid = uuid
+		result.id = id
 		result.data = item.data
 		result.quantity = item.quantity
 		return result
@@ -111,4 +106,4 @@ func debug()->void:
 		if not container is item: 
 			print("porco dio")
 			return
-		print("item: " + container.data.title + "(" + container.uuid + ") - quantity: " + var2str(container.quantity))
+		print("item: " + container.data.name + "(" + container.id + ") - quantity: " + var2str(container.quantity))

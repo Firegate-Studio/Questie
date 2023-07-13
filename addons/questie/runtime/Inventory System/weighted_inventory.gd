@@ -7,15 +7,15 @@ extends "res://addons/questie/runtime/Inventory System/inventory_base.gd"
 export(float) var max_weight = 200
 
 class item:
-	var uuid : String
+	var id : String
 	var data
 	var quantity : int
 
-func fetch_item(var uuid : String)->item:
+func fetch_item(id : String)->item:
 	for context in data:
 
 		# Ignore invalid uuid
-		if not context.uuid == uuid: continue
+		if not context.id == id: continue
 
 		return context
 
@@ -36,37 +36,17 @@ func get_current_weight()->float:
 # @brief                    Add an item to inventory
 # @param item               The UUID of the item to add
 # @param quantity           The quantity to add to inventory
-func add_item(var uuid, var quantity : int = 1):
+func add_item(id, var quantity : int = 1):
 
-	var container = fetch_item(uuid)
+	var container = fetch_item(id)
 	if not container:
 
 		# Construct new slot
 		container = item.new()
-		container.uuid = uuid
+		container.uuid = id
 		
-
-		# Binary search data from database
-		if InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.WEAPON): 
-			container.data = InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.WEAPON)
-		if not container.data and InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.ARMOR):
-			container.data = InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.ARMOR)
-		if not container.data and InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.CONSUMABLE):
-			container.data = InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.CONSUMABLE)
-		if not container.data and InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.MATERIAL):
-			container.data = InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.MATERIAL)
-		if not container.data and InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.SPECIAL):
-			container.data = InventorySystem.item_db.find_data(uuid, InventorySystem.item_db.ItemCategory.SPECIAL)
-		if not container.data:
-			print("[questie]: can't retrieve data from database")
-			return
-		
-		# Detect category from UUID
-		var category = InventorySystem.item_db.get_item_category(uuid)
-		if not category:
-			# Log error
-			print("[questie]: can't retrieve category for item with uuid: " + uuid)
-			return
+		# get data from database
+		container.data = load("res://questie/item-db.tres").get_item(id)
 
 		# Inspect quantity
 		if container.data.weight * quantity > max_weight:
@@ -81,7 +61,7 @@ func add_item(var uuid, var quantity : int = 1):
 			container.quantity = quantity
 			
 		data.push_back(container)
-		emit_signal("item_added", uuid, category)
+		emit_signal("item_added", id)
 	else:
 		# Inspect quantity
 		if container.data.weight * quantity + get_current_weight() > max_weight:
@@ -95,11 +75,11 @@ func add_item(var uuid, var quantity : int = 1):
 					break
 		else:
 			container.quantity += quantity
-			emit_signal("item_added", uuid, InventorySystem.item_db.get_item_category(uuid))			
+			emit_signal("item_added", id)			
 
-func remove_item(var item, var quantity : int = 1):
+func remove_item(id : String, var quantity : int = 1):
 
-	var container = fetch_item(item)
+	var container = fetch_item(id)
 	if not container: return
 
 	if container.quantity - quantity == 0:
@@ -108,12 +88,12 @@ func remove_item(var item, var quantity : int = 1):
 
 	container.quantity -= quantity
 
-func get_item(var uuid : String)->ResultItem:
+func get_item(id : String)->ResultItem:
 	for obj in data:
-		if not obj.uuid == uuid: continue
+		if not obj.id == id: continue
 
 		var result = ResultItem.new()
-		result.uuid = obj.uuid
+		result.id = obj.uuid
 		result.data = obj.data
 		result.quantity = obj.quantity
 

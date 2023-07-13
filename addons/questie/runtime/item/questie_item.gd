@@ -1,4 +1,4 @@
-extends Node
+extends Area2D
 class_name QuestieItem, "res://addons/questie/editor/icons/boxes_16x16.png"
 
 export(ItemsCollection.Items) var item
@@ -43,3 +43,6 @@ func get_min_custom(): return get_data().min_custom
 func get_max_custom(): return get_data().max_custom
 func get_sell_price(): return get_data().sell_price
 func get_purchase_price(): return get_data().purchase_price
+func interact():
+	var id = get_item_id()
+	QuestieEvents.emit_signal("interact_item", id)

@@ -12,8 +12,7 @@ static func has_item_node(constraint_data, constraint_id, quest_id, inventory)->
 	node.id = constraint_id
 	node.quest_id = quest_id
 	node.inventory = inventory
-	node.item_uuid = constraint_data.item
-	node.item_category = constraint_data.category
+	node.item_uuid = constraint_data.item_id
 	node.item_quantity = constraint_data.quantity
 
 	return node

@@ -7,9 +7,9 @@
 [ext_resource path="res://demo/journal/journal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demo/controls.gd" type="Script" id=6]
 [ext_resource path="res://demo/journal/QuestPopup.tscn" type="PackedScene" id=7]
+[ext_resource path="res://demo/items/item.tscn" type="PackedScene" id=8]
 [ext_resource path="res://demo/locations/grond_test.png" type="Texture" id=11]
 [ext_resource path="res://demo/characters/severalcode.tscn" type="PackedScene" id=13]
-[ext_resource path="res://demo/items/interactable.tscn" type="PackedScene" id=15]
 [ext_resource path="res://demo/characters/blacksmith.tscn" type="PackedScene" id=16]
 [ext_resource path="res://demo/character_interaction_example.gd" type="Script" id=17]
 [ext_resource path="res://demo/character_talk_example.gd" type="Script" id=18]
@@ -27,9 +27,11 @@ extents = Vector2( 353.5, 538.5 )
 [node name="Node2D" type="Node2D"]
 
 [node name="GAME INITIALIZER!" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 4 )
 
 [node name="Controls" type="Node2D" parent="."]
+visible = false
 script = ExtResource( 6 )
 
 [node name="GrondTest" type="Sprite" parent="."]
@@ -107,10 +109,26 @@ margin_top = 283.0
 margin_right = 1230.0
 margin_bottom = 783.0
 
-[node name="Interactable" parent="." instance=ExtResource( 15 )]
-position = Vector2( 92, 1003 )
+[node name="Item" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1334, 230 )
+
+[node name="Item2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1236, 280 )
+
+[node name="Item3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1354, 397 )
+
+[node name="Item4" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1105, 461 )
+
+[node name="Item5" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1134, 714 )
+
+[node name="Item6" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1209, 886 )
 
 [node name="QuestieLocation" type="Area2D" parent="."]
+visible = false
 position = Vector2( 1475, 503 )
 script = ExtResource( 1 )
 

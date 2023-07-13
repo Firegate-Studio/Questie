@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/parts/constraints/has_item_part.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/icons/trash.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/icons/boxes_32x32.png" type="Texture" id=3]
 
 [node name="Has Item Part" type="Panel"]
 margin_top = 10.0
@@ -24,48 +25,28 @@ margin_right = 28.0
 margin_bottom = 23.0
 text = "Has "
 
-[node name="Item" type="MenuButton" parent="HBoxContainer"]
-margin_left = 32.0
-margin_right = 74.0
-margin_bottom = 32.0
-focus_mode = 2
-text = "item"
-flat = false
-
-[node name="Label2" type="Label" parent="HBoxContainer"]
-margin_left = 78.0
-margin_top = 9.0
-margin_right = 108.0
-margin_bottom = 23.0
-text = "from"
-
-[node name="Category" type="MenuButton" parent="HBoxContainer"]
-margin_left = 112.0
-margin_right = 179.0
-margin_bottom = 32.0
-text = "Category"
-flat = false
-items = [ "Weapon", null, 0, false, false, 0, 0, null, "", false, "Armor", null, 0, false, false, 1, 0, null, "", false, "Consumable", null, 0, false, false, 2, 0, null, "", false, "Material", null, 0, false, false, 3, 0, null, "", false, "Special", null, 0, false, false, 4, 0, null, "", false ]
-
-[node name="Label3" type="Label" parent="HBoxContainer"]
-margin_left = 183.0
-margin_top = 9.0
-margin_right = 195.0
-margin_bottom = 23.0
-text = "of"
-
 [node name="Quantity" type="SpinBox" parent="HBoxContainer"]
-margin_left = 199.0
-margin_right = 363.0
+margin_left = 32.0
+margin_right = 106.0
 margin_bottom = 32.0
-size_flags_horizontal = 3
 min_value = 1.0
 value = 1.0
 allow_greater = true
 
+[node name="Item" type="MenuButton" parent="HBoxContainer"]
+margin_left = 110.0
+margin_right = 174.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 64, 32 )
+focus_mode = 2
+text = "item"
+icon = ExtResource( 3 )
+flat = false
+expand_icon = true
+
 [node name="Delete" type="Button" parent="HBoxContainer"]
-margin_left = 367.0
-margin_right = 399.0
+margin_left = 178.0
+margin_right = 210.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 icon = ExtResource( 2 )
