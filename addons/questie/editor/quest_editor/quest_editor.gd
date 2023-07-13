@@ -321,9 +321,7 @@ func load_workspace():
 				var qdata = database.get_data(element.owner)
 				if qdata:
 					var db = load("res://questie/item-db.tres")
-					part.uuid.text = element.item_uuid
-					part.item.text = db.find_data(element.item_uuid, element.item_category).title
-					part.category.text = part.category.get_popup().get_item_text(element.item_category - 1)
+					part.item_menu.text = db.get_item(element.item_uuid).name
 
 				# Subscribe trigger events
 				part.connect("item_selected", self, "trigger_get_item_selected", [part, element])
@@ -408,15 +406,13 @@ func load_workspace():
 
 				# get item database
 				var item_db = load("res://questie/item-db.tres")
-				var item_index = item_db.find_data_index(element.item_id, element.category)
-				var item_data = item_db.find_data(element.item_id, element.category)
+				var item_data = item_db.get_item(element.item_id)
 				
 				if item_data: 
 					# update trigger interface
-					part.autoload(element.category, item_data.title, item_index)
+					part.autoload(item_data)
 
 				# subscribe events
-				part.connect("category_selected", self, "item_interaction_trigger_category_selected", [element, quest_data])
 				part.connect("item_selected", self, "item_interaction_trigger_item_selected", [element, quest_data])
 				part.connect("deletion_request", self, "item_interaction_trigger_deletion_requested", [element, quest_data, part])
 				
@@ -569,21 +565,18 @@ func load_workspace():
 				var qdata = database.get_data(element.owner)
 				if qdata:
 					var db = load("res://questie/item-db.tres")
-					var item_data = db.find_data(element.item_uuid, element.category)
+					var item_data = db.get_item(element.item_uuid)
 					if not item_data:
 						part.item.text = "item"
-						part.category.text = part.category.get_popup().get_item_text(element.category)
-						part.load_items_from_database(element.category)
 						part.quantity.value = element.quantity
 					else:	
-						part.item.text = item_data.title
-						part.category.text = part.category.get_popup().get_item_text(element.category - 1)
-						part.load_items_from_database(element.category)
+						part.item.text = item_data.name
+						#part.category.text = part.category.get_popup().get_item_text(element.category - 1)
+						#part.load_items_from_database(element.category)
 						part.quantity.value = element.quantity
 
 				# Subscribe events
 				part.connect("item_selected", self, "task_collect_item_selected",[qdata, element])
-				part.connect("category_selected", self, "task_collect_category_selected", [qdata, element])
 				part.connect("quantity_changed", self, "taks_collect_quantity_changed", [qdata, element])
 				part.connect("delete_part_requested", self, "task_collect_delete", [qdata, element])
 
@@ -745,15 +738,13 @@ func load_workspace():
 
 				# get item database
 				var item_db = load("res://questie/item-db.tres")
-				var item_index = item_db.find_data_index(element.item_id, element.category)
-				var item_data = item_db.find_data(element.item_id, element.category)
+				var item_data = item_db.get_item(element.item_id)
 				
 				if item_data:
 					# update trigger interface
-					part.autoload(element.category, item_data.title, item_index)
+					part.autoload(item_data)
 
 				# subscribe events
-				part.connect("category_selected", self, "item_interaction_task_category_selected", [element, quest_data])
 				part.connect("item_selected", self, "item_interaction_task_item_selected", [element, quest_data])
 				part.connect("deletion_request", self, "item_interaction_task_deletion_requested", [element, quest_data, part])
 
@@ -830,21 +821,16 @@ func load_workspace():
 				var qdata = database.get_data(element.owner)
 				if qdata:
 					var db = load("res://questie/item-db.tres")
-					var item_data = db.find_data(element.item_id, element.item_category)
+					var item_data = db.get_item(element.item_id)
 					if not item_data:
 						part.item_menu.text = "item"
-						part.item_category.text = part.category.get_popup().get_item_text(element.category)
-						part.load_items_from_database(element.category)
 						part.quantity_box.value = element.quantity
 					else:	
-						part.item_menu.text = item_data.title
-						part.category_menu.text = part.category_menu.get_popup().get_item_text(element.item_category - 1)
-						part.load_items_from_database(element.item_category)
+						part.item_menu.text = item_data.name
 						part.quantity_box.value = element.item_quantity
 
 				# Subscribe events
 				part.connect("item_selected", self, "handle_add_item_reward_item_selected",[qdata, element])
-				part.connect("category_selected", self, "handle_add_item_reward_category_selected", [qdata, element])
 				part.connect("quantity_changed", self, "handle_add_item_reward_quantity_changed", [qdata, element])
 				part.connect("delete_part_requested", self, "handle_add_item_reward_deletion", [qdata, element])
 
@@ -1444,10 +1430,9 @@ func get_item_trigger():
 	# Update database
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
-func trigger_get_item_selected(var item_uuid, var category, var data, var part, var trigger):
+func trigger_get_item_selected(var item_id, var data, var part, var trigger):
 
-	trigger.item_uuid = item_uuid						# update trigger item UUID
-	trigger.item_category = category					# update item category
+	trigger.item_uuid = item_id						# update trigger item UUID
 
 	# update data
 	ResourceSaver.save("res://questie/quest-db.tres", database)
@@ -1630,34 +1615,18 @@ func create_interact_item_trigger():
 	triggers_list.add_child(part)
 
 	# subscribe events
-	part.connect("category_selected", self, "item_interaction_trigger_category_selected", [trigger_data, quest_data])
 	part.connect("item_selected", self, "item_interaction_trigger_item_selected", [trigger_data, quest_data])
 	part.connect("deletion_request", self, "item_interaction_trigger_deletion_requested", [trigger_data, quest_data, part])
 
 	# save data
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
-func item_interaction_trigger_category_selected(category_idx, trigger_data, quest_data):
-	trigger_data.category = category_idx
-	ResourceSaver.save("res://questie/quest-db.tres", database)
-
-func item_interaction_trigger_item_selected(item_idx, category_idx, trigger_data, quest_data):
+func item_interaction_trigger_item_selected(item_id, trigger_data, quest_data):
 	var item_db = load("res://questie/item-db.tres")
 
-	var item_data
-	match category_idx:
-		ItemDatabase.ItemCategory.WEAPON:
-			item_data = item_db.weapons[item_idx]
-		ItemDatabase.ItemCategory.ARMOR:
-			item_data = item_db.armors[item_idx]
-		ItemDatabase.ItemCategory.CONSUMABLE:
-			item_data = item_db.consumables[item_idx]
-		ItemDatabase.ItemCategory.MATERIAL:
-			item_data = item_db.materials[item_idx]
-		ItemDatabase.ItemCategory.SPECIAL:
-			item_data = item_db.specials[item_idx]
+	var item_data = item_db.get_item(item_id)
 
-	trigger_data.item_id = item_data.uuid
+	trigger_data.item_id = item_data.id
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 
 func item_interaction_trigger_deletion_requested(trigger_data, quest_data, node):
@@ -1750,7 +1719,6 @@ func collect_item_task():
 
 	# Subscribe events
 	part.connect("item_selected", self, "task_collect_item_selected",[qdata, tdata])
-	part.connect("category_selected", self, "task_collect_category_selected", [qdata, tdata])
 	part.connect("quantity_changed", self, "taks_collect_quantity_changed", [qdata, tdata])
 	part.connect("delete_part_requested", self, "task_collect_delete", [qdata, tdata])
 
@@ -1761,23 +1729,6 @@ func task_collect_item_selected(var item_uuid : String, var part, var quest_data
 	
 	task_data.item_uuid = item_uuid
 	print("[questie]: set task: Collect item/Item UUID: " + item_uuid)
-
-	# Save data
-	ResourceSaver.save("res://questie/quest-db.tres", database)
-
-func task_collect_category_selected(var category, var part, var quest_data, var task_data):
-
-	var item_db = load("res://questie/item-db.tres")
-
-	task_data.category = category
-	print("[questie]: set task: Collect item/Category: " + var2str(category))
-
-	var new_item = item_db.find_data_by_slot(0, category)
-	if not new_item:
-		return
-
-	task_data.item_uuid = new_item.uuid
-	print("[questie]: set task: Collect item/Item UUID: " + new_item.uuid)
 
 	# Save data
 	ResourceSaver.save("res://questie/quest-db.tres", database)
@@ -1796,7 +1747,6 @@ func task_collect_delete(var part, var quest_data, var task_data):
 
 	# Unsubscibe events
 	part.disconnect("item_selected", self, "task_collect_item_selected")
-	part.disconnect("category_selected", self, "task_collect_category_selected")
 	part.disconnect("quantity_changed", self, "taks_collect_quantity_changed")
 	part.disconnect("delete_part_requested", self, "task_collect_delete")
 
@@ -2021,34 +1971,18 @@ func create_interact_item_task():
 	tasks_list.add_child(part)
 	
 	# subscribe events
-	part.connect("category_selected", self, "item_interaction_task_category_selected", [task_data, quest_data])
 	part.connect("item_selected", self, "item_interaction_task_item_selected", [task_data, quest_data])
 	part.connect("deletion_request", self, "item_interaction_task_deletion_requested", [task_data, quest_data, part])
 
 	# save data
 	ResourceSaver.save("res://questie/quest-db.tres", database)
-	
-func item_interaction_task_category_selected(category_idx, task_data, quest_data):
-	task_data.category = category_idx
-	ResourceSaver.save("res://questie/quest-db.tres", database)
-	
-func item_interaction_task_item_selected(item_idx, category_idx, task_data, quest_data):
+
+func item_interaction_task_item_selected(item_id, task_data, quest_data):
 	var item_db = load("res://questie/item-db.tres")
 	
-	var item_data
-	match category_idx:
-		ItemDatabase.ItemCategory.WEAPON:
-			item_data = item_db.weapons[item_idx]
-		ItemDatabase.ItemCategory.ARMOR:
-			item_data = item_db.armors[item_idx]
-		ItemDatabase.ItemCategory.CONSUMABLE:
-			item_data = item_db.consumables[item_idx]
-		ItemDatabase.ItemCategory.MATERIAL:
-			item_data = item_db.materials[item_idx]
-		ItemDatabase.ItemCategory.SPECIAL:
-			item_data = item_db.specials[item_idx]
+	var item_data = item_db.get_item(item_id)
 	
-	task_data.item_id = item_data.uuid
+	task_data.item_id = item_data.id
 	ResourceSaver.save("res://questie/quest-db.tres", database)
 	
 func item_interaction_task_deletion_requested(task_data, quest_data, node):
@@ -2145,7 +2079,6 @@ func create_add_item_reward():
 
 	# subscribe events
 	part.connect("item_selected", self, "handle_add_item_reward_item_selected", [qdata, rdata])
-	part.connect("category_selected", self, "handle_add_item_reward_category_selected", [qdata, rdata])
 	part.connect("quantity_changed", self, "handle_add_item_reward_quantity_changed", [qdata, rdata])
 	part.connect("delete_part_requested", self, "handle_add_item_reward_deletion", [qdata, rdata])
 
@@ -2155,22 +2088,6 @@ func create_add_item_reward():
 func handle_add_item_reward_item_selected(item_id : String, part, quest_data, reward_data)->void:
 	reward_data.item_id = item_id
 	print("[questie]: set task: Collect item/Item UUID: " + item_id)
-
-	# Save data
-	ResourceSaver.save("res://questie/quest-db.tres", database)
-
-func handle_add_item_reward_category_selected(category,  part, quest_data, reward_data):
-	var item_db = load("res://questie/item-db.tres")
-
-	reward_data.item_category = category
-	print("[questie]: set task: Collect item/Category: " + var2str(category))
-
-	var new_item = item_db.find_data_by_slot(0, category)
-	if not new_item:
-		return
-
-	reward_data.item_id = new_item.uuid
-	print("[questie]: set task: Collect item/Item UUID: " + new_item.uuid)
 
 	# Save data
 	ResourceSaver.save("res://questie/quest-db.tres", database)
@@ -2187,7 +2104,6 @@ func handle_add_item_reward_deletion(part, quest_data, reward_data):
 
 	# Unsubscibe events
 	part.disconnect("item_selected", self, "handle_add_item_reward_item_selected")
-	part.disconnect("category_selected", self, "handle_add_item_reward_category_selected")
 	part.disconnect("quantity_changed", self, "handle_add_item_reward_quantity_changed")
 	part.disconnect("delete_part_requested", self, "handle_add_item_reward_deletion")
 

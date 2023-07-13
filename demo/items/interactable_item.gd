@@ -13,6 +13,6 @@ func on_trigger_enter(_body):
 	Questie.player_inventory.add_item(item.get_item_id())
 	
 	item.interact()
-	queue_free()
+	item.queue_free()
 
 	

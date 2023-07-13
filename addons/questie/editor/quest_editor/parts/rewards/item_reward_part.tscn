@@ -21,51 +21,29 @@ margin_bottom = -5.0
 alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-margin_left = 41.0
-margin_top = 8.0
-margin_right = 64.0
-margin_bottom = 22.0
+margin_left = 552.0
+margin_top = 248.0
+margin_right = 575.0
+margin_bottom = 262.0
 text = "add"
 
 [node name="Quantity Box" type="SpinBox" parent="HBoxContainer"]
-margin_left = 68.0
-margin_right = 142.0
-margin_bottom = 30.0
+margin_left = 579.0
+margin_right = 653.0
+margin_bottom = 510.0
 align = 1
 
-[node name="Label3" type="Label" parent="HBoxContainer"]
-margin_left = 146.0
-margin_top = 8.0
-margin_right = 158.0
-margin_bottom = 22.0
-text = "of"
-
 [node name="Item Menu" type="MenuButton" parent="HBoxContainer"]
-margin_left = 162.0
-margin_right = 205.0
-margin_bottom = 30.0
+margin_left = 657.0
+margin_right = 700.0
+margin_bottom = 510.0
 text = "ITEM"
-items = [ "Sword", null, 0, false, false, 0, 0, null, "", false ]
-
-[node name="Label2" type="Label" parent="HBoxContainer"]
-margin_left = 209.0
-margin_top = 8.0
-margin_right = 239.0
-margin_bottom = 22.0
-text = "from"
-
-[node name="Category Menu" type="MenuButton" parent="HBoxContainer"]
-margin_left = 243.0
-margin_right = 314.0
-margin_bottom = 30.0
-focus_mode = 2
-text = "Weapons"
-items = [ "Weapons", null, 0, false, false, 5, 0, null, "", false, "Armors", null, 0, false, false, 1, 0, null, "", false, "Consumables", null, 0, false, false, 2, 0, null, "", false, "Materials", null, 0, false, false, 3, 0, null, "", false, "Specials", null, 0, false, false, 4, 0, null, "", false ]
+items = [ "Training Sword", null, 0, false, false, 0, 0, null, "", false, "Morningstar", null, 0, false, false, 1, 0, null, "", false, "Longsword", null, 0, false, false, 2, 0, null, "", false, "Bastard", null, 0, false, false, 3, 0, null, "", false, "Mana Potion 1", null, 0, false, false, 4, 0, null, "", false, "Mana Potion 2", null, 0, false, false, 5, 0, null, "", false, "Mana Potion 3", null, 0, false, false, 6, 0, null, "", false, "Mana Potion 4", null, 0, false, false, 7, 0, null, "", false, "Mana Potion 5", null, 0, false, false, 8, 0, null, "", false, "Health Potion 1", null, 0, false, false, 9, 0, null, "", false, "Health Potion 2", null, 0, false, false, 10, 0, null, "", false, "Health Potion 3", null, 0, false, false, 11, 0, null, "", false, "Health Potion 4", null, 0, false, false, 12, 0, null, "", false, "Health Potion 5", null, 0, false, false, 13, 0, null, "", false, "Bag 01", null, 0, false, false, 14, 0, null, "", false, "Bag 02", null, 0, false, false, 15, 0, null, "", false, "Bag 03", null, 0, false, false, 16, 0, null, "", false, "Bag 04", null, 0, false, false, 17, 0, null, "", false, "Bag 05", null, 0, false, false, 18, 0, null, "", false, "Stone", null, 0, false, false, 19, 0, null, "", false, "Water", null, 0, false, false, 20, 0, null, "", false ]
 
 [node name="Delete Button" type="Button" parent="HBoxContainer"]
-margin_left = 318.0
-margin_right = 348.0
-margin_bottom = 30.0
+margin_left = 704.0
+margin_right = 734.0
+margin_bottom = 510.0
 rect_min_size = Vector2( 30, 0 )
 size_flags_horizontal = 5
 size_flags_vertical = 5
