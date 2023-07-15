@@ -1,9 +1,12 @@
-[gd_resource type="Resource" load_steps=11 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/character_editor/data/folder.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/character_editor/data/shop_item.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=5]
+[ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/character_editor/data/inventory_item.gd" type="Script" id=7]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -56,13 +59,28 @@ inventory = [  ]
 shop = [  ]
 loot = [  ]
 
-[sub_resource type="Resource" id=9]
-script = ExtResource( 4 )
-id = "75215c86-0845-4dda-b68c-455ecce3e193"
-name = "Armor"
-icon = "res://addons/questie/editor/icons/armor.png"
+[sub_resource type="Resource" id=15]
+script = ExtResource( 7 )
+id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
+name = "Training Sword"
+icon = ExtResource( 5 )
+quantity = 0
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 6 )
+id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
+name = "Training Sword"
+icon = ExtResource( 5 )
 quantity = 5.0
-percentage = 50.0
+percentage = 76.0
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 4 )
+id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
+name = "Training Sword"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 5.0
+quantity = 99.0
 
 [sub_resource type="Resource" id=8]
 script = ExtResource( 2 )
@@ -77,9 +95,9 @@ parent = "c056aee7-cf7c-448f-af6c-9a8976edb43a"
 is_vendor = false
 has_loot = true
 has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [ SubResource( 9 ) ]
+inventory = [ SubResource( 15 ) ]
+shop = [ SubResource( 14 ) ]
+loot = [ SubResource( 13 ) ]
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )

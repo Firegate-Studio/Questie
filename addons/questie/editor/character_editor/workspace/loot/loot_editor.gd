@@ -40,7 +40,7 @@ func on_item_confirmed(id, name, icon):
 	# update data
 	data.id = id
 	data.name = name
-	data.icon = icon.resource_path
+	data.icon = icon
 	ResourceSaver.save("res://questie/characters-db.tres", character_database)
 
 	# update slot
@@ -120,7 +120,7 @@ func setup(character_id):
 
 		# update slot
 		slot._name.text = data.name 
-		slot._icon.texture = load(data.icon)
+		slot._icon.texture = data.icon
 		slot._quantity.value = data.quantity
 		slot._percentage_slider.value = data.percentage
 		slot._percentage_text.text = var2str(data.percentage)+"%"

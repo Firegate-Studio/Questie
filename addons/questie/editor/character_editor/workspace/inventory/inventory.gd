@@ -37,12 +37,11 @@ func on_item_confirmed(id, name, icon):
 
 	# modify database values
 	var item_database = load("res://questie/item-db.tres")
-	var category = item_database.get_item_category(id)
 	var item_index = selected_slot.get_index()
 	var inventory_data = database.get_character_data(_character_id).inventory[item_index]
 	inventory_data.id = id
 	inventory_data.name = name
-	inventory_data.icon = icon.resource_path
+	inventory_data.icon = icon
 	ResourceSaver.save("res://questie/characters-db.tres", database)
 
 	selected_slot = null
@@ -89,7 +88,7 @@ func setup(character_id):
 		container.add_child(slot)
 		slot.item_id = data.id
 		slot._item_name.text = data.name
-		slot._icon.texture = load(data.icon)
+		slot._icon.texture = data.icon
 		slot._quantity.value = data.quantity
 
 		slot.connect("button_down", self, "on_item_slot_clicked", [slot])

@@ -41,8 +41,7 @@ func on_item_confirmed(var id, var name, var icon):
 	
 	# get item data from item database
 	var item_database = load("res://questie/item-db.tres")
-	var item_category = item_database.get_item_category(id)
-	var item_data = item_database.find_data(id, item_category)
+	var item_data = item_database.get_item(id)
 
 	# update data information
 	shop_inventory_data[slot_index].id = id

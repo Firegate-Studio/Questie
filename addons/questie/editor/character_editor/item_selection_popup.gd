@@ -35,11 +35,11 @@ func _enter_tree():
 	connect("confirmed", self, "on_confirmation")
 
 func on_item_sorting_changed():
-	items_container.load_all_items(search_line.text, weapons_check.pressed, armors_check.pressed, consumables_check.pressed, materials_check.pressed, specials_check.pressed)
+	items_container.load_all_items(search_line.text)
 
 func on_searching_text_changed(text): 
 	print("[Questie]: searching " + text)
-	items_container.load_all_items(text, weapons_check.pressed, armors_check.pressed, consumables_check.pressed, materials_check.pressed, specials_check.pressed)
+	items_container.load_all_items(text)
 
 func on_confirmation():
 	var selected_node = items_container.selected_node
