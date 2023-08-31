@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=37 format=2]
+[gd_resource type="Resource" load_steps=42 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=3]
+[ext_resource path="res://addons/questie/editor/icons/money_64x64.png" type="Texture" id=4]
 
 [sub_resource type="Resource" id=3]
 script = ExtResource( 2 )
@@ -207,7 +208,8 @@ display_name = "Morningstar"
 is_unique = false
 description = "fill item description"
 weight = 0.1
-icon_path = "res://YOUR_ICON_PATH"
+icon_path = "res://addons/questie/editor/icons/item.png"
+icon = ExtResource( 3 )
 min_damage = 10.0
 max_damage = 25.0
 min_defense = 0.0
@@ -217,7 +219,7 @@ max_healing = 0.0
 min_custom = 0.0
 max_custom = 0.0
 can_be_sold = true
-original_price = 0.0
+original_price = 100.0
 purchase_price = 200.0
 sell_price = 50.0
 
@@ -231,7 +233,8 @@ display_name = "Longsword"
 is_unique = false
 description = "fill item description"
 weight = 0.1
-icon_path = "res://YOUR_ICON_PATH"
+icon_path = "res://addons/questie/editor/icons/item.png"
+icon = ExtResource( 3 )
 min_damage = 1.0
 max_damage = 50.0
 min_defense = 0.0
@@ -255,7 +258,8 @@ display_name = "Bastard Sword"
 is_unique = false
 description = "fill item description"
 weight = 0.1
-icon_path = "res://YOUR_ICON_PATH"
+icon_path = "res://addons/questie/editor/icons/item.png"
+icon = ExtResource( 3 )
 min_damage = 5.0
 max_damage = 30.0
 min_defense = 0.0
@@ -677,6 +681,80 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=37]
+script = ExtResource( 2 )
+id = "31d87020-d7b5-4d0e-9d5b-3c94758ba6ea"
+folder_id = ""
+tag_id = "1935f9af-c23d-41f0-99af-feb0bfa09c8d"
+name = "Copper"
+display_name = "Copper"
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://addons/questie/editor/icons/money_64x64.png"
+icon = ExtResource( 4 )
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 1000.0
+purchase_price = 1000.0
+sell_price = 1000.0
+
+[sub_resource type="Resource" id=38]
+script = ExtResource( 2 )
+id = "c22b3be3-0039-420c-a091-165fab2882e5"
+folder_id = ""
+tag_id = "1935f9af-c23d-41f0-99af-feb0bfa09c8d"
+name = "Silver"
+display_name = "fill display name"
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://addons/questie/editor/icons/money_64x64.png"
+icon = ExtResource( 4 )
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 1000.0
+purchase_price = 1000.0
+sell_price = 1000.0
+
+[sub_resource type="Resource" id=39]
+script = ExtResource( 2 )
+id = "e4414fd8-cf05-4b4e-b201-161151588311"
+folder_id = "4ba6b257-8764-44c2-88a1-3efc58bd02f5"
+tag_id = ""
+name = "Programming_01"
+display_name = "C++ Foundamentals"
+is_unique = true
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 20.0
+purchase_price = 20.0
+sell_price = 10.0
+
 [sub_resource type="Resource" id=4]
 script = ExtResource( 2 )
 id = "39a196ea-166f-4a4d-8c17-2fd9db25ae86"
@@ -797,8 +875,32 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=36]
+script = ExtResource( 2 )
+id = "1935f9af-c23d-41f0-99af-feb0bfa09c8d"
+folder_id = "61848729-00d8-4301-895f-6c59c16ec25c"
+tag_id = ""
+name = "Economy"
+display_name = "fill display name"
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
 [resource]
 script = ExtResource( 1 )
 categories = [ SubResource( 3 ), SubResource( 10 ), SubResource( 11 ), SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 35 ) ]
-tags = [ SubResource( 4 ), SubResource( 9 ), SubResource( 12 ), SubResource( 26 ), SubResource( 32 ) ]
-items = [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 33 ), SubResource( 34 ) ]
+tags = [ SubResource( 4 ), SubResource( 9 ), SubResource( 12 ), SubResource( 26 ), SubResource( 32 ), SubResource( 36 ) ]
+items = [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 33 ), SubResource( 34 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ]

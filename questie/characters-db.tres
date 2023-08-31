@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=16 format=2]
+[gd_resource type="Resource" load_steps=28 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=5]
 [ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=6]
 [ext_resource path="res://addons/questie/editor/character_editor/data/inventory_item.gd" type="Script" id=7]
+[ext_resource path="res://addons/questie/editor/icons/money_64x64.png" type="Texture" id=8]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -25,6 +26,94 @@ inventory = [  ]
 shop = [  ]
 loot = [  ]
 
+[sub_resource type="Resource" id=26]
+script = ExtResource( 6 )
+id = "31d87020-d7b5-4d0e-9d5b-3c94758ba6ea"
+name = "Copper"
+icon = ExtResource( 8 )
+quantity = 99.0
+percentage = 75.0
+
+[sub_resource type="Resource" id=27]
+script = ExtResource( 6 )
+id = "c22b3be3-0039-420c-a091-165fab2882e5"
+name = "Silver"
+icon = ExtResource( 8 )
+quantity = 99.0
+percentage = 50.0
+
+[sub_resource type="Resource" id=28]
+script = ExtResource( 6 )
+id = "31d87020-d7b5-4d0e-9d5b-3c94758ba6ea"
+name = "Copper"
+icon = ExtResource( 8 )
+quantity = 99.0
+percentage = 75.0
+
+[sub_resource type="Resource" id=29]
+script = ExtResource( 6 )
+id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
+name = "Training Sword"
+icon = ExtResource( 5 )
+quantity = 1
+percentage = 60.0
+
+[sub_resource type="Resource" id=30]
+script = ExtResource( 6 )
+id = "1d1a7482-c8dc-4d73-bf8f-e280a0c19d90"
+name = "Morningstar"
+icon = ExtResource( 5 )
+quantity = 1
+percentage = 60.0
+
+[sub_resource type="Resource" id=31]
+script = ExtResource( 6 )
+id = "b453e815-d24b-4b04-96e6-5db3aa21b0e6"
+name = "Longsword"
+icon = ExtResource( 5 )
+quantity = 1
+percentage = 50.0
+
+[sub_resource type="Resource" id=32]
+script = ExtResource( 6 )
+id = "c9a63111-5d51-434b-9b26-8d09ddf7c46e"
+name = "Bastard"
+icon = ExtResource( 5 )
+quantity = 1
+percentage = 50.0
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 4 )
+id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
+name = "Training Sword"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 5.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=22]
+script = ExtResource( 4 )
+id = "1d1a7482-c8dc-4d73-bf8f-e280a0c19d90"
+name = "Morningstar"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 200.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 4 )
+id = "b453e815-d24b-4b04-96e6-5db3aa21b0e6"
+name = "Longsword"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 500.0
+quantity = 99.0
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 4 )
+id = "c9a63111-5d51-434b-9b26-8d09ddf7c46e"
+name = "Bastard"
+icon = "res://addons/questie/editor/icons/item.png"
+value = 800.0
+quantity = 99.0
+
 [sub_resource type="Resource" id=5]
 script = ExtResource( 2 )
 id = "1fafdf9b-c412-42c6-a015-499b3ae261fd"
@@ -35,12 +124,12 @@ biography = "A wonderful blacksmith"
 background = ""
 note = ""
 parent = ""
-is_vendor = false
-has_loot = false
+is_vendor = true
+has_loot = true
 has_inventory = false
 inventory = [  ]
-shop = [  ]
-loot = [  ]
+shop = [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
+loot = [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ]
 
 [sub_resource type="Resource" id=6]
 script = ExtResource( 2 )
@@ -93,7 +182,7 @@ background = ""
 note = ""
 parent = "c056aee7-cf7c-448f-af6c-9a8976edb43a"
 is_vendor = false
-has_loot = true
+has_loot = false
 has_inventory = false
 inventory = [ SubResource( 15 ) ]
 shop = [ SubResource( 14 ) ]

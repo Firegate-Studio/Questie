@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=11 format=2]
 
 [ext_resource path="res://addons/questie/editor/location_editor/location_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/location_editor/category_data.gd" type="Script" id=2]
@@ -8,6 +8,11 @@
 script = ExtResource( 2 )
 id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
 title = "Demo"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+id = "5ffea8c2-842d-4a5b-a6da-1a6e48b03c2a"
+title = "Home"
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
@@ -30,7 +35,21 @@ category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
 name = "Severalcode Temple"
 note = ""
 
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+id = "d9632aec-98d4-4cc7-bff6-86c1ea20ce9e"
+category_id = "5ffea8c2-842d-4a5b-a6da-1a6e48b03c2a"
+name = "Hall"
+note = ""
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+id = "3461c743-a350-4266-ad07-32eed35634d8"
+category_id = "5ffea8c2-842d-4a5b-a6da-1a6e48b03c2a"
+name = "Garden"
+note = ""
+
 [resource]
 script = ExtResource( 1 )
-categories = [ SubResource( 1 ) ]
-locations = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]
+categories = [ SubResource( 1 ), SubResource( 5 ) ]
+locations = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ), SubResource( 7 ) ]

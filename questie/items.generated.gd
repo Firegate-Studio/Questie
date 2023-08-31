@@ -32,6 +32,9 @@ Bag_04,
 Bag_05,
 Stone,
 Water,
+Copper,
+Silver,
+Programming_01,
 }
 const items_map = {
 Items.Training_Sword : "ec6158bf-a0dd-4516-b520-2c504e952b35",
@@ -55,4 +58,7 @@ Items.Bag_04 : "a4c17e47-8e06-4955-92bf-184b34ef800e",
 Items.Bag_05 : "948fa381-1321-44c1-8a04-6c6b4967ac71",
 Items.Stone : "a15f5d20-5fb8-4ecc-bae9-84c78768124f",
 Items.Water : "d13447a8-36c6-48be-9d27-768369ff5e3a",
+Items.Copper : "31d87020-d7b5-4d0e-9d5b-3c94758ba6ea",
+Items.Silver : "c22b3be3-0039-420c-a091-165fab2882e5",
+Items.Programming_01 : "e4414fd8-cf05-4b4e-b201-161151588311",
 }
