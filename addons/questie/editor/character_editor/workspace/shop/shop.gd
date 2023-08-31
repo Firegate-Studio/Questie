@@ -46,7 +46,7 @@ func on_item_confirmed(var id, var name, var icon):
 	# update data information
 	shop_inventory_data[slot_index].id = id
 	shop_inventory_data[slot_index].name = name
-	shop_inventory_data[slot_index].icon = icon.resource_path
+	if(icon): shop_inventory_data[slot_index].icon = icon.resource_path
 	shop_inventory_data[slot_index].value = item_data.purchase_price
 	ResourceSaver.save("res://questie/characters-db.tres", character_database)
 

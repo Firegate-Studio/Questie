@@ -120,7 +120,7 @@ func setup(character_id):
 
 		# update slot
 		slot._name.text = data.name 
-		slot._icon.texture = data.icon
+		if(data.icon): slot._icon.texture = data.icon
 		slot._quantity.value = data.quantity
 		slot._percentage_slider.value = data.percentage
 		slot._percentage_text.text = var2str(data.percentage)+"%"

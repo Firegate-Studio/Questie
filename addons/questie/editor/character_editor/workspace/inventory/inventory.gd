@@ -88,7 +88,7 @@ func setup(character_id):
 		container.add_child(slot)
 		slot.item_id = data.id
 		slot._item_name.text = data.name
-		slot._icon.texture = data.icon
+		if(data.icon): slot._icon.texture = data.icon
 		slot._quantity.value = data.quantity
 
 		slot.connect("button_down", self, "on_item_slot_clicked", [slot])
