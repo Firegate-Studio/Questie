@@ -26,3 +26,31 @@ func get_data():
 
 	return null
 
+# get all shop items data
+func get_shop_data():
+	
+	# retrieve data from character database
+	var data = get_data()
+	if not data:
+		print("[Questie]: Can not access shop data cause character data is invalid for character object:" + name)
+		return
+
+	# get shop items if is vendor
+	if data.is_vendor: return data.shop
+
+	print("[Questie]: this character is not vendor, ensure to have checked has shop in character editor")
+	return null
+
+# get all loot items
+func get_loot_data():
+
+	var data = get_data()
+	if not data:
+		print("[Questie]: Can not access shop data cause character data is invalid for charater object:" + name)
+		return
+
+	# get loot items
+	if data.has_loot: return data.loot
+
+	print("[Questie]: this character is not a lootable character/mob - ensure to have checked has_loot button in character editor")
+	

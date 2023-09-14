@@ -55,7 +55,7 @@ script = ExtResource( 6 )
 id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
 name = "Training Sword"
 icon = ExtResource( 5 )
-quantity = 1
+quantity = 1.0
 percentage = 60.0
 
 [sub_resource type="Resource" id=30]
@@ -63,7 +63,7 @@ script = ExtResource( 6 )
 id = "1d1a7482-c8dc-4d73-bf8f-e280a0c19d90"
 name = "Morningstar"
 icon = ExtResource( 5 )
-quantity = 1
+quantity = 1.0
 percentage = 60.0
 
 [sub_resource type="Resource" id=31]
@@ -71,7 +71,7 @@ script = ExtResource( 6 )
 id = "b453e815-d24b-4b04-96e6-5db3aa21b0e6"
 name = "Longsword"
 icon = ExtResource( 5 )
-quantity = 1
+quantity = 1.0
 percentage = 50.0
 
 [sub_resource type="Resource" id=32]
@@ -79,7 +79,7 @@ script = ExtResource( 6 )
 id = "c9a63111-5d51-434b-9b26-8d09ddf7c46e"
 name = "Bastard"
 icon = ExtResource( 5 )
-quantity = 1
+quantity = 1.0
 percentage = 50.0
 
 [sub_resource type="Resource" id=21]
