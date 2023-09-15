@@ -18,6 +18,9 @@ export(String) var name
 # the name of the item which will be displayed in game inventory
 export(String) var display_name = "fill display name"
 
+# the alignment of the item - i.e., evil staff, wand of the greater good, ..., etc.
+export(float) var alignment
+
 # define if this item is unique (i.e., The Might Ring)
 export(bool) var is_unique = false
 

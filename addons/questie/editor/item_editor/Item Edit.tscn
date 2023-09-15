@@ -206,6 +206,24 @@ margin_left = 242.0
 margin_right = 316.0
 margin_bottom = 24.0
 
+[node name="HBoxContainer5" type="HBoxContainer" parent="Values"]
+margin_top = 112.0
+margin_right = 1475.0
+margin_bottom = 136.0
+
+[node name="Label" type="Label" parent="Values/HBoxContainer5"]
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 19.0
+text = "Alignment"
+
+[node name="Alignment" type="SpinBox" parent="Values/HBoxContainer5"]
+margin_left = 70.0
+margin_right = 144.0
+margin_bottom = 24.0
+min_value = -10000.0
+max_value = 10000.0
+
 [node name="Selling" type="VBoxContainer" parent="."]
 visible = false
 anchor_right = 1.0

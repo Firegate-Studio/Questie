@@ -12,6 +12,7 @@ var min_defense : SpinBox
 var max_defense : SpinBox
 var min_healing : SpinBox
 var max_healing : SpinBox
+var alignment : SpinBox
 var min_custom : SpinBox
 var max_custom : SpinBox
 var original_price : SpinBox
@@ -37,6 +38,7 @@ func _enter_tree():
 	max_healing = $"Values/HBoxContainer3/Max Healing"
 	min_custom = $"Values/HBoxContainer4/Min Custom"
 	max_custom = $"Values/HBoxContainer4/Max Custom"
+	alignment = $Values/HBoxContainer5/Alignment
 	original_price = $"Selling/HBoxContainer/Original Price"
 	selling_price = $"Selling/HBoxContainer2/Selling Price"
 	purchase_price = $"Selling/HBoxContainer2/Purchase Price"
@@ -53,6 +55,7 @@ func _enter_tree():
 	max_healing.connect("value_changed", self, "on_max_healing_changed")
 	min_custom.connect("value_changed", self, "on_min_custom_changed")
 	max_custom.connect("value_changed", self, "on_max_custom_changed")
+	alignment.connect("value_changed", self, "on_alignment_changed")
 	original_price.connect("value_changed", self, "on_original_price_changed")
 	selling_price.connect("value_changed", self, "on_selling_price_changed")
 	purchase_price.connect("value_changed", self, "on_purchase_price_changed")
@@ -70,6 +73,7 @@ func _exit_tree():
 	max_healing.disconnect("value_changed", self, "on_max_healing_changed")
 	min_custom.disconnect("value_changed", self, "on_min_custom_changed")
 	max_custom.disconnect("value_changed", self, "on_max_custom_Changed")
+	alignment.disconnect("value_changed", self, "on_alignment_changed")
 	original_price.disconnect("value_changed", self, "on_original_price_changed")
 	selling_price.disconnect("value_changed", self, "on_selling_price_changed")
 	purchase_price.disconnect("value_changed", self, "on_purchase_price_changed")
@@ -128,6 +132,10 @@ func on_max_custom_changed(custom):
 	database.items[index].max_custom = custom
 	ResourceSaver.save(DB_PATH, database)
 
+func on_alignment_changed(alignment):
+	database.items[index].alignment = alignment
+	ResourceSaver.save(DB_PATH, database)
+
 func on_original_price_changed(price):
 	database.items[index].original_price = price
 	ResourceSaver.save(DB_PATH, database)
@@ -159,6 +167,7 @@ func setup(id):
 	max_healing.value = data.max_healing
 	min_custom.value = data.min_custom
 	max_custom.value = data.max_custom
+	alignment.value = data.alignment
 	original_price.value = data.original_price
 	selling_price.value = data.sell_price
 	purchase_price.value = data.purchase_price
