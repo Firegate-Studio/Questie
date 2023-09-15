@@ -13,6 +13,9 @@ export(String) var name
 # the character surname
 export(String) var surname
 
+# the character alignment - i.e., good or evil
+export var alignment : float
+
 # the character bio
 export(String) var biography
 

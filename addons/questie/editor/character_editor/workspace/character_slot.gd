@@ -3,6 +3,7 @@ extends Panel
 
 var _name : LineEdit
 var _surname : LineEdit
+var _alignment : SpinBox
 var _biography : TextEdit
 var _backgorund : TextEdit
 var _inventory_checkbox : CheckBox
@@ -22,6 +23,7 @@ var database = preload("res://questie/characters-db.tres")
 func _enter_tree(): 
 	_name = $ScrollContainer/VBoxContainer/HBoxContainer/Name
 	_surname = $ScrollContainer/VBoxContainer/HBoxContainer2/Surname
+	_alignment = $ScrollContainer/VBoxContainer/AlignmentBox/Alignment
 	_biography = $ScrollContainer/VBoxContainer/Biography
 	_backgorund = $ScrollContainer/VBoxContainer/Background
 	_inventory_checkbox = $"ScrollContainer/VBoxContainer/HBoxContainer3/Inventory Checkbox"
@@ -34,6 +36,7 @@ func _enter_tree():
 
 	_name.connect("text_changed", self, "on_name_changed")
 	_surname.connect("text_changed", self, "on_surname_changed")
+	_alignment.connect("value_changed", self, "on_alignment_changed")
 	_biography.connect("text_changed", self, "on_biography_changed")
 	_backgorund.connect("text_changed", self, "on_background_changed")
 	_inventory_checkbox.connect("toggled", self, "on_inventory_checkbox_changed")
@@ -43,6 +46,7 @@ func _enter_tree():
 func _exit_tree():
 	_name.disconnect("text_changed", self, "on_name_changed")
 	_surname.disconnect("text_changed", self, "on_surname_changed")
+	_alignment.disconnect("value_changed", self, "on_alignment_changed")
 	_biography.disconnect("text_changed", self, "on_biography_changed")
 	_backgorund.disconnect("text_changed", self, "on_background_changed")
 	_inventory_checkbox.disconnect("toggled", self, "on_inventory_checkbox_changed")
@@ -68,6 +72,16 @@ func on_surname_changed(text):
 	data.surname = text
 	ResourceSaver.save("res://questie/characters-db.tres", database)
 	print("[Questie]: set character surname to " + text)
+
+func on_alignment_changed(value):
+	var data = database.get_character_data(id)
+	if not data:
+		print("[Questie]: can not set the new character alignment")
+		return
+
+	data.alignment = value
+	ResourceSaver.save("res://questie/characters-db.tres", database)
+	print("[Questie]: set character alignment to " + var2str(value))
 
 func on_biography_changed():
 	var data = database.get_character_data(id)
@@ -129,6 +143,7 @@ func setup(character_id):
 	id = character_id
 	_name.text = data.name
 	_surname.text = data.surname
+	_alignment.value = data.alignment
 	_biography.text = data.biography
 	_backgorund.text = data.background
 	_inventory_checkbox.pressed = data.has_inventory

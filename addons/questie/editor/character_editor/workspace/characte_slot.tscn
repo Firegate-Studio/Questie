@@ -61,34 +61,53 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
 
-[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+[node name="AlignmentBox" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 56.0
 margin_right = 1880.0
-margin_bottom = 70.0
+margin_bottom = 80.0
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer/AlignmentBox"]
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 19.0
+text = "Alignment"
+
+[node name="Alignment" type="SpinBox" parent="ScrollContainer/VBoxContainer/AlignmentBox"]
+margin_left = 70.0
+margin_right = 144.0
+margin_bottom = 24.0
+min_value = -10000.0
+max_value = 10000.0
+rounded = true
+
+[node name="Label" type="Label" parent="ScrollContainer/VBoxContainer"]
+margin_top = 84.0
+margin_right = 1880.0
+margin_bottom = 98.0
 text = "Biography"
 
 [node name="Biography" type="TextEdit" parent="ScrollContainer/VBoxContainer"]
-margin_top = 74.0
+margin_top = 102.0
 margin_right = 1880.0
-margin_bottom = 274.0
+margin_bottom = 302.0
 rect_min_size = Vector2( 0, 200 )
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
-margin_top = 278.0
+margin_top = 306.0
 margin_right = 1880.0
-margin_bottom = 292.0
+margin_bottom = 320.0
 text = "Background"
 
 [node name="Background" type="TextEdit" parent="ScrollContainer/VBoxContainer"]
-margin_top = 296.0
+margin_top = 324.0
 margin_right = 1880.0
-margin_bottom = 496.0
+margin_bottom = 524.0
 rect_min_size = Vector2( 0, 200 )
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 500.0
+margin_top = 528.0
 margin_right = 1880.0
-margin_bottom = 550.0
+margin_bottom = 578.0
 rect_min_size = Vector2( 0, 50 )
 alignment = 1
 
@@ -129,7 +148,7 @@ margin_right = 1098.0
 margin_bottom = 50.0
 
 [node name="TabContainer" type="TabContainer" parent="ScrollContainer/VBoxContainer"]
-margin_top = 554.0
+margin_top = 582.0
 margin_right = 1880.0
 margin_bottom = 1040.0
 size_flags_vertical = 3
