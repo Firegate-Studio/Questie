@@ -50,7 +50,7 @@ func _enter_tree():
 	
 	# Creates the quest database and reference it if not exists anyone.
 	var file = File.new()
-	if !file.file_exists("res://questie/quest-db.tres"):
+	if not file.file_exists("res://questie/quest-db.tres"):
 		print("[questie]: creating quest database...")
 		quest_database = QuestDatabase.new()
 		quest_database.uuid = UUID.generate()
@@ -61,7 +61,7 @@ func _enter_tree():
 	if not file.file_exists("res://questie/item-db.tres"):
 		print("[questie]: creating item database...")
 		item_database = ItemDatabase.new()
-		item_database.uuid = UUID.generate()
+		item_database.id = UUID.generate()
 		ResourceSaver.save("res://questie/item-db.tres", item_database)
 		ItemsFileBuilder.generate_file()
 		print("[questie]: item database created at path res://quesite/item-db.tres")
