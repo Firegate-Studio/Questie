@@ -1,10 +1,10 @@
 extends Node
 
-onready var vendor : QuestieVendor
+onready var vendor : QuestieCharacter
 
 func _ready():
 	
-	if not get_parent() is QuestieVendor: return
+	if not get_parent() is QuestieCharacter: return
 	vendor = get_parent()
 	
 	# get items data
