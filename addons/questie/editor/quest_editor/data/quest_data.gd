@@ -15,10 +15,16 @@ enum QuestComplention{
 	COMPLETED           # Completed with success
 }
 
-# the unique identifier for a quest item. Each time a new quest data is generated a new uuid will be generated too.
-export(String) var uuid
+# the unique identifier for a quest item. Each time a new quest data is generated a new id will be generated too.
+export(String) var id
 
-# The quest title
+# the unique identifier of the parent folder owning the quest item representing the quest itself.
+export(String) var parent_folder_id
+
+# the name of the quest inside the quest tree
+export(String) var item_name 
+
+# The quest title used during gameplay
 export(String) var title = "fill quest title here"
 
 # The status of the quest
@@ -27,6 +33,9 @@ export(QuestComplention) var status = QuestComplention.IDLE
 
 # quest description for journal
 export(String) var description = "fill quest description here"
+
+# the quest alignment - is a good quest(+) or evil quest(-)?
+export(float) var alignment
 
 enum ConstraintType {
 	HAS_QUEST,                  # the player must have a specific quest

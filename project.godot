@@ -197,12 +197,12 @@ _global_script_classes=[ {
 "base": "Resource",
 "class": "QuestData",
 "language": "GDScript",
-"path": "res://addons/questie/editor/quest_editor/quest_data.gd"
+"path": "res://addons/questie/editor/quest_editor/data/quest_data.gd"
 }, {
 "base": "Resource",
 "class": "QuestDatabase",
 "language": "GDScript",
-"path": "res://addons/questie/editor/quest_editor/quest_db.gd"
+"path": "res://addons/questie/editor/quest_editor/data/quest_db.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "QuestieCharacter",

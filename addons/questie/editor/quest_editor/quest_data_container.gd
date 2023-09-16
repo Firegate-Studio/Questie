@@ -1,4 +1,4 @@
-# Contains a bunch of section holding quest data
+# Contains a bunch of sections holding quest data
 
 tool
 extends VBoxContainer

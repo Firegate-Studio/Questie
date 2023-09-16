@@ -40,10 +40,42 @@ margin_right = 409.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 
-[node name="description section" type="Control" parent="."]
+[node name="Alignment section" type="Control" parent="."]
 margin_top = 39.0
 margin_right = 429.0
-margin_bottom = 159.0
+margin_bottom = 74.0
+rect_min_size = Vector2( 0, 35 )
+
+[node name="CenterContainer" type="Control" parent="Alignment section"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 5.0
+margin_right = -10.0
+margin_bottom = -5.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Alignment section/CenterContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="Alignment section/CenterContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 66.0
+margin_bottom = 19.0
+text = "Alignment"
+
+[node name="Alignment" type="SpinBox" parent="Alignment section/CenterContainer/HBoxContainer"]
+margin_left = 70.0
+margin_right = 409.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+
+[node name="description section" type="Control" parent="."]
+margin_top = 78.0
+margin_right = 429.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 0, 120 )
 
 [node name="CenterContainer" type="Control" parent="description section"]
@@ -70,9 +102,9 @@ margin_bottom = 110.0
 size_flags_vertical = 3
 
 [node name="Constraint Section Header" type="Control" parent="."]
-margin_top = 163.0
+margin_top = 202.0
 margin_right = 429.0
-margin_bottom = 193.0
+margin_bottom = 232.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Constraint Section Header"]
@@ -95,9 +127,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="constraints section" type="Control" parent="."]
-margin_top = 197.0
+margin_top = 236.0
 margin_right = 429.0
-margin_bottom = 317.0
+margin_bottom = 356.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -120,9 +152,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Trigger section header" type="Control" parent="."]
-margin_top = 321.0
+margin_top = 360.0
 margin_right = 429.0
-margin_bottom = 351.0
+margin_bottom = 390.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Trigger section header"]
@@ -145,9 +177,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="triggers section" type="Control" parent="."]
-margin_top = 355.0
+margin_top = 394.0
 margin_right = 429.0
-margin_bottom = 475.0
+margin_bottom = 514.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -170,9 +202,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="task section header" type="Control" parent="."]
-margin_top = 479.0
+margin_top = 518.0
 margin_right = 429.0
-margin_bottom = 509.0
+margin_bottom = 548.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="task section header"]
@@ -195,9 +227,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="tasks section" type="Control" parent="."]
-margin_top = 513.0
+margin_top = 552.0
 margin_right = 429.0
-margin_bottom = 633.0
+margin_bottom = 672.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
@@ -222,9 +254,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="reward section header" type="Control" parent="."]
-margin_top = 637.0
+margin_top = 676.0
 margin_right = 429.0
-margin_bottom = 667.0
+margin_bottom = 706.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="reward section header"]
@@ -247,9 +279,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 3
 
 [node name="rewards section" type="Control" parent="."]
-margin_top = 671.0
+margin_top = 710.0
 margin_right = 429.0
-margin_bottom = 791.0
+margin_bottom = 830.0
 rect_min_size = Vector2( 0, 120 )
 size_flags_vertical = 3
 
