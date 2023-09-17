@@ -52,6 +52,7 @@ func _enter_tree():
 func _exit_tree():
 	disconnect("button_pressed", self, "handle_button_pressed")
 	disconnect("item_edited", self, "handle_item_edited")
+	disconnect("item_selected", self, "handle_item_selected")
 
 func handle_button_pressed(item : TreeItem, column : int, id : int):
 	# ensure to select the current item
@@ -71,7 +72,8 @@ func handle_button_pressed(item : TreeItem, column : int, id : int):
 		var data = get_tag_data(item)
 		match id:
 			TagProcedures.NEW_ITEM:
-				create_new_item(item, "", data.id)
+				var folder_data = get_folder_data(item.get_parent())
+				create_new_item(item, folder_data.id, data.id)
 			TagProcedures.DELETE:
 				delete_tag(item)
 

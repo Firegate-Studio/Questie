@@ -183,6 +183,8 @@ func push_trigger(var type : int, var owner : String):
 	var result = null
 
 	match type:
+		TriggerType.ALIGNMENT_AMOUNT:
+			result = load("res://addons/questie/editor/quest_editor/data/trigger/alignment_amount.gd").new()
 		TriggerType.ENTER_LOCATION: 
 			result = load("res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd").new()
 		TriggerType.EXIT_LOCATION:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraint_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/base_block.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/icons/boxes_64x64.png" type="Texture" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraints/has_item.gd" type="Script" id=3]
 

@@ -13,7 +13,7 @@ static func is_location_constraint():
 static func has_alignment_constraint():
 	var block = load("res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraints/has_alignment.tscn").instance()
 	if not block:
-		print("[Questie]: unable to build is location constraint")
+		print("[Questie]: unable to build has alignment constraint")
 		return null
 
 	return block

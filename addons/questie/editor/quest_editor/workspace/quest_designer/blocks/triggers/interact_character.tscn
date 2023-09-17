@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/base_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/questie/editor/icons/tag.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/icons/character_32x32.png" type="Texture" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/interact_character.gd" type="Script" id=4]
+
+[node name="InteractCharacter" instance=ExtResource( 1 )]
+title = "When Player Interact With Character..."
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = true
+slot/0/right_type = 2
+slot/0/right_color = Color( 0.945098, 0.866667, 0.211765, 1 )
+script = ExtResource( 4 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 292.0
+margin_bottom = 62.0
+
+[node name="Category Menu" type="MenuButton" parent="HBoxContainer" index="0"]
+visible = false
+margin_left = 17.0
+margin_right = 119.0
+margin_bottom = 38.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Category"
+icon = ExtResource( 2 )
+flat = false
+
+[node name="Character Menu" type="MenuButton" parent="HBoxContainer" index="1"]
+margin_left = 84.0
+margin_right = 191.0
+margin_bottom = 38.0
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Character"
+icon = ExtResource( 3 )
+flat = false

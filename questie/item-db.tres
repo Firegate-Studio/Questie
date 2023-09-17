@@ -1,87 +1,12 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=12 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_data.gd" type="Script" id=2]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-id = "2142d7d8-a3ce-43ba-b492-f520fdbddd7c"
+id = "bb4e766d-b92d-4164-866b-b744b91c8b80"
 folder_id = ""
-tag_id = ""
-name = "TestItems"
-display_name = "fill display name"
-alignment = 0.0
-is_unique = false
-description = "fill item description"
-weight = 0.1
-icon_path = "res://YOUR_ICON_PATH"
-min_damage = 0.0
-max_damage = 0.0
-min_defense = 0.0
-max_defense = 0.0
-min_healing = 0.0
-max_healing = 0.0
-min_custom = 0.0
-max_custom = 0.0
-can_be_sold = true
-original_price = 0.0
-purchase_price = 0
-sell_price = 0
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 2 )
-id = "5ee39dd2-03a4-4bcb-9ace-16254caf0165"
-folder_id = ""
-tag_id = "5869e2a8-b31a-46c1-8dd0-4934c5ba1ee2"
-name = "Sword"
-display_name = "fill display name"
-alignment = 0.0
-is_unique = false
-description = "fill item description"
-weight = 0.1
-icon_path = "res://YOUR_ICON_PATH"
-min_damage = 0.0
-max_damage = 0.0
-min_defense = 0.0
-max_defense = 0.0
-min_healing = 0.0
-max_healing = 0.0
-min_custom = 0.0
-max_custom = 0.0
-can_be_sold = true
-original_price = 0.0
-purchase_price = 0
-sell_price = 0
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-id = "b0480f92-fd8a-49aa-86f3-0ba9f717404e"
-folder_id = ""
-tag_id = "5869e2a8-b31a-46c1-8dd0-4934c5ba1ee2"
-name = "Staff"
-display_name = "fill display name"
-alignment = 0.0
-is_unique = false
-description = "fill item description"
-weight = 0.1
-icon_path = "res://YOUR_ICON_PATH"
-min_damage = 0.0
-max_damage = 0.0
-min_defense = 0.0
-max_defense = 0.0
-min_healing = 0.0
-max_healing = 0.0
-min_custom = 0.0
-max_custom = 0.0
-can_be_sold = true
-original_price = 0.0
-purchase_price = 0
-sell_price = 0
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 2 )
-id = "5869e2a8-b31a-46c1-8dd0-4934c5ba1ee2"
-folder_id = "2142d7d8-a3ce-43ba-b492-f520fdbddd7c"
 tag_id = ""
 name = "Weapons"
 display_name = "fill display name"
@@ -103,8 +28,208 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=6]
+script = ExtResource( 2 )
+id = "e1375468-89d2-4e7c-b8bd-6b7d5455d2b2"
+folder_id = ""
+tag_id = ""
+name = "Armors"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=3]
+script = ExtResource( 2 )
+id = "0ef71596-198d-4887-979b-484362ec0ede"
+folder_id = "bb4e766d-b92d-4164-866b-b744b91c8b80"
+tag_id = "a4f2bbe9-a596-4adb-9a40-700c936e9c1b"
+name = "Light Saber"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+id = "9dc67bb3-f51f-4cd0-9843-6abe3dcb00e9"
+folder_id = "bb4e766d-b92d-4164-866b-b744b91c8b80"
+tag_id = "6b063cf7-e62c-4201-8ac0-5f5039498632"
+name = "Ultimate Muscle"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 2 )
+id = "a32cace3-af99-4560-a824-658117c1a51a"
+folder_id = "e1375468-89d2-4e7c-b8bd-6b7d5455d2b2"
+tag_id = "b3cca1dd-b943-45c1-b2c2-dbdf5bd9c2c0"
+name = "Dovakin Helm"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+id = "14363567-2cc6-48e6-9d9b-360410941914"
+folder_id = "e1375468-89d2-4e7c-b8bd-6b7d5455d2b2"
+tag_id = ""
+name = "Sovengard"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+id = "a4f2bbe9-a596-4adb-9a40-700c936e9c1b"
+folder_id = "bb4e766d-b92d-4164-866b-b744b91c8b80"
+tag_id = ""
+name = "Swords"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+id = "6b063cf7-e62c-4201-8ac0-5f5039498632"
+folder_id = "bb4e766d-b92d-4164-866b-b744b91c8b80"
+tag_id = ""
+name = "Staff"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 2 )
+id = "b3cca1dd-b943-45c1-b2c2-dbdf5bd9c2c0"
+folder_id = "e1375468-89d2-4e7c-b8bd-6b7d5455d2b2"
+tag_id = ""
+name = "Head"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
 [resource]
 script = ExtResource( 1 )
-categories = [ SubResource( 1 ) ]
-tags = [ SubResource( 2 ) ]
-items = [ SubResource( 3 ), SubResource( 4 ) ]
+categories = [ SubResource( 1 ), SubResource( 6 ) ]
+tags = [ SubResource( 2 ), SubResource( 4 ), SubResource( 7 ) ]
+items = [ SubResource( 3 ), SubResource( 5 ), SubResource( 8 ), SubResource( 9 ) ]

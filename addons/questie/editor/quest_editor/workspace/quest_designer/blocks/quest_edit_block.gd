@@ -19,6 +19,7 @@ var blocks_id_map : Dictionary = {}
 
 # classes to attach and detach listeners in-from blocks when added or removed
 var constraint_callbacks_handler : ConstraintCallbacksHandler
+var trigger_callbacks_handler : TriggerCallbacksHandler
 
 func _enter_tree():
 
@@ -29,6 +30,7 @@ func _enter_tree():
 	quest_alignment = $HBoxContainer/SpinBox
 
 	constraint_callbacks_handler = ConstraintCallbacksHandler.new()
+	trigger_callbacks_handler = TriggerCallbacksHandler.new()
 
 	#todo: load information
 
@@ -100,7 +102,6 @@ func add_constraint(constraint_type, block):
 			constraint_data.quantity = block.current_quantity
 			ResourceSaver.save("res://questie/quest-db.tres", database)
 
-
 			current_blocks.append(block)
 			blocks_id_map[block] = constraint_data.uuid
 
@@ -117,7 +118,30 @@ func add_constraint(constraint_type, block):
 			blocks_id_map[block] = constraint_data.uuid
 
 			constraint_callbacks_handler.add_constraint_callbacks(block, constraint_data)
-			
+
+# @brief 					add constraint data inside the quest database
+# @param trigger_type		the trigger type
+# @param block				the trigger block to add			
+func add_trigger(trigger_type, block):
+	match trigger_type:
+		QuestData.TriggerType.ALIGNMENT_AMOUNT:
+			var data = current_data.push_trigger(trigger_type, current_data.id)
+			data.min_value = block.current_min
+			data.max_value = block.current_max
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			print(blocks_id_map)
+
+			trigger_callbacks_handler.add_callbacks(block, data)
+
+		QuestData.TriggerType.ENTER_LOCATION:
+			var data = current_data.push_trigger(trigger_type, current_data.id)
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+
 
 # @brief                    remove the constraint from the database
 # @param constraint_type    the type of constraint to remove - see QuestData for further details
@@ -131,5 +155,16 @@ func remove_constraint(constraint_type, block):
 		blocks_id_map.erase(block)
 
 		constraint_callbacks_handler.remove_constraint_callbacks(block) 
+
+func remove_trigger(trigger_type, block):
+		var trigger_id = blocks_id_map[block]
+		print("trigger id: " + trigger_id)
+		current_data.erase_trigger(trigger_id)
+		ResourceSaver.save("res://questie/quest-db.tres", database)
+
+		current_blocks.erase(block)
+		blocks_id_map.erase(block)
+
+		trigger_callbacks_handler.remove_callbacks(block)
 
 

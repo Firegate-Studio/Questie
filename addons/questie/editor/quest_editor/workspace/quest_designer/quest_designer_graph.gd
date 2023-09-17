@@ -78,6 +78,8 @@ func on_connection_request(from : String, from_slot : int, to : String, to_slot 
 	# identify block type
 	if is_constraint_block(block):
 		root_block.add_constraint(get_block_type(block), block)
+	if is_trigger_block(block):
+		root_block.add_trigger(get_block_type(block), block)
 
 	# todo: save quest database
 	connect_node(from, from_slot, to, to_slot)
@@ -96,8 +98,10 @@ func on_disconnection_request(from : String, from_port : int, to : String, to_po
 		return
 
 	# identify block
-	if is_constraint_block(block):
+	if is_constraint_block(block): 
 		root_block.remove_constraint(get_block_type(block), block)
+	if is_trigger_block(block): 
+		root_block.remove_trigger(get_block_type(block), block)
 
 	disconnect_node(from, from_port, to, to_port)
 	print("[Questie]: disconnected!")
@@ -109,23 +113,13 @@ func on_popup_request(position : Vector2):
 	spawn_point = position
 	popup.show()
 
-func on_is_location_block_requested():
-	var block = ConstraintBlockBuilder.is_location_constraint()
-	add_child(block)
-	constraint_blocks.append(block)
-
-	print(spawn_point)
-	print("offset: " + var2str(block.offset))
-	block.rect_position += spawn_point
-	block.connect("close_request", self, "on_block_deletion_requested", [block])
-
-	popup.hide()
-
 func on_block_creation(block):
 	add_child(block)
 
 	if is_constraint_block(block):
 		constraint_blocks.append(block)
+	if is_trigger_block(block):
+		trigger_blocks.append(block)
 
 	block.rect_position += spawn_point
 	block.connect("close_request", self, "on_block_deletion_requested", [block])
@@ -146,7 +140,8 @@ func on_block_deletion_requested(block):
 		var to_port = connection["to_port"]
 		
 		disconnect_node(from, from_port, to, to_port)
-		root_block.remove_constraint(get_block_type(block), block)
+		if is_constraint_block(block): root_block.remove_constraint(get_block_type(block), block)
+		if is_trigger_block(block): root_block.remove_trigger(get_block_type(block), block)
 		break
 
 	if constraint_blocks.has(block): constraint_blocks.erase(block)
@@ -207,7 +202,23 @@ func get_block_type(block):
 		return QuestData.ConstraintType.HAS_ALIGNMENT
 	if block is ConstraintBlock_HasItem:
 		return QuestData.ConstraintType.HAS_ITEM
+	
+	if block is TriggerBlock_CharacterEnterLocation:
+		return QuestData.TriggerType.ENTER_LOCATION
+	if block is TriggerBlock_CharacterExitLocation:
+		return QuestData.TriggerType.EXIT_LOCATION
+	if block is Trigger_GetItem:
+		return QuestData.TriggerType.GET_ITEM
+	if block is TriggerBlock_HasAlignmentRange:
+		return QuestData.TriggerType.ALIGNMENT_AMOUNT
+	if block is TriggerBlock_InteractCharacter:
+		return QuestData.TriggerType.INTERACT_CHARACTER
+	if block is TriggerBlock_InteractItem:
+		return QuestData.TriggerType.INTERACT_ITEM
 
 
-func is_constraint_block(block): return block is ConstraintBlock_HasAlignment or ConstraintBlock_HasItem or ConstraintBlock_IsLocation
+func is_constraint_block(block): return block is ConstraintBlock_HasAlignment or block is ConstraintBlock_HasItem or block is ConstraintBlock_IsLocation
+
+func is_trigger_block(block): return block is TriggerBlock_CharacterEnterLocation or block is TriggerBlock_CharacterExitLocation or block is TriggerBlock_GetItem or block is TriggerBlock_HasAlignmentRange or block is TriggerBlock_InteractCharacter or block is TriggerBlock_InteractItem
+
 

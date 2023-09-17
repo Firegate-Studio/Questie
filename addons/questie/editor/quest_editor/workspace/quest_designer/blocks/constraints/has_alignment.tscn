@@ -1,12 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraint_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/base_block.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/icons/ying-yang_x32.png" type="Texture" id=3]
 [ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraints/has_alignment.gd" type="Script" id=4]
 
 [node name="has_alignment" instance=ExtResource( 1 )]
 title = "Character Has Alignment?"
-show_close = true
 slot/0/left_enabled = false
 slot/0/left_type = 1
 slot/0/left_color = Color( 1, 1, 1, 1 )
