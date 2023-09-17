@@ -1,4 +1,4 @@
-extends Resource
+extends "res://addons/questie/editor/quest_editor/data/constraint/quest_constraint.gd"
 class_name Constraint_HasAlignment
 
 # the minimum alignment allowed to pass this constraint

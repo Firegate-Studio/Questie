@@ -5,5 +5,4 @@ func _enter_tree():
 
 func _ready():
 	var inv = Questie.player_inventory
-	var item_id = ItemsCollection.items_map[ItemsCollection.Items.Stone]
 	

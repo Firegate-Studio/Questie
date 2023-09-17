@@ -1,54 +1,110 @@
-[gd_resource type="Resource" load_steps=9 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
-[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd" type="Script" id=1]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=2]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/item_editor/data/item_database.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/item_editor/data/item_data.gd" type="Script" id=2]
 
 [sub_resource type="Resource" id=1]
-script = ExtResource( 3 )
-id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
-parent_id = ""
-name = "Prologue"
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 4 )
-id = "8531fce4-d45e-45f4-a645-a4487ce50916"
-parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
-item_name = "La mia bellissima missione"
-title = "Prima Missione"
-status = 0
-description = "Secondo le leggende, questa missione era stata create dal re dei lich in persona per poter dare modo ai neofiti sviluppatori di capire come funzionasse un tool dalla documentazione ambigua."
+script = ExtResource( 2 )
+id = "2142d7d8-a3ce-43ba-b492-f520fdbddd7c"
+folder_id = ""
+tag_id = ""
+name = "TestItems"
+display_name = "fill display name"
 alignment = 0.0
-constraints = [  ]
-triggers = [  ]
-tasks = [  ]
-rewards = [  ]
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 1 )
-uuid = "14a1d58e-72ba-43ec-9282-0a6a8efc479d"
-owner = "325314ba-4655-4c59-b2a8-98fcf50ea395"
-item_id = "c9a63111-5d51-434b-9b26-8d09ddf7c46e"
-category = 0
-quantity = 5
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
 
 [sub_resource type="Resource" id=3]
-script = ExtResource( 4 )
-id = "325314ba-4655-4c59-b2a8-98fcf50ea395"
-parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
-item_name = "Main Quest"
-title = "The Lich King"
-status = 0
-description = "The Linch King wants to talk with you. Go to the High Mountain grounds and talk with the lich king"
-alignment = -10.0
-constraints = [ SubResource( 4 ) ]
-triggers = [  ]
-tasks = [  ]
-rewards = [  ]
+script = ExtResource( 2 )
+id = "5ee39dd2-03a4-4bcb-9ace-16254caf0165"
+folder_id = ""
+tag_id = "5869e2a8-b31a-46c1-8dd0-4934c5ba1ee2"
+name = "Sword"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 2 )
+id = "b0480f92-fd8a-49aa-86f3-0ba9f717404e"
+folder_id = ""
+tag_id = "5869e2a8-b31a-46c1-8dd0-4934c5ba1ee2"
+name = "Staff"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+id = "5869e2a8-b31a-46c1-8dd0-4934c5ba1ee2"
+folder_id = "2142d7d8-a3ce-43ba-b492-f520fdbddd7c"
+tag_id = ""
+name = "Weapons"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
 
 [resource]
-script = ExtResource( 2 )
-uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
-folders = [ SubResource( 1 ) ]
-quests = [ SubResource( 2 ), SubResource( 3 ) ]
+script = ExtResource( 1 )
+categories = [ SubResource( 1 ) ]
+tags = [ SubResource( 2 ) ]
+items = [ SubResource( 3 ), SubResource( 4 ) ]

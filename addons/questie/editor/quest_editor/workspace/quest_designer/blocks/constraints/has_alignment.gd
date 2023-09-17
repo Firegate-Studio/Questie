@@ -2,12 +2,16 @@ tool
 extends GraphNode
 class_name ConstraintBlock_HasAlignment
 
+signal character_id_changed(character_id)
+signal character_alignment_changed(min_align, max_align)
+
 var character_database : CharacterDatabase
 
 var characters_menu : OptionButton
 var min_alignment : SpinBox
 var max_alignment : SpinBox
 
+var selected_character_id : String = ""
 var selected_character_index : int = 0
 var current_min : float
 var current_max : float
@@ -49,9 +53,15 @@ func on_character_menu_pressed():
 func on_character_item_selected(character_index : int):
 	selected_character_index = character_index;
 	characters_menu.text = characters_menu.get_popup().get_item_text(character_index)
+	
+	# get player ID
+	selected_character_id = character_database.characters[character_index].id
+	emit_signal("character_id_changed", selected_character_id)
 
 func on_min_alignment_changed(new_value : float):
 	current_min = new_value
+	emit_signal("character_alignment_changed", current_min, current_max)
 
 func on_max_alignment_changed(new_value : float):
 	current_max = new_value
+	emit_signal("character_alignment_changed", current_min, current_max)

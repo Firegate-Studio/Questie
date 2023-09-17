@@ -50,7 +50,8 @@ enum TriggerType{
 	EXIT_LOCATION				# the player exits from location
 	GET_ITEM,					# player has an item in inventory
 	INTERACT_ITEM,				# player has to interact with an item
-	INTERACT_CHARACTER			# player has to interact with a character
+	INTERACT_CHARACTER,			# player has to interact with a character
+	ALIGNMENT_AMOUNT			# player has to gain the minimum alignment level/points
 }
 
 enum TaskType{
@@ -59,7 +60,8 @@ enum TaskType{
 	KILL,						# the player has to kill a specific number of characters
 	TALK,						# the player has to talk with a specific character
 	INTERACT_ITEM,				# the player has to interact with a specific item
-	INTERACT_CHARACTER			# the player has to interact with a specific character
+	INTERACT_CHARACTER,			# the player has to interact with a specific character
+	ALIGNMENT_TARGET			# the player has to achieve a specific alignment amount/points
 }
 
 enum RewardType{
@@ -101,6 +103,8 @@ func push_constraint(var type : int, var owner : String):
 			result = load("res://addons/questie/editor/quest_editor/data/constraint/quest_state_constraint.gd").new()
 		ConstraintType.IS_LOCATION:
 			result = load("res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd").new()
+		ConstraintType.HAS_ALIGNMENT: 
+			result = load("res://addons/questie/editor/quest_editor/data/constraint/has_alignment_constraint.gd").new()
 	
 	# Generate constraint UUID
 	result.uuid = UUID.generate()

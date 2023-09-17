@@ -98,6 +98,20 @@ func add_constraint(constraint_type, block):
 			var constraint_data = current_data.push_constraint(constraint_type, current_data.id)
 			constraint_data.item_id = block.selected_item_id
 			constraint_data.quantity = block.current_quantity
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+
+			current_blocks.append(block)
+			blocks_id_map[block] = constraint_data.uuid
+
+			constraint_callbacks_handler.add_constraint_callbacks(block, constraint_data)
+
+		QuestData.ConstraintType.HAS_ALIGNMENT:
+			var constraint_data = current_data.push_constraint(constraint_type, current_data.id)
+			constraint_data.min_alignment = block.current_min
+			constraint_data.max_alignment = block.current_max
+			constraint_data.character_id = block.selected_character_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
 
 			current_blocks.append(block)
 			blocks_id_map[block] = constraint_data.uuid

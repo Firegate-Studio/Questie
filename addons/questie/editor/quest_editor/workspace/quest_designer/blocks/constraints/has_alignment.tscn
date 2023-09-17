@@ -59,6 +59,8 @@ margin_left = 28.0
 margin_right = 102.0
 margin_bottom = 24.0
 size_flags_vertical = 4
+min_value = -10000.0
+max_value = 10000.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" index="1"]
 margin_top = 28.0
@@ -78,3 +80,6 @@ margin_right = 104.0
 margin_bottom = 24.0
 size_flags_horizontal = 5
 size_flags_vertical = 4
+min_value = -10000.0
+max_value = 10000.0
+rounded = true
