@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraint_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/questie/editor/icons/boxes_64x64.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/constraints/has_item.gd" type="Script" id=3]
+
+[node name="has Item" instance=ExtResource( 1 )]
+title = "Player Has Item?"
+show_close = true
+slot/0/left_enabled = false
+slot/0/left_type = 1
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = true
+slot/0/right_type = 1
+slot/0/right_color = Color( 0.94902, 0.247059, 0.156863, 1 )
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 170.0
+margin_bottom = 112.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" index="0"]
+margin_right = 76.0
+margin_bottom = 88.0
+
+[node name="ItemMenu" type="MenuButton" parent="HBoxContainer/VBoxContainer" index="0"]
+margin_right = 76.0
+margin_bottom = 70.0
+focus_mode = 2
+icon = ExtResource( 2 )
+icon_align = 1
+items = [ "Training Sword", null, 0, false, false, 0, 0, null, "", false, "Morningstar", null, 0, false, false, 1, 0, null, "", false, "Longsword", null, 0, false, false, 2, 0, null, "", false, "Bastard", null, 0, false, false, 3, 0, null, "", false, "Mana Potion 1", null, 0, false, false, 4, 0, null, "", false, "Mana Potion 2", null, 0, false, false, 5, 0, null, "", false, "Mana Potion 3", null, 0, false, false, 6, 0, null, "", false, "Mana Potion 4", null, 0, false, false, 7, 0, null, "", false, "Mana Potion 5", null, 0, false, false, 8, 0, null, "", false, "Health Potion 1", null, 0, false, false, 9, 0, null, "", false, "Health Potion 2", null, 0, false, false, 10, 0, null, "", false, "Health Potion 3", null, 0, false, false, 11, 0, null, "", false, "Health Potion 4", null, 0, false, false, 12, 0, null, "", false, "Health Potion 5", null, 0, false, false, 13, 0, null, "", false, "Bag 01", null, 0, false, false, 14, 0, null, "", false, "Bag 02", null, 0, false, false, 15, 0, null, "", false, "Bag 03", null, 0, false, false, 16, 0, null, "", false, "Bag 04", null, 0, false, false, 17, 0, null, "", false, "Bag 05", null, 0, false, false, 18, 0, null, "", false, "Stone", null, 0, false, false, 19, 0, null, "", false, "Water", null, 0, false, false, 20, 0, null, "", false, "Copper", null, 0, false, false, 21, 0, null, "", false, "Silver", null, 0, false, false, 22, 0, null, "", false, "Programming_01", null, 0, false, false, 23, 0, null, "", false ]
+
+[node name="Item Name" type="Label" parent="HBoxContainer/VBoxContainer" index="1"]
+margin_top = 74.0
+margin_right = 76.0
+margin_bottom = 88.0
+text = "Select Item"
+align = 1
+
+[node name="Quantity" type="SpinBox" parent="HBoxContainer" index="1"]
+margin_left = 80.0
+margin_top = 32.0
+margin_right = 154.0
+margin_bottom = 56.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 10000.0
+align = 1

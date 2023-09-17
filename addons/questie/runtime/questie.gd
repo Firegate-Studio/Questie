@@ -99,7 +99,7 @@ func setup_quests():
 		# Create quest
 		var current = load("res://addons/questie/runtime/quest_system/quest.gd").new()
 		current.name = quest.title
-		current.uuid = quest.uuid
+		current.uuid = quest.id
 		current.title = quest.title
 		current.description = quest.description
 
@@ -297,8 +297,8 @@ func setup_rewards(reward_id, quest_id, quest_data):
 # Get a quest data from quest database
 # If no quest is found returns **null**
 func get_quest_from_database(var uuid : String)->QuestData: 
-	for item in quest_database.data:
-		if(item.uuid == uuid): return item
+	for item in quest_database.quests:
+		if(item.id == uuid): return item
 	return null
 
 # Get instantiated quest by UUID

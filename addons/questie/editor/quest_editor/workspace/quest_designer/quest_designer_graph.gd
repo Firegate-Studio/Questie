@@ -15,6 +15,9 @@ var trigger_blocks : Array
 var task_blocks : Array
 var reward_blocks : Array
 
+# where to spawn a popup or a new block
+var spawn_point : Vector2
+
 func _enter_tree(): 
 
 	quest_database = load("res://questie/quest-db.tres")
@@ -29,6 +32,12 @@ func _enter_tree():
 	connect("disconnection_request", self, "on_disconnection_request")
 	connect("popup_request", self, "on_popup_request")
 
+	# popup signals
+	popup.connect("constraint_block_requested", self, "on_block_creation")
+	popup.connect("trigger_block_requested", self, "on_block_creation")
+	popup.connect("task_block_requested", self, "on_block_creation")
+	popup.connect("reward_block_requested", self, "on_block_creation")
+
 
 func _exit_tree(): 
 	disconnect("connection_to_empty", self, "on_connection_to_empty")
@@ -36,6 +45,12 @@ func _exit_tree():
 	disconnect("connection_request", self, "on_connection_request")
 	disconnect("disconnection_request", self, "on_disconnection_request")
 	disconnect("popup_request", self, "on_popup_request")
+
+	# popup signals
+	popup.disconnect("constraint_block_requested", self, "on_block_creation")
+	popup.disconnect("trigger_block_requested", self, "on_block_creation")
+	popup.disconnect("task_block_requested", self, "on_block_creation")
+	popup.disconnect("reward_block_requested", self, "on_block_creation")
 
 
 func on_connection_to_empty(from : String, from_slot: int, release_position : Vector2): 
@@ -61,10 +76,9 @@ func on_connection_request(from : String, from_slot : int, to : String, to_slot 
 		return
 	
 	# identify block type
-	if block is ConstraintBlock_IsLocation:
-		root_block.add_constraint(QuestData.ConstraintType.IS_LOCATION, block)
+	if is_constraint_block(block):
+		root_block.add_constraint(get_block_type(block), block)
 
-	# todo: connect listeners to quest block
 	# todo: save quest database
 	connect_node(from, from_slot, to, to_slot)
 	print("[Questie]: connected!")
@@ -82,8 +96,8 @@ func on_disconnection_request(from : String, from_port : int, to : String, to_po
 		return
 
 	# identify block
-	if block is ConstraintBlock_IsLocation:
-		root_block.remove_constraint(QuestData.ConstraintType.IS_LOCATION, block)
+	if is_constraint_block(block):
+		root_block.remove_constraint(get_block_type(block), block)
 
 	disconnect_node(from, from_port, to, to_port)
 	print("[Questie]: disconnected!")
@@ -92,6 +106,7 @@ func on_popup_request(position : Vector2):
 	print("[Questie]: popup requested...")
 	
 	popup.set_global_position(position)
+	spawn_point = position
 	popup.show()
 
 func on_is_location_block_requested():
@@ -99,8 +114,20 @@ func on_is_location_block_requested():
 	add_child(block)
 	constraint_blocks.append(block)
 
-	block.set_global_position(get_global_mouse_position())
+	print(spawn_point)
+	print("offset: " + var2str(block.offset))
+	block.rect_position += spawn_point
+	block.connect("close_request", self, "on_block_deletion_requested", [block])
 
+	popup.hide()
+
+func on_block_creation(block):
+	add_child(block)
+
+	if is_constraint_block(block):
+		constraint_blocks.append(block)
+
+	block.rect_position += spawn_point
 	block.connect("close_request", self, "on_block_deletion_requested", [block])
 
 	popup.hide()
@@ -133,7 +160,7 @@ func on_block_deletion_requested(block):
 	
 
 func init_quest_block():
-	root_block = load("res://addons/questie/editor/quest_editor/blocks/quest_edit_block.tscn").instance()
+	root_block = load("res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/quest_edit_block.tscn").instance()
 	if not root_block:
 		print("[Questie]: can't initialize quest block!")
 		return
@@ -149,9 +176,6 @@ func init_popup():
 	
 	add_child(popup)
 	popup.hide()
-
-	# subscribe events
-	popup.constraint_blocks_container.connect("is_location_block_requested", self, "on_is_location_block_requested")
 
 # @brief                    initialize blocks and connections inside the graph
 # @param quest_id           the quest identifier 
@@ -179,7 +203,11 @@ func is_valid_block(block):
 func get_block_type(block):
 	if block is ConstraintBlock_IsLocation:
 		return QuestData.ConstraintType.IS_LOCATION
+	if block is ConstraintBlock_HasAlignment:
+		return QuestData.ConstraintType.HAS_ALIGNMENT
+	if block is ConstraintBlock_HasItem:
+		return QuestData.ConstraintType.HAS_ITEM
 
 
-
+func is_constraint_block(block): return block is ConstraintBlock_HasAlignment or ConstraintBlock_HasItem or ConstraintBlock_IsLocation
 

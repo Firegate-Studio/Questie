@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://addons/questie/editor/quest_editor/blocks/block.tres" type="Theme" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/block.tres" type="Theme" id=1]
 
 [node name="ConstraintBlock" type="GraphNode"]
 margin_right = 32.0

@@ -93,21 +93,29 @@ func add_constraint(constraint_type, block):
 			blocks_id_map[block] = location_data.uuid
 
 			constraint_callbacks_handler.add_constraint_callbacks(block, location_data)
+		
+		QuestData.ConstraintType.HAS_ITEM:
+			var constraint_data = current_data.push_constraint(constraint_type, current_data.id)
+			constraint_data.item_id = block.selected_item_id
+			constraint_data.quantity = block.current_quantity
+
+			current_blocks.append(block)
+			blocks_id_map[block] = constraint_data.uuid
+
+			constraint_callbacks_handler.add_constraint_callbacks(block, constraint_data)
+			
 
 # @brief                    remove the constraint from the database
 # @param constraint_type    the type of constraint to remove - see QuestData for further details
 # @param block              the constraint block disconnecting from the quest
 func remove_constraint(constraint_type, block):
-	match constraint_type:
-		QuestData.ConstraintType.IS_LOCATION:
+		var constraint_id = blocks_id_map[block]
+		current_data.erase_constraint(constraint_id)
+		ResourceSaver.save("res://questie/quest-db.tres", database)
 
-			var constraint_id = blocks_id_map[block]
-			print("[Questie]: constraint id " + constraint_id)
-			current_data.erase_constraint(constraint_id)
-			ResourceSaver.save("res://questie/quest-db.tres", database)
+		current_blocks.erase(block)
+		blocks_id_map.erase(block)
 
-			current_blocks.erase(block)
-			blocks_id_map.erase(block)
+		constraint_callbacks_handler.remove_constraint_callbacks(block) 
 
-			constraint_callbacks_handler.remove_constraint_callbacks(block) 
 

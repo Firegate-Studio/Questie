@@ -30,8 +30,8 @@ extents = Vector2( 353.5, 538.5 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 48.5, 56.5 )
 
-[sub_resource type="CircleShape2D" id=5]
-radius = 89.9444
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 193, 537.5 )
 
 [node name="Node2D" type="Node2D"]
 
@@ -167,4 +167,5 @@ __meta__ = {
 script = ExtResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="QuestieItem/Interaction Area"]
+position = Vector2( 325, 407.5 )
 shape = SubResource( 5 )

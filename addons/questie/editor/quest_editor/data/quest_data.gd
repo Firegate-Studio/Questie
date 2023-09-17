@@ -41,7 +41,8 @@ enum ConstraintType {
 	HAS_QUEST,                  # the player must have a specific quest
 	HAS_ITEM,                   # the player must own a specific item with a minimum quantity
 	IS_LOCATION,				# the player is within a specific location
-	QUEST_STATE                 # check the state of activity(complention) of a specific quest
+	QUEST_STATE                 # check the state of activity(complention) of a specific quest,
+	HAS_ALIGNMENT				# check the character alignment
 }
 
 enum TriggerType{
@@ -64,6 +65,7 @@ enum TaskType{
 enum RewardType{
 	ADD_ITEM 					# Add a specific amount of items as quest reward
 	NEW_QUEST					# Activates a new quest as quest reward
+	ADD_ALIGNMENT				# Add an amount of alignment points to the character
 }
 
 # quest constraints represents rules that should be satisfied 
