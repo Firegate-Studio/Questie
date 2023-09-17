@@ -1,6 +1,10 @@
 tool
 extends Tree
 
+# @brief					called when the quest item is pressed
+# @param quest_id			the identifier of the quest inside the quest database
+signal quest_item_pressed(quest_id)
+
 # The master root branch for tree view
 var root : TreeItem
 
@@ -29,6 +33,7 @@ func _enter_tree():
 
 	connect("button_pressed", self, "on_button_pressed")
 	connect("item_edited", self, "on_item_edited")
+	connect("cell_selected", self, "on_item_selected")
 
 func _exit_tree(): pass
 
@@ -85,6 +90,12 @@ func on_item_edited():
 
 		return
 
+func on_item_selected():
+	var selected = get_selected()
+	if is_quest(selected):
+		var quest_id = quests_id_map[selected]
+		emit_signal("quest_item_pressed", quest_id)
+		print("[Questie]: launching quest builder...")
 
 func create_folder(folder_name : String):
 	var folder = create_item(root)

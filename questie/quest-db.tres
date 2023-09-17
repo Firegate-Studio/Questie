@@ -2,27 +2,30 @@
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
 
-[sub_resource type="Resource" id=3]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-id = "8b05d7fb-2f22-41a9-af90-3469b9ffe5d8"
-parent_id = "1d9c8edf-80a4-4c95-bace-d8eea386aeca"
-name = "Samuel"
+id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+parent_id = ""
+name = "Prologue"
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-id = "86e3eaf8-e9ee-40c0-ba7a-e1da02c34a8d"
-parent_id = "1d9c8edf-80a4-4c95-bace-d8eea386aeca"
-name = "Astrid"
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 2 )
-id = "66aecca5-fcb0-4b40-a5c6-5022830bab6e"
-parent_id = "1d9c8edf-80a4-4c95-bace-d8eea386aeca"
-name = "Rowan"
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+id = "8531fce4-d45e-45f4-a645-a4487ce50916"
+parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+item_name = "La mia bellissima missione"
+title = "Una missione di prova"
+status = 0
+description = "Una descrizione di prova"
+alignment = 666.0
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
-folders = [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ]
-quests = [  ]
+folders = [ SubResource( 1 ) ]
+quests = [ SubResource( 2 ) ]

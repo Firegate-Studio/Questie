@@ -1,0 +1,507 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://addons/questie/editor/icons/map.png" type="Texture" id=1]
+[ext_resource path="res://addons/questie/editor/icons/quest_64x64.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=3]
+[ext_resource path="res://addons/questie/editor/icons/new_item_64x64.png" type="Texture" id=4]
+[ext_resource path="res://addons/questie/editor/icons/boxes_64x64.png" type="Texture" id=5]
+[ext_resource path="res://addons/questie/editor/icons/character_64x64.png" type="Texture" id=6]
+[ext_resource path="res://addons/questie/editor/icons/talk.png" type="Texture" id=7]
+[ext_resource path="res://addons/questie/editor/icons/kill.png" type="Texture" id=8]
+[ext_resource path="res://addons/questie/editor/icons/loot_64x64.png" type="Texture" id=9]
+[ext_resource path="res://addons/questie/editor/icons/ying-yang_x64.png" type="Texture" id=10]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/quest_designer_popup.gd" type="Script" id=11]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/constraint_blocks_container.gd" type="Script" id=12]
+
+[node name="QuestDesignPopup" type="Panel"]
+margin_right = 500.0
+margin_bottom = 490.0
+rect_min_size = Vector2( 300, 430 )
+script = ExtResource( 11 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = -10.0
+margin_bottom = -10.0
+size_flags_vertical = 11
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 480.0
+margin_bottom = 14.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Constraints"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer"]
+margin_left = 76.0
+margin_right = 480.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Constraints Container" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 480.0
+margin_bottom = 111.0
+scroll_vertical_enabled = false
+script = ExtResource( 12 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Constraints Container"]
+margin_right = 312.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Constraints Container/HBoxContainer"]
+margin_right = 75.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 1 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Is Location"
+align = 1
+valign = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Constraints Container/HBoxContainer"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer2"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 3 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer2"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Has Item"
+align = 1
+valign = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Constraints Container/HBoxContainer"]
+margin_left = 158.0
+margin_right = 233.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer3"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 2 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer3"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Quest State"
+align = 1
+valign = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/Constraints Container/HBoxContainer"]
+margin_left = 237.0
+margin_right = 312.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer4"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 10 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Constraints Container/HBoxContainer/VBoxContainer4"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Alignment"
+align = 1
+valign = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 115.0
+margin_right = 480.0
+margin_bottom = 129.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Constraints"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 76.0
+margin_right = 480.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Triggers Container" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 133.0
+margin_right = 480.0
+margin_bottom = 226.0
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Triggers Container"]
+margin_right = 391.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Triggers Container/HBoxContainer"]
+margin_right = 75.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 1 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Enter"
+align = 1
+valign = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Triggers Container/HBoxContainer"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer2"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 1 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer2"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Exit"
+align = 1
+valign = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Triggers Container/HBoxContainer"]
+margin_left = 158.0
+margin_right = 233.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer3"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 4 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer3"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Interact"
+align = 1
+valign = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/Triggers Container/HBoxContainer"]
+margin_left = 237.0
+margin_right = 312.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer4"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 6 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer4"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Interact"
+align = 1
+valign = 1
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer/Triggers Container/HBoxContainer"]
+margin_left = 316.0
+margin_right = 391.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="Button" type="Button" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer5"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 5 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Triggers Container/HBoxContainer/VBoxContainer5"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Get Item"
+align = 1
+valign = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 230.0
+margin_right = 480.0
+margin_bottom = 244.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer3"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Constraints"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer3"]
+margin_left = 76.0
+margin_right = 480.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Tasks Container" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 248.0
+margin_right = 480.0
+margin_bottom = 341.0
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Tasks Container"]
+margin_right = 470.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Tasks Container/HBoxContainer"]
+margin_right = 75.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 9 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Collect"
+align = 1
+valign = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Tasks Container/HBoxContainer"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer2"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 8 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer2"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Kill"
+align = 1
+valign = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="VBoxContainer/Tasks Container/HBoxContainer"]
+margin_left = 158.0
+margin_right = 233.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer3"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 7 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer3"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Talk"
+align = 1
+valign = 1
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="VBoxContainer/Tasks Container/HBoxContainer"]
+margin_left = 237.0
+margin_right = 312.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer4"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 1 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer4"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Go To"
+align = 1
+valign = 1
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="VBoxContainer/Tasks Container/HBoxContainer"]
+margin_left = 316.0
+margin_right = 391.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer5"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 5 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer5"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Interact"
+align = 1
+valign = 1
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="VBoxContainer/Tasks Container/HBoxContainer"]
+margin_left = 395.0
+margin_right = 470.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer6"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 6 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Tasks Container/HBoxContainer/VBoxContainer6"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Interact"
+align = 1
+valign = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 345.0
+margin_right = 480.0
+margin_bottom = 359.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer4"]
+margin_right = 72.0
+margin_bottom = 14.0
+text = "Constraints"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer/HBoxContainer4"]
+margin_left = 76.0
+margin_right = 480.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+
+[node name="Rewards Container" type="ScrollContainer" parent="VBoxContainer"]
+margin_top = 363.0
+margin_right = 480.0
+margin_bottom = 456.0
+scroll_vertical_enabled = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Rewards Container"]
+margin_right = 154.0
+margin_bottom = 93.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Rewards Container/HBoxContainer"]
+margin_right = 75.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Rewards Container/HBoxContainer/VBoxContainer"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 9 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Rewards Container/HBoxContainer/VBoxContainer"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Item"
+align = 1
+valign = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Rewards Container/HBoxContainer"]
+margin_left = 79.0
+margin_right = 154.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 75, 75 )
+
+[node name="Button" type="Button" parent="VBoxContainer/Rewards Container/HBoxContainer/VBoxContainer2"]
+margin_right = 75.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 75, 75 )
+icon = ExtResource( 10 )
+icon_align = 1
+expand_icon = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Rewards Container/HBoxContainer/VBoxContainer2"]
+margin_top = 79.0
+margin_right = 75.0
+margin_bottom = 93.0
+text = "Alignment"
+align = 1
+valign = 1

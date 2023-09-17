@@ -94,7 +94,7 @@ func setup_quests():
 
 	# todo: quest saves should be loded here
 
-	for quest in quest_database.data:
+	for quest in quest_database.quests:
 		
 		# Create quest
 		var current = load("res://addons/questie/runtime/quest_system/quest.gd").new()

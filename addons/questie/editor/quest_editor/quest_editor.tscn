@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://addons/questie/editor/icons/folder_64x64.png" type="Texture" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/quest_tree.gd" type="Script" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://addons/questie/editor/icons/quest_32x32.png" type="Texture" id=6]
 [ext_resource path="res://addons/questie/editor/icons/trash_32x32.png" type="Texture" id=7]
 [ext_resource path="res://addons/questie/editor/quest_editor/new_quest_editor.gd" type="Script" id=8]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/quest_designer_graph.gd" type="Script" id=9]
+[ext_resource path="res://addons/questie/editor/fonts/Quest.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 10 )
 
 [node name="Quest Editor" type="Control"]
 anchor_right = 1.0
@@ -52,7 +58,7 @@ margin_bottom = 1060.0
 size_flags_vertical = 3
 
 [node name="Tree" type="Tree" parent="VBoxContainer/HSplitContainer"]
-margin_right = 300.0
+margin_right = 1900.0
 margin_bottom = 984.0
 rect_min_size = Vector2( 300, 0 )
 size_flags_vertical = 3
@@ -62,18 +68,24 @@ folder_icon = ExtResource( 5 )
 quest_icon = ExtResource( 6 )
 delete_icon = ExtResource( 7 )
 
-[node name="HSplitContainer" type="HSplitContainer" parent="VBoxContainer/HSplitContainer"]
+[node name="QuestBuilderView" type="GraphEdit" parent="VBoxContainer/HSplitContainer"]
+visible = false
 margin_left = 312.0
 margin_right = 1900.0
 margin_bottom = 984.0
+right_disconnects = true
+script = ExtResource( 9 )
 
-[node name="Control" type="Control" parent="VBoxContainer/HSplitContainer/HSplitContainer"]
-margin_right = 1276.0
-margin_bottom = 984.0
-size_flags_horizontal = 3
+[node name="Label" type="Label" parent="VBoxContainer/HSplitContainer/QuestBuilderView"]
+margin_left = 15.0
+margin_top = 56.0
+margin_right = 258.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 1 )
+text = "Quest Designer"
 
-[node name="ButtonsContainer" type="Control" parent="VBoxContainer/HSplitContainer/HSplitContainer"]
-margin_left = 1288.0
-margin_right = 1588.0
+[node name="QuestChainView" type="GraphEdit" parent="VBoxContainer/HSplitContainer"]
+visible = false
+margin_left = 312.0
+margin_right = 1900.0
 margin_bottom = 984.0
-rect_min_size = Vector2( 300, 0 )

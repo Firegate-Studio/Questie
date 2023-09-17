@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "GraphNode",
+"class": "Block_QuestEdit",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/blocks/quest_edit_block.gd"
+}, {
 "base": "Resource",
 "class": "CharacterDatabase",
 "language": "GDScript",
@@ -23,6 +28,31 @@ _global_script_classes=[ {
 "class": "Constraint",
 "language": "GDScript",
 "path": "res://addons/questie/nodes/constraints/constraint_node.gd"
+}, {
+"base": "GraphNode",
+"class": "ConstraintBlock",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/blocks/constraint_block.gd"
+}, {
+"base": "Object",
+"class": "ConstraintBlockBuilder",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/builders/constraint_block_builder.gd"
+}, {
+"base": "GraphNode",
+"class": "ConstraintBlock_IsLocation",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/blocks/constraints/is_location.gd"
+}, {
+"base": "ScrollContainer",
+"class": "ConstraintBlocksContainer",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/constraint_blocks_container.gd"
+}, {
+"base": "Object",
+"class": "ConstraintCallbacksHandler",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/constraint_callbacks_handler.gd"
 }, {
 "base": "Reference",
 "class": "ConstraintNodeBuilder",
@@ -204,6 +234,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/data/quest_db.gd"
 }, {
+"base": "GraphEdit",
+"class": "QuestDesignerGraph",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/quest_designer_graph.gd"
+}, {
+"base": "Panel",
+"class": "QuestDesignerPopup",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/quest_designer_popup.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "QuestieCharacter",
 "language": "GDScript",
@@ -365,9 +405,15 @@ _global_script_classes=[ {
 "path": "res://addons/questie/runtime/Inventory System/weighted_inventory.gd"
 } ]
 _global_script_class_icons={
+"Block_QuestEdit": "",
 "CharacterDatabase": "",
 "CharactersFileGenerator": "",
 "Constraint": "",
+"ConstraintBlock": "",
+"ConstraintBlockBuilder": "",
+"ConstraintBlock_IsLocation": "",
+"ConstraintBlocksContainer": "",
+"ConstraintCallbacksHandler": "",
 "ConstraintNodeBuilder": "",
 "Constraint_HasItem": "",
 "Constraint_HasQuest": "",
@@ -404,6 +450,8 @@ _global_script_class_icons={
 "Quest": "",
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
+"QuestDesignerGraph": "",
+"QuestDesignerPopup": "",
 "QuestieCharacter": "res://addons/questie/editor/icons/character_64x64.png",
 "QuestieFoldingTree": "",
 "QuestieItem": "res://addons/questie/editor/icons/boxes_16x16.png",
