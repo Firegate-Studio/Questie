@@ -18,24 +18,25 @@ script = ExtResource( 4 )
 [node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
 margin_left = 16.0
 margin_top = 24.0
-margin_right = 218.0
+margin_right = 243.0
 margin_bottom = 62.0
 alignment = 1
 
 [node name="Category Menu" type="MenuButton" parent="HBoxContainer" index="0"]
-margin_right = 112.0
+margin_right = 106.0
 margin_bottom = 38.0
 size_flags_vertical = 4
-text = "TestItems"
+text = "Weapons"
 icon = ExtResource( 2 )
 flat = false
-items = [ "TestItems", null, 0, false, false, 0, 0, null, "", false, "Test2", null, 0, false, false, 1, 0, null, "", false ]
+items = [ "Weapons", null, 0, false, false, 0, 0, null, "", false, "Armors", null, 0, false, false, 1, 0, null, "", false ]
 
 [node name="Item Menu" type="MenuButton" parent="HBoxContainer" index="1"]
-margin_left = 116.0
-margin_right = 201.0
+margin_left = 110.0
+margin_right = 227.0
 margin_bottom = 38.0
 size_flags_vertical = 4
-text = "Sword"
+text = "Light Saber"
 icon = ExtResource( 3 )
 flat = false
+items = [ "Light Saber", null, 0, false, false, 0, 0, null, "", false, "Ultimate Muscle", null, 0, false, false, 1, 0, null, "", false ]

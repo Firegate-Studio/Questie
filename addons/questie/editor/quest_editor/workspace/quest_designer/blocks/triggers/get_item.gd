@@ -64,7 +64,7 @@ func load_object_items_from_database_by_category(category_index : int, category_
 	var fixed_index = -1
 	for data in item_db.items:
 		fixed_index += 1
-		print("category id: " + category_id + " | folder_id: " + data.folder_id + " | tag id: " + data.tag_id)
+		#print("category id: " + category_id + " | folder_id: " + data.folder_id + " | tag id: " + data.tag_id)
 		if not data.folder_id == category_id and not data.tag_id == category_id: continue
 
 		popup.add_item(data.name, fixed_index)

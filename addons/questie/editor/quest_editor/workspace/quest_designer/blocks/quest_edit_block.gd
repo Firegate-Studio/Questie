@@ -165,6 +165,20 @@ func add_trigger(trigger_type, block):
 
 			trigger_callbacks_handler.add_callbacks(block, data)
 
+		QuestData.TriggerType.GET_ITEM:
+			var data = current_data.push_trigger(trigger_type, current_data.id)
+			data.item_index = block.selected_item_index
+			data.item_id = block.selected_item_id
+			data.category_index = block.selected_item_index
+			data.category_id = block.selected_item_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			trigger_callbacks_handler.add_callbacks(block, data)
+
+
 
 
 # @brief                    remove the constraint from the database

@@ -419,6 +419,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/exit_location_callbacks.gd"
 }, {
+"base": "Object",
+"class": "TriggerCallbacks_GetItem",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/get_item_callbacks.gd"
+}, {
 "base": "QuestieNode",
 "class": "TriggerNode",
 "language": "GDScript",
@@ -557,6 +562,7 @@ _global_script_class_icons={
 "TriggerButtonsContainer": "",
 "TriggerCallbacksHandler": "",
 "TriggerCallbacks_CharacterExitLocation": "",
+"TriggerCallbacks_GetItem": "",
 "TriggerNode": "",
 "TriggerNodeBuilder": "",
 "Trigger_AlignmentAmount": "",

@@ -207,7 +207,7 @@ func get_block_type(block):
 		return QuestData.TriggerType.ENTER_LOCATION
 	if block is TriggerBlock_CharacterExitLocation:
 		return QuestData.TriggerType.EXIT_LOCATION
-	if block is Trigger_GetItem:
+	if block is TriggerBlock_GetItem:
 		return QuestData.TriggerType.GET_ITEM
 	if block is TriggerBlock_HasAlignmentRange:
 		return QuestData.TriggerType.ALIGNMENT_AMOUNT
