@@ -9,3 +9,8 @@ export var location_index : int = -1
 
 # the region position inside the database
 export var category_index : int = -1
+
+export var category_id : String
+
+export var character_index : int = -1
+export var character_id : String

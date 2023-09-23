@@ -150,6 +150,21 @@ func add_trigger(trigger_type, block):
 
 			trigger_callbacks_handler.add_callbacks(block, data)
 
+		QuestData.TriggerType.EXIT_LOCATION:
+			var data = current_data.push_trigger(trigger_type, current_data.id)
+			data.character_index = block.selected_character_index
+			data.character_id = block.selected_character_id
+			data.location_index = block.selected_location_index
+			data.location_id = block.selected_location_id
+			data.category_index = block.selected_region_index
+			data.category_id = block.selected_region_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			trigger_callbacks_handler.add_callbacks(block, data)
+
 
 
 # @brief                    remove the constraint from the database
