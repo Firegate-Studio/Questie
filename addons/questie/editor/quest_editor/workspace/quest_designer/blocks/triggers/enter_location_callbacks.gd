@@ -1,5 +1,5 @@
 extends Object
-class_name CharacterEnterLocationCallbacks
+class_name TriggerCallbacks_CharacterEnterLocation
 
 var quest_database : QuestDatabase = null
 

@@ -19,11 +19,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/character_editor/data/characters_database.gd"
 }, {
-"base": "Object",
-"class": "CharacterEnterLocationCallbacks",
-"language": "GDScript",
-"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/enter_location_callbacks.gd"
-}, {
 "base": "Reference",
 "class": "CharactersFileGenerator",
 "language": "GDScript",
@@ -415,6 +410,16 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/trigger_callbacks_handler.gd"
 }, {
 "base": "Object",
+"class": "TriggerCallbacks_AlignmentAmount",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/alignment_amount_callbacks.gd"
+}, {
+"base": "Object",
+"class": "TriggerCallbacks_CharacterEnterLocation",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/enter_location_callbacks.gd"
+}, {
+"base": "Object",
 "class": "TriggerCallbacks_CharacterExitLocation",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/exit_location_callbacks.gd"
@@ -492,7 +497,6 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Block_QuestEdit": "",
 "CharacterDatabase": "",
-"CharacterEnterLocationCallbacks": "",
 "CharactersFileGenerator": "",
 "Constraint": "",
 "ConstraintBlockBuilder": "",
@@ -571,6 +575,8 @@ _global_script_class_icons={
 "TriggerBlock_InteractItem": "",
 "TriggerButtonsContainer": "",
 "TriggerCallbacksHandler": "",
+"TriggerCallbacks_AlignmentAmount": "",
+"TriggerCallbacks_CharacterEnterLocation": "",
 "TriggerCallbacks_CharacterExitLocation": "",
 "TriggerCallbacks_GetItem": "",
 "TriggerCallbacks_InteractCharacter": "",
