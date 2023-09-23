@@ -424,6 +424,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/get_item_callbacks.gd"
 }, {
+"base": "Object",
+"class": "TriggerCallbacks_InteractCharacter",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/interact_character_callbacks.gd"
+}, {
+"base": "Object",
+"class": "TriggerCallbacks_InteractItem",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/triggers/interact_item_callbacks.gd"
+}, {
 "base": "QuestieNode",
 "class": "TriggerNode",
 "language": "GDScript",
@@ -563,6 +573,8 @@ _global_script_class_icons={
 "TriggerCallbacksHandler": "",
 "TriggerCallbacks_CharacterExitLocation": "",
 "TriggerCallbacks_GetItem": "",
+"TriggerCallbacks_InteractCharacter": "",
+"TriggerCallbacks_InteractItem": "",
 "TriggerNode": "",
 "TriggerNodeBuilder": "",
 "Trigger_AlignmentAmount": "",

@@ -1,8 +1,7 @@
 extends "res://addons/questie/editor/quest_editor/data/trigger/quest_trigger.gd"
 class_name Trigger_ItemInteraction
 
-# the identifier of the item to interact with
-export(String) var item_id
-
-# the category of the item
-export(ItemsCollection.Categories) var category
+export var item_index : int = -1
+export var item_id : String
+export var category_index : int = -1
+export var category_id : String
