@@ -19,6 +19,7 @@ var reward_buttons_container
 func _enter_tree():
 	constraint_blocks_container = $"VBoxContainer/Constraints Container"
 	trigger_blocks_container =$"VBoxContainer/Triggers Container"
+	task_blocks_container = $"VBoxContainer/Tasks Container"
 	
 	constraint_blocks_container.connect("has_item_block_requested", self, "on_has_item_constraint_requested")
 	constraint_blocks_container.connect("is_location_block_requested", self, "on_is_location_constraint_requested")
@@ -31,6 +32,13 @@ func _enter_tree():
 	trigger_blocks_container.connect("interact_item_button_pressed", self, "on_interact_item_trigger_requested")
 	trigger_blocks_container.connect("get_item_button_pressed", self, "on_get_item_trigger_requested")
 
+	task_blocks_container.connect("collect_block_requested", self, "on_collect_task_requested")
+	task_blocks_container.connect("go_to_block_requested", self, "on_go_to_task_requested")
+	task_blocks_container.connect("kill_block_requested", self, "on_kill_task_requested")
+	task_blocks_container.connect("talk_block_requested", self, "on_talk_task_requested")
+	task_blocks_container.connect("interact_item_block_requested", self, "on_interact_item_task_requested")
+	task_blocks_container.connect("interact_character_block_requested", self, "on_interact_character_task_requested")
+
 func _exit_tree():
 	constraint_blocks_container.disconnect("has_item_block_requested", self, "on_has_item_constraint_requested")
 	constraint_blocks_container.disconnect("is_location_block_requested", self, "on_is_location_constraint_requested")
@@ -42,6 +50,13 @@ func _exit_tree():
 	trigger_blocks_container.disconnect("interact_character_button_pressed", self, "on_interact_character_trigger_requested")
 	trigger_blocks_container.disconnect("interact_item_button_pressed", self, "on_interact_item_trigger_requested")
 	trigger_blocks_container.disconnect("get_item_button_pressed", self, "on_get_item_trigger_requested")
+
+	task_blocks_container.disconnect("collect_block_requested", self, "on_collect_task_requested")
+	task_blocks_container.disconnect("go_to_block_requested", self, "on_go_to_task_requested")
+	task_blocks_container.disconnect("kill_block_requested", self, "on_kill_task_requested")
+	task_blocks_container.disconnect("talk_block_requested", self, "on_talk_task_requested")
+	task_blocks_container.disconnect("interact_item_block_requested", self, "on_interact_item_task_requested")
+	task_blocks_container.disconnect("interact_character_block_requested", self, "on_interact_character_task_requested")
 
 
 func on_has_item_constraint_requested():
@@ -80,4 +95,29 @@ func on_interact_item_trigger_requested():
 func on_get_item_trigger_requested():
 	var block = TriggerBlockBuilder.get_item()
 	emit_signal("trigger_block_requested", block)
+
+func on_collect_task_requested():
+	var block = TaskBlockBuilder.collect()
+	emit_signal("task_block_requested", block)
+
+func on_go_to_task_requested():
+	var block = TaskBlockBuilder.go_to()
+	emit_signal("task_block_requested", block)
+
+func on_kill_task_requested():
+	var block = TaskBlockBuilder.kill()
+	emit_signal("task_block_requested", block)
+
+func on_talk_task_requested():
+	var block = TaskBlockBuilder.talk()
+	emit_signal("task_block_requested", block)
+
+func on_interact_item_task_requested():
+	var block = TaskBlockBuilder.interact_item()
+	emit_signal("task_block_requested", block)
+
+func on_interact_character_task_requested():
+	var block = TaskBlockBuilder.interact_character()
+	emit_signal("task_block_requested", block)
+
 
