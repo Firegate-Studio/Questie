@@ -369,6 +369,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/collect_callbacks.gd"
 }, {
+"base": "Object",
+"class": "TaskCallbacks_GoTo",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/go_to_callbacks.gd"
+}, {
 "base": "QuestieNode",
 "class": "TaskNode",
 "language": "GDScript",
@@ -612,6 +617,7 @@ _global_script_class_icons={
 "TaskBlock_Talk": "",
 "TaskCallbacksHandler": "",
 "TaskCallbacks_Collect": "",
+"TaskCallbacks_GoTo": "",
 "TaskNode": "",
 "TaskNodeBuilder": "",
 "Task_CharacterInteraction": "",

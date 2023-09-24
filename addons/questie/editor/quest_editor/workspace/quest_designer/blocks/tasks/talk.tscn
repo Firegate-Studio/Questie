@@ -18,7 +18,7 @@ script = ExtResource( 4 )
 [node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
 margin_left = 16.0
 margin_top = 24.0
-margin_right = 218.0
+margin_right = 197.0
 margin_bottom = 74.0
 size_flags_vertical = 3
 alignment = 1
@@ -30,7 +30,8 @@ texture = ExtResource( 3 )
 
 [node name="CharacterMenu" type="MenuButton" parent="HBoxContainer" index="1"]
 margin_left = 52.0
-margin_right = 202.0
+margin_right = 181.0
 margin_bottom = 50.0
-text = "Select Character"
+text = "Several Code"
 icon = ExtResource( 2 )
+items = [ "Several Code", null, 0, false, false, 0, 0, null, "", false, "Blacksmith", null, 0, false, false, 1, 0, null, "", false, "Magician", null, 0, false, false, 2, 0, null, "", false, "Wolf", null, 0, false, false, 3, 0, null, "", false ]

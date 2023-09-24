@@ -211,6 +211,10 @@ func add_trigger(trigger_type, block):
 # @param block				the task block to add
 func add_task(task_type, block):
 	match task_type:
+		QuestData.TaskType.ALIGNMENT_TARGET:
+			# todo - ALIGNMENT_TARGET BLOCK
+			pass
+
 		QuestData.TaskType.COLLECT_ITEM:
 			var data = current_data.push_task(task_type, current_data.id)
 			data.category_index = block.selected_category_index
@@ -224,6 +228,20 @@ func add_task(task_type, block):
 			blocks_id_map[block] = data.uuid
 
 			task_callbacks_handler.add_callbacks(block, data)
+		
+		QuestData.TaskType.GO_TO:
+			var data = current_data.push_task(task_type, current_data.id)
+			data.category_index = block.selected_region_index
+			data.category_id = block.selected_region_id
+			data.location_index = block.selected_location_index
+			data.location_id = block.selected_location_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			task_callbacks_handler.add_callbacks(block, data)
+
 
 # @brief                    remove the constraint from the database
 # @param constraint_type    the type of constraint to remove - see QuestData for further details

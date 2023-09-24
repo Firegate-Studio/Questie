@@ -5,12 +5,13 @@ class_name TaskCallbacksHandler
 var quest_database : QuestDatabase = null
 
 var collect_callbacks : TaskCallbacks_Collect
+var go_to_callbacks : TaskCallbacks_GoTo
 
 func add_callbacks(task_block, data): 
     if task_block is TaskBlock_Collect: 
         collect_callbacks.add_listeners(task_block, data)
     if task_block is TaskBlock_GoTo:
-        pass
+        go_to_callbacks.add_listeners(task_block, data)
     if task_block is TaskBlock_InteractCharacter:
         pass
     if task_block is TaskBlock_InteractItem:
@@ -24,7 +25,7 @@ func remove_callbacks(task_block):
     if task_block is TaskBlock_Collect: 
         collect_callbacks.remove_listeners(task_block)
     if task_block is TaskBlock_GoTo:
-        pass
+        go_to_callbacks.remove_listeners(task_block)
     if task_block is TaskBlock_InteractCharacter:
         pass
     if task_block is TaskBlock_InteractItem:
@@ -38,3 +39,4 @@ func _init():
     quest_database = ResourceLoader.load("res://questie/quest-db.tres")
 
     collect_callbacks = TaskCallbacks_Collect.new()
+    go_to_callbacks = TaskCallbacks_GoTo.new()
