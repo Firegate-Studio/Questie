@@ -20,6 +20,7 @@ var blocks_id_map : Dictionary = {}
 # classes to attach and detach listeners in-from blocks when added or removed
 var constraint_callbacks_handler : ConstraintCallbacksHandler
 var trigger_callbacks_handler : TriggerCallbacksHandler
+var task_callbacks_handler : TaskCallbacksHandler
 
 func _enter_tree():
 
@@ -31,6 +32,7 @@ func _enter_tree():
 
 	constraint_callbacks_handler = ConstraintCallbacksHandler.new()
 	trigger_callbacks_handler = TriggerCallbacksHandler.new()
+	task_callbacks_handler = TaskCallbacksHandler.new()
 
 	#todo: load information
 
@@ -204,7 +206,24 @@ func add_trigger(trigger_type, block):
 			trigger_callbacks_handler.add_callbacks(block, data)
 
 
+# @brief 					add task data inside the quest database
+# @param task_type			the task type
+# @param block				the task block to add
+func add_task(task_type, block):
+	match task_type:
+		QuestData.TaskType.COLLECT_ITEM:
+			var data = current_data.push_task(task_type, current_data.id)
+			data.category_index = block.selected_category_index
+			data.category_id = block.selected_category_id
+			data.item_index = block.selected_item_index
+			data.item_id  = block.selected_item_id
+			data.quantity = block.selected_quantity
+			ResourceSaver.save("res://questie/quest-db.tres", database)
 
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			task_callbacks_handler.add_callbacks(block, data)
 
 # @brief                    remove the constraint from the database
 # @param constraint_type    the type of constraint to remove - see QuestData for further details
@@ -221,7 +240,6 @@ func remove_constraint(constraint_type, block):
 
 func remove_trigger(trigger_type, block):
 		var trigger_id = blocks_id_map[block]
-		print("trigger id: " + trigger_id)
 		current_data.erase_trigger(trigger_id)
 		ResourceSaver.save("res://questie/quest-db.tres", database)
 
@@ -229,5 +247,15 @@ func remove_trigger(trigger_type, block):
 		blocks_id_map.erase(block)
 
 		trigger_callbacks_handler.remove_callbacks(block)
+
+func remove_task(task_type, block):
+	var task_id = blocks_id_map[block]
+	current_data.erase_task(task_id)
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+	current_blocks.erase(block)
+	blocks_id_map.erase(block)
+
+	task_callbacks_handler.remove_callbacks(block)
 
 

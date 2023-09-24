@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/base_block.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/questie/editor/icons/boxes_32x32.png" type="Texture" id=2]
 [ext_resource path="res://addons/questie/editor/icons/tag.png" type="Texture" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/collect.gd" type="Script" id=4]
 
 [node name="CollectTask" instance=ExtResource( 1 )]
 title = "Collect Item Quantity"
@@ -12,6 +13,7 @@ slot/0/left_color = Color( 1, 1, 1, 1 )
 slot/0/right_enabled = true
 slot/0/right_type = 3
 slot/0/right_color = Color( 0.12549, 0.905882, 0.905882, 1 )
+script = ExtResource( 4 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
 margin_left = 16.0

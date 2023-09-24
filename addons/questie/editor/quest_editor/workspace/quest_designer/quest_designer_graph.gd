@@ -80,6 +80,8 @@ func on_connection_request(from : String, from_slot : int, to : String, to_slot 
 		root_block.add_constraint(get_block_type(block), block)
 	if is_trigger_block(block):
 		root_block.add_trigger(get_block_type(block), block)
+	if is_task_block(block):
+		root_block.add_task(get_block_type(block), block)
 
 	# todo: save quest database
 	connect_node(from, from_slot, to, to_slot)
@@ -102,6 +104,8 @@ func on_disconnection_request(from : String, from_port : int, to : String, to_po
 		root_block.remove_constraint(get_block_type(block), block)
 	if is_trigger_block(block): 
 		root_block.remove_trigger(get_block_type(block), block)
+	if is_task_block(block):
+		root_block.remove_task(get_block_type(block), block)
 
 	disconnect_node(from, from_port, to, to_port)
 	print("[Questie]: disconnected!")
@@ -120,6 +124,8 @@ func on_block_creation(block):
 		constraint_blocks.append(block)
 	if is_trigger_block(block):
 		trigger_blocks.append(block)
+	if is_task_block(block):
+		task_blocks.append(block)
 
 	block.rect_position += spawn_point
 	block.connect("close_request", self, "on_block_deletion_requested", [block])
@@ -142,6 +148,7 @@ func on_block_deletion_requested(block):
 		disconnect_node(from, from_port, to, to_port)
 		if is_constraint_block(block): root_block.remove_constraint(get_block_type(block), block)
 		if is_trigger_block(block): root_block.remove_trigger(get_block_type(block), block)
+		if is_task_block(block): root_block.remove_task(get_block_type(block), block)
 		break
 
 	if constraint_blocks.has(block): constraint_blocks.erase(block)
@@ -216,9 +223,23 @@ func get_block_type(block):
 	if block is TriggerBlock_InteractItem:
 		return QuestData.TriggerType.INTERACT_ITEM
 
+	if block is TaskBlock_Collect:
+		return QuestData.TaskType.COLLECT_ITEM
+	if block is TaskBlock_GoTo:
+		return QuestData.TaskType.GO_TO
+	if block is TaskBlock_InteractCharacter:
+		return QuestData.TaskType.INTERACT_CHARACTER
+	if block is TaskBlock_InteractItem:
+		return QuestData.TaskType.INTERACT_ITEM
+	if block is TaskBlock_Kill:
+		return QuestData.TaskType.KILL
+	if block is TaskBlock_Talk:
+		return QuestData.TaskType.TALK
+
 
 func is_constraint_block(block): return block is ConstraintBlock_HasAlignment or block is ConstraintBlock_HasItem or block is ConstraintBlock_IsLocation
 
 func is_trigger_block(block): return block is TriggerBlock_CharacterEnterLocation or block is TriggerBlock_CharacterExitLocation or block is TriggerBlock_GetItem or block is TriggerBlock_HasAlignmentRange or block is TriggerBlock_InteractCharacter or block is TriggerBlock_InteractItem
 
+func is_task_block(block): return block is TaskBlock_Collect or block is TaskBlock_GoTo or block is TaskBlock_InteractCharacter or block is TaskBlock_InteractItem or block is TaskBlock_Kill or block is TaskBlock_Talk
 
