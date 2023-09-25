@@ -9,6 +9,7 @@ var go_to_callbacks : TaskCallbacks_GoTo
 var interact_character_callbacks : TaskCallbacks_InteractCharacter
 var interact_item_callbacks : TaskCallbacks_InteractItem
 var kill_callbacks : TaskCallbacks_Kill
+var talk_callbacks : TaskCallbacks_Talk
 
 func add_callbacks(task_block, data): 
     if task_block is TaskBlock_Collect: 
@@ -22,7 +23,7 @@ func add_callbacks(task_block, data):
     if task_block is TaskBlock_Kill:
         kill_callbacks.add_listeners(task_block, data)
     if task_block is TaskBlock_Talk:
-        pass
+        talk_callbacks.add_listeners(task_block, data)
 
 func remove_callbacks(task_block): 
     if task_block is TaskBlock_Collect: 
@@ -36,7 +37,7 @@ func remove_callbacks(task_block):
     if task_block is TaskBlock_Kill:
         kill_callbacks.remove_listeners(task_block)
     if task_block is TaskBlock_Talk:
-        pass
+        talk_callbacks.remove_listeners(task_block)
 
 func _init():
     quest_database = ResourceLoader.load("res://questie/quest-db.tres")
@@ -46,3 +47,4 @@ func _init():
     interact_character_callbacks = TaskCallbacks_InteractCharacter.new()
     interact_item_callbacks = TaskCallbacks_InteractItem.new()
     kill_callbacks = TaskCallbacks_Kill.new()
+    talk_callbacks = TaskCallbacks_Talk.new()

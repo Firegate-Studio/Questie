@@ -277,10 +277,17 @@ func add_task(task_type, block):
 			blocks_id_map[block] = data.uuid
 
 			task_callbacks_handler.add_callbacks(block, data)
-			
 
-		
+		QuestData.TaskType.TALK:
+			var data = current_data.push_task(task_type, current_data.id)
+			data.character_index = block.selected_character_index
+			data.character_id = block.selected_character_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
 
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			task_callbacks_handler.add_callbacks(block, data)
 
 # @brief                    remove the constraint from the database
 # @param constraint_type    the type of constraint to remove - see QuestData for further details
