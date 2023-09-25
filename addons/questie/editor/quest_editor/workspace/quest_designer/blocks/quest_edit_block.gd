@@ -265,6 +265,18 @@ func add_task(task_type, block):
 			blocks_id_map[block] = data.uuid
 
 			task_callbacks_handler.add_callbacks(block, data)
+
+		QuestData.TaskType.KILL:
+			var data = current_data.push_task(task_type, current_data.id)
+			data.target_kills = block.selected_quantity
+			data.character_index = block.selected_character_index
+			data.character_id = block.selected_character_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			task_callbacks_handler.add_callbacks(block, data)
 			
 
 		

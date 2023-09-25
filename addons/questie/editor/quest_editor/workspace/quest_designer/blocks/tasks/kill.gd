@@ -12,7 +12,7 @@ var quantity_box : SpinBox
 
 var selected_character_index : int = -1
 var selected_character_id : String
-var selected_quantity : int 
+var selected_quantity : int = 1
 
 func _enter_tree():
 	character_database = ResourceLoader.load("res://questie/characters-db.tres")
