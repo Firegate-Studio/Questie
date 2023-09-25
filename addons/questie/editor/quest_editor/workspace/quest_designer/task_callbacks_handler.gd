@@ -7,6 +7,7 @@ var quest_database : QuestDatabase = null
 var collect_callbacks : TaskCallbacks_Collect
 var go_to_callbacks : TaskCallbacks_GoTo
 var interact_character_callbacks : TaskCallbacks_InteractCharacter
+var interact_item_callbacks : TaskCallbacks_InteractItem
 
 func add_callbacks(task_block, data): 
     if task_block is TaskBlock_Collect: 
@@ -16,7 +17,7 @@ func add_callbacks(task_block, data):
     if task_block is TaskBlock_InteractCharacter:
         interact_character_callbacks.add_listeners(task_block, data)
     if task_block is TaskBlock_InteractItem:
-        pass
+        interact_item_callbacks.add_listeners(task_block, data)
     if task_block is TaskBlock_Kill:
         pass
     if task_block is TaskBlock_Talk:
@@ -30,7 +31,7 @@ func remove_callbacks(task_block):
     if task_block is TaskBlock_InteractCharacter:
         interact_character_callbacks.remove_listeners(task_block)
     if task_block is TaskBlock_InteractItem:
-        pass
+        interact_item_callbacks.remove_listeners(task_block)
     if task_block is TaskBlock_Kill:
         pass
     if task_block is TaskBlock_Talk:
@@ -42,3 +43,4 @@ func _init():
     collect_callbacks = TaskCallbacks_Collect.new()
     go_to_callbacks = TaskCallbacks_GoTo.new()
     interact_character_callbacks = TaskCallbacks_InteractCharacter.new()
+    interact_item_callbacks = TaskCallbacks_InteractItem.new()

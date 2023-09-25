@@ -253,6 +253,20 @@ func add_task(task_type, block):
 
 			task_callbacks_handler.add_callbacks(block, data)
 
+		QuestData.TaskType.INTERACT_ITEM:
+			var data = current_data.push_task(task_type, current_data.id)
+			data.category_index = block.selected_category_index
+			data.category_id = block.selected_category_id
+			data.item_index = block.selected_item_index
+			data.item_id = block.selected_item_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			task_callbacks_handler.add_callbacks(block, data)
+			
+
 		
 
 

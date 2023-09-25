@@ -1,8 +1,8 @@
 extends "res://addons/questie/editor/quest_editor/data/task/quest_task.gd"
 class_name Task_ItemInteraction
 
-# the item identifier for the item to interact
-export(String) var item_id 
+export var category_index : int = -1
+export var category_id : String
 
-# the category of the item
-export(ItemsCollection.Categories) var category
+export var item_index : int = -1
+export var item_id : String
