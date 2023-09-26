@@ -14,12 +14,13 @@ signal reward_block_requested(block)
 var constraint_blocks_container : ConstraintBlocksContainer
 var trigger_blocks_container : TriggerButtonsContainer
 var task_blocks_container
-var reward_buttons_container 
+var reward_buttons_container  : RewardButtonsContainer
 
 func _enter_tree():
 	constraint_blocks_container = $"VBoxContainer/Constraints Container"
 	trigger_blocks_container =$"VBoxContainer/Triggers Container"
 	task_blocks_container = $"VBoxContainer/Tasks Container"
+	reward_buttons_container = $"VBoxContainer/Rewards Container"
 	
 	constraint_blocks_container.connect("has_item_block_requested", self, "on_has_item_constraint_requested")
 	constraint_blocks_container.connect("is_location_block_requested", self, "on_is_location_constraint_requested")
@@ -40,6 +41,9 @@ func _enter_tree():
 	task_blocks_container.connect("interact_item_block_requested", self, "on_interact_item_task_requested")
 	task_blocks_container.connect("interact_character_block_requested", self, "on_interact_character_task_requested")
 
+	reward_buttons_container.connect("add_item_block_requested", self, "on_add_item_reward_requested")
+	reward_buttons_container.connect("add_alignment_block_requested", self, "on_add_alignment_reward_requested")
+
 func _exit_tree():
 	constraint_blocks_container.disconnect("has_item_block_requested", self, "on_has_item_constraint_requested")
 	constraint_blocks_container.disconnect("is_location_block_requested", self, "on_is_location_constraint_requested")
@@ -59,6 +63,9 @@ func _exit_tree():
 	task_blocks_container.disconnect("talk_block_requested", self, "on_talk_task_requested")
 	task_blocks_container.disconnect("interact_item_block_requested", self, "on_interact_item_task_requested")
 	task_blocks_container.disconnect("interact_character_block_requested", self, "on_interact_character_task_requested")
+
+	reward_buttons_container.disconnect("add_item_block_requested", self, "on_add_item_reward_requested")
+	reward_buttons_container.disconnect("add_alignment_block_requested", self, "on_add_alignment_reward_requested")
 
 
 func on_has_item_constraint_requested():
@@ -126,5 +133,13 @@ func on_interact_item_task_requested():
 func on_interact_character_task_requested():
 	var block = TaskBlockBuilder.interact_character()
 	emit_signal("task_block_requested", block)
+
+func on_add_item_reward_requested():
+	var block = RewardBlockBuilder.add_item()
+	emit_signal("reward_block_requested", block)
+
+func on_add_alignment_reward_requested():
+	var block = RewardBlockBuilder.add_alignment()
+	emit_signal("reward_block_requested", block)
 
 

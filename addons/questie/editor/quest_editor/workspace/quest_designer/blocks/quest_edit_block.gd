@@ -21,6 +21,7 @@ var blocks_id_map : Dictionary = {}
 var constraint_callbacks_handler : ConstraintCallbacksHandler
 var trigger_callbacks_handler : TriggerCallbacksHandler
 var task_callbacks_handler : TaskCallbacksHandler
+var reward_callabcks_handler : RewardCallbacksHandler
 
 func _enter_tree():
 
@@ -33,6 +34,7 @@ func _enter_tree():
 	constraint_callbacks_handler = ConstraintCallbacksHandler.new()
 	trigger_callbacks_handler = TriggerCallbacksHandler.new()
 	task_callbacks_handler = TaskCallbacksHandler.new()
+	reward_callabcks_handler = RewardCallbacksHandler.new()
 
 	#todo: load information
 
@@ -296,6 +298,25 @@ func add_task(task_type, block):
 
 			task_callbacks_handler.add_callbacks(block, data)
 
+func add_reward(reward_type, block):
+	match reward_type:
+		QuestData.RewardType.ADD_ALIGNMENT:
+			pass
+		
+		QuestData.RewardType.ADD_ITEM:
+			var data = current_data.push_reward(reward_type, current_data.id)
+			data.item_quantity = block.current_quantity
+			data.category_index = block.selected_category_index
+			data.category_id = block.selected_category_id
+			data.item_index = block.selected_item_index
+			data.item_id = block.selected_item_id
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			reward_callabcks_handler.add_callbacks(block, data)
+
 # @brief                    remove the constraint from the database
 # @param constraint_type    the type of constraint to remove - see QuestData for further details
 # @param block              the constraint block disconnecting from the quest
@@ -328,5 +349,16 @@ func remove_task(task_type, block):
 	blocks_id_map.erase(block)
 
 	task_callbacks_handler.remove_callbacks(block)
+
+func remove_reward(reward_type, block):
+	var reward_id = blocks_id_map[block]
+	current_data.erase_reward(reward_id)
+	ResourceSaver.save("res://questie/quest-db.tres", database)
+
+	current_blocks.erase(block)
+	blocks_id_map.erase(block)
+	
+	reward_callabcks_handler.remove_callbacks(block)
+
 
 

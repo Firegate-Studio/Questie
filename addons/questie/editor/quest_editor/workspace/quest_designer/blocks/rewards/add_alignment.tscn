@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/base_block.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/questie/editor/icons/ying-yang_x32.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/rewards/add_alignment.gd" type="Script" id=3]
+
+[node name="AddAlignment" instance=ExtResource( 1 )]
+title = "Add Alignment"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 1, 1, 1, 1 )
+slot/0/right_enabled = true
+slot/0/right_type = 4
+slot/0/right_color = Color( 0.537255, 0.945098, 0.227451, 1 )
+script = ExtResource( 3 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." index="0"]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 143.0
+margin_bottom = 74.0
+size_flags_vertical = 3
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" index="0"]
+margin_left = 8.0
+margin_right = 40.0
+margin_bottom = 50.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="QuantityBox" type="SpinBox" parent="HBoxContainer" index="1"]
+margin_left = 44.0
+margin_top = 13.0
+margin_right = 118.0
+margin_bottom = 37.0
+size_flags_vertical = 4
+min_value = -10000.0
+max_value = 10000.0
+align = 1

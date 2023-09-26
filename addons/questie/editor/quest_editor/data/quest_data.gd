@@ -291,12 +291,11 @@ func get_task(var uuid : String):
 func push_reward(type : int, owner : String):
 	var reward = null
 	match type:
+		RewardType.ADD_ALIGNMENT:
+			reward = load("res://addons/questie/editor/quest_editor/data/reward/add_alignment.gd").new()
 		RewardType.ADD_ITEM: 
 			reward = load("res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd").new()
 
-		RewardType.NEW_QUEST:
-			reward = load("res://addons/questie/editor/quest_editor/data/reward/new_quest_reward.gd").new()
-	
 	if not reward:
 		# Log error
 		print("[questie]: can't generated taks for quest(" + owner + ")")
