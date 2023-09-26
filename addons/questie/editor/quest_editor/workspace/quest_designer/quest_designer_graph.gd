@@ -223,6 +223,8 @@ func get_block_type(block):
 	if block is TriggerBlock_InteractItem:
 		return QuestData.TriggerType.INTERACT_ITEM
 
+	if block is TaskBlock_AlignmentRange:
+		return QuestData.TaskType.ALIGNMENT_TARGET
 	if block is TaskBlock_Collect:
 		return QuestData.TaskType.COLLECT_ITEM
 	if block is TaskBlock_GoTo:
@@ -241,5 +243,5 @@ func is_constraint_block(block): return block is ConstraintBlock_HasAlignment or
 
 func is_trigger_block(block): return block is TriggerBlock_CharacterEnterLocation or block is TriggerBlock_CharacterExitLocation or block is TriggerBlock_GetItem or block is TriggerBlock_HasAlignmentRange or block is TriggerBlock_InteractCharacter or block is TriggerBlock_InteractItem
 
-func is_task_block(block): return block is TaskBlock_Collect or block is TaskBlock_GoTo or block is TaskBlock_InteractCharacter or block is TaskBlock_InteractItem or block is TaskBlock_Kill or block is TaskBlock_Talk
+func is_task_block(block): return block is TaskBlock_AlignmentRange or block is TaskBlock_Collect or block is TaskBlock_GoTo or block is TaskBlock_InteractCharacter or block is TaskBlock_InteractItem or block is TaskBlock_Kill or block is TaskBlock_Talk
 

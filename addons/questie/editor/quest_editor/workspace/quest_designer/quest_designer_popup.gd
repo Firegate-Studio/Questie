@@ -32,6 +32,7 @@ func _enter_tree():
 	trigger_blocks_container.connect("interact_item_button_pressed", self, "on_interact_item_trigger_requested")
 	trigger_blocks_container.connect("get_item_button_pressed", self, "on_get_item_trigger_requested")
 
+	task_blocks_container.connect("alignment_button_requested", self, "on_alignment_task_requested")
 	task_blocks_container.connect("collect_block_requested", self, "on_collect_task_requested")
 	task_blocks_container.connect("go_to_block_requested", self, "on_go_to_task_requested")
 	task_blocks_container.connect("kill_block_requested", self, "on_kill_task_requested")
@@ -51,6 +52,7 @@ func _exit_tree():
 	trigger_blocks_container.disconnect("interact_item_button_pressed", self, "on_interact_item_trigger_requested")
 	trigger_blocks_container.disconnect("get_item_button_pressed", self, "on_get_item_trigger_requested")
 
+	task_blocks_container.disconnect("alignment_button_requested", self, "on_alignment_button_requested")
 	task_blocks_container.disconnect("collect_block_requested", self, "on_collect_task_requested")
 	task_blocks_container.disconnect("go_to_block_requested", self, "on_go_to_task_requested")
 	task_blocks_container.disconnect("kill_block_requested", self, "on_kill_task_requested")
@@ -95,6 +97,11 @@ func on_interact_item_trigger_requested():
 func on_get_item_trigger_requested():
 	var block = TriggerBlockBuilder.get_item()
 	emit_signal("trigger_block_requested", block)
+
+
+func on_alignment_task_requested():
+	var block = TaskBlockBuilder.alignment_range()
+	emit_signal("task_block_requested", block)
 
 func on_collect_task_requested():
 	var block = TaskBlockBuilder.collect()

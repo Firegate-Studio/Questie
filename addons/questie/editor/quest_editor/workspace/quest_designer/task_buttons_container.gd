@@ -1,6 +1,7 @@
 tool
 extends ScrollContainer
 
+signal alignment_button_requested()
 signal collect_block_requested()
 signal kill_block_requested()
 signal talk_block_requested()
@@ -8,6 +9,7 @@ signal go_to_block_requested()
 signal interact_item_block_requested()
 signal interact_character_block_requested()
 
+var alignment_button : Button
 var collect_button : Button
 var kill_button : Button
 var talk_button : Button
@@ -16,6 +18,7 @@ var interact_item_button : Button
 var interact_character_button : Button
 
 func _enter_tree():
+    alignment_button = $HBoxContainer/VBoxContainer7/Button
     collect_button = $HBoxContainer/VBoxContainer/Button
     kill_button = $HBoxContainer/VBoxContainer2/Button
     talk_button = $HBoxContainer/VBoxContainer3/Button
@@ -23,6 +26,7 @@ func _enter_tree():
     interact_item_button = $HBoxContainer/VBoxContainer5/Button
     interact_character_button = $HBoxContainer/VBoxContainer6/Button
 
+    alignment_button.connect("button_down", self, "on_alignment_button_pressed")
     collect_button.connect("button_down", self, "on_collect_button_pressed")
     kill_button.connect("button_down", self, "on_kill_button_pressed")
     talk_button.connect("button_down", self, "on_talk_button_pressed")
@@ -31,12 +35,16 @@ func _enter_tree():
     interact_character_button.connect("button_down", self, "on_interact_character_button_pressed")
 
 func _exit_tree():
+    alignment_button.disconnect("button_down", self, "on_alignment_button_pressed")
     collect_button.disconnect("button_down", self, "on_collect_button_pressed")
     kill_button.disconnect("button_down", self, "on_kill_button_pressed")
     talk_button.disconnect("button_down", self, "on_talk_button_pressed")
     go_to_button.disconnect("button_down", self, "on_go_to_button_pressed")
     interact_item_button.disconnect("button_down", self, "on_interact_item_button_pressed")
     interact_character_button.disconnect("button_down", self, "on_interact_character_button_pressed")
+
+func on_alignment_button_pressed():
+    emit_signal("alignment_button_requested")
 
 func on_collect_button_pressed():
     emit_signal("collect_block_requested")

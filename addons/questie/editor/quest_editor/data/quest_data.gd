@@ -227,6 +227,8 @@ func erase_trigger(var uuid : String):
 func push_task(var type : int, var owner : String):
 	var task = null
 	match type:
+		TaskType.ALIGNMENT_TARGET:
+			task = load("res://addons/questie/editor/quest_editor/data/task/alignment_range.gd").new()
 		TaskType.COLLECT_ITEM:
 			task = load("res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd").new()
 		TaskType.GO_TO:

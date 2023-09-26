@@ -212,8 +212,15 @@ func add_trigger(trigger_type, block):
 func add_task(task_type, block):
 	match task_type:
 		QuestData.TaskType.ALIGNMENT_TARGET:
-			# todo - ALIGNMENT_TARGET BLOCK
-			pass
+			var data = current_data.push_task(task_type, current_data.id)
+			data.min_value = block.current_min_alignment
+			data.max_value = block.current_max_alignment
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+		
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			task_callbacks_handler.add_callbacks(block, data)
 
 		QuestData.TaskType.COLLECT_ITEM:
 			var data = current_data.push_task(task_type, current_data.id)

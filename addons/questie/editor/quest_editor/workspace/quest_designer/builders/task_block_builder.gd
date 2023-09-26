@@ -2,6 +2,14 @@ tool
 extends Object
 class_name TaskBlockBuilder
 
+static func alignment_range():
+    var block = load("res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/alignment_range.tscn").instance()
+    if not block:
+        print("[Questie]: can't build alignment range task block!")
+        return null
+
+    return block
+
 static func collect():
     var block = load("res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/collect.tscn").instance()
     if not block:

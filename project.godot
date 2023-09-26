@@ -330,6 +330,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/builders/task_block_builder.gd"
 }, {
 "base": "GraphNode",
+"class": "TaskBlock_AlignmentRange",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/alignment_range.gd"
+}, {
+"base": "GraphNode",
 "class": "TaskBlock_Collect",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/collect.gd"
@@ -363,6 +368,11 @@ _global_script_classes=[ {
 "class": "TaskCallbacksHandler",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/task_callbacks_handler.gd"
+}, {
+"base": "Object",
+"class": "TaskCallbacks_AlignmentRange",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/tasks/alignment_range_callbacks.gd"
 }, {
 "base": "Object",
 "class": "TaskCallbacks_Collect",
@@ -403,6 +413,11 @@ _global_script_classes=[ {
 "class": "TaskNodeBuilder",
 "language": "GDScript",
 "path": "res://addons/questie/nodes/builders/task_node_builder.gd"
+}, {
+"base": "Resource",
+"class": "Task_AlignmentRange",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/task/alignment_range.gd"
 }, {
 "base": "Resource",
 "class": "Task_CharacterInteraction",
@@ -629,6 +644,7 @@ _global_script_class_icons={
 "SettingsData": "res://addons/questie/editor/icons/settings.png",
 "SlotInventory": "res://addons/questie/editor/icons/inventory.png",
 "TaskBlockBuilder": "",
+"TaskBlock_AlignmentRange": "",
 "TaskBlock_Collect": "",
 "TaskBlock_GoTo": "",
 "TaskBlock_InteractCharacter": "",
@@ -636,6 +652,7 @@ _global_script_class_icons={
 "TaskBlock_Kill": "",
 "TaskBlock_Talk": "",
 "TaskCallbacksHandler": "",
+"TaskCallbacks_AlignmentRange": "",
 "TaskCallbacks_Collect": "",
 "TaskCallbacks_GoTo": "",
 "TaskCallbacks_InteractCharacter": "",
@@ -644,6 +661,7 @@ _global_script_class_icons={
 "TaskCallbacks_Talk": "",
 "TaskNode": "",
 "TaskNodeBuilder": "",
+"Task_AlignmentRange": "",
 "Task_CharacterInteraction": "",
 "Task_CollectItem": "",
 "Task_GoTo": "",
