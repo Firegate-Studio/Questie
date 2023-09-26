@@ -301,7 +301,14 @@ func add_task(task_type, block):
 func add_reward(reward_type, block):
 	match reward_type:
 		QuestData.RewardType.ADD_ALIGNMENT:
-			pass
+			var data = current_data.push_reward(reward_type, current_data.id)
+			data.alignment_amount = block.alignment_amount
+			ResourceSaver.save("res://questie/quest-db.tres", database)
+
+			current_blocks.append(block)
+			blocks_id_map[block] = data.uuid
+
+			reward_callabcks_handler.add_callbacks(block, data)
 		
 		QuestData.RewardType.ADD_ITEM:
 			var data = current_data.push_reward(reward_type, current_data.id)

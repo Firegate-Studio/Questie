@@ -315,6 +315,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/reward_callbacks_handler.gd"
 }, {
 "base": "Object",
+"class": "RewardCallbacks_AddAlignment",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/rewards/add_alignment_callbacks.gd"
+}, {
+"base": "Object",
 "class": "RewardCallbacks_AddItem",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/rewards/add_item_callbacks.gd"
@@ -676,6 +681,7 @@ _global_script_class_icons={
 "RewardBlock_AddItem": "",
 "RewardButtonsContainer": "",
 "RewardCallbacksHandler": "",
+"RewardCallbacks_AddAlignment": "",
 "RewardCallbacks_AddItem": "",
 "RewardData_AddAlignment": "",
 "RewardNode": "",
