@@ -138,6 +138,8 @@ func on_block_creation(block):
 
 	popup.hide()
 
+#	QuestDesignerSaver.save(current_data.id, get_children())
+
 func on_block_deletion_requested(block):
 
 	# check if the block is connected to the quest block and disconnect 
@@ -199,7 +201,14 @@ func setup(quest_id : String):
 
 	root_block.setup(data)
 
-	# todo - load constraint blocks
+	clear_viewport()
+	
+	var count : int = 0
+	count = load_constraint_blocks(data, count)
+	count = load_trigger_blocks(data, count)
+	
+
+		
 	# todo - load trigger blocks
 	# todo - load task blocks
 	# todo - load reward blocks
@@ -250,7 +259,6 @@ func get_block_type(block):
 	if block is RewardBlock_AddItem:
 		return QuestData.RewardType.ADD_ITEM
 
-
 func is_constraint_block(block): return block is ConstraintBlock_HasAlignment or block is ConstraintBlock_HasItem or block is ConstraintBlock_IsLocation
 
 func is_trigger_block(block): return block is TriggerBlock_CharacterEnterLocation or block is TriggerBlock_CharacterExitLocation or block is TriggerBlock_GetItem or block is TriggerBlock_HasAlignmentRange or block is TriggerBlock_InteractCharacter or block is TriggerBlock_InteractItem
@@ -258,3 +266,129 @@ func is_trigger_block(block): return block is TriggerBlock_CharacterEnterLocatio
 func is_task_block(block): return block is TaskBlock_AlignmentRange or block is TaskBlock_Collect or block is TaskBlock_GoTo or block is TaskBlock_InteractCharacter or block is TaskBlock_InteractItem or block is TaskBlock_Kill or block is TaskBlock_Talk
 
 func is_reward_block(block): return block is RewardBlock_AddAlignment or block is RewardBlock_AddItem
+
+func clear_viewport():
+	for block in get_children():
+		if is_constraint_block(block):
+			disconnect_node(block.name, 0, root_block.name, 0)
+			root_block.constraint_callbacks_handler.remove_constraint_callbacks(block)
+			block.queue_free()
+		if is_trigger_block(block):
+			disconnect_node(block.name, 0, root_block.name, 1)
+			root_block.trigger_callbacks_handler.remove_callbacks(block)
+			block.queue_free()
+
+func load_constraint_blocks(quest_data : QuestData, count : int = 0, snap : float = 120):
+	
+	var item_db : ItemDatabase = ResourceLoader.load("res://questie/item-db.tres")
+	var location_db : LocationDatabase = ResourceLoader.load("res://questie/location-db.tres")
+	var characters_db : CharacterDatabase = ResourceLoader.load("res://questie/characters-db.tres")
+	
+	for constraint_data in quest_data.constraints:
+		count += 1
+		if constraint_data is Constraint_HasAlignment:
+			var block : ConstraintBlock_HasAlignment = ConstraintBlockBuilder.has_alignment_constraint()
+			add_child(block)
+			block.current_min = constraint_data.min_alignment
+			block.current_max = constraint_data.max_alignment
+			block.min_alignment.value = constraint_data.min_alignment
+			block.max_alignment.value = constraint_data.max_alignment
+			block.characters_menu.text = characters_db.get_character_data(constraint_data.character_id).title
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 0)
+			constraint_blocks.append(block)
+			root_block.blocks_id_map[block] = constraint_data.uuid
+			root_block.constraint_callbacks_handler.add_constraint_callbacks(block, constraint_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if constraint_data is Constraint_HasItem:
+			var block : ConstraintBlock_HasItem  = ConstraintBlockBuilder.has_item_constraint()
+			add_child(block)
+			block.item_name.text = item_db.get_item(constraint_data.item_id).name
+			block.item_quantity.value = constraint_data.quantity
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 0)
+			constraint_blocks.append(block)
+			root_block.blocks_id_map[block] = constraint_data.uuid
+			root_block.constraint_callbacks_handler.add_constraint_callbacks(block, constraint_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if constraint_data is Constraint_IsLocation:
+			var block : ConstraintBlock_IsLocation = ConstraintBlockBuilder.is_location_constraint()
+			add_child(block)
+			block.location_menu.text = location_db.locations[constraint_data.location_id].name
+			block.current_location = constraint_data.location_index
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 0)
+			constraint_blocks.append(block)
+			root_block.blocks_id_map[block] = constraint_data.uuid
+			root_block.constraint_callbacks_handler.add_constraint_callbacks(block, constraint_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+	return count
+
+func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float = 120):
+	for trigger_data in quest_data.triggers:
+		count += 1
+		if trigger_data is Trigger_AlignmentAmount: 
+			var block : TriggerBlock_HasAlignmentRange = TriggerBlockBuilder.alignment_amount()
+			add_child(block)
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 1)
+			trigger_blocks.append(block)
+			root_block.blocks_id_map[block] = trigger_data.uuid
+			root_block.trigger_callbacks_handler.add_callbacks(block, trigger_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if trigger_data is Trigger_CharacterInteraction: 
+			var block : TriggerBlock_InteractCharacter = TriggerBlockBuilder.interact_character()
+			add_child(block)
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 1)
+			trigger_blocks.append(block)
+			root_block.blocks_id_map[block] = trigger_data.uuid
+			root_block.trigger_callbacks_handler.add_callbacks(block, trigger_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if trigger_data is Trigger_EnterLocation: 
+			var block : TriggerBlock_CharacterEnterLocation = TriggerBlockBuilder.enter_location()
+			add_child(block)
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 1)
+			trigger_blocks.append(block)
+			root_block.blocks_id_map[block] = trigger_data.uuid
+			root_block.trigger_callbacks_handler.add_callbacks(block, trigger_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if trigger_data is Trigger_ExitLocation: 
+			var block : TriggerBlock_CharacterExitLocation = TriggerBlockBuilder.exit_location()
+			add_child(block)
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 1)
+			trigger_blocks.append(block)
+			root_block.blocks_id_map[block] = trigger_data.uuid
+			root_block.trigger_callbacks_handler.add_callbacks(block, trigger_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if trigger_data is Trigger_GetItem:
+			var block : TriggerBlock_GetItem = TriggerBlockBuilder.get_item()
+			add_child(block)
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 1)
+			trigger_blocks.append(block)
+			root_block.blocks_id_map[block] = trigger_data.uuid
+			root_block.trigger_callbacks_handler.add_callbacks(block, trigger_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		if trigger_data is Trigger_ItemInteraction: 
+			var block : TriggerBlock_InteractItem = TriggerBlockBuilder.interact_item()
+			add_child(block)
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 1)
+			trigger_blocks.append(block)
+			root_block.blocks_id_map[block] = trigger_data.uuid
+			root_block.trigger_callbacks_handler.add_callbacks(block, trigger_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+	return count

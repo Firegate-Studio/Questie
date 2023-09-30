@@ -1,14 +1,42 @@
-[gd_resource type="Resource" load_steps=6 format=2]
+[gd_resource type="Resource" load_steps=13 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_alignment_constraint.gd" type="Script" id=5]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd" type="Script" id=6]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
 parent_id = ""
 name = "Prologue"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 4 )
+uuid = "e5775c80-4a0c-415c-b167-61d1021c35c9"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+category_id = ""
+location_id = 2
+category_index = 0
+location_index = 0
+
+[sub_resource type="Resource" id=6]
+script = ExtResource( 5 )
+uuid = "7c3cf0ee-ecb0-47d8-8fe0-8087e0f24203"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+min_alignment = -50.0
+max_alignment = 50.0
+character_id = "cf1cd4b4-c412-4cc0-8e70-7d85f7fd05f7"
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 6 )
+uuid = "dd39bb9e-92e7-4c7c-8a94-2361a591cfac"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+item_id = "9dc67bb3-f51f-4cd0-9843-6abe3dcb00e9"
+category = 0
+quantity = 5
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
@@ -19,6 +47,20 @@ title = "Void's Calling"
 status = 0
 description = "My Amazing quest description"
 alignment = 0.0
+constraints = [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+id = "1a845b39-b9df-4df1-9fce-e534514b61e4"
+parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+item_name = "Second Quest"
+title = "fill quest title here"
+status = 0
+description = "fill quest description here"
+alignment = 0.0
 constraints = [  ]
 triggers = [  ]
 tasks = [  ]
@@ -28,4 +70,4 @@ rewards = [  ]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
 folders = [ SubResource( 1 ) ]
-quests = [ SubResource( 2 ) ]
+quests = [ SubResource( 2 ), SubResource( 4 ) ]
