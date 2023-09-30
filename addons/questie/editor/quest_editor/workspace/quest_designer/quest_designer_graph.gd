@@ -206,6 +206,7 @@ func setup(quest_id : String):
 	var count : int = 0
 	count = load_constraint_blocks(data, count)
 	count = load_trigger_blocks(data, count)
+	count = load_task_blocks(data, count)
 	
 
 		
@@ -276,6 +277,14 @@ func clear_viewport():
 		if is_trigger_block(block):
 			disconnect_node(block.name, 0, root_block.name, 1)
 			root_block.trigger_callbacks_handler.remove_callbacks(block)
+			block.queue_free()
+		if is_task_block(block):
+			disconnect_node(block.name, 0, root_block.name, 2)
+			root_block.task_callbacks_handler.remove_callbacks(block)
+			block.queue_free()
+		if is_reward_block(block):
+			disconnect_node(block.name, 0, root_block.name, 3)
+			root_block.reward_callabcks_handler.remove_callbacks(block)
 			block.queue_free()
 
 func load_constraint_blocks(quest_data : QuestData, count : int = 0, snap : float = 120):
@@ -420,3 +429,125 @@ func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float =
 			continue
 
 	return count
+
+func load_task_blocks(quest_data : QuestData, count : int = 0, snap : float = 120):
+	
+	var item_db : ItemDatabase = ResourceLoader.load("res://questie/item-db.tres")
+	var location_db : LocationDatabase = ResourceLoader.load("res://questie/location-db.tres")
+	var character_db : CharacterDatabase = ResourceLoader.load("res://questie/characters-db.tres")
+
+	for task_data in quest_data.tasks:
+		count += 1
+		if task_data is Task_AlignmentRange: 
+			var block : TaskBlock_AlignmentRange = TaskBlockBuilder.alignment_range()
+			add_child(block)
+			block.current_min_alignment = task_data.min_value
+			block.current_max_alignment = task_data.max_value
+			block.min_box.value = task_data.min_value
+			block.max_box.value = task_data.max_value
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+		if task_data is Task_CharacterInteraction: 
+			var block : TaskBlock_InteractCharacter = TaskBlockBuilder.interact_character()
+			add_child(block)
+			block.selected_character_index = task_data.character_idx
+			block.selected_character_id = task_data.character_id
+			block.character_menu.text = character_db.get_character_data(task_data.character_id).title
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+		if task_data is Task_CollectItem: 
+			var block : TaskBlock_Collect = TaskBlockBuilder.collect()
+			add_child(block)
+			block.selected_category_index = task_data.category_id
+			block.selected_category_id = task_data.category_id
+			block.selected_item_index = task_data.item_index
+			block.selected_item_id = task_data.item_id
+			block.selected_quantity = task_data.quantity
+			block.category_menu.text = item_db.get_category(task_data.category_id).name
+			block.item_menu.text = item_db.get_item(task_data.item_id).name
+			block.quantityBox.value = task_data.quantity
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+		if task_data is Task_GoTo: 
+			var block : TaskBlock_GoTo = TaskBlockBuilder.go_to()
+			add_child(block)
+			block.selected_region_index = task_data.category_index
+			block.selected_region_id = task_data.category_id
+			block.selected_location_index = task_data.location_index
+			block.selected_location_id = task_data.location_id
+			block.region_menu.text = location_db.get_category(task_data.category_id).title
+			block.location_menu.text = location_db.locations[task_data.location_index].name
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+		
+		if task_data is Task_ItemInteraction: 
+			var block : TaskBlock_InteractItem = TaskBlockBuilder.interact_item()
+			add_child(block)
+			block.selected_category_index = task_data.category_index
+			block.selected_category_id = task_data.category_id
+			block.selected_item_index = task_data.item_index
+			block.selected_item_id = task_data.item_id
+			block.category_menu.text = item_db.get_category(task_data.category_id).name
+			block.item_menu.text = item_db.get_item(task_data.item_id).name
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+		if task_data is Task_Kill: 
+			var block : TaskBlock_Kill = TaskBlockBuilder.kill()
+			add_child(block)
+			block.selected_character_index = task_data.character_index
+			block.selected_character_id = task_data.character_id
+			block.selected_quantity = task_data.target_kills
+			block.character_menu.text = character_db.get_character_data(task_data.character_id).title
+			block.quantity_box.value = task_data.target_kills
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+		if task_data is Task_TalkTo: 
+			var block : TaskBlock_Talk = TaskBlockBuilder.talk()
+			add_child(block)
+			block.selected_character_index = task_data.character_index
+			block.selected_character_id = task_data.character_id
+			block.character_menu.text = character_db.get_character_data(task_data.character_id).title
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 2)
+			task_blocks.append(block)
+			root_block.blocks_id_map[block] = task_data.uuid
+			root_block.task_callbacks_handler.add_callbacks(block, task_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+	return 1
