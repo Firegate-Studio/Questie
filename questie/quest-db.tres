@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=21 format=2]
+[gd_resource type="Resource" load_steps=26 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd" type="Script" id=4]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd" type="Script" id=5]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_alignment.gd" type="Script" id=7]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd" type="Script" id=8]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/task/go_to_task.gd" type="Script" id=11]
 
@@ -34,11 +35,31 @@ location_index = 0
 script = ExtResource( 6 )
 uuid = "02b8de50-3702-4269-a123-b337c1ee18c1"
 owner = "f671e170-2291-499d-a751-af9505f83654"
-item_quantity = 1
-category_index = 0
-category_id = "bb4e766d-b92d-4164-866b-b744b91c8b80"
-item_index = 0
-item_id = "0ef71596-198d-4887-979b-484362ec0ede"
+item_quantity = 2
+category_index = 2
+category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
+item_index = 11
+item_id = "c4fb5c88-aa43-49c1-981c-bfa45c9375a3"
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 6 )
+uuid = "26640850-4114-4c25-a112-096d1092dad1"
+owner = "f671e170-2291-499d-a751-af9505f83654"
+item_quantity = 3
+category_index = 2
+category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
+item_index = 12
+item_id = "5d9497bb-f284-432d-bf84-bc0f3ffc9704"
+
+[sub_resource type="Resource" id=21]
+script = ExtResource( 6 )
+uuid = "2c61eb9a-861b-424e-9353-b141de8946fc"
+owner = "f671e170-2291-499d-a751-af9505f83654"
+item_quantity = 5
+category_index = 2
+category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
+item_index = 13
+item_id = "4b70001b-8f72-4ebe-88de-d151937fc550"
 
 [sub_resource type="Resource" id=6]
 script = ExtResource( 5 )
@@ -47,8 +68,8 @@ owner = "f671e170-2291-499d-a751-af9505f83654"
 state = 0
 category_index = 2
 category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 4
-item_id = "f021c2b9-f893-417c-a4c0-510eda575b45"
+item_index = 6
+item_id = "b9d4fdcf-2410-4063-a6d0-4e18951073b7"
 quantity = 20
 
 [sub_resource type="Resource" id=7]
@@ -58,8 +79,8 @@ owner = "f671e170-2291-499d-a751-af9505f83654"
 state = 0
 category_index = 2
 category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 9
-item_id = "cee761a8-8635-47a4-962a-6ad203cdc949"
+item_index = 7
+item_id = "fca64120-fd68-4bcc-88c5-cf8e6ff7c956"
 quantity = 30
 
 [sub_resource type="Resource" id=10]
@@ -69,8 +90,8 @@ owner = "f671e170-2291-499d-a751-af9505f83654"
 state = 0
 category_index = 2
 category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 9
-item_id = "cee761a8-8635-47a4-962a-6ad203cdc949"
+item_index = 8
+item_id = "218b8cc6-6acb-416f-82ba-161fdecac3a2"
 quantity = 50
 
 [sub_resource type="Resource" id=4]
@@ -92,7 +113,7 @@ alignment = 0.0
 constraints = [ SubResource( 5 ) ]
 triggers = [ SubResource( 4 ) ]
 tasks = [ SubResource( 6 ), SubResource( 7 ), SubResource( 10 ) ]
-rewards = [ SubResource( 8 ) ]
+rewards = [ SubResource( 8 ), SubResource( 20 ), SubResource( 21 ) ]
 
 [sub_resource type="Resource" id=9]
 script = ExtResource( 3 )
@@ -107,6 +128,22 @@ constraints = [  ]
 triggers = [  ]
 tasks = [  ]
 rewards = [  ]
+
+[sub_resource type="Resource" id=18]
+script = ExtResource( 6 )
+uuid = "3530be48-584a-4bba-8683-000092eb33c0"
+owner = "fe38bdb1-884b-4025-8d4e-f9c8c651f41f"
+item_quantity = 3
+category_index = 2
+category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
+item_index = 13
+item_id = "4b70001b-8f72-4ebe-88de-d151937fc550"
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 7 )
+uuid = "8f106cef-8364-4305-9321-f670f7beacab"
+owner = "fe38bdb1-884b-4025-8d4e-f9c8c651f41f"
+alignment_amount = -10.0
 
 [sub_resource type="Resource" id=17]
 script = ExtResource( 11 )
@@ -130,7 +167,7 @@ alignment = 0.0
 constraints = [  ]
 triggers = [  ]
 tasks = [ SubResource( 17 ) ]
-rewards = [  ]
+rewards = [ SubResource( 18 ), SubResource( 19 ) ]
 
 [resource]
 script = ExtResource( 1 )

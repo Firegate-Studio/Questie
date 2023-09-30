@@ -207,14 +207,7 @@ func setup(quest_id : String):
 	count = load_constraint_blocks(data, count)
 	count = load_trigger_blocks(data, count)
 	count = load_task_blocks(data, count)
-	
-
-		
-	# todo - load trigger blocks
-	# todo - load task blocks
-	# todo - load reward blocks
-
-	# todo build connections
+	count = load_reward_blocks(data, count)
 
 func is_valid_block(block): 
 	return constraint_blocks.has(block) or trigger_blocks.has(block) or task_blocks.has(block) or reward_blocks.has(block)
@@ -550,4 +543,45 @@ func load_task_blocks(quest_data : QuestData, count : int = 0, snap : float = 12
 			block.connect("close_request", self, "on_block_deletion_requested", [block])
 			continue
 
-	return 1
+	return count
+
+func load_reward_blocks(quest_data : QuestData, count : int = 0, snap : float = 120):
+	
+	var item_db : ItemDatabase = ResourceLoader.load("res://questie/item-db.tres")
+
+	for reward_data in quest_data.rewards:
+		count += 1
+		
+		if reward_data is RewardData_AddAlignment:
+			var block : RewardBlock_AddAlignment = RewardBlockBuilder.add_alignment()
+			add_child(block)
+			block.alignment_amount = reward_data.alignment_amount
+			block.alignment_box.value = reward_data.alignment_amount
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 3)
+			reward_blocks.append(block)
+			root_block.blocks_id_map[block] = reward_data.uuid
+			root_block.reward_callabcks_handler.add_callbacks(block, reward_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+		if reward_data is Reward_AddItem:
+			var block : RewardBlock_AddItem = RewardBlockBuilder.add_item()
+			add_child(block)
+			block.current_quantity = reward_data.item_quantity
+			block.selected_category_index = reward_data.category_index
+			block.selected_category_id = reward_data.category_id
+			block.selected_item_index = reward_data.item_index
+			block.selected_item_id = reward_data.item_id
+			block.category_menu.text = item_db.get_category(reward_data.category_id).name
+			block.item_menu.text = item_db.get_item(reward_data.item_id).name
+			block.quantity_box.value = reward_data.item_quantity
+			block.offset = Vector2(block.offset.x, count * snap)
+			connect_node(block.name, 0, root_block.name, 3)
+			reward_blocks.append(block)
+			root_block.blocks_id_map[block] = reward_data.uuid
+			root_block.reward_callabcks_handler.add_callbacks(block, reward_data)
+			block.connect("close_request", self, "on_block_deletion_requested", [block])
+			continue
+
+	return count
