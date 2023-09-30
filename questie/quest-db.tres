@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=13 format=2]
+[gd_resource type="Resource" load_steps=25 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
@@ -6,6 +6,12 @@
 [ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd" type="Script" id=4]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_alignment_constraint.gd" type="Script" id=5]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/alignment_amount.gd" type="Script" id=7]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd" type="Script" id=8]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd" type="Script" id=9]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/exit_location.gd" type="Script" id=10]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd" type="Script" id=11]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/item_interaction.gd" type="Script" id=12]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -38,6 +44,60 @@ item_id = "9dc67bb3-f51f-4cd0-9843-6abe3dcb00e9"
 category = 0
 quantity = 5
 
+[sub_resource type="Resource" id=8]
+script = ExtResource( 7 )
+uuid = "a12995ec-028a-4399-a605-0ba21351a625"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+min_value = -100.0
+max_value = 100.0
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 8 )
+uuid = "ada42a67-2640-4ab4-9002-47b1787eb64d"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+character_id = "f6a089d9-247d-4735-88a1-d145957b0079"
+character_idx = 3
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 9 )
+uuid = "351d4241-d0c0-45d8-8d86-008d68fdbc91"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+location_id = "e494fb15-7d74-48f6-bf21-9afcdaa5720f"
+location_index = 1
+category_index = 0
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+character_index = 0
+character_id = "1469ea5b-4647-495b-ba0a-6c038153a639"
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 10 )
+uuid = "f56d18a1-4b80-48a5-993d-108c72b59347"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+location_id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
+location_index = 0
+category_index = 0
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+character_index = 2
+character_id = "cf1cd4b4-c412-4cc0-8e70-7d85f7fd05f7"
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 11 )
+uuid = "bb27b383-40eb-4848-a8d2-08b96da8ef3d"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+item_index = 3
+item_id = "14363567-2cc6-48e6-9d9b-360410941914"
+category_index = 1
+category_id = "e1375468-89d2-4e7c-b8bd-6b7d5455d2b2"
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 12 )
+uuid = "6dd00e4d-5946-42a9-a1e1-898a94b22b07"
+owner = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
+item_index = 2
+item_id = "a32cace3-af99-4560-a824-658117c1a51a"
+category_index = 1
+category_id = "e1375468-89d2-4e7c-b8bd-6b7d5455d2b2"
+
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
 id = "cd11c080-9c82-4ecc-9160-048a96ae0f8c"
@@ -48,7 +108,7 @@ status = 0
 description = "My Amazing quest description"
 alignment = 0.0
 constraints = [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ]
-triggers = [  ]
+triggers = [ SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ) ]
 tasks = [  ]
 rewards = [  ]
 

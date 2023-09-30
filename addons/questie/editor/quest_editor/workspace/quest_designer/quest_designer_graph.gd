@@ -328,11 +328,20 @@ func load_constraint_blocks(quest_data : QuestData, count : int = 0, snap : floa
 	return count
 
 func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float = 120):
+	
+	var character_db : CharacterDatabase = ResourceLoader.load("res://questie/characters-db.tres")
+	var location_db : LocationDatabase = ResourceLoader.load("res://questie/location-db.tres")
+	var item_db : ItemDatabase = ResourceLoader.load("res://questie/item-db.tres")
+
 	for trigger_data in quest_data.triggers:
 		count += 1
 		if trigger_data is Trigger_AlignmentAmount: 
 			var block : TriggerBlock_HasAlignmentRange = TriggerBlockBuilder.alignment_amount()
 			add_child(block)
+			block.current_min = trigger_data.min_value
+			block.current_max = trigger_data.max_value
+			block.min_alignment_spin.value = trigger_data.min_value
+			block.max_alignment_spin.value = trigger_data.max_value 
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 1)
 			trigger_blocks.append(block)
@@ -343,6 +352,7 @@ func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float =
 		if trigger_data is Trigger_CharacterInteraction: 
 			var block : TriggerBlock_InteractCharacter = TriggerBlockBuilder.interact_character()
 			add_child(block)
+			block.character_menu.text = character_db.get_character_data(trigger_data.character_id).title
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 1)
 			trigger_blocks.append(block)
@@ -353,6 +363,9 @@ func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float =
 		if trigger_data is Trigger_EnterLocation: 
 			var block : TriggerBlock_CharacterEnterLocation = TriggerBlockBuilder.enter_location()
 			add_child(block)
+			block.region_name.text = location_db.get_category(trigger_data.category_id).title
+			block.location_name.text = location_db.locations[trigger_data.location_index].name
+			block.character_menu.text = character_db.get_character_data(trigger_data.character_id).title
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 1)
 			trigger_blocks.append(block)
@@ -363,6 +376,9 @@ func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float =
 		if trigger_data is Trigger_ExitLocation: 
 			var block : TriggerBlock_CharacterExitLocation = TriggerBlockBuilder.exit_location()
 			add_child(block)
+			block.character_menu.text = character_db.get_character_data(trigger_data.character_id).title
+			block.region_name.text = location_db.get_category(trigger_data.category_id).title
+			block.location_name.text = location_db.locations[trigger_data.location_index].name
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 1)
 			trigger_blocks.append(block)
@@ -373,6 +389,12 @@ func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float =
 		if trigger_data is Trigger_GetItem:
 			var block : TriggerBlock_GetItem = TriggerBlockBuilder.get_item()
 			add_child(block)
+			block.selected_item_category_index = trigger_data.category_index
+			block.selected_item_category_id = trigger_data.category_id
+			block.selected_item_index = trigger_data.item_index
+			block.selected_item_id = trigger_data.item_id
+			block.category_menu.text = item_db.get_category(trigger_data.category_id).name
+			block.item_menu.text = item_db.get_item(trigger_data.item_id).name
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 1)
 			trigger_blocks.append(block)
@@ -383,6 +405,12 @@ func load_trigger_blocks(quest_data : QuestData, count : int = 0, snap : float =
 		if trigger_data is Trigger_ItemInteraction: 
 			var block : TriggerBlock_InteractItem = TriggerBlockBuilder.interact_item()
 			add_child(block)
+			block.selected_category_index = trigger_data.category_index
+			block.selected_category_id = trigger_data.category_id
+			block.selected_item_index = trigger_data.item_index
+			block.selected_item_id = trigger_data.item_id
+			block.category_menu.text = item_db.get_category(trigger_data.category_id).name
+			block.item_menu.text = item_db.get_item(trigger_data.item_id).name
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 1)
 			trigger_blocks.append(block)
