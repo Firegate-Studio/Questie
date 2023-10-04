@@ -73,7 +73,7 @@ func handle_button_pressed(item : TreeItem, column : int, id : int):
 		match id:
 			TagProcedures.NEW_ITEM:
 				var folder_data = get_folder_data(item.get_parent())
-				create_new_item(item, folder_data.id, data.id)
+				create_new_item(item, "", data.id)
 			TagProcedures.DELETE:
 				delete_tag(item)
 

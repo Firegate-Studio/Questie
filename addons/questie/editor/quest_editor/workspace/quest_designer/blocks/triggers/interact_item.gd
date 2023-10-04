@@ -55,7 +55,9 @@ func load_item_items_from_database(category_id : String):
 	var fixed_index = -1
 	for item_data in item_database.items:
 		fixed_index += 1
-		if not item_data.folder_id == category_id and not item_data.tag_id == category_id: continue
+
+		var tag_data = item_database.get_tag(item_data.tag_id)
+		if not item_data.folder_id == category_id and not tag_data.folder_id == category_id: continue
 
 		popup.add_item(item_data.name, fixed_index)
 

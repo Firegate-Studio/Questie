@@ -11,7 +11,7 @@ static func collect_item_node(task_data, task_id, quest_id, inventory)->TaskNode
 	node.id = task_id
 	node.quest_id = quest_id
 	node.inventory = inventory
-	node.item_id = task_data.item_uuid
+	node.item_id = task_data.item_id
 	node.item_quantity = task_data.quantity
 
 	return node

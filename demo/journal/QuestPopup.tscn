@@ -51,6 +51,7 @@ margin_bottom = 134.0
 rect_min_size = Vector2( 300, 100 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+wrap_enabled = true
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel/CenterContainer/VBoxContainer"]
 margin_top = 138.0

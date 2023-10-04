@@ -1,14 +1,8 @@
-[gd_resource type="Resource" load_steps=26 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/is_location_constraint.gd" type="Script" id=4]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd" type="Script" id=5]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd" type="Script" id=6]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_alignment.gd" type="Script" id=7]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/character_interaction.gd" type="Script" id=8]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/task/go_to_task.gd" type="Script" id=11]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -17,160 +11,49 @@ parent_id = ""
 name = "Prologue"
 
 [sub_resource type="Resource" id=2]
-script = ExtResource( 2 )
-id = "b30868ae-813c-4841-aea5-b85e9a3dc9e6"
-parent_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
-name = "Blacksmith"
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 4 )
-uuid = "7c1a8d1d-70fd-4f39-967c-a5b853c22334"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-category_id = ""
-location_id = 0
-category_index = 0
-location_index = 0
-
-[sub_resource type="Resource" id=8]
-script = ExtResource( 6 )
-uuid = "02b8de50-3702-4269-a123-b337c1ee18c1"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-item_quantity = 2
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 11
-item_id = "c4fb5c88-aa43-49c1-981c-bfa45c9375a3"
-
-[sub_resource type="Resource" id=20]
-script = ExtResource( 6 )
-uuid = "26640850-4114-4c25-a112-096d1092dad1"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-item_quantity = 3
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 12
-item_id = "5d9497bb-f284-432d-bf84-bc0f3ffc9704"
-
-[sub_resource type="Resource" id=21]
-script = ExtResource( 6 )
-uuid = "2c61eb9a-861b-424e-9353-b141de8946fc"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-item_quantity = 5
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 13
-item_id = "4b70001b-8f72-4ebe-88de-d151937fc550"
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 5 )
-uuid = "a3b67e2e-4cb1-4dda-84d2-f1283c061872"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-state = 0
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 6
-item_id = "b9d4fdcf-2410-4063-a6d0-4e18951073b7"
-quantity = 20
-
-[sub_resource type="Resource" id=7]
-script = ExtResource( 5 )
-uuid = "6479f2b7-d5e8-4aa0-8c57-d5541e08b2ec"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-state = 0
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 7
-item_id = "fca64120-fd68-4bcc-88c5-cf8e6ff7c956"
-quantity = 30
-
-[sub_resource type="Resource" id=10]
-script = ExtResource( 5 )
-uuid = "0eb19ffa-5d7a-4e4a-871b-be817f44ae63"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-state = 0
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 8
-item_id = "218b8cc6-6acb-416f-82ba-161fdecac3a2"
-quantity = 50
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 8 )
-uuid = "e2c45591-633b-4ef8-9df9-60072ba57256"
-owner = "f671e170-2291-499d-a751-af9505f83654"
-character_id = "1fafdf9b-c412-42c6-a015-499b3ae261fd"
-character_idx = 1
-
-[sub_resource type="Resource" id=3]
 script = ExtResource( 3 )
-id = "f671e170-2291-499d-a751-af9505f83654"
-parent_folder_id = "b30868ae-813c-4841-aea5-b85e9a3dc9e6"
-item_name = "Blacksmith_001"
-title = "fill quest title here"
+id = "3e9964a1-5b9f-42b2-a422-d6e96aee4ee6"
+parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+item_name = "Quest_01"
+title = "The Epic Tale"
 status = 0
 description = "fill quest description here"
-alignment = 0.0
-constraints = [ SubResource( 5 ) ]
-triggers = [ SubResource( 4 ) ]
-tasks = [ SubResource( 6 ), SubResource( 7 ), SubResource( 10 ) ]
-rewards = [ SubResource( 8 ), SubResource( 20 ), SubResource( 21 ) ]
-
-[sub_resource type="Resource" id=9]
-script = ExtResource( 3 )
-id = "cd968976-05ba-4963-91f6-fe2b01ed5102"
-parent_folder_id = "b30868ae-813c-4841-aea5-b85e9a3dc9e6"
-item_name = "Blacksmith_002"
-title = "The Forge"
-status = 0
-description = "Il frabbro del villaggio vuole che tu gli porti gli porti gli oggetti necessari per la creazione della tua spada"
 alignment = 0.0
 constraints = [  ]
 triggers = [  ]
 tasks = [  ]
 rewards = [  ]
 
-[sub_resource type="Resource" id=18]
-script = ExtResource( 6 )
-uuid = "3530be48-584a-4bba-8683-000092eb33c0"
-owner = "fe38bdb1-884b-4025-8d4e-f9c8c651f41f"
-item_quantity = 3
-category_index = 2
-category_id = "ffc2ab3c-0324-4f64-839d-4d9accb950fb"
-item_index = 13
-item_id = "4b70001b-8f72-4ebe-88de-d151937fc550"
-
-[sub_resource type="Resource" id=19]
-script = ExtResource( 7 )
-uuid = "8f106cef-8364-4305-9321-f670f7beacab"
-owner = "fe38bdb1-884b-4025-8d4e-f9c8c651f41f"
-alignment_amount = -10.0
-
-[sub_resource type="Resource" id=17]
-script = ExtResource( 11 )
-uuid = "b728ed0c-110f-43ca-ab79-287c0ac30184"
-owner = "fe38bdb1-884b-4025-8d4e-f9c8c651f41f"
-state = 0
-category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
-location_id = "8ff72eb4-0945-4511-8c5f-fdada8c82dee"
-category_index = 0
-location_index = 2
-
-[sub_resource type="Resource" id=11]
+[sub_resource type="Resource" id=3]
 script = ExtResource( 3 )
-id = "fe38bdb1-884b-4025-8d4e-f9c8c651f41f"
+id = "95009e6e-c4a3-4332-8c25-656632d702b5"
 parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
-item_name = "Test"
-title = "fill quest title here"
+item_name = "Quest_02A"
+title = "The Wanderer"
 status = 0
 description = "fill quest description here"
 alignment = 0.0
 constraints = [  ]
 triggers = [  ]
-tasks = [ SubResource( 17 ) ]
-rewards = [ SubResource( 18 ), SubResource( 19 ) ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=4]
+script = ExtResource( 3 )
+id = "ad10af04-e909-48ca-b216-43730f35e8f2"
+parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+item_name = "Quest_02B"
+title = "The Blacksmith"
+status = 0
+description = "fill quest description here"
+alignment = 0.0
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
-folders = [ SubResource( 1 ), SubResource( 2 ) ]
-quests = [ SubResource( 3 ), SubResource( 9 ), SubResource( 11 ) ]
+folders = [ SubResource( 1 ) ]
+quests = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]

@@ -173,8 +173,8 @@ func add_trigger(trigger_type, block):
 			var data = current_data.push_trigger(trigger_type, current_data.id)
 			data.item_index = block.selected_item_index
 			data.item_id = block.selected_item_id
-			data.category_index = block.selected_item_index
-			data.category_id = block.selected_item_id
+			data.category_index = block.selected_item_category_index
+			data.category_id = block.selected_item_category_id
 			ResourceSaver.save("res://questie/quest-db.tres", database)
 
 			current_blocks.append(block)
