@@ -264,6 +264,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/common/folding_tree/folding_tree.gd"
 }, {
+"base": "CollisionShape2D",
+"class": "QuestieInteractionArea",
+"language": "GDScript",
+"path": "res://addons/questie/runtime/item/questie_interaction_area.gd"
+}, {
 "base": "Area2D",
 "class": "QuestieItem",
 "language": "GDScript",
@@ -671,6 +676,7 @@ _global_script_class_icons={
 "QuestDesignerPopup": "",
 "QuestieCharacter": "res://addons/questie/editor/icons/character_64x64.png",
 "QuestieFoldingTree": "",
+"QuestieInteractionArea": "",
 "QuestieItem": "res://addons/questie/editor/icons/boxes_16x16.png",
 "QuestieLocation": "res://addons/questie/editor/icons/village.png",
 "QuestieModule": "",

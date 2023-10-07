@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_data.gd" type="Script" id=2]
@@ -9,6 +9,56 @@ id = "47fa811a-0d66-4f86-9cf0-b4aa07bcbe86"
 folder_id = ""
 tag_id = ""
 name = "Weapons"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 2 )
+id = "0b76c704-e6f8-4bbb-8eec-04cb075fb709"
+folder_id = ""
+tag_id = ""
+name = "Armors"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 2 )
+id = "721ec836-c0b7-4e45-8abb-d82bfa8a2c69"
+folder_id = ""
+tag_id = ""
+name = "Ingredients"
 display_name = "fill display name"
 alignment = 0.0
 is_unique = false
@@ -78,6 +128,81 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=18]
+script = ExtResource( 2 )
+id = "a7eb359d-9297-40c0-8f6c-93592a0a4cd6"
+folder_id = ""
+tag_id = "3ba338f2-b7d7-46f5-8b72-59f7fc16a090"
+name = "Dark Orb"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=19]
+script = ExtResource( 2 )
+id = "b8846b78-6780-4e8f-b7f3-62059769de3f"
+folder_id = "721ec836-c0b7-4e45-8abb-d82bfa8a2c69"
+tag_id = ""
+name = "Wolf Meat"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=20]
+script = ExtResource( 2 )
+id = "caba71d4-0e73-48dc-825d-06f1ef1c7a6a"
+folder_id = "721ec836-c0b7-4e45-8abb-d82bfa8a2c69"
+tag_id = ""
+name = "Wolf Leather"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
 [sub_resource type="Resource" id=11]
 script = ExtResource( 2 )
 id = "bebb9ab6-7742-4951-b14e-df05e03e27f2"
@@ -128,8 +253,33 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=17]
+script = ExtResource( 2 )
+id = "3ba338f2-b7d7-46f5-8b72-59f7fc16a090"
+folder_id = "47fa811a-0d66-4f86-9cf0-b4aa07bcbe86"
+tag_id = ""
+name = "Orbs"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
 [resource]
 script = ExtResource( 1 )
-categories = [ SubResource( 10 ) ]
-tags = [ SubResource( 11 ), SubResource( 13 ) ]
-items = [ SubResource( 12 ), SubResource( 14 ) ]
+categories = [ SubResource( 10 ), SubResource( 15 ), SubResource( 16 ) ]
+tags = [ SubResource( 11 ), SubResource( 13 ), SubResource( 17 ) ]
+items = [ SubResource( 12 ), SubResource( 14 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]

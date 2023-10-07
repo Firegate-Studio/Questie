@@ -12,7 +12,7 @@ static func get_item_node(trigger_data, trigger_id, quest_id, inventory)->Trigge
 	node.id = trigger_id
 	node.quest_id = quest_id
 	node.inventory = inventory
-	node.target_uuid = trigger_data.item_uuid
+	node.target_uuid = trigger_data.item_id
 
 	return node
 
