@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=14 format=2]
+[gd_resource type="Resource" load_steps=19 format=2]
 
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/item_editor/data/item_data.gd" type="Script" id=2]
@@ -203,6 +203,81 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=22]
+script = ExtResource( 2 )
+id = "cfc45904-0673-446c-9142-e951cfdff483"
+folder_id = ""
+tag_id = "74fc03ae-85b4-4c40-a7ac-4b773a0d4065"
+name = "Dovakin Helm"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=23]
+script = ExtResource( 2 )
+id = "412a84bf-676c-4e68-a884-e3c672b00a21"
+folder_id = ""
+tag_id = "74fc03ae-85b4-4c40-a7ac-4b773a0d4065"
+name = "Sauron Helmet"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=25]
+script = ExtResource( 2 )
+id = "482eaea6-c0e8-4541-b21d-7a09a8da18a2"
+folder_id = ""
+tag_id = "8a3a4e64-e6ab-442d-b3b6-f0f6ea1453f5"
+name = "With King Pauldrons"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
 [sub_resource type="Resource" id=11]
 script = ExtResource( 2 )
 id = "bebb9ab6-7742-4951-b14e-df05e03e27f2"
@@ -278,8 +353,58 @@ original_price = 0.0
 purchase_price = 0
 sell_price = 0
 
+[sub_resource type="Resource" id=21]
+script = ExtResource( 2 )
+id = "74fc03ae-85b4-4c40-a7ac-4b773a0d4065"
+folder_id = "0b76c704-e6f8-4bbb-8eec-04cb075fb709"
+tag_id = ""
+name = "Head"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
+[sub_resource type="Resource" id=24]
+script = ExtResource( 2 )
+id = "8a3a4e64-e6ab-442d-b3b6-f0f6ea1453f5"
+folder_id = "0b76c704-e6f8-4bbb-8eec-04cb075fb709"
+tag_id = ""
+name = "Shoulders"
+display_name = "fill display name"
+alignment = 0.0
+is_unique = false
+description = "fill item description"
+weight = 0.1
+icon_path = "res://YOUR_ICON_PATH"
+min_damage = 0.0
+max_damage = 0.0
+min_defense = 0.0
+max_defense = 0.0
+min_healing = 0.0
+max_healing = 0.0
+min_custom = 0.0
+max_custom = 0.0
+can_be_sold = true
+original_price = 0.0
+purchase_price = 0
+sell_price = 0
+
 [resource]
 script = ExtResource( 1 )
 categories = [ SubResource( 10 ), SubResource( 15 ), SubResource( 16 ) ]
-tags = [ SubResource( 11 ), SubResource( 13 ), SubResource( 17 ) ]
-items = [ SubResource( 12 ), SubResource( 14 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ]
+tags = [ SubResource( 11 ), SubResource( 13 ), SubResource( 17 ), SubResource( 21 ), SubResource( 24 ) ]
+items = [ SubResource( 12 ), SubResource( 14 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 22 ), SubResource( 23 ), SubResource( 25 ) ]

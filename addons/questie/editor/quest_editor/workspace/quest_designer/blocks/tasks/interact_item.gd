@@ -69,8 +69,10 @@ func load_item_items(category_id):
 		fixed_index += 1
 
 		var tag_data = item_database.get_tag(data.tag_id)
-		if not data.folder_id == category_id and not tag_data.folder_id == category_id: continue
-
+		if tag_data:
+			if not data.folder_id == category_id and not tag_data.folder_id == category_id: continue
+		else:
+			if not data.folder_id == category_id: continue
 		popup.add_item(data.name, fixed_index)
 
 func on_category_menu_pressed():

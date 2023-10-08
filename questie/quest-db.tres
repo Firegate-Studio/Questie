@@ -1,35 +1,14 @@
-[gd_resource type="Resource" load_steps=10 format=2]
+[gd_resource type="Resource" load_steps=7 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd" type="Script" id=4]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/task/talk_to_task.gd" type="Script" id=7]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
 id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
 parent_id = ""
 name = "Prologue"
-
-[sub_resource type="Resource" id=4]
-script = ExtResource( 7 )
-uuid = "4e4f4749-fa41-4772-9c98-9f348e41697c"
-owner = "3e9964a1-5b9f-42b2-a422-d6e96aee4ee6"
-state = 0
-character_id = "1469ea5b-4647-495b-ba0a-6c038153a639"
-character_index = 0
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 4 )
-uuid = "ac12794a-1b41-4590-bb90-72d1bc04447c"
-owner = "3e9964a1-5b9f-42b2-a422-d6e96aee4ee6"
-location_id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
-location_index = 0
-category_index = 0
-category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
-character_index = 0
-character_id = "1469ea5b-4647-495b-ba0a-6c038153a639"
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
@@ -41,12 +20,26 @@ status = 0
 description = "The village's blacksmith want to talk with you."
 alignment = 0.0
 constraints = [  ]
-triggers = [ SubResource( 3 ) ]
-tasks = [ SubResource( 4 ) ]
+triggers = [  ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 3 )
+id = "2f2b412d-a6c6-4830-ab95-5655d1c03a4d"
+parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+item_name = "Quest_02"
+title = "fill quest title here"
+status = 0
+description = "fill quest description here"
+alignment = 0.0
+constraints = [  ]
+triggers = [  ]
+tasks = [  ]
 rewards = [  ]
 
 [resource]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
 folders = [ SubResource( 1 ) ]
-quests = [ SubResource( 2 ) ]
+quests = [ SubResource( 2 ), SubResource( 10 ) ]
