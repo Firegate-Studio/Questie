@@ -1,8 +1,11 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=13 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/item_interaction.gd" type="Script" id=5]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd" type="Script" id=6]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -10,31 +13,57 @@ id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
 parent_id = ""
 name = "Prologue"
 
+[sub_resource type="Resource" id=11]
+script = ExtResource( 4 )
+uuid = "3eda7c40-b0e6-4f98-b73d-5b4b3c9986d0"
+owner = "3e9964a1-5b9f-42b2-a422-d6e96aee4ee6"
+item_index = 3
+item_id = "b8846b78-6780-4e8f-b7f3-62059769de3f"
+category_index = 2
+category_id = "721ec836-c0b7-4e45-8abb-d82bfa8a2c69"
+
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
 id = "3e9964a1-5b9f-42b2-a422-d6e96aee4ee6"
 parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
 item_name = "Quest_01"
-title = "The Epic Tale"
+title = "Collect Item Test"
 status = 0
-description = "The village's blacksmith want to talk with you."
+description = "This quest is needed to test the collect item quest"
 alignment = 0.0
 constraints = [  ]
-triggers = [  ]
+triggers = [ SubResource( 11 ) ]
 tasks = [  ]
 rewards = [  ]
+
+[sub_resource type="Resource" id=13]
+script = ExtResource( 6 )
+uuid = "cedd4074-d431-41d4-98a4-4a477cc78c77"
+owner = "2f2b412d-a6c6-4830-ab95-5655d1c03a4d"
+item_id = "b8846b78-6780-4e8f-b7f3-62059769de3f"
+category = 0
+quantity = 1
+
+[sub_resource type="Resource" id=12]
+script = ExtResource( 5 )
+uuid = "7e585bf4-33a3-43d6-98e8-8406a4bdf35e"
+owner = "2f2b412d-a6c6-4830-ab95-5655d1c03a4d"
+item_index = 2
+item_id = "a7eb359d-9297-40c0-8f6c-93592a0a4cd6"
+category_index = 0
+category_id = "47fa811a-0d66-4f86-9cf0-b4aa07bcbe86"
 
 [sub_resource type="Resource" id=10]
 script = ExtResource( 3 )
 id = "2f2b412d-a6c6-4830-ab95-5655d1c03a4d"
 parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
 item_name = "Quest_02"
-title = "fill quest title here"
+title = "Interact Item Test"
 status = 0
 description = "fill quest description here"
 alignment = 0.0
-constraints = [  ]
-triggers = [  ]
+constraints = [ SubResource( 13 ) ]
+triggers = [ SubResource( 12 ) ]
 tasks = [  ]
 rewards = [  ]
 

@@ -10,7 +10,6 @@ func _ready():
 
 func on_trigger_enter(_body):
 	
-	item.interact()
 	var item_id = get_parent().get_item_id()
 	Questie.player_inventory.add_item(item_id, 1)
 
