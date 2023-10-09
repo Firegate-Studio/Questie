@@ -6,6 +6,15 @@ export(GameCharacters.Characters) var character_type
 # define if this character is the main character or not
 export(bool) var is_player = false
 
+# the character alignment
+export(float) var alignment = 0
+
+func _ready():
+
+	# the alignment
+	if not is_player:
+		add_alignment(get_data().alignment)
+
 # get the character identier as string
 func get_id()->String:
 	return GameCharacters.characters_map[character_type]
@@ -25,6 +34,16 @@ func get_data():
 		return character
 
 	return null
+
+# add a specific amount of alignment to this character 
+# NB: add alignment should be used for negative values too
+func add_alignment(amount : float):
+	alignment += amount
+	QuestieEvents.emit_signal("character_alignment_changed", get_id(), alignment)
+
+# get the character alignment value
+func get_alignment()->float: 
+	return alignment
 
 # get all shop items data
 func get_shop_data():

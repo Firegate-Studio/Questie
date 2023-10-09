@@ -177,6 +177,13 @@ func setup_constraints(constraint_id, quest_id, quest_data):
 			constraints[constraint_id] = constraint_node
 			add_child(constraint_node)
 
+		if constraint_data is Constraint_HasAlignment:
+			var constraint_node = ConstraintNodeBuilder.character_has_alignment_node(constraint_data, constraint_id, quest_id)
+			constraint_node.connect("constraint_passed", self, "handle_quest_constraint_bypassed")
+			constraint_node.connect("constraint_failed", self, "handle_quest_constraint_failed")
+			constraints[constraint_id] = constraint_node
+			add_child(constraint_node)
+
 		emit_signal("generate_constraints", constraint_data)
 
 # create or load all trigger nodes
@@ -285,6 +292,7 @@ func setup_rewards(reward_id, quest_id, quest_data):
 			rewards[reward_id] = reward_node
 			add_child(reward_node)
 
+		# todo - remove this node
 		if reward_data is Reward_NewQuest:
 			var reward_node = RewardNodeBuilder.new_quest_node(reward_data, reward_id, quest_id)
 			connect("quest_completed", reward_node, "complete")
@@ -557,6 +565,7 @@ func handle_quest_constraint_bypassed(constraint_id):
 	activate_quest(quest_id)
 
 func handle_quest_constraint_failed(constraint_id): 
+	# todo - this log is called too many times / needed further investigation
 	print("[Questie]: constraint check rule failed for constraint with identifier: " + constraint_id)
 
 # called when a trigger receive activation

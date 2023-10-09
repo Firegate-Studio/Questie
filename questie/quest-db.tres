@@ -1,11 +1,12 @@
-[gd_resource type="Resource" load_steps=13 format=2]
+[gd_resource type="Resource" load_steps=16 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd" type="Script" id=4]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/item_interaction.gd" type="Script" id=5]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_item_constraint.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_alignment_constraint.gd" type="Script" id=7]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -36,14 +37,6 @@ triggers = [ SubResource( 11 ) ]
 tasks = [  ]
 rewards = [  ]
 
-[sub_resource type="Resource" id=13]
-script = ExtResource( 6 )
-uuid = "cedd4074-d431-41d4-98a4-4a477cc78c77"
-owner = "2f2b412d-a6c6-4830-ab95-5655d1c03a4d"
-item_id = "b8846b78-6780-4e8f-b7f3-62059769de3f"
-category = 0
-quantity = 1
-
 [sub_resource type="Resource" id=12]
 script = ExtResource( 5 )
 uuid = "7e585bf4-33a3-43d6-98e8-8406a4bdf35e"
@@ -62,8 +55,41 @@ title = "Interact Item Test"
 status = 0
 description = "fill quest description here"
 alignment = 0.0
-constraints = [ SubResource( 13 ) ]
+constraints = [  ]
 triggers = [ SubResource( 12 ) ]
+tasks = [  ]
+rewards = [  ]
+
+[sub_resource type="Resource" id=15]
+script = ExtResource( 7 )
+uuid = "ef037bb7-a767-411a-b664-5fb8f699e807"
+owner = "6ca4e9f7-c1ad-4363-9da6-054110228c08"
+min_alignment = 1.0
+max_alignment = 1.0
+character_id = "62f05bad-87aa-4649-bbe4-00c4be286fe2"
+
+[sub_resource type="Resource" id=16]
+script = ExtResource( 6 )
+uuid = "908fc20c-e355-4a1d-9979-a26032968c81"
+owner = "6ca4e9f7-c1ad-4363-9da6-054110228c08"
+location_id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
+location_index = 0
+category_index = 0
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+character_index = 4
+character_id = "62f05bad-87aa-4649-bbe4-00c4be286fe2"
+
+[sub_resource type="Resource" id=14]
+script = ExtResource( 3 )
+id = "6ca4e9f7-c1ad-4363-9da6-054110228c08"
+parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
+item_name = "Alignment Constraint"
+title = "Alignment Constraint"
+status = 0
+description = "fill quest description here"
+alignment = 0.0
+constraints = [ SubResource( 15 ) ]
+triggers = [ SubResource( 16 ) ]
 tasks = [  ]
 rewards = [  ]
 
@@ -71,4 +97,4 @@ rewards = [  ]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
 folders = [ SubResource( 1 ) ]
-quests = [ SubResource( 2 ), SubResource( 10 ) ]
+quests = [ SubResource( 2 ), SubResource( 10 ), SubResource( 14 ) ]
