@@ -77,3 +77,17 @@ static func exit_location_node(trigger_data, trigger_id, quest_id)->TriggerNode:
 	node.quest_id = quest_id
 	node.location_id = trigger_data.location_id
 	return node
+
+static func player_has_alignment_range(trigger_data, trigger_id, quest_id)->TriggerNode:
+
+	var node = load("res://addons/questie/nodes/triggers/player_has_alignment_range.gd").new()
+	if not node:
+		print("[Questie]: trigger node is not valid for trigger with identifier: " + trigger_id)
+		return null
+
+	node.id = trigger_id
+	node.quest_id = quest_id
+	node.min_alignment_required = trigger_data.min_value
+	node.max_alignment_required = trigger_data.max_value
+
+	return node

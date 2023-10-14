@@ -227,6 +227,12 @@ func setup_triggers(trigger_id, quest_id, quest_data):
 			triggers[trigger_id] = trigger_node
 			add_child(trigger_node)
 
+		if trigger_data is Trigger_AlignmentAmount:
+			var trigger_node = TriggerNodeBuilder.player_has_alignment_range(trigger_data, trigger_id, quest_id)
+			trigger_node.connect("trigger_activated", self, "handle_quest_trigger_activated")
+			triggers[trigger_id] = trigger_node
+			add_child(trigger_node)
+
 		emit_signal("generate_triggers", trigger_data)
 
 # create or load all task nodes

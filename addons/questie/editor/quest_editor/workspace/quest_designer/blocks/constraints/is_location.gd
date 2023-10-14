@@ -5,7 +5,8 @@ class_name ConstraintBlock_IsLocation
 var location_databse : LocationDatabase
 
 var location_menu : MenuButton
-var current_location : int
+var current_location_index : int
+var current_location_id : String
 
 func _enter_tree():
 	location_databse = load("res://questie/location-db.tres")
@@ -22,10 +23,11 @@ func _enter_tree():
 func _ready():
 	set_slot(0, false, 1, get_slot_color_left(0), true, 1, get_slot_color_right(0))
 
-func on_location_pressed(id : int):
-	current_location = id
+func on_location_pressed(index : int):
+	current_location_index = index
+	current_location_id = location_databse.locations[index].id
 
-	location_menu.text = location_menu.get_popup().get_item_text(id)
+	location_menu.text = location_menu.get_popup().get_item_text(index)
 
 
 func load_location_items():

@@ -28,11 +28,9 @@ func on_item_added(var item_uuid : String):
 
 	if obj.quantity >= item_quantity:
 		bypassed = true
-		print("[Questie]: constraint rule check bypassed")
 		emit_signal("constraint_passed", id)
 
 	else:
 		bypassed = false
-		print("[Questie]: constrain rule check failed!")
 		emit_signal("constraint_failed", id)
 

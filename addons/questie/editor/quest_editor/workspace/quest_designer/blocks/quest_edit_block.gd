@@ -92,7 +92,7 @@ func add_constraint(constraint_type, block):
 	match constraint_type:
 		QuestData.ConstraintType.IS_LOCATION:
 			var location_data = current_data.push_constraint(constraint_type, current_data.id)
-			location_data.location_id =  block.current_location
+			location_data.location_id =  block.current_location_id
 			ResourceSaver.save("res://questie/quest-db.tres", database)
 
 			current_blocks.append(block)

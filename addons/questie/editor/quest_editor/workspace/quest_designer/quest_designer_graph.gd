@@ -318,8 +318,8 @@ func load_constraint_blocks(quest_data : QuestData, count : int = 0, snap : floa
 		if constraint_data is Constraint_IsLocation:
 			var block : ConstraintBlock_IsLocation = ConstraintBlockBuilder.is_location_constraint()
 			add_child(block)
-			block.location_menu.text = location_db.locations[constraint_data.location_id].name
-			block.current_location = constraint_data.location_index
+			block.location_menu.text = location_db.locations[constraint_data.location_index].name
+			block.current_location_id = constraint_data.location_id
 			block.offset = Vector2(block.offset.x, count * snap)
 			connect_node(block.name, 0, root_block.name, 0)
 			constraint_blocks.append(block)

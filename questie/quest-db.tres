@@ -1,12 +1,11 @@
-[gd_resource type="Resource" load_steps=16 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/get_item_trigger.gd" type="Script" id=4]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/item_interaction.gd" type="Script" id=5]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd" type="Script" id=6]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/constraint/has_alignment_constraint.gd" type="Script" id=7]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/alignment_amount.gd" type="Script" id=8]
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
@@ -60,36 +59,24 @@ triggers = [ SubResource( 12 ) ]
 tasks = [  ]
 rewards = [  ]
 
-[sub_resource type="Resource" id=15]
-script = ExtResource( 7 )
-uuid = "ef037bb7-a767-411a-b664-5fb8f699e807"
-owner = "6ca4e9f7-c1ad-4363-9da6-054110228c08"
-min_alignment = 1.0
-max_alignment = 1.0
-character_id = "62f05bad-87aa-4649-bbe4-00c4be286fe2"
+[sub_resource type="Resource" id=22]
+script = ExtResource( 8 )
+uuid = "12935774-4c23-456b-b9dc-2daeac9353c3"
+owner = "17f7f3d4-3f34-4146-ae5d-35636bd2e8a7"
+min_value = 0.0
+max_value = 5.0
 
-[sub_resource type="Resource" id=16]
-script = ExtResource( 6 )
-uuid = "908fc20c-e355-4a1d-9979-a26032968c81"
-owner = "6ca4e9f7-c1ad-4363-9da6-054110228c08"
-location_id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
-location_index = 0
-category_index = 0
-category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
-character_index = 4
-character_id = "62f05bad-87aa-4649-bbe4-00c4be286fe2"
-
-[sub_resource type="Resource" id=14]
+[sub_resource type="Resource" id=17]
 script = ExtResource( 3 )
-id = "6ca4e9f7-c1ad-4363-9da6-054110228c08"
+id = "17f7f3d4-3f34-4146-ae5d-35636bd2e8a7"
 parent_folder_id = "288be6bf-d1f0-4e72-9ac0-2c05de1ea9a7"
-item_name = "Alignment Constraint"
-title = "Alignment Constraint"
+item_name = "Alignment Trigger"
+title = "Alignment Trigger"
 status = 0
-description = "fill quest description here"
+description = "Player has to achive a specific alignment amount."
 alignment = 0.0
-constraints = [ SubResource( 15 ) ]
-triggers = [ SubResource( 16 ) ]
+constraints = [  ]
+triggers = [ SubResource( 22 ) ]
 tasks = [  ]
 rewards = [  ]
 
@@ -97,4 +84,4 @@ rewards = [  ]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
 folders = [ SubResource( 1 ) ]
-quests = [ SubResource( 2 ), SubResource( 10 ), SubResource( 14 ) ]
+quests = [ SubResource( 2 ), SubResource( 10 ), SubResource( 17 ) ]
