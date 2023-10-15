@@ -772,6 +772,10 @@ window/stretch/aspect="expand"
 
 enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg", "res://addons/questie/plugin.cfg" )
 
+[global]
+
+windows=false
+
 [input]
 
 dialogic_default_action={
