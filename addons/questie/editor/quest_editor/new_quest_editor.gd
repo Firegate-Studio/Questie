@@ -39,6 +39,8 @@ func on_new_folder_button_pressed():
 func on_new_quest_button_pressed():
 	quest_tree.create_quest("New Quest")
 
+func on_compile_button_pressed():
+	QuestCompiler.compile()
 
 func on_quest_item_pressed(quest_id : String):
 	quest_builder_graph.setup(quest_id)

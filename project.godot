@@ -149,6 +149,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://questie/locations.generated.gd"
 }, {
+"base": "Object",
+"class": "GameQuests",
+"language": "GDScript",
+"path": "res://questie/quest.generated.gd"
+}, {
 "base": "PanelContainer",
 "class": "HistoryRow",
 "language": "GDScript",
@@ -233,6 +238,11 @@ _global_script_classes=[ {
 "class": "Quest",
 "language": "GDScript",
 "path": "res://addons/questie/runtime/quest_system/quest.gd"
+}, {
+"base": "Object",
+"class": "QuestCompiler",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/compiler/quest_compiler.gd"
 }, {
 "base": "Resource",
 "class": "QuestData",
@@ -653,6 +663,7 @@ _global_script_class_icons={
 "DialogicUtil": "",
 "GameCharacters": "",
 "GameLocations": "",
+"GameQuests": "",
 "HistoryRow": "",
 "InventoryBase": "res://addons/questie/editor/icons/inventory.png",
 "InventorySystem": "",
@@ -670,6 +681,7 @@ _global_script_class_icons={
 "LocationViewport": "",
 "Location_CategoryTree": "",
 "Quest": "",
+"QuestCompiler": "",
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
 "QuestDesignerGraph": "",

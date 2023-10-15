@@ -14,3 +14,8 @@ data_*/
 # Generated data from questie & testing dependencies
 addons/dialogic
 build
+
+# Package and Builds
+*.zip
+*.exe
+*.pck

@@ -58,6 +58,11 @@ func _enter_tree():
 		ResourceSaver.save("res://questie/quest-db.tres", quest_database)
 		print("[questie]: quest database created at path res://questie/quest-db.tres")
 
+	if not file.file_exists(QuestCompiler.FILE_PATH):
+		print("[Questie]: generating quest file...")
+		QuestCompiler.compile()
+		print("[Questie]: quest file has been generated")
+
 	if not file.file_exists("res://questie/item-db.tres"):
 		print("[questie]: creating item database...")
 		item_database = ItemDatabase.new()
