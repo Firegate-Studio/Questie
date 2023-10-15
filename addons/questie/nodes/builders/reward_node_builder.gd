@@ -28,4 +28,17 @@ static func new_quest_node(reward_data, reward_id, quest_id):
 
 	return node
 
+static func add_alignment_node(reward_data, reward_id, quest_id):
+	var node = load("res://addons/questie/nodes/rewards/add_alignment.gd").new()
+	if not node:
+		print("[Questie]: reward node is not valid for reward with identifier: " + reward_id)
+		return null
+
+	# setup_node
+	node.id = reward_id
+	node.quest_id = quest_id
+	node.alignment_amount = reward_data.alignment_amount
+
+	return node
+
 

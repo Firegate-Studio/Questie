@@ -20,5 +20,6 @@ func complete(quest_id):
         return
 
     inventory.add_item(item_id, item_quantity)
+    inventory.debug()
 
     emit_signal("reward_completed", id, quest_id)

@@ -313,6 +313,12 @@ func setup_rewards(reward_id, quest_id, quest_data):
 			rewards[reward_id] = reward_node
 			add_child(reward_node)
 
+		if reward_data is RewardData_AddAlignment:
+			var reward_node = RewardNodeBuilder.add_alignment_node(reward_data, reward_id, quest_id)
+			connect("quest_completed", reward_node, "complete")
+			rewards[reward_id] = reward_node
+			add_child(reward_node)
+
 		emit_signal("generate_rewards", reward_data)
 
 # Get a quest data from quest database
