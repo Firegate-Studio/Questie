@@ -10,6 +10,9 @@ class_name QuestieModule
 # The database that contains all quest of the game
 var quest_database 
 
+# the database who contains all quest chains
+var quest_chain_database : ChainDatabase
+
 # The database that contains all items of the game
 var item_database
 
@@ -62,6 +65,13 @@ func _enter_tree():
 		print("[Questie]: generating quest file...")
 		QuestCompiler.compile()
 		print("[Questie]: quest file has been generated")
+
+	if not file.file_exists("res://questie/chain-db.tres"):
+		print("[Questie]: creating quest chain database...")
+		quest_chain_database = ChainDatabase.new()
+		quest_chain_database.id = UUID.generate()
+		ResourceSaver.save("res://questie/chain-db.tres", quest_chain_database)
+		print("[Questie]: chain database created at path res://questie/chain-db.tres")
 
 	if not file.file_exists("res://questie/item-db.tres"):
 		print("[questie]: creating item database...")

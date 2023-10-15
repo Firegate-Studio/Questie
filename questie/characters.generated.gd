@@ -8,6 +8,7 @@ Blacksmith,
 Magician,
 Wolf,
 Player,
+Samuel,
 }
 
 # A dictionary containing the characters identifiers associated to the character enumaration
@@ -17,4 +18,5 @@ Characters.Blacksmith : "1fafdf9b-c412-42c6-a015-499b3ae261fd",
 Characters.Magician : "cf1cd4b4-c412-4cc0-8e70-7d85f7fd05f7",
 Characters.Wolf : "f6a089d9-247d-4735-88a1-d145957b0079",
 Characters.Player : "62f05bad-87aa-4649-bbe4-00c4be286fe2",
+Characters.Samuel : "55ec886f-9205-48e5-9ee5-bd15ca5ec760",
 }

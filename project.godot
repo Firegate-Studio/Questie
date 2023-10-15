@@ -15,6 +15,16 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/quest_edit_block.gd"
 }, {
 "base": "Resource",
+"class": "ChainData",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/chain_data.gd"
+}, {
+"base": "Resource",
+"class": "ChainDatabase",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/data/chain_database.gd"
+}, {
+"base": "Resource",
 "class": "CharacterDatabase",
 "language": "GDScript",
 "path": "res://addons/questie/editor/character_editor/data/characters_database.gd"
@@ -636,6 +646,8 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Block_QuestEdit": "",
+"ChainData": "",
+"ChainDatabase": "",
 "CharacterDatabase": "",
 "CharactersFileGenerator": "",
 "Constraint": "",

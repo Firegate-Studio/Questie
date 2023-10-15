@@ -5,6 +5,7 @@ enum Categories {
 Weapons,
 Armors,
 Ingredients,
+Specials,
 }
 enum Items {
 Bastard,
@@ -15,6 +16,7 @@ Wolf_Leather,
 Dovakin_Helm,
 Sauron_Helmet,
 With_King_Pauldrons,
+Flowers,
 }
 const items_map = {
 Items.Bastard : "97cc9150-9f5c-4883-a165-3e47d4876ad9",
@@ -25,4 +27,5 @@ Items.Wolf_Leather : "caba71d4-0e73-48dc-825d-06f1ef1c7a6a",
 Items.Dovakin_Helm : "cfc45904-0673-446c-9142-e951cfdff483",
 Items.Sauron_Helmet : "412a84bf-676c-4e68-a884-e3c672b00a21",
 Items.With_King_Pauldrons : "482eaea6-c0e8-4541-b21d-7a09a8da18a2",
+Items.Flowers : "f0d3bbb1-3737-4c6d-b150-47e7a4530489",
 }

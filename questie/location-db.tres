@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=8 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
 [ext_resource path="res://addons/questie/editor/location_editor/location_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/location_editor/category_data.gd" type="Script" id=2]
@@ -8,6 +8,11 @@
 script = ExtResource( 2 )
 id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
 title = "Demo"
+
+[sub_resource type="Resource" id=5]
+script = ExtResource( 2 )
+id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+title = "Redgrave's Manor"
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 3 )
@@ -30,7 +35,49 @@ category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
 name = "Severalcode Temple"
 note = ""
 
+[sub_resource type="Resource" id=6]
+script = ExtResource( 3 )
+id = "0a7acb5d-a918-4a29-8a84-88dd9d3d98dc"
+category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+name = "Gazebo"
+note = "Il gazebo dove astrid fa colazione ogni mattina"
+
+[sub_resource type="Resource" id=7]
+script = ExtResource( 3 )
+id = "4622c8db-ab5c-4388-aceb-22585dde48a3"
+category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+name = "Fields"
+note = ""
+
+[sub_resource type="Resource" id=8]
+script = ExtResource( 3 )
+id = "2b763c6a-bd9e-4a5f-bcdc-1aaf011b84ad"
+category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+name = "Barn"
+note = ""
+
+[sub_resource type="Resource" id=9]
+script = ExtResource( 3 )
+id = "2950f5f4-b9c5-4808-9a66-2d7c333c3a96"
+category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+name = "Astrid's Room"
+note = ""
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 3 )
+id = "5464c1ee-845f-43f4-80d4-6e60f9e9e382"
+category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+name = "Samuel's Room"
+note = ""
+
+[sub_resource type="Resource" id=11]
+script = ExtResource( 3 )
+id = "1454a4cb-92a6-48ad-82aa-8e06c284dc3c"
+category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
+name = "Kitchen"
+note = ""
+
 [resource]
 script = ExtResource( 1 )
-categories = [ SubResource( 1 ) ]
-locations = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ]
+categories = [ SubResource( 1 ), SubResource( 5 ) ]
+locations = [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ]

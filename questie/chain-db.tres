@@ -1,0 +1,21 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/data/chain_database.gd" type="Script" id=1]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/chain_data.gd" type="Script" id=2]
+
+[sub_resource type="Resource" id=1]
+script = ExtResource( 2 )
+id = "fc1bafab-4520-4b3f-82e2-1476c0b1f824"
+parent_id = "9c8742be-4c49-4d15-a5a3-c7099ea13b5f"
+name = "Prologue"
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 2 )
+id = "2ed9c39d-bbf9-4f26-87a3-081707c6872f"
+parent_id = "48b25417-8415-483f-8dc1-464f0b8e8d00"
+name = "Astrid"
+
+[resource]
+script = ExtResource( 1 )
+id = "f94e2bdb-f56a-4a1e-add7-2d068545f90d"
+chains = [ SubResource( 1 ), SubResource( 2 ) ]

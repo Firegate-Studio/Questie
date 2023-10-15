@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=29 format=2]
+[gd_resource type="Resource" load_steps=32 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
@@ -210,6 +210,42 @@ inventory = [  ]
 shop = [  ]
 loot = [  ]
 
+[sub_resource type="Resource" id=35]
+script = ExtResource( 2 )
+id = "55ec886f-9205-48e5-9ee5-bd15ca5ec760"
+title = "Samuel"
+name = "Samuel"
+surname = "Redgrave"
+alignment = -15.0
+biography = ""
+background = ""
+note = ""
+parent = "5d633690-9407-4225-aaf9-95cefb815769"
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
+
+[sub_resource type="Resource" id=36]
+script = ExtResource( 2 )
+id = "f52df351-5183-4f10-90c9-d5c77f912eae"
+title = "Astrid"
+name = "Astrid"
+surname = "Redgrave"
+alignment = -30.0
+biography = ""
+background = ""
+note = ""
+parent = "5d633690-9407-4225-aaf9-95cefb815769"
+is_vendor = false
+has_loot = false
+has_inventory = false
+inventory = [  ]
+shop = [  ]
+loot = [  ]
+
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
 id = "c056aee7-cf7c-448f-af6c-9a8976edb43a"
@@ -217,7 +253,14 @@ name = "Monsters"
 parent = ""
 children = [  ]
 
+[sub_resource type="Resource" id=34]
+script = ExtResource( 3 )
+id = "5d633690-9407-4225-aaf9-95cefb815769"
+name = "Test"
+parent = ""
+children = [  ]
+
 [resource]
 script = ExtResource( 1 )
-folders = [ SubResource( 7 ) ]
-characters = [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ), SubResource( 8 ), SubResource( 33 ) ]
+folders = [ SubResource( 7 ), SubResource( 34 ) ]
+characters = [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ), SubResource( 8 ), SubResource( 33 ), SubResource( 35 ), SubResource( 36 ) ]
