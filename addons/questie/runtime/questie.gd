@@ -284,6 +284,13 @@ func setup_tasks(task_id, quest_id, quest_data):
 			tasks[task_id] = task_node
 			add_child(task_node)
 
+		if task_data is Task_AlignmentRange:
+			var task_node = TaskNodeBuilder.player_has_alignment(task_data, task_id, quest_id)
+			task_node.connect("task_completed", self, "handle_quest_task_completed")
+			task_node.connect("task_updated", self, "handle_quest_task_updated")
+			tasks[task_id] = task_node
+			add_child(task_node)
+
 		emit_signal("generate_tasks", task_data)
 
 # create or load all reward nodes

@@ -83,3 +83,16 @@ static func kill_node(task_data, task_id, quest_id)->TaskNode:
 	node.character_id = task_data.character_id
 	node.target_kills = task_data.target_kills
 	return node
+
+static func player_has_alignment(task_data, task_id, quest_id)->TaskNode:
+	var node = load("res://addons/questie/nodes/tasks/alignment_achieved.gd").new()
+	if not node:
+		print("[Questie]: task generation failed for task with identifier: " + task_id)
+		return null
+
+	# setup node
+	node.id = task_id
+	node.quest_id = quest_id
+	node.min_value = task_data.min_value
+	node.max_value = task_data.max_value
+	return node
