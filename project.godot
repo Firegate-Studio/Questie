@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/quest_edit_block.gd"
 }, {
 "base": "Resource",
+"class": "BooleanData",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/variables/data/boolean_data.gd"
+}, {
+"base": "Resource",
 "class": "ChainData",
 "language": "GDScript",
 "path": "res://addons/questie/editor/quest_editor/data/chain_data.gd"
@@ -104,6 +109,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Localization/translation_service.gd"
 }, {
+"base": "Resource",
+"class": "DecimalData",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/variables/data/decimal_data.gd"
+}, {
 "base": "Node",
 "class": "Dialogic",
 "language": "GDScript",
@@ -168,6 +178,11 @@ _global_script_classes=[ {
 "class": "HistoryRow",
 "language": "GDScript",
 "path": "res://addons/dialogic/Example Assets/History/HistoryRow.gd"
+}, {
+"base": "Resource",
+"class": "IntegerData",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/variables/data/integer_data.gd"
 }, {
 "base": "Control",
 "class": "InventoryBase",
@@ -248,6 +263,11 @@ _global_script_classes=[ {
 "class": "Quest",
 "language": "GDScript",
 "path": "res://addons/questie/runtime/quest_system/quest.gd"
+}, {
+"base": "GraphEdit",
+"class": "QuestChainGraph",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/quest_chain/quest_chain_graph.gd"
 }, {
 "base": "Object",
 "class": "QuestCompiler",
@@ -639,6 +659,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/common/uuid/uuid.gd"
 }, {
+"base": "Resource",
+"class": "VariableDatabase",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/variables/data/variable_database.gd"
+}, {
+"base": "Tree",
+"class": "VariablesTree",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/variables/variables_tree.gd"
+}, {
 "base": "Control",
 "class": "WeightedInventory",
 "language": "GDScript",
@@ -646,6 +676,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Block_QuestEdit": "",
+"BooleanData": "",
 "ChainData": "",
 "ChainDatabase": "",
 "CharacterDatabase": "",
@@ -664,6 +695,7 @@ _global_script_class_icons={
 "Constraint_IsLocation": "",
 "Constraint_QuestState": "",
 "DTS": "",
+"DecimalData": "",
 "Dialogic": "",
 "DialogicAnimaPropertiesHelper": "",
 "DialogicAnimaResources": "",
@@ -677,6 +709,7 @@ _global_script_class_icons={
 "GameLocations": "",
 "GameQuests": "",
 "HistoryRow": "",
+"IntegerData": "",
 "InventoryBase": "res://addons/questie/editor/icons/inventory.png",
 "InventorySystem": "",
 "InventoryWorkspace": "",
@@ -693,6 +726,7 @@ _global_script_class_icons={
 "LocationViewport": "",
 "Location_CategoryTree": "",
 "Quest": "",
+"QuestChainGraph": "",
 "QuestCompiler": "",
 "QuestData": "",
 "QuestDatabase": "res://addons/questie/editor/icons/database.png",
@@ -771,6 +805,8 @@ _global_script_class_icons={
 "Trigger_IsLocation": "",
 "Trigger_ItemInteraction": "",
 "UUID": "",
+"VariableDatabase": "",
+"VariablesTree": "",
 "WeightedInventory": "res://addons/questie/editor/icons/inventory.png"
 }
 

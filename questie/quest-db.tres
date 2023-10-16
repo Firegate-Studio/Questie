@@ -1,114 +1,80 @@
-[gd_resource type="Resource" load_steps=18 format=2]
+[gd_resource type="Resource" load_steps=14 format=2]
 
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_db.gd" type="Script" id=1]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=2]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/task/collect_item_task.gd" type="Script" id=2]
 [ext_resource path="res://addons/questie/editor/quest_editor/data/quest_data.gd" type="Script" id=3]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/task/talk_to_task.gd" type="Script" id=4]
-[ext_resource path="res://addons/questie/editor/quest_editor/data/task/go_to_task.gd" type="Script" id=6]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/trigger/enter_location.gd" type="Script" id=4]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/folder_data.gd" type="Script" id=5]
+[ext_resource path="res://addons/questie/editor/quest_editor/data/reward/add_item_reward.gd" type="Script" id=6]
 
-[sub_resource type="Resource" id=1]
-script = ExtResource( 2 )
-id = "9c8742be-4c49-4d15-a5a3-c7099ea13b5f"
+[sub_resource type="Resource" id=11]
+script = ExtResource( 5 )
+id = "5a51fd0b-179a-4e0c-9505-c3181513dfb0"
 parent_id = ""
-name = "Prologue"
+name = "Test"
 
-[sub_resource type="Resource" id=4]
-script = ExtResource( 2 )
-id = "893a75f9-afec-4ced-a07d-a74bb82c5e4d"
-parent_id = "9c8742be-4c49-4d15-a5a3-c7099ea13b5f"
-name = "Locations"
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 2 )
-id = "294a4393-846c-4b20-a161-b4f30f88a34f"
-parent_id = "9c8742be-4c49-4d15-a5a3-c7099ea13b5f"
-name = "Characters"
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 2 )
-id = "f0565063-61f3-4928-a373-734769371e6c"
-parent_id = "893a75f9-afec-4ced-a07d-a74bb82c5e4d"
-name = "Redgrave's Manor"
+[sub_resource type="Resource" id=12]
+script = ExtResource( 6 )
+uuid = "521bf116-ed91-414b-bc86-d671295097bd"
+owner = "ab0ee154-6e2f-4c70-ab17-b6a25c574beb"
+item_quantity = 1
+category_index = 0
+category_id = "47fa811a-0d66-4f86-9cf0-b4aa07bcbe86"
+item_index = 2
+item_id = "a7eb359d-9297-40c0-8f6c-93592a0a4cd6"
 
 [sub_resource type="Resource" id=8]
 script = ExtResource( 2 )
-id = "48b25417-8415-483f-8dc1-464f0b8e8d00"
-parent_id = "294a4393-846c-4b20-a161-b4f30f88a34f"
-name = "Astrid"
-
-[sub_resource type="Resource" id=3]
-script = ExtResource( 4 )
-uuid = "d54bab7f-9856-437a-8c62-9d5d0ad7dff0"
-owner = "db267e67-261a-4ec6-8fbc-78ca40067a0a"
+uuid = "4481b770-bd1e-4d54-a2f5-23912497597c"
+owner = "ab0ee154-6e2f-4c70-ab17-b6a25c574beb"
 state = 0
-character_id = "55ec886f-9205-48e5-9ee5-bd15ca5ec760"
-character_index = 5
+category_index = 2
+category_id = "721ec836-c0b7-4e45-8abb-d82bfa8a2c69"
+item_index = 4
+item_id = "caba71d4-0e73-48dc-825d-06f1ef1c7a6a"
+quantity = 5
 
-[sub_resource type="Resource" id=2]
-script = ExtResource( 3 )
-id = "db267e67-261a-4ec6-8fbc-78ca40067a0a"
-parent_folder_id = "9c8742be-4c49-4d15-a5a3-c7099ea13b5f"
-item_name = "Q001"
-title = "Of Masters and Slaves"
-status = 0
-description = "Come ogni giorno Rowan doveva lavorare con il proprio padrone. Rowan sapeva che questa situazione non sarebbe durata in eterno. Doveva solo attendere con estrema pazienza."
-alignment = 0.0
-constraints = [  ]
-triggers = [  ]
-tasks = [ SubResource( 3 ) ]
-rewards = [  ]
+[sub_resource type="Resource" id=9]
+script = ExtResource( 2 )
+uuid = "1c754f74-f419-47ba-a478-9708180ea931"
+owner = "ab0ee154-6e2f-4c70-ab17-b6a25c574beb"
+state = 0
+category_index = 2
+category_id = "721ec836-c0b7-4e45-8abb-d82bfa8a2c69"
+item_index = 3
+item_id = "b8846b78-6780-4e8f-b7f3-62059769de3f"
+quantity = 10
+
+[sub_resource type="Resource" id=10]
+script = ExtResource( 4 )
+uuid = "896180f7-5ad8-49b2-ae94-aa272c766f92"
+owner = "ab0ee154-6e2f-4c70-ab17-b6a25c574beb"
+location_id = "c6ce875a-c606-49db-b80d-15e7d18e4d48"
+location_index = 0
+category_index = 0
+category_id = "15c4557d-b8c8-4372-9129-fd3ee8e68aaa"
+character_index = 1
+character_id = "62f05bad-87aa-4649-bbe4-00c4be286fe2"
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
-id = "dd0eaede-8b41-4177-bdeb-6996008451b2"
-parent_folder_id = "f0565063-61f3-4928-a373-734769371e6c"
-item_name = "The Barn"
-title = "A Slave ordinary life"
+id = "ab0ee154-6e2f-4c70-ab17-b6a25c574beb"
+parent_folder_id = ""
+item_name = "My Quest"
+title = "My Awesome Quest"
 status = 0
 description = "fill quest description here"
 alignment = 0.0
 constraints = [  ]
-triggers = [  ]
-tasks = [  ]
-rewards = [  ]
+triggers = [ SubResource( 10 ) ]
+tasks = [ SubResource( 8 ), SubResource( 9 ) ]
+rewards = [ SubResource( 12 ) ]
 
 [sub_resource type="Resource" id=13]
-script = ExtResource( 6 )
-uuid = "813c77af-9daf-46c6-9bdc-fe07aaee658c"
-owner = "d12a16dc-9b65-4e54-973c-bae55326be54"
-state = 0
-category_id = "2fcc13b5-67f6-450d-b360-e4a004d44c76"
-location_id = "0a7acb5d-a918-4a29-8a84-88dd9d3d98dc"
-category_index = 1
-location_index = 3
-
-[sub_resource type="Resource" id=14]
-script = ExtResource( 4 )
-uuid = "7d1842bb-9409-4823-9431-1abd66898cd2"
-owner = "d12a16dc-9b65-4e54-973c-bae55326be54"
-state = 0
-character_id = "55ec886f-9205-48e5-9ee5-bd15ca5ec760"
-character_index = 5
-
-[sub_resource type="Resource" id=9]
 script = ExtResource( 3 )
-id = "d12a16dc-9b65-4e54-973c-bae55326be54"
-parent_folder_id = "48b25417-8415-483f-8dc1-464f0b8e8d00"
-item_name = "001"
-title = "Serata al chiaro di luna"
-status = 0
-description = "fill quest description here"
-alignment = 0.0
-constraints = [  ]
-triggers = [  ]
-tasks = [ SubResource( 13 ), SubResource( 14 ) ]
-rewards = [  ]
-
-[sub_resource type="Resource" id=10]
-script = ExtResource( 3 )
-id = "79ffd2f2-408a-471a-bba0-fe8d889a160c"
-parent_folder_id = "48b25417-8415-483f-8dc1-464f0b8e8d00"
-item_name = "002"
+id = "a3838b2d-b7df-4b5e-bbf4-c2965bae0ec5"
+parent_folder_id = "5a51fd0b-179a-4e0c-9505-c3181513dfb0"
+item_name = "001A"
 title = "fill quest title here"
 status = 0
 description = "fill quest description here"
@@ -121,5 +87,5 @@ rewards = [  ]
 [resource]
 script = ExtResource( 1 )
 uuid = "e74aa3cd-312d-4f37-83d7-19fe4436afe2"
-folders = [ SubResource( 1 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 8 ) ]
-quests = [ SubResource( 2 ), SubResource( 7 ), SubResource( 9 ), SubResource( 10 ) ]
+folders = [ SubResource( 11 ) ]
+quests = [ SubResource( 7 ), SubResource( 13 ) ]

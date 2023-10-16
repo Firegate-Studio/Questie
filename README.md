@@ -1,4 +1,11 @@
-# News - Version Beta.1[WIP]
+<div style="display: flex; flex-wrap: nowrap; overflow-x: auto;">
+    <img src="images/questDesigner.png" alt="Immagine 1">
+    <img src="images/itemEditor.png" alt="Immagine 2">
+    <img src="images/characterEditor.png" alt="Immagine 3">
+</div>
+
+
+# News - v0.9.0.0[WIP]
 This new update for Questie introduces the latest features of the Questie Toolkit for quest creation, adding following new functionalities to the system:
 
 - **Quest Designer**: Replaces the old quest creation system with a new one based on graphs and nodes, allowing you to compose your quest in a similar manner to visual scripting systems found in graphic engines like Unreal Engine, for example.

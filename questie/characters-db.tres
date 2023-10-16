@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=32 format=2]
+[gd_resource type="Resource" load_steps=15 format=2]
 
 [ext_resource path="res://addons/questie/editor/character_editor/data/characters_database.gd" type="Script" id=1]
 [ext_resource path="res://addons/questie/editor/character_editor/data/character.gd" type="Script" id=2]
@@ -7,149 +7,6 @@
 [ext_resource path="res://addons/questie/editor/icons/item.png" type="Texture" id=5]
 [ext_resource path="res://addons/questie/editor/character_editor/data/loot_item.gd" type="Script" id=6]
 [ext_resource path="res://addons/questie/editor/character_editor/data/inventory_item.gd" type="Script" id=7]
-[ext_resource path="res://addons/questie/editor/icons/money_64x64.png" type="Texture" id=8]
-
-[sub_resource type="Resource" id=1]
-script = ExtResource( 2 )
-id = "1469ea5b-4647-495b-ba0a-6c038153a639"
-title = "Several Code"
-name = "Several"
-surname = "Code"
-alignment = -500.0
-biography = ""
-background = ""
-note = ""
-parent = ""
-is_vendor = false
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
-
-[sub_resource type="Resource" id=26]
-script = ExtResource( 6 )
-id = "31d87020-d7b5-4d0e-9d5b-3c94758ba6ea"
-name = "Copper"
-icon = ExtResource( 8 )
-quantity = 99.0
-percentage = 75.0
-
-[sub_resource type="Resource" id=27]
-script = ExtResource( 6 )
-id = "c22b3be3-0039-420c-a091-165fab2882e5"
-name = "Silver"
-icon = ExtResource( 8 )
-quantity = 99.0
-percentage = 50.0
-
-[sub_resource type="Resource" id=28]
-script = ExtResource( 6 )
-id = "31d87020-d7b5-4d0e-9d5b-3c94758ba6ea"
-name = "Copper"
-icon = ExtResource( 8 )
-quantity = 99.0
-percentage = 75.0
-
-[sub_resource type="Resource" id=29]
-script = ExtResource( 6 )
-id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
-name = "Training Sword"
-icon = ExtResource( 5 )
-quantity = 1.0
-percentage = 60.0
-
-[sub_resource type="Resource" id=30]
-script = ExtResource( 6 )
-id = "1d1a7482-c8dc-4d73-bf8f-e280a0c19d90"
-name = "Morningstar"
-icon = ExtResource( 5 )
-quantity = 1.0
-percentage = 60.0
-
-[sub_resource type="Resource" id=31]
-script = ExtResource( 6 )
-id = "b453e815-d24b-4b04-96e6-5db3aa21b0e6"
-name = "Longsword"
-icon = ExtResource( 5 )
-quantity = 1.0
-percentage = 50.0
-
-[sub_resource type="Resource" id=32]
-script = ExtResource( 6 )
-id = "c9a63111-5d51-434b-9b26-8d09ddf7c46e"
-name = "Bastard"
-icon = ExtResource( 5 )
-quantity = 1.0
-percentage = 50.0
-
-[sub_resource type="Resource" id=21]
-script = ExtResource( 4 )
-id = "ec6158bf-a0dd-4516-b520-2c504e952b35"
-name = "Training Sword"
-icon = "res://addons/questie/editor/icons/item.png"
-value = 5.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=22]
-script = ExtResource( 4 )
-id = "1d1a7482-c8dc-4d73-bf8f-e280a0c19d90"
-name = "Morningstar"
-icon = "res://addons/questie/editor/icons/item.png"
-value = 200.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=23]
-script = ExtResource( 4 )
-id = "b453e815-d24b-4b04-96e6-5db3aa21b0e6"
-name = "Longsword"
-icon = "res://addons/questie/editor/icons/item.png"
-value = 500.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=24]
-script = ExtResource( 4 )
-id = "c9a63111-5d51-434b-9b26-8d09ddf7c46e"
-name = "Bastard"
-icon = "res://addons/questie/editor/icons/item.png"
-value = 800.0
-quantity = 99.0
-
-[sub_resource type="Resource" id=5]
-script = ExtResource( 2 )
-id = "1fafdf9b-c412-42c6-a015-499b3ae261fd"
-title = "Blacksmith"
-name = "Edward"
-surname = "Sinner"
-alignment = 25.0
-biography = "A wonderful blacksmith"
-background = ""
-note = ""
-parent = ""
-is_vendor = true
-has_loot = true
-has_inventory = false
-inventory = [  ]
-shop = [ SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 24 ) ]
-loot = [ SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ) ]
-
-[sub_resource type="Resource" id=6]
-script = ExtResource( 2 )
-id = "cf1cd4b4-c412-4cc0-8e70-7d85f7fd05f7"
-title = "Magician"
-name = "Tylor"
-surname = "Swift"
-alignment = -25.0
-biography = ""
-background = ""
-note = ""
-parent = ""
-is_vendor = false
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
 
 [sub_resource type="Resource" id=15]
 script = ExtResource( 7 )
@@ -192,59 +49,36 @@ inventory = [ SubResource( 15 ) ]
 shop = [ SubResource( 14 ) ]
 loot = [ SubResource( 13 ) ]
 
+[sub_resource type="Resource" id=34]
+script = ExtResource( 6 )
+id = ""
+name = ""
+icon = ""
+quantity = 5.0
+percentage = 77.0
+
 [sub_resource type="Resource" id=33]
 script = ExtResource( 2 )
 id = "62f05bad-87aa-4649-bbe4-00c4be286fe2"
 title = "Player"
-name = "Alessio"
-surname = "Manna"
-alignment = 0.0
-biography = ""
-background = ""
+name = "Jane "
+surname = "Johnson"
+alignment = -15.0
+biography = "Jane Johnson, a remarkable figure in the world of science, was born in the vibrant city of New York on a crisp autumn morning. From a young age, she exhibited a keen curiosity about the natural world. Her insatiable appetite for knowledge led her to pursue a degree in biology, which she completed with honors at the age of 22. Jane's groundbreaking research in genetics and her passion for environmental conservation have earned her numerous awards and international recognition. Her dedication to the betterment of our planet continues to inspire the next generation of scientists."
+background = "Growing up in the heart of the Appalachian Mountains, John Smith developed a deep connection to the outdoors. The rugged landscapes and pristine wilderness of his hometown kindled his love for adventure and exploration. After obtaining a degree in environmental studies, he embarked on a series of expeditions, from summiting the world's highest peaks to traversing the most remote deserts. John's experiences have not only shaped his character but also fueled his commitment to preserving our planet's natural wonders. He now works tirelessly as an advocate for environmental conservation, using his knowledge and love for the environment to make a positive impact on the world.
+
+
+
+
+"
 note = ""
 parent = ""
 is_vendor = false
-has_loot = false
+has_loot = true
 has_inventory = false
 inventory = [  ]
 shop = [  ]
-loot = [  ]
-
-[sub_resource type="Resource" id=35]
-script = ExtResource( 2 )
-id = "55ec886f-9205-48e5-9ee5-bd15ca5ec760"
-title = "Samuel"
-name = "Samuel"
-surname = "Redgrave"
-alignment = -15.0
-biography = ""
-background = ""
-note = ""
-parent = "5d633690-9407-4225-aaf9-95cefb815769"
-is_vendor = false
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
-
-[sub_resource type="Resource" id=36]
-script = ExtResource( 2 )
-id = "f52df351-5183-4f10-90c9-d5c77f912eae"
-title = "Astrid"
-name = "Astrid"
-surname = "Redgrave"
-alignment = -30.0
-biography = ""
-background = ""
-note = ""
-parent = "5d633690-9407-4225-aaf9-95cefb815769"
-is_vendor = false
-has_loot = false
-has_inventory = false
-inventory = [  ]
-shop = [  ]
-loot = [  ]
+loot = [ SubResource( 34 ) ]
 
 [sub_resource type="Resource" id=7]
 script = ExtResource( 3 )
@@ -253,14 +87,7 @@ name = "Monsters"
 parent = ""
 children = [  ]
 
-[sub_resource type="Resource" id=34]
-script = ExtResource( 3 )
-id = "5d633690-9407-4225-aaf9-95cefb815769"
-name = "Test"
-parent = ""
-children = [  ]
-
 [resource]
 script = ExtResource( 1 )
-folders = [ SubResource( 7 ), SubResource( 34 ) ]
-characters = [ SubResource( 1 ), SubResource( 5 ), SubResource( 6 ), SubResource( 8 ), SubResource( 33 ), SubResource( 35 ), SubResource( 36 ) ]
+folders = [ SubResource( 7 ) ]
+characters = [ SubResource( 8 ), SubResource( 33 ) ]

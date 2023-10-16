@@ -13,6 +13,9 @@ var quest_database
 # the database who contains all quest chains
 var quest_chain_database : ChainDatabase
 
+# variables database
+var variables_db : VariableDatabase
+
 # The database that contains all items of the game
 var item_database
 
@@ -60,6 +63,13 @@ func _enter_tree():
 		quest_database.purge()
 		ResourceSaver.save("res://questie/quest-db.tres", quest_database)
 		print("[questie]: quest database created at path res://questie/quest-db.tres")
+
+	if not file.file_exists("res://questie/variables.tres"):
+		print("[Questie]: creating variables database...")
+		variables_db = VariableDatabase.new()
+		variables_db.id = UUID.generate()
+		ResourceSaver.save("res://questie/variables.tres", variables_db)
+		print("[Questie]: variables database generated")
 
 	if not file.file_exists(QuestCompiler.FILE_PATH):
 		print("[Questie]: generating quest file...")

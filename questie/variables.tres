@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/variables/data/variable_database.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+id = "b834f5cb-592f-48df-8496-345d66d31242"
+booleans = [  ]
+integers = [  ]
+decimal = [  ]

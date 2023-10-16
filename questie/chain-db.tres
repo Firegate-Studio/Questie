@@ -5,15 +5,15 @@
 
 [sub_resource type="Resource" id=1]
 script = ExtResource( 2 )
-id = "fc1bafab-4520-4b3f-82e2-1476c0b1f824"
-parent_id = "9c8742be-4c49-4d15-a5a3-c7099ea13b5f"
-name = "Prologue"
+id = "e1cdcaf7-a2cb-4b45-996b-03511601a57f"
+parent_id = ""
+name = "My Quest Chain"
 
 [sub_resource type="Resource" id=2]
 script = ExtResource( 2 )
-id = "2ed9c39d-bbf9-4f26-87a3-081707c6872f"
-parent_id = "48b25417-8415-483f-8dc1-464f0b8e8d00"
-name = "Astrid"
+id = "be64f3e9-8d0a-4a9a-8a4d-13fad0194b89"
+parent_id = "5a51fd0b-179a-4e0c-9505-c3181513dfb0"
+name = "Test Chain"
 
 [resource]
 script = ExtResource( 1 )

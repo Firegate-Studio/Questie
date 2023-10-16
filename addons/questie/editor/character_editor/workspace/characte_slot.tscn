@@ -91,6 +91,9 @@ margin_top = 102.0
 margin_right = 1880.0
 margin_bottom = 302.0
 rect_min_size = Vector2( 0, 200 )
+bookmark_gutter = true
+breakpoint_gutter = true
+wrap_enabled = true
 
 [node name="Label2" type="Label" parent="ScrollContainer/VBoxContainer"]
 margin_top = 306.0
@@ -103,6 +106,8 @@ margin_top = 324.0
 margin_right = 1880.0
 margin_bottom = 524.0
 rect_min_size = Vector2( 0, 200 )
+bookmark_gutter = true
+wrap_enabled = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="ScrollContainer/VBoxContainer"]
 margin_top = 528.0

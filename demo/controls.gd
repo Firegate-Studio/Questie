@@ -5,7 +5,7 @@ var journal_is_open : bool = false
 var quest_journal
 
 func _enter_tree():
-	quest_journal = $"../QuestJournal"
+	quest_journal = $"../CanvasLayer/QuestJournal"
 
 func _input(event):
 

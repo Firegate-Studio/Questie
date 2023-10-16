@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/questie/editor/quest_editor/workspace/quest_designer/blocks/block.tres" type="Theme" id=1]
+[ext_resource path="res://addons/questie/editor/icons/tag.png" type="Texture" id=2]
+[ext_resource path="res://addons/questie/editor/icons/quest.png" type="Texture" id=3]
+
+[node name="Quest" type="GraphNode"]
+margin_right = 84.0
+margin_bottom = 78.0
+theme = ExtResource( 1 )
+title = "Quest"
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color( 0.827451, 0.905882, 0.117647, 1 )
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color( 0.827451, 0.905882, 0.117647, 1 )
+slot/1/left_enabled = true
+slot/1/left_type = 0
+slot/1/left_color = Color( 1, 1, 1, 1 )
+slot/1/right_enabled = true
+slot/1/right_type = 0
+slot/1/right_color = Color( 0.298039, 0.905882, 0.14902, 1 )
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color( 1, 1, 1, 1 )
+slot/2/right_enabled = true
+slot/2/right_type = 0
+slot/2/right_color = Color( 0.92549, 0.352941, 0.12549, 1 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 16.0
+margin_top = 24.0
+margin_right = 174.0
+margin_bottom = 62.0
+
+[node name="TagMenu" type="MenuButton" parent="HBoxContainer"]
+margin_right = 68.0
+margin_bottom = 38.0
+text = "Tag"
+icon = ExtResource( 2 )
+
+[node name="QuestMenu" type="MenuButton" parent="HBoxContainer"]
+margin_left = 72.0
+margin_right = 158.0
+margin_bottom = 38.0
+focus_mode = 2
+text = "Quest"
+icon = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 82.0
+margin_right = 174.0
+margin_bottom = 96.0
+text = "OnSuccess"
+align = 2
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 16.0
+margin_top = 116.0
+margin_right = 174.0
+margin_bottom = 130.0
+text = "OnFailure"
+align = 2

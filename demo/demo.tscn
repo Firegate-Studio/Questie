@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://demo/player/player.tscn" type="PackedScene" id=2]
@@ -7,29 +7,11 @@
 [ext_resource path="res://demo/journal/journal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://demo/controls.gd" type="Script" id=6]
 [ext_resource path="res://demo/journal/QuestPopup.tscn" type="PackedScene" id=7]
-[ext_resource path="res://addons/questie/runtime/location/location.gd" type="Script" id=8]
 [ext_resource path="res://demo/items/interact_item.gd" type="Script" id=9]
 [ext_resource path="res://addons/questie/runtime/item/questie_item.gd" type="Script" id=10]
 [ext_resource path="res://demo/locations/grond_test.png" type="Texture" id=11]
 [ext_resource path="res://demo/items/collect_item.gd" type="Script" id=12]
-[ext_resource path="res://demo/characters/severalcode.tscn" type="PackedScene" id=13]
 [ext_resource path="res://demo/items/add_alignment.gd" type="Script" id=14]
-[ext_resource path="res://demo/characters/blacksmith.tscn" type="PackedScene" id=16]
-[ext_resource path="res://demo/character_interaction_example.gd" type="Script" id=17]
-[ext_resource path="res://demo/character_talk_example.gd" type="Script" id=18]
-[ext_resource path="res://demo/characters/wolf.tscn" type="PackedScene" id=19]
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 71.5, 80 )
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 64.5, 62.5 )
-
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 274.5, 541.5 )
-
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 293.5, 188 )
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 35.0571
@@ -57,94 +39,7 @@ __meta__ = {
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( 126, 488 )
-character_type = 4
-
-[node name="SeveralCode" parent="." instance=ExtResource( 13 )]
-position = Vector2( 660, 867 )
-
-[node name="Talking Trigger" type="Area2D" parent="SeveralCode"]
-script = ExtResource( 18 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SeveralCode/Talking Trigger"]
-position = Vector2( 1, 36 )
-shape = SubResource( 2 )
-
-[node name="blacksmith" parent="." instance=ExtResource( 16 )]
-position = Vector2( 840, 212 )
 character_type = 1
-
-[node name="Area2D" type="Area2D" parent="blacksmith"]
-script = ExtResource( 17 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blacksmith/Area2D"]
-position = Vector2( 1.5, 0.5 )
-shape = SubResource( 1 )
-
-[node name="wolf" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1635, 206 )
-
-[node name="wolf2" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1764, 207 )
-
-[node name="wolf3" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1582, 377 )
-
-[node name="wolf4" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1732, 392 )
-
-[node name="wolf5" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1476, 652 )
-
-[node name="wolf6" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1650, 799 )
-
-[node name="wolf7" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1645, 607 )
-
-[node name="wolf8" parent="." instance=ExtResource( 19 )]
-position = Vector2( 1831, 703 )
-
-[node name="Controls Map" parent="." instance=ExtResource( 3 )]
-visible = false
-margin_right = 1921.0
-margin_bottom = 1083.0
-
-[node name="QuestJournal" parent="." instance=ExtResource( 5 )]
-visible = false
-margin_left = 559.0
-margin_top = 234.0
-margin_right = 1359.0
-margin_bottom = 834.0
-
-[node name="QuestPopup" parent="." instance=ExtResource( 7 )]
-visible = false
-margin_left = 730.0
-margin_top = 283.0
-margin_right = 1230.0
-margin_bottom = 783.0
-
-[node name="LongLake" type="Area2D" parent="."]
-position = Vector2( 2, 2 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LongLake"]
-position = Vector2( 1034.5, 539.5 )
-shape = SubResource( 5 )
-
-[node name="Mountains" type="Area2D" parent="."]
-position = Vector2( 479, 118 )
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_group_": true
-}
-location = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mountains"]
-position = Vector2( -18.5, 89 )
-shape = SubResource( 8 )
 
 [node name="Interact Item Test" type="Area2D" parent="."]
 position = Vector2( 1375, 81 )
@@ -235,3 +130,24 @@ script = ExtResource( 14 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collect Item Test2/Area2D"]
 position = Vector2( -1.5, 65 )
 shape = SubResource( 10 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Controls Map" parent="CanvasLayer" instance=ExtResource( 3 )]
+modulate = Color( 1, 1, 1, 0.486275 )
+margin_right = 1921.0
+margin_bottom = 1083.0
+
+[node name="QuestJournal" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
+margin_left = 559.0
+margin_top = 234.0
+margin_right = 1359.0
+margin_bottom = 834.0
+
+[node name="QuestPopup" parent="CanvasLayer" instance=ExtResource( 7 )]
+visible = false
+margin_left = 979.6
+margin_top = 532.48
+margin_right = 1479.6
+margin_bottom = 1032.48

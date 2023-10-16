@@ -7,13 +7,15 @@ var new_chain_button : ToolButton
 var compile_button : ToolButton
 
 var quest_builder_graph : QuestDesignerGraph
+var quest_chain_graph : QuestChainGraph
 
 var quest_tree 
 
 func _enter_tree(): 
 	
-	quest_tree = $VBoxContainer/HSplitContainer/Tree
-	quest_builder_graph = $VBoxContainer/HSplitContainer/QuestBuilderView
+	quest_tree = $VBoxContainer/HSplitContainer/VSplitContainer/QuestTree
+	quest_builder_graph = $VBoxContainer/HSplitContainer/VBoxContainer/QuestBuilderView
+	quest_chain_graph = $"VBoxContainer/HSplitContainer/VBoxContainer/QuestChainView"
 
 	new_folder_button = $VBoxContainer/HBoxContainer/NewFolderButton
 	new_quest_button = $VBoxContainer/HBoxContainer/NewQuestButton
@@ -51,9 +53,12 @@ func on_compile_button_pressed():
 	QuestCompiler.compile()
 
 func on_quest_item_pressed(quest_id : String):
+	quest_chain_graph.hide()
 	quest_builder_graph.setup(quest_id)
 	quest_builder_graph.show()
 
 func on_chain_item_pressed(chain_id : String):
-	print("[Questie]: TODO - chain tool called!")
+	quest_builder_graph.hide()
+	# todo - chain setup
+	quest_chain_graph.show()
 
