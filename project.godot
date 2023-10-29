@@ -659,6 +659,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/questie/editor/common/uuid/uuid.gd"
 }, {
+"base": "Object",
+"class": "VariableBuilder",
+"language": "GDScript",
+"path": "res://addons/questie/editor/quest_editor/workspace/variables/variables_builder.gd"
+}, {
 "base": "Resource",
 "class": "VariableDatabase",
 "language": "GDScript",
@@ -805,6 +810,7 @@ _global_script_class_icons={
 "Trigger_IsLocation": "",
 "Trigger_ItemInteraction": "",
 "UUID": "",
+"VariableBuilder": "",
 "VariableDatabase": "",
 "VariablesTree": "",
 "WeightedInventory": "res://addons/questie/editor/icons/inventory.png"

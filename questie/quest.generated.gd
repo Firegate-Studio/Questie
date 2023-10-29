@@ -3,16 +3,12 @@ extends Object
 class_name GameQuests
 
 enum Quests{
-Collect_Item_Test,
-Interact_Item_Test,
-The_Dark_Lord,
-The_Dark_Side,
+My_Awesome_Quest,
+fill_quest_title_here,
 }
 
 const quest_id_map = {
-Quests.Collect_Item_Test : "3e9964a1-5b9f-42b2-a422-d6e96aee4ee6",
-Quests.Interact_Item_Test : "2f2b412d-a6c6-4830-ab95-5655d1c03a4d",
-Quests.The_Dark_Lord : "e399e2fb-4a74-434b-8cbd-0296053c2633",
-Quests.The_Dark_Side : "513b7cf3-adfe-4490-bf12-1cce8cd1e0d2",
+Quests.My_Awesome_Quest : "ab0ee154-6e2f-4c70-ab17-b6a25c574beb",
+Quests.fill_quest_title_here : "a3838b2d-b7df-4b5e-bbf4-c2965bae0ec5",
 }
 
